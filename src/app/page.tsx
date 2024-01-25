@@ -11,24 +11,33 @@ import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
-// IMP START - Dashboard Registration
-const clientId =
-  "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ"; // get from https://dashboard.web3auth.io
+import RPC from "./web3RPC"; // for using web3.js
+
+
+// Zero Dev 
+import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev';
+import { providerToSmartAccountSigner } from '@zerodev/sdk';
+import { polygonMumbai } from 'viem/chains';
+import { SmartAccountSigner } from 'permissionless/accounts';
+import { Hex, zeroAddress } from "viem"
+import { generatePrivateKey } from "viem/accounts"
+import { privateKeyToAccount } from "viem/accounts"
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: "0x1", // Please use 0x1 for Mainnet
-  rpcTarget: "https://rpc.ankr.com/eth",
-  displayName: "Ethereum Mainnet",
+  chainId: "0x13881",
+  rpcTarget: "https://rpc.ankr.com/polygon_mumbai",
+  displayName: "Polygon Mumbai",
   blockExplorer: "https://etherscan.io/",
-  ticker: "ETH",
-  tickerName: "Ethereum",
+  ticker: "Matic",
+  tickerName: "Matic",
 };
 
 const web3auth = new Web3AuthNoModal({
-  clientId,
+  // @ts-ignore
+  clientId: "BCUJ9sDhdO5iekR-oaXL7bIC5Dg3tPNyhtGp_4z_SLp3B0ZKp-0qmE9RFWxUdY4g1wNzJqkxr10d14ty-PoAqCI",
   chainConfig,
-  web3AuthNetwork: "sapphire_mainnet",
+  web3AuthNetwork: "sapphire_devnet",
 });
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({ config: { chainConfig } });
@@ -36,12 +45,12 @@ const openloginAdapter = new OpenloginAdapter({
   privateKeyProvider: privateKeyProvider,
 });
 web3auth.configureAdapter(openloginAdapter);
-// IMP END - SDK Initialization
 
 
 export default function HomePage() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [kernalClient, setKernalClient] = useState<any>(null);
 
   useEffect(() => {
     const init = async () => {
@@ -62,6 +71,10 @@ export default function HomePage() {
     init();
   }, []);
 
+  useEffect(() => {
+    console.log("kernalClient", kernalClient)
+  }, [kernalClient])
+
   const login = async () => {
     // IMP START - Login
     const web3authProvider = await web3auth.connectTo(
@@ -72,11 +85,11 @@ export default function HomePage() {
     );
     // IMP END - Login
     setProvider(web3authProvider);
+
     if (web3auth.connected) {
       setLoggedIn(true);
     }
   };
-
 
   const getDetails = async () => {
     try {
@@ -93,6 +106,53 @@ export default function HomePage() {
     </button>
   );
 
+  const setUp = async () => {
+    try {
+
+      if (web3auth) {
+
+        const rpc = new RPC(web3auth.provider as IProvider);
+        const privateKey = await rpc.getPrivateKey();
+        const signer = privateKeyToAccount(`0x${privateKey}` as Hex)
+        const kernelClient = await createEcdsaKernelAccountClient({
+          // required
+          chain: polygonMumbai,
+          projectId: "f1d2d8bf-0feb-430a-9f6f-dfeb8bc639a3",
+          signer: signer,
+        })
+        setKernalClient(kernelClient)
+
+
+        console.log("My account:", kernelClient.account.address)
+
+
+        const txnHash = await kernelClient.sendTransaction({
+          to: zeroAddress,
+          value: BigInt(0),
+          data: "0x",
+        })
+
+        console.log("txn hash:", txnHash)
+
+        const userOpHash = await kernelClient.sendUserOperation({
+          userOperation: {
+            callData: await kernelClient.account.encodeCallData({
+              to: zeroAddress,
+              value: BigInt(0),
+              data: "0x",
+            }),
+          },
+        })
+
+        console.log("userOp hash:", userOpHash)
+
+      }
+
+    } catch (error) {
+
+    }
+  }
+
 
   const loggedInView = (
     <>
@@ -103,6 +163,11 @@ export default function HomePage() {
             onClick={getDetails}
           >
             Details
+          </button>
+          <button
+            onClick={setUp}
+          >
+            Setup
           </button>
         </div>
       </div>
