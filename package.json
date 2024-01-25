@@ -18,6 +18,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@web3auth/base": "^7.3.1",
+    "@web3auth/ethereum-provider": "^7.3.1",
+    "@web3auth/no-modal": "^7.3.1",
+    "@web3auth/openlogin-adapter": "^7.3.1",
     "clsx": "^2.0.0",
     "lucide-react": "^0.297.0",
     "next": "^14.0.4",
