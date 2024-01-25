@@ -19,7 +19,7 @@ import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev';
 import { providerToSmartAccountSigner } from '@zerodev/sdk';
 import { polygonMumbai } from 'viem/chains';
 import { SmartAccountSigner } from 'permissionless/accounts';
-import { Hex, zeroAddress } from "viem"
+import { Hex, parseEther, zeroAddress } from "viem"
 import { generatePrivateKey } from "viem/accounts"
 import { privateKeyToAccount } from "viem/accounts"
 
@@ -126,26 +126,6 @@ export default function HomePage() {
         console.log("My account:", kernelClient.account.address)
 
 
-        const txnHash = await kernelClient.sendTransaction({
-          to: zeroAddress,
-          value: BigInt(0),
-          data: "0x",
-        })
-
-        console.log("txn hash:", txnHash)
-
-        const userOpHash = await kernelClient.sendUserOperation({
-          userOperation: {
-            callData: await kernelClient.account.encodeCallData({
-              to: zeroAddress,
-              value: BigInt(0),
-              data: "0x",
-            }),
-          },
-        })
-
-        console.log("userOp hash:", userOpHash)
-
       }
 
     } catch (error) {
@@ -153,6 +133,32 @@ export default function HomePage() {
     }
   }
 
+
+  const sendTx = async () => {
+    try {
+      const txnHash = await kernalClient.sendTransaction({
+        to: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+        value: parseEther("0.0001"),
+        data: "0x",
+      })
+
+      console.log("txn hash:", txnHash)
+
+      const userOpHash = await kernalClient.sendUserOperation({
+        userOperation: {
+          callData: await kernalClient.account.encodeCallData({
+            to: "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
+            value: parseEther("0.0001"),
+            data: "0x",
+          }),
+        },
+      })
+
+      console.log("userOp hash:", userOpHash)
+    } catch (error) {
+
+    }
+  }
 
   const loggedInView = (
     <>
@@ -183,6 +189,12 @@ export default function HomePage() {
       <section className='bg-slate-900 text-white w-screen h-screen'>
         {unloggedInView}
         {loggedIn && loggedInView}
+
+        <button
+          onClick={sendTx}
+        >
+          Send Tx
+        </button>
       </section>
     </main>
   );
