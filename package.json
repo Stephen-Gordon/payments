@@ -27,6 +27,7 @@
     "@web3auth/openlogin-adapter": "^7.3.1",
     "@zerodev/presets": "^5.0.0",
     "@zerodev/sdk": "^5.0.0",
+    "alchemy-sdk": "^3.1.2",
     "clsx": "^2.0.0",
     "lucide-react": "^0.297.0",
     "next": "^14.0.4",
