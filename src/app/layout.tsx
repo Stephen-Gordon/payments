@@ -65,7 +65,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
 
-  console.log("children")
   const queryClient = new QueryClient()
 
   return (
