@@ -1,13 +1,18 @@
 'use client';
 
 import Head from 'next/head';
-import * as React from 'react';
 
+// React
+import * as React from 'react';
 import { useState, useEffect } from 'react';
 
+
+
 // Wagmi
-import config from './config'
-import { WagmiProvider } from 'wagmi'
+import config from '@/app/config';
+import { WagmiProvider, } from 'wagmi'
+import { useBalance } from 'wagmi';
+
 // Web3auth
 import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from "@web3auth/base";
@@ -25,11 +30,15 @@ import { Hex, parseEther, zeroAddress } from "viem"
 import { generatePrivateKey } from "viem/accounts"
 import { privateKeyToAccount } from "viem/accounts"
 
-import { useBalance, useAccount } from "wagmi";
 
 
 // Hooks
-import getERC20Balance from '@/app/hooks/getErc20Balance';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import Balance from '@/app/components/Balance/Balance';
+
+
+
+
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: "0x13881",
@@ -58,6 +67,8 @@ export default function HomePage() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [kernalClient, setKernalClient] = useState<any>(null);
+
+  const queryClient = new QueryClient()
 
   useEffect(() => {
     const init = async () => {
@@ -166,10 +177,10 @@ export default function HomePage() {
 
     }
   }
-  const result = useBalance({
-    address: kernalClient?.account?.address,
-    token: "0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97",
-  });
+  /*  const result = useBalance({
+     address: kernalClient?.account?.address,
+     token: "0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97",
+   }); */
   const loggedInView = (
     <>
       <div className="flex-container">
@@ -192,27 +203,31 @@ export default function HomePage() {
 
 
   return (
-    <WagmiProvider config={config!}>
-      <main>
-        <Head>
-          <title>Payments, Stephen Gordon</title>
-        </Head>
-        <section className='bg-slate-900 text-white w-screen h-screen'>
-          {unloggedInView}
-          {loggedIn && loggedInView}
 
-          <button
-            onClick={sendTx}
-          >
-            Send Tx
-          </button>
-          <div>
-            balance :  {/* {balance} */}
-          </div>
 
-        </section>
-      </main>
-    </WagmiProvider>
+    <main>
+      <Head>
+        <title>Payments, Stephen Gordon</title>
+      </Head>
+      <section className='bg-slate-900 text-white w-screen h-screen'>
+        {unloggedInView}
+        {loggedIn && loggedInView}
+
+        <button
+          onClick={sendTx}
+        >
+          Send Tx
+        </button>
+        <div>
+          balance :  {/* {balance} */}
+        </div>
+        <Balance />
+
+      </section>
+    </main>
+
+
+
 
   );
 }

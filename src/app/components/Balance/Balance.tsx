@@ -1,27 +1,27 @@
 // wagmi
-import { useBalance, useAccount } from "wagmi";
+'use client'
+import { useBalance } from "wagmi";
 
-import { createPublicClient, http } from 'viem'
-import { mainnet } from 'viem/chains'
-
-export const publicClient = createPublicClient({
-	chain: mainnet,
-	transport: http()
-})
-
+// Redux
+import { address } from '../../../GlobalRedux/Features/address/addressSlice'
+import { RootState } from '../../../GlobalRedux/store'
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function Balance() {
 
-	const { address } = useAccount();
+	const addressState = useSelector((state: RootState) => state.address.value);
 
+	console.log("addressState", addressState)
 	const result = useBalance({
-		address: address,
+		address: addressState,
 		token: "0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97",
 	});
 
-	console.log("balance", result);
 
 	return (
-		<p>{result?.data?.formatted}</p>
+		<div>
+			{result?.data?.formatted}
+
+		</div>
 	);
 }

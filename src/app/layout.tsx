@@ -1,7 +1,16 @@
+'use client'
+
 import { Metadata } from 'next';
 import * as React from 'react';
-import { WagmiProvider } from 'wagmi'
+
+// Redux
+import { Providers } from '../GlobalRedux/provider'
+
+
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { WagmiProvider, } from 'wagmi'
 import config from '@/app/config';
+
 import '@/styles/globals.css';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
@@ -10,7 +19,7 @@ import { siteConfig } from '@/constant/config';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
-export const metadata: Metadata = {
+/* export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: siteConfig.title,
@@ -49,18 +58,30 @@ export const metadata: Metadata = {
   //   },
   // ],
 };
-
+ */
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  console.log("children")
+  const queryClient = new QueryClient()
+
   return (
     <html>
       <body>
-        <WagmiProvider config={config}>
-          <main>{children}</main>
-        </WagmiProvider>
+        <Providers>
+          <WagmiProvider config={config!}>
+            <QueryClientProvider client={queryClient}>
+              <main>{children}</main>
+            </QueryClientProvider>
+          </WagmiProvider>
+        </Providers>
+
+
+
+
 
       </body>
     </html>
