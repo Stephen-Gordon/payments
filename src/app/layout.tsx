@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import * as React from 'react';
-
+import { WagmiProvider } from 'wagmi'
+import config from '@/app/config';
 import '@/styles/globals.css';
 // !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
@@ -56,7 +57,12 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body>{children}</body>
+      <body>
+        <WagmiProvider config={config}>
+          <main>{children}</main>
+        </WagmiProvider>
+
+      </body>
     </html>
   );
 }
