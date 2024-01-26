@@ -6,19 +6,12 @@ import Head from 'next/head';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
-
-
-// Wagmi
-import config from '@/app/config';
-import { WagmiProvider, } from 'wagmi'
-import { useBalance } from 'wagmi';
-
 // Web3auth
 import { Web3AuthNoModal } from "@web3auth/no-modal";
 import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from "@web3auth/base";
 import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
-import RPC from "./web3RPC"; // for using web3.js
+import RPC from "./web3RPC";
 
 
 // Zero Dev 
@@ -30,10 +23,7 @@ import { Hex, parseEther, zeroAddress } from "viem"
 import { generatePrivateKey } from "viem/accounts"
 import { privateKeyToAccount } from "viem/accounts"
 
-
-
-// Hooks
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+// Components
 import Balance from '@/app/components/Balance/Balance';
 
 
@@ -68,7 +58,6 @@ export default function HomePage() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [kernalClient, setKernalClient] = useState<any>(null);
 
-  const queryClient = new QueryClient()
 
   useEffect(() => {
     const init = async () => {
