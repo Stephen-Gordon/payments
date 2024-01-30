@@ -11,6 +11,9 @@ import { useState } from 'react';
 import useGetAddress from '@/app/hooks/useGetAddress';
 import Sheet from '@/app/components/Layouts/Sheet';
 
+// address
+import truncateEthAddress from 'truncate-eth-address';
+
 const config = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
   network: Network.MATIC_MUMBAI,
@@ -34,14 +37,17 @@ export default function Page() {
 
   const searchParams = useSearchParams();
 
-  const payee = searchParams.get('payee');
-
-  /*  const { payee } = router.query; */
+  let payee = searchParams.get('payee');
+  payee = truncateEthAddress(payee);
 
   return (
     <>
-      <h1>Send Page</h1>
-      <p>Route address: {address}</p>
+      <div className='grid'>
+        <div className='my-4'>
+          <p className='my-4 text-center text-xl text-gray-300'>Send</p>
+        </div>
+      </div>
+
       <p>Payee: {payee}</p>
       {/* <button onClick={getData} >get data</button> */}
 

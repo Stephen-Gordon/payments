@@ -34,3 +34,8 @@ https://www.0xdev.co/how-to-send-erc-20-tokens-to-another-address-in-react-with-
 
 Next Js modals
 https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#modals
+
+# Search Params
+
+Next JS Search Params
+https://stackoverflow.com/questions/76592804/how-to-access-query-parameters-in-next-js-13-4-with-the-new-app-router

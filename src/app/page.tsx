@@ -11,19 +11,13 @@ import { Web3AuthNoModal } from '@web3auth/no-modal';
 import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from '@web3auth/base';
 import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
-import RPC from './web3RPC';
 
-// Zero Dev
-import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev';
-import { providerToSmartAccountSigner } from '@zerodev/sdk';
-import { polygonMumbai } from 'viem/chains';
-import { SmartAccountSigner } from 'permissionless/accounts';
-import { Hex, parseEther, zeroAddress } from 'viem';
-import { generatePrivateKey } from 'viem/accounts';
-import { privateKeyToAccount } from 'viem/accounts';
+import { useDispatch } from 'react-redux';
 
 // Components
 import Balance from '@/app/components/Balance/Balance';
+import useCreateKernal from '@/app/utils/useCreateKernal';
+import Link from 'next/link';
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -55,6 +49,8 @@ export default function HomePage() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [kernalClient, setKernalClient] = useState<any>(null);
+  // set the kernal client in redux
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const init = async () => {
@@ -110,20 +106,16 @@ export default function HomePage() {
   const setUp = async () => {
     try {
       if (web3auth) {
-        const rpc = new RPC(web3auth.provider as IProvider);
-        const privateKey = await rpc.getPrivateKey();
-        const signer = privateKeyToAccount(`0x${privateKey}` as Hex);
-        const kernelClient = await createEcdsaKernelAccountClient({
-          // required
-          chain: polygonMumbai,
-          projectId: 'f1d2d8bf-0feb-430a-9f6f-dfeb8bc639a3',
-          signer: signer,
-        });
-        setKernalClient(kernelClient);
+        const kernal = await useCreateKernal(web3auth);
 
-        console.log('My account:', kernelClient.account.address);
+        setKernalClient(kernal);
+        dispatch(kernal);
+        console.log('REDUX KERNAL', kernal);
+        console.log('My account:', kernal.account.address);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const sendTx = async () => {
@@ -172,10 +164,18 @@ export default function HomePage() {
       </Head>
       <section className='h-screen w-screen bg-slate-900 text-white'>
         {unloggedInView}
-        {loggedIn && loggedInView}
+        {loggedInView}
 
         <button onClick={sendTx}>Send Tx</button>
         <Balance />
+
+        <Link
+          href={{
+            pathname: '/home',
+          }}
+        >
+          Home
+        </Link>
       </section>
     </main>
   );

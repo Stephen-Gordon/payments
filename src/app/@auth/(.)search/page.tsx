@@ -6,7 +6,6 @@ import useGetAddress from '@/app/hooks/useGetAddress';
 import Link from 'next/link';
 
 // Layout
-import Sheet from '@/app/components/Layouts/Sheet';
 
 export default function Page() {
   const [payee, setPayee] = useState(
@@ -50,3 +49,6 @@ export default function Page() {
     </>
   );
 }
+
+// Add address check
+//https://viem.sh/docs/utilities/isAddress
