@@ -1,14 +1,15 @@
-'use client'
+'use client';
 
 import { Metadata } from 'next';
 import * as React from 'react';
 
-// Redux
-import { Providers } from '../GlobalRedux/provider'
+import { useEffect } from 'react';
 
+// Redux
+import { Providers } from '../GlobalRedux/provider';
 
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { WagmiProvider, } from 'wagmi'
+import { WagmiProvider } from 'wagmi';
 import config from '@/app/config';
 
 import '@/styles/globals.css';
@@ -16,6 +17,10 @@ import '@/styles/globals.css';
 import '@/styles/colors.css';
 
 import { siteConfig } from '@/constant/config';
+
+// Redux
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -59,13 +64,24 @@ import { siteConfig } from '@/constant/config';
   // ],
 };
  */
+
+import Link from 'next/link';
 export default function RootLayout({
+  auth,
   children,
 }: {
+  auth: React.ReactNode;
   children: React.ReactNode;
 }) {
+  const queryClient = new QueryClient();
 
-  const queryClient = new QueryClient()
+  const authState = true;
+  /* 
+  const searchState = useSelector((state: RootState) => state.search.value);
+
+  useEffect(() => {
+    console.log('searchState', searchState);
+  }, [searchState]); */
 
   return (
     <html>
@@ -73,15 +89,14 @@ export default function RootLayout({
         <Providers>
           <WagmiProvider config={config!}>
             <QueryClientProvider client={queryClient}>
+              <nav>
+                <Link href='/search'>Open modal</Link>
+              </nav>
+              <div>{authState && auth}</div>
               <main>{children}</main>
             </QueryClientProvider>
           </WagmiProvider>
         </Providers>
-
-
-
-
-
       </body>
     </html>
   );
