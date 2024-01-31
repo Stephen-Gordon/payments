@@ -20,7 +20,9 @@ import { siteConfig } from '@/constant/config';
 
 // Redux
 import { useSelector } from 'react-redux';
-import { RootState } from '@/GlobalRedux/store';
+import { RootState, persistor } from '@/GlobalRedux/store';
+
+import { PersistGate } from 'redux-persist/integration/react';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them

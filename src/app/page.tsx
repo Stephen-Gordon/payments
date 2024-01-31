@@ -19,6 +19,11 @@ import Balance from '@/app/components/Balance/Balance';
 import useCreateKernal from '@/app/utils/useCreateKernal';
 import Link from 'next/link';
 
+//
+import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClientSlice';
+
+import { parseEther } from 'viem';
+
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0x13881',
@@ -48,7 +53,7 @@ web3auth.configureAdapter(openloginAdapter);
 export default function HomePage() {
   const [provider, setProvider] = useState<IProvider | null>(null);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [kernalClient, setKernalClient] = useState<any>(null);
+  const [kernalClient, setKernal] = useState<any>(null);
   // set the kernal client in redux
   const dispatch = useDispatch();
 
@@ -83,7 +88,6 @@ export default function HomePage() {
         loginProvider: 'google',
       }
     );
-    // IMP END - Login
     setProvider(web3authProvider);
 
     if (web3auth.connected) {
@@ -107,16 +111,24 @@ export default function HomePage() {
     try {
       if (web3auth) {
         const kernal = await useCreateKernal(web3auth);
-
-        setKernalClient(kernal);
-        dispatch(kernal);
-        console.log('REDUX KERNAL', kernal);
+        setKernal(kernal);
         console.log('My account:', kernal.account.address);
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const setReduxKernal = async () => {
+      try {
+        console.log('setting kernal');
+        dispatch(setKernalClient(kernalClient));
+        console.log('kernal set');
+      } catch (error) {}
+    };
+    setReduxKernal();
+  }, [kernalClient]);
 
   const sendTx = async () => {
     try {

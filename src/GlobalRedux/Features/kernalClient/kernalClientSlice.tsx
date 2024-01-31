@@ -8,10 +8,10 @@ export const kernalClientSlice = createSlice({
     value: {},
   },
   reducers: {
-    kernalClient: (state, action) => {
+    setKernalClient: (state, action) => {
       state.value = action.payload;
     },
   },
 });
-export const { kernalClient } = kernalClientSlice.actions;
+export const { setKernalClient } = kernalClientSlice.actions;
 export default kernalClientSlice.reducer;
