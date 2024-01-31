@@ -89,15 +89,17 @@ export default function RootLayout({
     <html>
       <body>
         <Providers>
-          <WagmiProvider config={config!}>
-            <QueryClientProvider client={queryClient}>
-              <nav>
-                <Link href='/search'>Open modal</Link>
-              </nav>
-              <div>{authState && auth}</div>
-              <main>{children}</main>
-            </QueryClientProvider>
-          </WagmiProvider>
+          <PersistGate loading={null} persistor={persistor}>
+            <WagmiProvider config={config!}>
+              <QueryClientProvider client={queryClient}>
+                <nav>
+                  <Link href='/search'>Open modal</Link>
+                </nav>
+                <div>{authState && auth}</div>
+                <main>{children}</main>
+              </QueryClientProvider>
+            </WagmiProvider>
+          </PersistGate>
         </Providers>
       </body>
     </html>
