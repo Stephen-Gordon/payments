@@ -14,6 +14,9 @@ import Sheet from '@/app/components/Layouts/Sheet';
 // address
 import truncateEthAddress from 'truncate-eth-address';
 
+// components
+import SendUsdc from '@/app/components/SendUsdc/SendUsdc';
+
 const config = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
   network: Network.MATIC_MUMBAI,
@@ -48,10 +51,9 @@ export default function Page() {
         </div>
       </div>
 
-      <p>Payee: {payee}</p>
-      {/* <button onClick={getData} >get data</button> */}
-
-      <div className='mt-20'>{/* <SendUsdc payee={payee} /> */}</div>
+      <div className='mt-20'>
+        <SendUsdc />
+      </div>
     </>
   );
 }
