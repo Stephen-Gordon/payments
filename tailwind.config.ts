@@ -9,6 +9,10 @@ export default {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        main: '#101012',
+        dark: '#101012',
+        paper: '#2C2D33',
+        purple: '#6A48F2',
         primary: {
           // Customize it on globals.css :root
           50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
@@ -23,7 +27,7 @@ export default {
           900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
           950: 'rgb(var(--tw-color-primary-950) / <alpha-value>)',
         },
-        dark: '#222222',
+
       },
       keyframes: {
         flicker: {

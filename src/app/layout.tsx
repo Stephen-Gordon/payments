@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import * as React from 'react';
 
 import { useEffect } from 'react';
-
+import '@radix-ui/themes/styles.css';
 // Redux
 import { Providers } from '../GlobalRedux/provider';
 
@@ -68,6 +68,7 @@ import { PersistGate } from 'redux-persist/integration/react';
  */
 
 import Link from 'next/link';
+import { Theme, ThemePanel } from '@radix-ui/themes';
 export default function RootLayout({
   auth,
   children,
@@ -92,11 +93,11 @@ export default function RootLayout({
           <PersistGate loading={null} persistor={persistor}>
             <WagmiProvider config={config!}>
               <QueryClientProvider client={queryClient}>
-                <nav>
-                  <Link href='/search'>Open modal</Link>
-                </nav>
-                <div>{authState && auth}</div>
-                <main>{children}</main>
+
+                <div>{auth}</div>
+                <main className='bg-dark w-screen h-screen text-gray-300'>{children}</main>
+
+
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>

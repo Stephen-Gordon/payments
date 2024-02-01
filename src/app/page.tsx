@@ -98,7 +98,7 @@ export default function HomePage() {
   const getDetails = async () => {
     try {
       console.log(provider);
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const unloggedInView = (
@@ -125,7 +125,7 @@ export default function HomePage() {
         console.log('setting kernal');
         dispatch(setKernalClient(kernalClient));
         console.log('kernal set');
-      } catch (error) {}
+      } catch (error) { }
     };
     setReduxKernal();
   }, [kernalClient]);
@@ -151,7 +151,7 @@ export default function HomePage() {
       });
 
       console.log('userOp hash:', userOpHash);
-    } catch (error) {}
+    } catch (error) { }
   };
   /*  const result = useBalance({
      address: kernalClient?.account?.address,

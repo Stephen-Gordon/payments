@@ -38,12 +38,13 @@ const Sheet = ({ children }) => {
               transition={{ type: 'spring', damping: 20, stiffness: 300 }}
               style={{
                 width: '100%',
-                maxHeight: '80%',
-                minHeight: '80%',
-                backgroundColor: '#2C2D33',
-                borderTopLeftRadius: '16px',
-                borderTopRightRadius: '16px',
+
+                minHeight: '90%',
+                backgroundColor: '',
+                borderTopLeftRadius: '32px',
+                borderTopRightRadius: '32px',
               }}
+              className='bg-paper'
             >
               <div>{children}</div>
             </motion.div>

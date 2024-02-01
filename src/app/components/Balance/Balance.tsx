@@ -19,9 +19,8 @@ export default function Balance() {
 
 
 	return (
-		<div>
+		<div className="text-white">
 			{result?.data?.formatted}
-
 		</div>
 	);
 }
