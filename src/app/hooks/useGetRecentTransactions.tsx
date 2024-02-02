@@ -1,4 +1,4 @@
-
+'use client'
 import useGetAddress from '@/app/hooks/useGetAddress';
 import { Alchemy, Network } from 'alchemy-sdk';
 
@@ -10,7 +10,6 @@ const useGetRecentTransactions = async () => {
       network: Network.MATIC_MUMBAI,
     };
     const alchemy = new Alchemy(config);
-    console.log("env", process.env.NEXT_PUBLIC_ALCHEMY_API_KEY)
 
     const data = await alchemy.core.getAssetTransfers({
       fromBlock: "0x0",
@@ -21,7 +20,7 @@ const useGetRecentTransactions = async () => {
 
     return data;
   } catch (error) {
-    console.log(error);
+    console.log("error", error);
   }
 
 }

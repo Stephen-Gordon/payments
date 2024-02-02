@@ -9,8 +9,7 @@ import { RootState } from '@/GlobalRedux/store';
 import { Tab } from '@headlessui/react'
 
 
-import Activity from '@/app/components/activity/activity';
-
+import Activity from '@/app/components/activity/Activity';
 export default function Page() {
   const kernalReduxState = useSelector(
     (state: RootState) => state.kernalClient.value

@@ -4,8 +4,8 @@ import useGetRecentTransactions from "@/app/hooks/useGetRecentTransactions";
 import { useEffect, useState } from "react";
 
 export default function Activity() {
-  const [transactions, setTransactions] = useState(null);
-  const address = useGetAddress();
+  const [transactions, setTransactions] = useState<any>([])
+  const address = "0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c"
 
   useEffect(() => {
 
@@ -13,18 +13,18 @@ export default function Activity() {
       try {
         const recentTransactions = await useGetRecentTransactions();
 
-        setTransactions(recentTransactions);
+        setTransactions(recentTransactions?.transfers);
       } catch (error) {
         console.error("Error while getting recent transactions:", error);
       }
     };
 
     getData();
-  }, [address]); // Add address as a dependency if it's used inside useGetRecentTransactions
+  }, []); // Add address as a dependency if it's used inside useGetRecentTransactions
 
   useEffect(() => {
     if (transactions) {
-      console.log("transactions", transactions);
+      console.log("transactions console", transactions[0]);
     }
   }, [transactions]); // Add transactions as a dependency
 
@@ -34,13 +34,13 @@ export default function Activity() {
         <div>
           Recent
         </div>
-        {/* Uncomment this section to render transactions when available */}
+
         <div className="mt-4">
-          {/*    {transactions && transactions.map((t, i) => (
+          {transactions && transactions.map((transaction: any, i: any) => (
             <div key={i}>
-              {i} hello
+              {transaction.value}
             </div>
-          ))} */}
+          ))}
         </div>
       </div>
     </>
