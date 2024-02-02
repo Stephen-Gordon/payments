@@ -27,14 +27,14 @@ export default function Page() {
   const address = useGetAddress();
 
   /* 
-	const getData = async () => {
-		const data = await alchemy.core.getAssetTransfers({
-			fromBlock: "0x0",
-			fromAddress: address,
-			category: ["erc20", "erc721"],
-		});
-		console.log(data);
-	}
+  const getData = async () => {
+    const data = await alchemy.core.getAssetTransfers({
+      fromBlock: "0x0",
+      fromAddress: address,
+      category: ["erc20", "erc721"],
+    });
+    console.log(data);
+  }
 
  */
 

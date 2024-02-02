@@ -29,6 +29,7 @@ const Sheet = ({ children }) => {
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'flex-end',
+              zIndex: 100,
             }}
           >
             <motion.div

@@ -1,6 +1,8 @@
 'use client'
+import RecentTransaction from "@/app/components/RecentTransaction/RecentTransaction";
 import useGetAddress from "@/app/hooks/useGetAddress";
 import useGetRecentTransactions from "@/app/hooks/useGetRecentTransactions";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Activity() {
@@ -13,7 +15,7 @@ export default function Activity() {
       try {
         const recentTransactions = await useGetRecentTransactions();
 
-        setTransactions(recentTransactions?.transfers);
+        setTransactions(recentTransactions?.transfers.slice(0, 3));
       } catch (error) {
         console.error("Error while getting recent transactions:", error);
       }
@@ -30,7 +32,7 @@ export default function Activity() {
 
   return (
     <>
-      <div className='h-96 bg-paper rounded-xl w-full text-xl p-4'>
+      <div className='bg-paper rounded-xl w-full text-xl p-4'>
         <div>
           Recent
         </div>
@@ -38,9 +40,16 @@ export default function Activity() {
         <div className="mt-4">
           {transactions && transactions.map((transaction: any, i: any) => (
             <div key={i}>
-              {transaction.value}
+              <RecentTransaction transaction={transaction} />
             </div>
           ))}
+          <div className="text-purple text-center">
+            <Link href={{
+              pathname: '/transactions',
+            }}>
+              See all
+            </Link>
+          </div>
         </div>
       </div>
     </>

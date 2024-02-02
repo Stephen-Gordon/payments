@@ -71,10 +71,14 @@ import Link from 'next/link';
 import { Theme, ThemePanel } from '@radix-ui/themes';
 export default function RootLayout({
   auth,
+  transactionmodal,
   children,
+
 }: {
   auth: React.ReactNode;
+  transactionmodal: React.ReactNode;
   children: React.ReactNode;
+
 }) {
   const queryClient = new QueryClient();
 
@@ -95,9 +99,8 @@ export default function RootLayout({
               <QueryClientProvider client={queryClient}>
 
                 <div>{auth}</div>
+                <div>{transactionmodal}</div>
                 <main className='bg-dark w-screen h-screen text-gray-300'>{children}</main>
-
-
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>

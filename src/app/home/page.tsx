@@ -46,29 +46,31 @@ export default function Page() {
         </Link>
 
       </div>
-      <Tab.Group>
-        <Tab.List >
-          <div className=' flex justify-between'>
-            <Tab>
-              <div className='text-xl text-gray-300'>
-                Account
-              </div>
-            </Tab>
-            <Tab>
-              <div className='text-xl text-gray-300'>
-                Activity
-              </div>
-            </Tab>
-          </div>
-        </Tab.List>
-        <Tab.Panels>
-          <Tab.Panel>
-            <Activity />
+      <div className='mt-4'>
+        <Tab.Group>
+          <Tab.List >
+            <div className='flex justify-between mb-4'>
+              <Tab>
+                <div className='text-xl text-gray-300'>
+                  Account
+                </div>
+              </Tab>
+              <Tab>
+                <div className='text-xl text-gray-300'>
+                  Activity
+                </div>
+              </Tab>
+            </div>
+          </Tab.List>
+          <Tab.Panels>
+            <Tab.Panel>
+              <Activity />
 
-          </Tab.Panel>
-          <Tab.Panel>Content 2</Tab.Panel>
-        </Tab.Panels>
-      </Tab.Group>
+            </Tab.Panel>
+            <Tab.Panel>Content 2</Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
 
       {/* <Send /> */}
       {/* 		<Account />
