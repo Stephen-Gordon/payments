@@ -1,5 +1,6 @@
 'use client'
 import RecentTransaction from "@/app/components/RecentTransaction/RecentTransaction";
+// hooks
 import useGetAddress from "@/app/hooks/useGetAddress";
 import useGetRecentTransactions from "@/app/hooks/useGetRecentTransactions";
 import Link from "next/link";
@@ -26,7 +27,7 @@ export default function Activity() {
     };
 
     getData();
-  }, []); // Add address as a dependency if it's used inside useGetRecentTransactions
+  }, []);
 
   useEffect(() => {
     if (transactions) {

@@ -30,7 +30,7 @@ export default function RecentTransaction({ transaction }: any) {
             {transaction.from == address ? "From" : ""} {truncateEthAddress(transaction.from)}
           </div>
         </div>
-        <div className="flex">
+        <div className="flex text-white">
           {transaction.from == address ? "+$" : "-$"}
 
           {transaction.value}

@@ -26,7 +26,6 @@ export default function Page() {
         <Link
           href={{
             pathname: '/search',
-            query: { address: '12345' },
           }}
         >
           <button className='rounded w-40 bg-purple px-4 py-2 text-white hover:bg-blue-700 text-lg'>
@@ -37,7 +36,7 @@ export default function Page() {
         <Link
           href={{
             pathname: '/receive',
-            query: { address: '12345' },
+
           }}
         >
           <button className='rounded w-40 bg-purple px-4 py-2 text-white hover:bg-blue-700 text-lg'>
