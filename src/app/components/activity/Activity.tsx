@@ -4,10 +4,14 @@ import useGetAddress from "@/app/hooks/useGetAddress";
 import useGetRecentTransactions from "@/app/hooks/useGetRecentTransactions";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setTransactions } from "@/GlobalRedux/Features/transactions/transactionsSlice";
 
 export default function Activity() {
-  const [transactions, setTransactions] = useState<any>([])
+  const [transactions, setTxs] = useState<any>([])
   const address = "0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c"
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
@@ -15,7 +19,7 @@ export default function Activity() {
       try {
         const recentTransactions = await useGetRecentTransactions();
 
-        setTransactions(recentTransactions?.transfers.slice(0, 3));
+        setTxs(recentTransactions?.transfers.slice(0, 3));
       } catch (error) {
         console.error("Error while getting recent transactions:", error);
       }
@@ -28,11 +32,12 @@ export default function Activity() {
     if (transactions) {
       console.log("transactions console", transactions[0]);
     }
+    dispatch(setTransactions(transactions));
   }, [transactions]); // Add transactions as a dependency
 
   return (
     <>
-      <div className='bg-paper rounded-xl w-full text-xl p-4'>
+      <div className='bg-paper-one rounded-xl w-full text-xl p-4'>
         <div>
           Recent
         </div>

@@ -45,9 +45,9 @@ const Sheet = ({ children }) => {
                 borderTopLeftRadius: '32px',
                 borderTopRightRadius: '32px',
               }}
-              className='bg-paper'
+              className='bg-paper-one'
             >
-              <div>{children}</div>
+              <div className='text-slate-300'>{children}</div>
             </motion.div>
           </motion.div>
         )}

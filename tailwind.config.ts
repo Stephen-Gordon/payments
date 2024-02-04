@@ -11,7 +11,10 @@ export default {
       colors: {
         main: '#101012',
         dark: '#101012',
-        paper: '#2C2D33',
+        'paper': {
+          one: '#2C2D33',
+          two: '#43444C',
+        },
         purple: '#6A48F2',
         primary: {
           // Customize it on globals.css :root
