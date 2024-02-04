@@ -29,7 +29,7 @@ export default function Page() {
   return (
     <div className="p-4">
       <h1>Transactions</h1>
-      <div>
+      <div className="mt-4">
         {transactions && transactions.map((transaction: any, i: any) => (
           <div key={i}>
             <RecentTransaction transaction={transaction} />
