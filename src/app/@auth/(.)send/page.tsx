@@ -19,7 +19,7 @@ import SendUsdc from '@/app/components/SendUsdc/SendUsdc';
 
 const config = {
   apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
-  network: Network.MATIC_MUMBAI,
+  network: Network.ETH_SEPOLIA,
 };
 const alchemy = new Alchemy(config);
 

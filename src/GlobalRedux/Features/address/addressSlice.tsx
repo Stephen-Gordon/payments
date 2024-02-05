@@ -1,18 +1,24 @@
 'use client'
 
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-export const addressSlice = createSlice({
+interface AddressState {
+  value: string;
+}
+
+const initialState: AddressState = {
+  value: "0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c",
+};
+
+const addressSlice = createSlice({
   name: "address",
-  initialState: {
-    value: "0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c",
-  },
+  initialState,
   reducers: {
-    address: (state) => {
-      state.value = "0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c"
+    setAddress: (state, action: PayloadAction<string>) => {
+      state.value = action.payload;
     },
-
   },
 });
-export const { address } = addressSlice.actions;
+
+export const { setAddress } = addressSlice.actions;
 export default addressSlice.reducer;

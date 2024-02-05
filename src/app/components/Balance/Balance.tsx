@@ -11,13 +11,13 @@ export default function Balance() {
 
 	const addressState = useSelector((state: RootState) => state.address.value);
 
-	console.log("addressState", addressState)
+
 	const result = useBalance({
 		address: addressState,
-		token: "0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97",
+		token: "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8",
 	});
 
-
+	console.log("balance", result)
 	return (
 		<div className="text-white">
 			{result?.data?.formatted}

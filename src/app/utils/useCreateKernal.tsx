@@ -8,7 +8,7 @@ import RPC from '../web3RPC';
 
 // Zero Dev
 import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev';
-import { polygonMumbai } from 'viem/chains';
+import { sepolia } from 'viem/chains';
 import { Hex } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 
@@ -29,8 +29,8 @@ const useCreateKernal = async (web3auth) => {
   // create the Account Abstraction Kernal Client
   const kernelClient = await createEcdsaKernelAccountClient({
     // required
-    chain: polygonMumbai,
-    projectId: 'f1d2d8bf-0feb-430a-9f6f-dfeb8bc639a3',
+    chain: sepolia,
+    projectId: 'f6375b6f-2205-4fc7-bc87-f03218789b86',
     signer: signer,
   });
 

@@ -1,11 +1,11 @@
 'use client'
 import { http, createConfig } from 'wagmi'
-import { polygonMumbai } from 'wagmi/chains'
+import { sepolia } from 'wagmi/chains'
 
 const config = createConfig({
-  chains: [polygonMumbai],
+  chains: [sepolia],
   transports: {
-    [polygonMumbai.id]: http(),
+    [sepolia.id]: http(),
   },
 });
 

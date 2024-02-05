@@ -26,12 +26,12 @@ import { parseEther } from 'viem';
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0x13881',
-  rpcTarget: 'https://rpc.ankr.com/polygon_mumbai',
-  displayName: 'Polygon Mumbai',
+  chainId: '0xaa36a7',
+  rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
+  displayName: 'Sepolia',
   blockExplorer: 'https://etherscan.io/',
-  ticker: 'Matic',
-  tickerName: 'Matic',
+  ticker: 'Eth',
+  tickerName: 'Eth',
 };
 
 const web3auth = new Web3AuthNoModal({

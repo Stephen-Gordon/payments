@@ -22,7 +22,8 @@ export default function SendUsdc() {
   let payee = searchParams.get('payee');
 
   // USDC contract address
-  const usdc = '0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97';
+  //const usdc = '0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97';
+  const usdc = '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8';
 
   // Encode the data with Viem Function
   // Requires the abi of the contract, the function name, and the arguments address and amount
@@ -35,15 +36,13 @@ export default function SendUsdc() {
   // Send transaction function
   const sendTx = async () => {
     try {
-      const userOpHash = kernal.sendUserOperation({
-        userOperation: {
-          callData: await kernal.account.encodeCallData({
-            to: usdc,
-            data: encoded,
-            value: BigInt(0),
-          }),
-        },
-      });
+      const txnHash = await kernal.sendTransaction({
+        to: "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8",  // use any address
+        value: BigInt(0), // default to 0
+        data: "0x",       // default to 0x
+      })
+
+      console.log("Txn hash:", txnHash)
     } catch (error) {
       console.log(error);
     }
