@@ -8,14 +8,25 @@ import { useSelector } from 'react-redux';
 // Next
 import { useSearchParams } from 'next/navigation';
 
+// Loading
+import { RotatingLines } from 'react-loader-spinner';
+
 // React
 import { useState } from 'react';
 import truncateEthAddress from 'truncate-eth-address';
+import Success from '@/app/components/Success/Success';
+import { useRouter } from 'next/navigation';
 
 export default function SendUsdc() {
-  const [usdcAmount, setUsdcAmount] = useState('10');
+  const [usdcAmount, setUsdcAmount] = useState<string>('1');
+
+  const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const kernal = useSelector((state: RootState) => state.kernalClient.value);
+
+  const router = useRouter();
+  // next router
 
   // get search params
   const searchParams = useSearchParams();
@@ -27,17 +38,17 @@ export default function SendUsdc() {
 
   // Encode the data with Viem Function
   // Requires the abi of the contract, the function name, and the arguments address and amount
-  const encoded = encodeFunctionData({
+  const encoded: any = encodeFunctionData<any>({
     abi: erc20Abi,
     functionName: 'transfer',
     args: [payee as `0x${string}`, parseUnits(usdcAmount, 6)],
   });
-  console.log('Encoded:', encoded);
 
   // Send transaction function
   const sendTx = async () => {
     try {
       console.log('Sending USDC');
+      setLoading(true);
       const txnHash = await kernal.sendTransaction({
         to: usdc, // use any address
         value: BigInt(0), // default to 0
@@ -46,16 +57,14 @@ export default function SendUsdc() {
 
       console.log('Txn hash:', txnHash);
 
-      const userOpHash = await kernal.sendUserOperation({
-        userOperation: {
-          callData: await kernal.account.encodeCallData({
-            to: usdc,
-            value: parseEther('0.001'),
-            data: encoded,
-          }),
-        },
-      });
-      console.log('User operation hash:', userOpHash);
+      if (txnHash) {
+        setLoading(false);
+        setTransactionStatus(true);
+      }
+
+      setTimeout(() => {
+        router.push('/home'); // Redirect to target route after 3 seconds
+      }, 3000); // 3000 milliseconds = 3 seconds
     } catch (error) {
       console.log(error);
     }
@@ -73,7 +82,7 @@ export default function SendUsdc() {
           placeholder='100'
         />
         <div className='grid h-24 w-full content-center items-center rounded-xl bg-black  text-center'>
-          <p>{truncateEthAddress(payee)}</p>
+          <p>{payee && truncateEthAddress(payee)}</p>
         </div>
         <button
           className='mt-5 rounded-xl bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
@@ -82,6 +91,12 @@ export default function SendUsdc() {
           Send USDC
         </button>
       </div>
+      {transactionStatus ||
+        (loading && (
+          <>
+            <Success transactionStatus={transactionStatus} loading={loading} />
+          </>
+        ))}
     </>
   );
 }

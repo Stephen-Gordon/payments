@@ -1,22 +1,16 @@
-import { useState } from "react";
-//import Modal from "../Modal/Modal";
-export default function Send () {
-   /*  const [modal, setModal] = useState(false)
-
-    const onClose = () => {
-        setModal(false)
-    } */
-    return (
-			<>
-				<button
-					onClick={() => {
-						//setModal(true);
-					}}
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-				>
-					Send
-				</button>
-				
-			</>
-		);
+'use client';
+import { useState } from 'react';
+export default function Send() {
+  return (
+    <>
+      <button
+        onClick={() => {
+          //setModal(true);
+        }}
+        className='rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
+      >
+        Send
+      </button>
+    </>
+  );
 }
