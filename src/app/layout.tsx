@@ -67,28 +67,16 @@ import { PersistGate } from 'redux-persist/integration/react';
 };
  */
 
-import Link from 'next/link';
-import { Theme, ThemePanel } from '@radix-ui/themes';
 export default function RootLayout({
   auth,
   transactionmodal,
   children,
-
 }: {
   auth: React.ReactNode;
   transactionmodal: React.ReactNode;
   children: React.ReactNode;
-
 }) {
   const queryClient = new QueryClient();
-
-  const authState = true;
-  /* 
-  const searchState = useSelector((state: RootState) => state.search.value);
-
-  useEffect(() => {
-    console.log('searchState', searchState);
-  }, [searchState]); */
 
   return (
     <html>
@@ -97,10 +85,11 @@ export default function RootLayout({
           <PersistGate loading={null} persistor={persistor}>
             <WagmiProvider config={config!}>
               <QueryClientProvider client={queryClient}>
-
                 <div>{auth}</div>
                 <div>{transactionmodal}</div>
-                <main className='bg-dark w-screen h-screen text-gray-300'>{children}</main>
+                <main className='bg-dark h-screen w-screen text-gray-300'>
+                  {children}
+                </main>
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>
