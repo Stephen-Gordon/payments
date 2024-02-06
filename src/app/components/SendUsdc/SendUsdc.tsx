@@ -1,6 +1,6 @@
 'use client';
 // Viem
-import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
+import { encodeFunctionData, parseUnits, erc20Abi, parseEther } from 'viem';
 
 // Redux
 import { useSelector } from 'react-redux';
@@ -32,17 +32,30 @@ export default function SendUsdc() {
     functionName: 'transfer',
     args: [payee as `0x${string}`, parseUnits(usdcAmount, 6)],
   });
+  console.log('Encoded:', encoded);
 
   // Send transaction function
   const sendTx = async () => {
     try {
+      console.log('Sending USDC');
       const txnHash = await kernal.sendTransaction({
-        to: "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8",  // use any address
+        to: usdc, // use any address
         value: BigInt(0), // default to 0
-        data: "0x",       // default to 0x
-      })
+        data: encoded, // default to 0x
+      });
 
-      console.log("Txn hash:", txnHash)
+      console.log('Txn hash:', txnHash);
+
+      const userOpHash = await kernal.sendUserOperation({
+        userOperation: {
+          callData: await kernal.account.encodeCallData({
+            to: usdc,
+            value: parseEther('0.001'),
+            data: encoded,
+          }),
+        },
+      });
+      console.log('User operation hash:', userOpHash);
     } catch (error) {
       console.log(error);
     }
