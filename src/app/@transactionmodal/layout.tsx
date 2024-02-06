@@ -8,9 +8,11 @@ export default function ComponentsLayout({
 }: {
   children: React.ReactNode;
 }) {
+  console.log('Sheet', 'Sheet');
+  let isOpen = true;
   return (
     <>
-      <Sheet>{children}</Sheet>
+      <Sheet isOpen={isOpen}>{children}</Sheet>
     </>
   );
 }

@@ -4,76 +4,67 @@ import Link from 'next/link';
 //import { Account, Connect } from "../../components";
 import Balance from '../components/Balance/Balance';
 import Send from '../components/Send/Send';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
-import { Tab } from '@headlessui/react'
-
+import { Tab } from '@headlessui/react';
 
 import Activity from '@/app/components/activity/Activity';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 export default function Page() {
   const kernalReduxState = useSelector(
     (state: RootState) => state.kernalClient.value
   );
   console.log('kernalReduxState', kernalReduxState);
-
+  const dispatch = useDispatch();
   return (
-    <div className='pt-40 p-8'>
+    <div className='p-8 pt-40'>
       <div className=' items-center text-center text-5xl'>
         <Balance />
       </div>
 
       <div className='mt-10 flex justify-between'>
         <Link
+          onClick={() => {
+            dispatch(setSheet(true));
+          }}
           href={{
             pathname: '/search',
           }}
         >
-          <button className='rounded w-40 bg-purple px-4 py-2 text-white hover:bg-blue-700 text-lg'>
+          <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
             Send
           </button>
-
         </Link>
         <Link
           href={{
             pathname: '/receive',
-
           }}
         >
-          <button className='rounded w-40 bg-purple px-4 py-2 text-white hover:bg-blue-700 text-lg'>
+          <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
             Receive
           </button>
         </Link>
-
       </div>
       <div className='mt-4'>
         <Tab.Group>
-          <Tab.List >
-            <div className='flex justify-between mb-4'>
+          <Tab.List>
+            <div className='mb-4 flex justify-between'>
               <Tab>
-                <div className='text-xl text-gray-300'>
-                  Account
-                </div>
+                <div className='text-xl text-gray-300'>Account</div>
               </Tab>
               <Tab>
-                <div className='text-xl text-gray-300'>
-                  Activity
-                </div>
+                <div className='text-xl text-gray-300'>Activity</div>
               </Tab>
             </div>
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
               <Activity />
-
             </Tab.Panel>
             <Tab.Panel>Content 2</Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
-
-      {/* <Send /> */}
-      {/* 		<Account />
-			<Connect /> */}
-    </div >
+    </div>
   );
 }

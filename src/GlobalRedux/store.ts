@@ -8,6 +8,7 @@ import addressReducer from './Features/address/addressSlice';
 import searchReducer from './Features/search/searchSlice';
 import kernalClientSliceReducer from './Features/kernalClient/kernalClientSlice';
 import transactionsSliceReducer from './Features/transactions/transactionsSlice';
+import sheetSliceReducer from './Features/sheet/sheetSlice';
 
 // Define RootState type
 type RootState = {
@@ -28,7 +29,6 @@ type RootState = {
       value: {};
     }
   ];
-
 };
 
 const persistConfig = {
@@ -43,7 +43,7 @@ const rootReducer = combineReducers<RootState>({
   search: searchReducer,
   kernalClient: kernalClientSliceReducer,
   transactions: transactionsSliceReducer,
-
+  sheet: sheetSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

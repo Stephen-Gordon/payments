@@ -1,11 +1,14 @@
 'use client';
 // React
 import { useState, useEffect } from 'react';
+
 import useGetAddress from '@/app/hooks/useGetAddress';
+
 // Next
 import Link from 'next/link';
-
-// Layout
+import BackButton from '@/app/components/Navigation/BackButton/BackButton';
+import { useDispatch } from 'react-redux';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 export default function Page() {
   const [payee, setPayee] = useState(
@@ -14,14 +17,27 @@ export default function Page() {
 
   const address = useGetAddress();
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    // Add your logic here to listen to the input value
+    // Add logic here to listen to the input value
     console.log('Input value:', payee);
   }, [payee]);
 
   return (
     <>
       <div className='grid'>
+        <div className='p-4 '>
+          <div
+            className='w-fit'
+            onClick={() => {
+              dispatch(setSheet(false));
+            }}
+          >
+            <BackButton />
+          </div>
+        </div>
+
         <div className='my-4'>
           <p className='my-4 text-center text-xl text-gray-300'>Search</p>
         </div>
@@ -42,7 +58,7 @@ export default function Page() {
               query: { payee: payee },
             }}
           >
-            <button className='w-full rounded bg-slate-400 p-4'>Go</button>
+            <button className='bg-purple w-full rounded p-4'>Go</button>
           </Link>
         </div>
       </div>

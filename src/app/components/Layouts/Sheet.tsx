@@ -4,12 +4,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Sheet = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
-  };
+const Sheet = ({ children }) => {
+  const isOpen = useSelector((state) => state.sheet.value);
+
+  useEffect(() => {
+    // Add your logic here to handle the sheet open state
+    console.log('Sheet is open:', isOpen);
+  }, [isOpen]);
 
   return (
     <div>
