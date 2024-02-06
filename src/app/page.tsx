@@ -81,7 +81,6 @@ export default function HomePage() {
   }, [kernalClient]);
 
   const login = async () => {
-    // IMP START - Login
     const web3authProvider = await web3auth.connectTo(
       WALLET_ADAPTERS.OPENLOGIN,
       {
@@ -93,12 +92,6 @@ export default function HomePage() {
     if (web3auth.connected) {
       setLoggedIn(true);
     }
-  };
-
-  const getDetails = async () => {
-    try {
-      console.log(provider);
-    } catch (error) { }
   };
 
   const unloggedInView = (
@@ -125,38 +118,11 @@ export default function HomePage() {
         console.log('setting kernal');
         dispatch(setKernalClient(kernalClient));
         console.log('kernal set');
-      } catch (error) { }
+      } catch (error) {}
     };
     setReduxKernal();
   }, [kernalClient]);
 
-  const sendTx = async () => {
-    try {
-      const txnHash = await kernalClient.sendTransaction({
-        to: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-        value: parseEther('0.0001'),
-        data: '0x',
-      });
-
-      console.log('txn hash:', txnHash);
-
-      const userOpHash = await kernalClient.sendUserOperation({
-        userOperation: {
-          callData: await kernalClient.account.encodeCallData({
-            to: '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045',
-            value: parseEther('0.0001'),
-            data: '0x',
-          }),
-        },
-      });
-
-      console.log('userOp hash:', userOpHash);
-    } catch (error) { }
-  };
-  /*  const result = useBalance({
-     address: kernalClient?.account?.address,
-     token: "0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97",
-   }); */
   const loggedInView = (
     <>
       <div className='flex-container'>
@@ -177,9 +143,6 @@ export default function HomePage() {
       <section className='h-screen w-screen bg-slate-900 text-white'>
         {unloggedInView}
         {loggedInView}
-
-        <button onClick={sendTx}>Send Tx</button>
-        <Balance />
 
         <Link
           href={{
