@@ -8,24 +8,22 @@ import { useState, useEffect } from 'react';
 
 // Web3auth
 import { Web3AuthNoModal } from '@web3auth/no-modal';
-import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from '@web3auth/base';
+import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from '@web3auth/base';
 import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
 import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
 
 import { useDispatch } from 'react-redux';
 
 // Components
-import Balance from '@/app/components/Balance/Balance';
 import useCreateKernal from '@/app/utils/useCreateKernal';
-import Link from 'next/link';
 
 // spinner
 import { RotatingLines } from 'react-loader-spinner';
 
 import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClientSlice';
 
-import { parseEther } from 'viem';
 import { useRouter } from 'next/navigation';
+import { setLogin } from '@/GlobalRedux/Features/login/loginSlice';
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -54,15 +52,20 @@ const openloginAdapter = new OpenloginAdapter({
 web3auth.configureAdapter(openloginAdapter);
 
 export default function Page() {
+  // Kernal State
   const [kernalClient, setKernal] = useState<any>(null);
-
+  // Loading State
+  const [loading, setLoading] = useState<boolean>(false);
+  // Login Success State
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
+  // router
   const router = useRouter();
 
   // set the kernal client in redux
   const dispatch = useDispatch();
 
+  // initial useEffect to setup the sdk
   useEffect(() => {
     const init = async () => {
       try {
@@ -77,15 +80,11 @@ export default function Page() {
     init();
   }, []);
 
-  useEffect(() => {
-    if (loginSuccess) {
-      router.push('/home');
-    }
-  }, [loginSuccess]);
-
+  // Web3Auth login
   const login = async () => {
     try {
       console.log('logging in');
+      setLoading(true);
       const web3authProvider = await web3auth.connectTo(
         WALLET_ADAPTERS.OPENLOGIN,
         {
@@ -101,29 +100,45 @@ export default function Page() {
       console.log(error);
     }
   };
+  const setReduxKernal = async () => {
+    try {
+      console.log('setting kernal');
+      dispatch(setKernalClient(kernalClient));
+      console.log('kernal set');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const setReduxLogin = async () => {
+    try {
+      console.log('setting login');
+      dispatch(setLogin(true));
+      console.log('login set');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  // ZeroDev SDK setup
   const setUp = async () => {
     try {
       if (web3auth) {
         const kernal = await useCreateKernal(web3auth);
         setKernal(kernal);
+        if (kernal.account) {
+          setLoading(false);
+          setLoginSuccess(true);
+          setReduxKernal();
+          setTimeout(() => {
+            router.push('/home');
+          }, 2000);
+        }
         console.log('My account:', kernal.account.address);
       }
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    const setReduxKernal = async () => {
-      try {
-        console.log('setting kernal');
-        dispatch(setKernalClient(kernalClient));
-        console.log('kernal set');
-      } catch (error) {}
-    };
-    setReduxKernal();
-  }, [kernalClient]);
 
   return (
     <main>
@@ -135,7 +150,18 @@ export default function Page() {
           onClick={login}
           className='rounded-lg bg-blue-500 px-8 py-4 text-white transition-all duration-300 hover:bg-blue-700'
         >
-          {!loading ? 'Sign in with Google' : <RotatingLines />}
+          {!loading ? (
+            'Sign in with Google'
+          ) : (
+            <RotatingLines
+              visible={true}
+              height='96'
+              width='96'
+              color='grey'
+              strokeWidth='5'
+              animationDuration='1'
+            />
+          )}
         </button>
       </section>
     </main>

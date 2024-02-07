@@ -23,6 +23,7 @@ import { useSelector } from 'react-redux';
 import { RootState, persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
+import { usePathname, useRouter } from 'next/navigation';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -78,6 +79,17 @@ export default function RootLayout({
 }) {
   const queryClient = new QueryClient();
 
+  const router = useRouter();
+  const pathname = usePathname();
+  /*   const loginState = useSelector((state: RootState) => state.login.value);
+
+  // Redirect to login if not authenticated
+  if (!loginState && pathname !== '/login') {
+    router.push('/login');
+    return null;
+  }
+  console.log(loginState);
+ */
   return (
     <html>
       <body>

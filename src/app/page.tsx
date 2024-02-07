@@ -128,7 +128,6 @@ export default function HomePage() {
       <div className='flex-container'>
         <div>
           Logged in
-          <button onClick={getDetails}>Details</button>
           <button onClick={setUp}>Setup</button>
         </div>
       </div>

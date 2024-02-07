@@ -1,6 +1,4 @@
 'use client';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../GlobalRedux/store';
 import { IProvider } from '@web3auth/base';
 
 // rpc
@@ -30,7 +28,7 @@ const useCreateKernal = async (web3auth) => {
   const kernelClient = await createEcdsaKernelAccountClient({
     // required
     chain: sepolia,
-    projectId: 'f6375b6f-2205-4fc7-bc87-f03218789b86',
+    projectId: process.env.ZERODEV_ID,
     signer: signer,
   });
 
