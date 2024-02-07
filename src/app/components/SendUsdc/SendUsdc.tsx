@@ -56,9 +56,9 @@ export default function SendUsdc() {
       console.log('Sending USDC');
       setLoading(true);
       const txnHash = await kernal.sendTransaction({
-        to: usdc, // use any address
+        to: usdc, // ERC20 address
         value: BigInt(0), // default to 0
-        data: encoded, // default to 0x
+        data: encoded,
       });
 
       console.log('Txn hash:', txnHash);
@@ -69,7 +69,7 @@ export default function SendUsdc() {
         setTimeout(() => {
           dispatch(setSheet(false));
           router.push(`/transaction?hash=${txnHash}`);
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
