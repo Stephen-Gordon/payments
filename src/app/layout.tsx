@@ -77,12 +77,6 @@ export default function RootLayout({
 
  */
 
-  const onRefresh = async () => {
-    console.log('refreshing');
-
-    window.location.reload();
-  };
-
   return (
     <html className='bg-dark h-full overflow-auto '>
       <head>
@@ -320,17 +314,11 @@ export default function RootLayout({
           <PersistGate loading={null} persistor={persistor}>
             <WagmiProvider config={config!}>
               <QueryClientProvider client={queryClient}>
-                <ReactPullToRefresh
-                  onRefresh={onRefresh}
-                  className='your-own-class-if-you-want'
-                  style={{ textAlign: 'center' }}
-                >
-                  <div>{auth}</div>
-                  <div>{transactionmodal}</div>
-                  <main className='bg-dark h-screen w-screen text-gray-300'>
-                    {children}
-                  </main>
-                </ReactPullToRefresh>
+                <div>{auth}</div>
+                <div>{transactionmodal}</div>
+                <main className='bg-dark h-screen w-screen text-gray-300'>
+                  {children}
+                </main>
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>
