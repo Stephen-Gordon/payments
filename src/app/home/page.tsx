@@ -54,10 +54,10 @@ export default function Page() {
             <Tab.List>
               <div className='mb-4 flex justify-between'>
                 <Tab>
-                  <div className='text-xl text-gray-300'>Account</div>
+                  <div className='text-lg text-gray-300'>Account</div>
                 </Tab>
                 <Tab>
-                  <div className='text-xl text-gray-300'>Activity</div>
+                  <div className='text-lg text-gray-300'>Activity</div>
                 </Tab>
               </div>
             </Tab.List>
