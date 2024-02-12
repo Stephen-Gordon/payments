@@ -142,9 +142,6 @@ export default function Page() {
 
   return (
     <main>
-      <Head>
-        <title>Payments, Stephen Gordon</title>
-      </Head>
       <section className='grid justify-center text-white'>
         <button
           onClick={login}

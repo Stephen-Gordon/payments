@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
   env: {
     browser: true,
     es2021: true,
@@ -76,6 +76,24 @@ module.exports = {
       },
     ],
     //#endregion  //*======== Import Sort ===========
+  },
+  globals: {
+    React: true,
+    JSX: true,
+  },
+};
+ */
+
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  plugins: [],
+  extends: ['eslint:recommended', 'next', 'next/core-web-vitals', 'prettier'],
+  rules: {
+    'no-console': 'off',
   },
   globals: {
     React: true,
