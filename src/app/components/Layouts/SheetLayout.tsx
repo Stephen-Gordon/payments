@@ -19,27 +19,21 @@ const SheetLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <Sheet isOpen={isOpen} onClose={() => dispatch(setSheet(false))}>
-              <Sheet.Container
-                className='blurios'
-                style={{
-                  backgroundColor: 'rgba(44, 45, 51, 0.7)',
-                  backdropFilter: 'blur(10px) saturate(150%)',
-                }}
-              >
-                {/*  <Sheet.Header></Sheet.Header> */}
-                <Sheet.Content>{children}</Sheet.Content>
-              </Sheet.Container>
-              <Sheet.Backdrop onTap={() => dispatch(setSheet(false))} />
-            </Sheet>
-          </>
-        )}
-      </AnimatePresence>
-    </div>
+    <>
+      <Sheet isOpen={isOpen} onClose={() => dispatch(setSheet(false))}>
+        <Sheet.Container
+          className='blurios'
+          style={{
+            backgroundColor: 'rgba(44, 45, 51, 0.7)',
+            backdropFilter: 'blur(10px) saturate(150%)',
+          }}
+        >
+          {/*  <Sheet.Header></Sheet.Header> */}
+          <Sheet.Content>{children}</Sheet.Content>
+        </Sheet.Container>
+        <Sheet.Backdrop onTap={() => dispatch(setSheet(false))} />
+      </Sheet>
+    </>
   );
 };
 
