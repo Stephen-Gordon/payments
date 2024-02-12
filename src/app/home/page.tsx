@@ -17,10 +17,8 @@ export default function Page() {
   console.log('kernalReduxState', kernalReduxState);
   const dispatch = useDispatch();
   return (
-    <div className='p-8 pt-40'>
-      <div className=' items-center text-center text-5xl'>
-        <Balance />
-      </div>
+    <div className='p-4 pt-40'>
+      <div className='items-center text-center text-5xl'></div>
 
       <div className='mt-10 flex justify-between'>
         <Link

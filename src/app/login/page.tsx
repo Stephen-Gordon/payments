@@ -59,6 +59,8 @@ export default function Page() {
   // Login Success State
   const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
 
+  const [error, setError] = useState<string>('');
+
   // router
   const router = useRouter();
 
@@ -132,6 +134,8 @@ export default function Page() {
           setTimeout(() => {
             router.push('/home');
           }, 2000);
+        } else {
+          setError('Error creating account');
         }
         console.log('My account:', kernal.account.address);
       }
@@ -159,6 +163,7 @@ export default function Page() {
               animationDuration='1'
             />
           )}
+          {error && error}
         </button>
       </section>
     </main>

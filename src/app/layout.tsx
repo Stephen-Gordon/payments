@@ -24,6 +24,7 @@ import { RootState, persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { usePathname, useRouter } from 'next/navigation';
+import ReactPullToRefresh from 'react-pull-to-refresh';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -72,7 +73,16 @@ export default function RootLayout({
     return null;
   }
   console.log(loginState);
+
+
  */
+
+  const onRefresh = async () => {
+    console.log('refreshing');
+
+    window.location.reload();
+  };
+
   return (
     <html>
       <head>
@@ -304,16 +314,23 @@ export default function RootLayout({
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
         />
       </Head>
+
       <body>
         <Providers>
           <PersistGate loading={null} persistor={persistor}>
             <WagmiProvider config={config!}>
               <QueryClientProvider client={queryClient}>
-                <div>{auth}</div>
-                <div>{transactionmodal}</div>
-                <main className='bg-dark h-screen w-screen text-gray-300'>
-                  {children}
-                </main>
+                <ReactPullToRefresh
+                  onRefresh={onRefresh}
+                  className='your-own-class-if-you-want'
+                  style={{ textAlign: 'center' }}
+                >
+                  <div>{auth}</div>
+                  <div>{transactionmodal}</div>
+                  <main className='bg-dark h-screen w-screen text-gray-300'>
+                    {children}
+                  </main>
+                </ReactPullToRefresh>
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>
