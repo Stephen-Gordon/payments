@@ -23,12 +23,9 @@ const SheetLayout = ({ children }) => {
       <AnimatePresence>
         {isOpen && (
           <>
-            <Sheet
-              rootId='render'
-              isOpen={isOpen}
-              onClose={() => dispatch(setSheet(false))}
-            >
+            <Sheet isOpen={isOpen} onClose={() => dispatch(setSheet(false))}>
               <Sheet.Container
+                className='blurios'
                 style={{
                   backgroundColor: 'rgba(44, 45, 51, 0.7)',
                   backdropFilter: 'blur(10px) saturate(150%)',

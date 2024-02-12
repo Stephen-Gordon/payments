@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+.blurios {
+  -webkit-backdrop-filter: blur(10px) saturate(150%); /* Add this line first, it fixes blur for Safari and adds saturation */
+
+  backdrop-filter: blur(5px); /* This line activates blur*/
+}
+
 :root {
   /* #region  /**=========== Primary Color =========== */
   /* !STARTERCONF Customize these variable, copy and paste from /styles/colors.css for list of colors */
