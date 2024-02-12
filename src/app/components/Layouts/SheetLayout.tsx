@@ -25,7 +25,7 @@ const SheetLayout = ({ children }) => {
           className='blurios'
           style={{
             backgroundColor: 'rgba(16, 16, 18, 0.7)',
-            backdropFilter: 'blur(10px) saturate(150%)',
+            backdropFilter: 'blur(10px) saturate(1000%)',
           }}
         >
           {/*  <Sheet.Header></Sheet.Header> */}

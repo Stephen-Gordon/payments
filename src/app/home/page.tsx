@@ -18,7 +18,7 @@ export default function Page() {
   const dispatch = useDispatch();
   return (
     <div id='render'>
-      <div className='p-4 pt-40'>
+      <div className='blurios p-4 pt-40'>
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>

@@ -316,7 +316,16 @@ export default function RootLayout({
               <QueryClientProvider client={queryClient}>
                 <div>{auth}</div>
                 <div>{transactionmodal}</div>
-                <main className='bg-dark h-screen w-screen text-gray-300'>
+                <div className='items absolute -z-50 flex h-screen w-screen content-center items-center justify-center '>
+                  <div className='bg-purple h-1/2 w-1/2 rounded-full'></div>
+                </div>
+                <main
+                  style={{
+                    backgroundColor: 'rgba(16, 16, 18, 0.9)',
+                    backdropFilter: 'blur(100px) saturate(1000%)',
+                  }}
+                  className='blurios bg-dark/90 h-screen w-screen text-gray-300'
+                >
                   {children}
                 </main>
               </QueryClientProvider>
