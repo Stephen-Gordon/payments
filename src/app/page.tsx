@@ -28,10 +28,10 @@ import { useRouter } from 'next/navigation';
 export default function HomePage() {
   const router = useRouter();
 
-  /* useEffect(() => {
+  useEffect(() => {
     router.push('/login');
   }, []);
- */
+
   return (
     <main>
       <Head>
@@ -148,7 +148,7 @@ export default function HomePage() {
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
         />
       </Head>
-      <section className='h-screen w-screen bg-slate-900 text-white'>
+      {/*  <section className='h-screen w-screen bg-slate-900 text-white'>
         <Link
           href={{
             pathname: '/home',
@@ -156,7 +156,7 @@ export default function HomePage() {
         >
           Home
         </Link>
-      </section>
+      </section> */}
     </main>
   );
 }
