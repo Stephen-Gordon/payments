@@ -28,7 +28,7 @@ const useCreateKernal = async (web3auth) => {
   const kernelClient = await createEcdsaKernelAccountClient({
     // required
     chain: sepolia,
-    projectId: process.env.ZERODEV_ID,
+    projectId: 'f6375b6f-2205-4fc7-bc87-f03218789b86',
     signer: signer,
   });
 
