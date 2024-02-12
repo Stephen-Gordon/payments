@@ -18,7 +18,9 @@ export default function Page() {
   const dispatch = useDispatch();
   return (
     <div className='p-4 pt-40'>
-      <div className='items-center text-center text-5xl'></div>
+      <div className='items-center text-center text-5xl'>
+        <Balance />
+      </div>
 
       <div className='mt-10 flex justify-between'>
         <Link
@@ -34,6 +36,9 @@ export default function Page() {
           </button>
         </Link>
         <Link
+          onClick={() => {
+            dispatch(setSheet(true));
+          }}
           href={{
             pathname: '/receive',
           }}

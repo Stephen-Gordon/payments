@@ -1,5 +1,5 @@
 'use client';
-import Sheet from '@/app/components/Layouts/Sheet';
+import SheetLayout from '@/app/components/Layouts/SheetLayout';
 import { Metadata } from 'next';
 import * as React from 'react';
 
@@ -10,7 +10,7 @@ export default function ComponentsLayout({
 }) {
   return (
     <>
-      <Sheet>{children}</Sheet>
+      <SheetLayout>{children}</SheetLayout>
     </>
   );
 }

@@ -84,7 +84,7 @@ export default function RootLayout({
   };
 
   return (
-    <html>
+    <html id='render' className='bg-dark h-full overflow-auto '>
       <head>
         <title>Payments, Stephen Gordon</title>
         <title>Payments, Stephen Gordon</title>

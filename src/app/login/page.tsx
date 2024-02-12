@@ -6,6 +6,8 @@ import Head from 'next/head';
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 
+import Link from 'next/link';
+
 // Web3auth
 import { Web3AuthNoModal } from '@web3auth/no-modal';
 import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from '@web3auth/base';
@@ -165,6 +167,13 @@ export default function Page() {
           )}
           {error && error}
         </button>
+        <Link
+          href={{
+            pathname: '/home',
+          }}
+        >
+          Home
+        </Link>
       </section>
     </main>
   );
