@@ -28,10 +28,10 @@ import { useRouter } from 'next/navigation';
 export default function HomePage() {
   const router = useRouter();
 
-  useEffect(() => {
+  /* useEffect(() => {
     router.push('/login');
   }, []);
-
+ */
   return (
     <main>
       <Head>
