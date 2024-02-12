@@ -23,122 +23,17 @@ import Link from 'next/link';
 import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClientSlice';
 
 import { parseEther } from 'viem';
-
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
-  displayName: 'Sepolia',
-  blockExplorer: 'https://etherscan.io/',
-  ticker: 'Eth',
-  tickerName: 'Eth',
-};
-
-const web3auth = new Web3AuthNoModal({
-  // @ts-ignore
-  clientId:
-    'BCUJ9sDhdO5iekR-oaXL7bIC5Dg3tPNyhtGp_4z_SLp3B0ZKp-0qmE9RFWxUdY4g1wNzJqkxr10d14ty-PoAqCI',
-  chainConfig,
-  web3AuthNetwork: 'sapphire_devnet',
-});
-
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: { chainConfig },
-});
-const openloginAdapter = new OpenloginAdapter({
-  privateKeyProvider: privateKeyProvider,
-});
-web3auth.configureAdapter(openloginAdapter);
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
-  const [provider, setProvider] = useState<IProvider | null>(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [kernalClient, setKernal] = useState<any>(null);
-  // set the kernal client in redux
-  const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
-    const init = async () => {
-      try {
-        // IMP START - SDK Initialization
-        await web3auth.init();
-        // IMP END - SDK Initialization
-        setProvider(web3auth.provider);
-
-        if (web3auth.connected) {
-          setLoggedIn(true);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    init();
+    router.push('/login');
   }, []);
-
-  useEffect(() => {
-    console.log('kernalClient', kernalClient);
-  }, [kernalClient]);
-
-  const login = async () => {
-    const web3authProvider = await web3auth.connectTo(
-      WALLET_ADAPTERS.OPENLOGIN,
-      {
-        loginProvider: 'google',
-      }
-    );
-    setProvider(web3authProvider);
-
-    if (web3auth.connected) {
-      setLoggedIn(true);
-    }
-  };
-
-  const unloggedInView = (
-    <button onClick={login} className='card'>
-      Login
-    </button>
-  );
-
-  const setUp = async () => {
-    try {
-      if (web3auth) {
-        const kernal = await useCreateKernal(web3auth);
-        setKernal(kernal);
-        console.log('My account:', kernal.account.address);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    const setReduxKernal = async () => {
-      try {
-        console.log('setting kernal');
-        dispatch(setKernalClient(kernalClient));
-        console.log('kernal set');
-      } catch (error) {}
-    };
-    setReduxKernal();
-  }, [kernalClient]);
-
-  const loggedInView = (
-    <>
-      <div className='flex-container'>
-        <div>
-          Logged in
-          <button onClick={setUp}>Setup</button>
-        </div>
-      </div>
-    </>
-  );
 
   return (
     <main>
-      <head>
-        <title>Payments, Stephen Gordon</title>
-      </head>
       <Head>
         <title>Payments, Stephen Gordon</title>
         <meta name='application-name' content='PWA App' />
@@ -254,9 +149,6 @@ export default function HomePage() {
         />
       </Head>
       <section className='h-screen w-screen bg-slate-900 text-white'>
-        {unloggedInView}
-        {loggedInView}
-
         <Link
           href={{
             pathname: '/home',
