@@ -1,14 +1,17 @@
 'use client';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import useGetAddress from '@/app/hooks/useGetAddress';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
 import truncateEthAddress from 'truncate-eth-address';
 
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
-
+  const dispatch = useDispatch();
   return (
     <Link
+      onClick={() => dispatch(setSheet(true))}
       href={{ pathname: '/transaction', query: { hash: transaction.hash } }}
     >
       <div className='mb-4 flex content-center justify-between text-base'>
