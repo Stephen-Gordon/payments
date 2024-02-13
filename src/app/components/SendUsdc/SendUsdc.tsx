@@ -18,6 +18,8 @@ import Success from '@/app/components/Success/Success';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+import useCreateKernal from '@/app/utils/useCreateKernal';
+import secureLocalStorage from 'react-secure-storage';
 
 export default function SendUsdc() {
   const [usdcAmount, setUsdcAmount] = useState<string>('1');
@@ -25,7 +27,9 @@ export default function SendUsdc() {
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const kernal = useSelector((state: RootState) => state.kernalClient.value);
+  const [kernal, setKernal] = useState<any>(null);
+
+  /* const kernal = useSelector((state: RootState) => state.kernalClient.value); */
 
   // next router
   const router = useRouter();
@@ -42,8 +46,19 @@ export default function SendUsdc() {
   const usdc = '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8';
 
   useEffect(() => {
-    console.log('Kernal', kernal);
-  }, [kernal]);
+    const setUp = async () => {
+      try {
+        const getKernal = await useCreateKernal({
+          name: 'local',
+          value: secureLocalStorage.getItem('pk'),
+        });
+        setKernal(getKernal);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    setUp();
+  }, []);
 
   // Send transaction function
   const sendTx = async () => {

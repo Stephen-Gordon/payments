@@ -10,8 +10,6 @@ const useGetRecentTransactions = async () => {
     };
     const alchemy = new Alchemy(config);
 
-    console.log('alchemy key', process.env.NEXT_PUBLIC_ALCHEMY_API_KEY);
-
     const data = await alchemy.core.getAssetTransfers({
       fromBlock: '0x0',
       fromAddress: '0x6b3C5DeBB67505dfD66F3b3b80D1d24DF8DA886D',

@@ -27,11 +27,7 @@ export default function Page() {
 
   console.log('kernalReduxState', kernalReduxState);
 
-  useEffect(() => {
-    let value = secureLocalStorage.getItem('pk');
-    console.log('private key', value);
-    console.log('Kernal', kernalReduxState);
-  }, [kernalReduxState]);
+  useEffect(() => {}, [kernalReduxState]);
 
   const dispatch = useDispatch();
   return (

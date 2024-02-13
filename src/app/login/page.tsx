@@ -27,6 +27,9 @@ import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClien
 import { useRouter } from 'next/navigation';
 import { setLogin } from '@/GlobalRedux/Features/login/loginSlice';
 
+// secure storage
+import secureLocalStorage from 'react-secure-storage';
+
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
   chainId: '0xaa36a7',
@@ -71,6 +74,19 @@ export default function Page() {
 
   // initial useEffect to setup the sdk
   useEffect(() => {
+    let value = secureLocalStorage.getItem('pk');
+    if (value) {
+      let option = {
+        name: 'local',
+        value: value,
+      };
+      const kernal = useCreateKernal(option);
+      setReduxKernal(kernal);
+      setReduxLogin();
+
+      router.push('/home');
+    }
+
     const init = async () => {
       try {
         // init the web3auth sdk
@@ -119,7 +135,11 @@ export default function Page() {
   const setUp = async () => {
     try {
       if (web3auth) {
-        const kernal = await useCreateKernal(web3auth);
+        let option = {
+          name: 'web3auth',
+          value: web3auth,
+        };
+        const kernal = await useCreateKernal(option);
         setKernal(kernal);
         if (kernal.account) {
           setLoading(false);
@@ -141,9 +161,7 @@ export default function Page() {
     try {
       console.log('setting kernal');
       dispatch(setKernalClient(kernal));
-
       console.log('kernal set');
-      console.log('kernal should be working', kernal);
     } catch (error) {
       console.log(error);
     }
