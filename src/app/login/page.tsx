@@ -104,15 +104,7 @@ export default function Page() {
       console.log(error);
     }
   };
-  const setReduxKernal = async () => {
-    try {
-      console.log('setting kernal');
-      dispatch(setKernalClient(kernalClient));
-      console.log('kernal set');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const setReduxLogin = async () => {
     try {
       console.log('setting login');
@@ -132,7 +124,7 @@ export default function Page() {
         if (kernal.account) {
           setLoading(false);
           setLoginSuccess(true);
-          setReduxKernal();
+          setReduxKernal(kernal);
           setTimeout(() => {
             router.push('/home');
           }, 2000);
@@ -145,36 +137,54 @@ export default function Page() {
       console.log(error);
     }
   };
+  const setReduxKernal = async (kernal: any) => {
+    try {
+      console.log('setting kernal');
+      dispatch(setKernalClient(kernal));
+
+      console.log('kernal set');
+      console.log('kernal should be working', kernal);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <main>
-      <section className='grid justify-center text-white'>
-        <button
-          onClick={login}
-          className='rounded-lg bg-blue-500 px-8 py-4 text-white transition-all duration-300 hover:bg-blue-700'
-        >
-          {!loading ? (
-            'Sign in with Google'
-          ) : (
-            <RotatingLines
-              visible={true}
-              height='96'
-              width='96'
-              color='grey'
-              strokeWidth='5'
-              animationDuration='1'
-            />
-          )}
-          {error && error}
-        </button>
-        <Link
-          href={{
-            pathname: '/home',
-          }}
-        >
-          Home
-        </Link>
-      </section>
-    </main>
+    <section className=' h-screen w-screen p-4 text-white'>
+      <div className='min-h-1/2 flex w-full content-end justify-center p-4 text-center'>
+        <div className='w-full'>
+          <div className='mb-12'>
+            <h1 className='text-4xl font-bold'>Sign in</h1>
+          </div>
+          <button
+            onClick={login}
+            className='blurios w-full rounded-lg border border-slate-500 px-8 py-4 text-white transition-all duration-300 hover:opacity-80'
+          >
+            {!loading ? (
+              'Sign in with Google'
+            ) : (
+              <RotatingLines
+                visible={true}
+                height='24'
+                width='24'
+                color='grey'
+                strokeWidth='5'
+                animationDuration='1'
+              />
+            )}
+            {error && error}
+          </button>
+        </div>
+      </div>
+      <button onClick={setReduxLogin}>set login</button>
+
+      {/*   <Link
+        href={{
+          pathname: '/home',
+        }}
+      >
+        Home
+      </Link> */}
+    </section>
   );
 }

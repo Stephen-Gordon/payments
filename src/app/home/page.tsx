@@ -1,20 +1,38 @@
 'use client';
-
+// next
 import Link from 'next/link';
-//import { Account, Connect } from "../../components";
+// components
 import Balance from '../components/Balance/Balance';
 import Send from '../components/Send/Send';
+import Activity from '@/app/components/activity/Activity';
+
+// redux
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+
+//headless UI
 import { Tab } from '@headlessui/react';
 
-import Activity from '@/app/components/activity/Activity';
-import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+// react
+import { useEffect } from 'react';
+
+// secure storage
+import secureLocalStorage from 'react-secure-storage';
+
 export default function Page() {
   const kernalReduxState = useSelector(
     (state: RootState) => state.kernalClient.value
   );
+
   console.log('kernalReduxState', kernalReduxState);
+
+  useEffect(() => {
+    let value = secureLocalStorage.getItem('pk');
+    console.log('private key', value);
+    console.log('Kernal', kernalReduxState);
+  }, [kernalReduxState]);
+
   const dispatch = useDispatch();
   return (
     <div id='render'>

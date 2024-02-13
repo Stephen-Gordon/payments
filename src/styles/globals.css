@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .blurios {
-  -webkit-backdrop-filter: blur(20px) saturate(1000%); /* Add this line first, it fixes blur for Safari and adds saturation */
+  -webkit-backdrop-filter: blur(20px) saturate(1000%);
   background-color: 'rgba(16, 16, 18, 0.9)';
-  backdrop-filter: blur(20px); /* This line activates blur*/
+  backdrop-filter: blur(20px);
 }
 
 :root {

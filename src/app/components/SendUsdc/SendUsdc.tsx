@@ -12,7 +12,7 @@ import { useSearchParams } from 'next/navigation';
 import { RotatingLines } from 'react-loader-spinner';
 
 // React
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import truncateEthAddress from 'truncate-eth-address';
 import Success from '@/app/components/Success/Success';
 import { useRouter } from 'next/navigation';
@@ -41,6 +41,10 @@ export default function SendUsdc() {
   //const usdc = '0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97';
   const usdc = '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8';
 
+  useEffect(() => {
+    console.log('Kernal', kernal);
+  }, [kernal]);
+
   // Send transaction function
   const sendTx = async () => {
     try {
@@ -55,21 +59,23 @@ export default function SendUsdc() {
       });
       console.log('Sending USDC');
       setLoading(true);
-      const txnHash = await kernal.sendTransaction({
-        to: usdc, // ERC20 address
-        value: BigInt(0), // default to 0
-        data: encoded,
-      });
+      if (kernal) {
+        const txnHash = await kernal.sendTransaction({
+          to: usdc, // ERC20 address
+          value: BigInt(0), // default to 0
+          data: encoded,
+        });
 
-      console.log('Txn hash:', txnHash);
+        console.log('Txn hash:', txnHash);
 
-      if (txnHash) {
-        setLoading(false);
-        setTransactionStatus(true);
-        setTimeout(() => {
-          dispatch(setSheet(false));
-          router.push(`/transaction?hash=${txnHash}`);
-        }, 3000);
+        if (txnHash) {
+          setLoading(false);
+          setTransactionStatus(true);
+          setTimeout(() => {
+            dispatch(setSheet(false));
+            router.push(`/transaction?hash=${txnHash}`);
+          }, 3000);
+        }
       }
     } catch (error) {
       console.log(error);

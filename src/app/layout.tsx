@@ -92,7 +92,7 @@ export default function RootLayout({
         <meta name='msapplication-config' content='/icons/browserconfig.xml' />
         <meta name='msapplication-TileColor' content='#2B5797' />
         <meta name='msapplication-tap-highlight' content='no' />
-        <meta name='theme-color' content='#000000' />
+        <meta name='theme-color' content='#101012' />
 
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
         <link
@@ -154,41 +154,6 @@ export default function RootLayout({
           content='https://yourdomain.com/icons/apple-touch-icon.png'
         />
 
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_2048.png'
-          sizes='2048x2732'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_1668.png'
-          sizes='1668x2224'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_1536.png'
-          sizes='1536x2048'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_1125.png'
-          sizes='1125x2436'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_1242.png'
-          sizes='1242x2208'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_750.png'
-          sizes='750x1334'
-        />
-        <link
-          rel='apple-touch-startup-image'
-          href='/images/apple_splash_640.png'
-          sizes='640x1136'
-        />
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
@@ -316,9 +281,9 @@ export default function RootLayout({
               <QueryClientProvider client={queryClient}>
                 <div>{auth}</div>
                 <div>{transactionmodal}</div>
-                <div className='items absolute -z-50 flex h-screen w-screen content-center items-center justify-center '>
+                {/* <div className='items absolute -z-50 flex h-screen w-screen content-center items-center justify-center '>
                   <div className='bg-purple h-1/2 w-1/2 rounded-full'></div>
-                </div>
+                </div> */}
                 <main
                   style={{
                     backgroundColor: 'rgba(16, 16, 18, 0.9)',

@@ -12,6 +12,9 @@ import { privateKeyToAccount } from 'viem/accounts';
 
 import { useDispatch } from 'react-redux';
 
+// secure storage
+import secureLocalStorage from 'react-secure-storage';
+
 const useCreateKernal = async (web3auth) => {
   // take in the web3auth provider as a param
 
@@ -23,6 +26,8 @@ const useCreateKernal = async (web3auth) => {
 
   // create a signer from the private key
   const signer = privateKeyToAccount(`0x${privateKey}` as Hex);
+
+  secureLocalStorage.setItem('pk', privateKey);
 
   // create the Account Abstraction Kernal Client
   const kernelClient = await createEcdsaKernelAccountClient({
