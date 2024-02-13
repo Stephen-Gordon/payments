@@ -63,6 +63,34 @@ export default function Page() {
             <button className='bg-purple w-full rounded p-4'>Go</button>
           </Link>
         </div>
+
+        <div className='p-4'>
+          <div className='text-lg text-gray-300'>Favorites</div>
+          <div className='mb-4 flex content-center justify-between text-base'>
+            <div className='flex items-center'>
+              <div className='relative grid items-center justify-center'>
+                <div className='h-12 w-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 '>
+                  {/* Circle */}
+                </div>
+              </div>
+              <div className='ml-2 text-gray-300'>John</div>
+            </div>
+
+            {/*  {transaction.blockNum} */}
+          </div>
+          <div className='mb-4 flex content-center justify-between text-base'>
+            <div className='flex items-center'>
+              <div className='relative grid items-center justify-center'>
+                <div className='h-12 w-12 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 '>
+                  {/* Circle */}
+                </div>
+              </div>
+              <div className='ml-2 text-gray-300'>Joe</div>
+            </div>
+
+            {/*  {transaction.blockNum} */}
+          </div>
+        </div>
       </div>
     </>
   );

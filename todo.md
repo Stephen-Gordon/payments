@@ -9,3 +9,5 @@
 # add redux login context
 
 # get kernal from redux
+
+# add camera scanner
