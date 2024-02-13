@@ -105,10 +105,10 @@ export default function SendUsdc() {
           onChange={(e) => {
             setUsdcAmount(e.target.value);
           }}
-          className='mb-4 h-24 w-full rounded-xl bg-black text-center'
+          className='bg-paper-one mb-4 h-24 w-full rounded-xl text-center'
           placeholder='100'
         />
-        <div className='grid h-24 w-full content-center items-center rounded-xl bg-black  text-center'>
+        <div className='bg-paper-one grid h-24 w-full content-center items-center rounded-xl  text-center'>
           <p>{payee && truncateEthAddress(payee)}</p>
         </div>
         <button

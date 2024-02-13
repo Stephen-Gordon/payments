@@ -194,15 +194,14 @@ export default function Page() {
           </button>
         </div>
       </div>
-      <button onClick={setReduxLogin}>set login</button>
 
-      {/*   <Link
+      <Link
         href={{
           pathname: '/home',
         }}
       >
         Home
-      </Link> */}
+      </Link>
     </section>
   );
 }

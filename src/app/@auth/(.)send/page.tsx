@@ -9,15 +9,15 @@ export default function Page() {
   return (
     <>
       <div className='grid'>
-        <div className='p-4'>
+        <div className='flex p-4'>
           <BackButton />
-        </div>
-        <div className='my-4'>
-          <p className='my-4 text-center text-xl text-gray-300'>Send</p>
+          <div className='my-4'>
+            <p className='my-4 text-center text-xl text-gray-300'>Send</p>
+          </div>
         </div>
       </div>
 
-      <div className='mt-20'>
+      <div className='mt-10'>
         <SendUsdc />
       </div>
     </>

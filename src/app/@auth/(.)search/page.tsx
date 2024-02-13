@@ -27,19 +27,21 @@ export default function Page() {
   return (
     <>
       <div className='grid'>
-        <div className='p-4 '>
-          <div
-            className='w-fit'
-            onClick={() => {
-              dispatch(setSheet(false));
-            }}
-          >
-            <BackButton />
+        <div className='flex'>
+          <div className='p-4 '>
+            <div
+              className='w-fit'
+              onClick={() => {
+                dispatch(setSheet(false));
+              }}
+            >
+              <BackButton />
+            </div>
           </div>
-        </div>
 
-        <div className='my-4'>
-          <p className='my-4 text-center text-xl text-gray-300'>Search</p>
+          <div className='my-4'>
+            <p className='my-4 text-center text-xl text-gray-300'>Search</p>
+          </div>
         </div>
         <div className='px-4'>
           <input
