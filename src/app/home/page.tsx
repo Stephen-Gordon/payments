@@ -32,13 +32,13 @@ export default function Page() {
   const [scanResult, setScanResult] = useState(null);
   const router = useRouter();
   useEffect(() => {
-    function onSuccess(result: any) {
+    function onSuccess(decodedText: any, decodedResult: any) {
       // handle the scanned code as you like, for example:
 
-      setScanResult(result);
+      setScanResult(decodedText);
 
       scanner.clear();
-      router.push(`/send?payee=${result}`);
+      router.push(`/send?payee=${decodedText}`);
     }
 
     function onScanFailure(error: any) {
