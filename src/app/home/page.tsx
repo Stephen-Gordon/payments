@@ -60,7 +60,7 @@ export default function Page() {
 
   return (
     <div id='render'>
-      <div className='blurios p-4 pt-40'>
+      <div className=' p-4 pt-40'>
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
@@ -111,13 +111,15 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-        {scanResult ? (
-          <p>success</p>
-        ) : (
-          <div id='reader' style={{ width: '300px' }}>
-            Scanner
-          </div>
-        )}
+        <div className='absolute z-50'>
+          {scanResult ? (
+            <p>success</p>
+          ) : (
+            <div id='reader' style={{ width: '300px' }}>
+              Scanner
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
