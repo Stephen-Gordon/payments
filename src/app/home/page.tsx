@@ -108,7 +108,7 @@ export default function Page() {
         </div>
         {scanResult ? (
           <div>
-            Success: <a href={scanResult}></a>
+            Success: <a href={scanResult}>{scanResult}</a>
           </div>
         ) : (
           <div id='reader' style={{ width: '300px' }}></div>
