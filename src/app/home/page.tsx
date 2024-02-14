@@ -28,7 +28,7 @@ export default function Page() {
   );
 
   console.log('kernalReduxState', kernalReduxState);
-  const [scanResult, setScanResult] = useState('No result');
+  const [scanResult, setScanResult] = useState(null);
   useEffect(() => {
     function onSuccess(result) {
       // handle the scanned code as you like, for example:
