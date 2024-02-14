@@ -34,8 +34,11 @@ export default function Page() {
   useEffect(() => {
     function onSuccess(result: any) {
       // handle the scanned code as you like, for example:
+
       setScanResult(result);
+
       scanner.clear();
+      router.push(`/send?payee=${result}`);
     }
 
     function onScanFailure(error: any) {
@@ -109,9 +112,11 @@ export default function Page() {
           </Tab.Group>
         </div>
         {scanResult ? (
-          router.push(`/send?payee=${scanResult}`)
+          <p>success</p>
         ) : (
-          <div id='reader' style={{ width: '300px' }}></div>
+          <div id='reader' style={{ width: '300px' }}>
+            Scanner
+          </div>
         )}
       </div>
     </div>
