@@ -29,36 +29,11 @@ export default function Page() {
   );
 
   console.log('kernalReduxState', kernalReduxState);
-  const [scanResult, setScanResult] = useState(null);
-  const [scan, setScan] = useState(false);
-  const router = useRouter();
+
   useEffect(() => {}, []);
 
   // redux
   const dispatch = useDispatch();
-
-  const handleScan = () => {
-    let scanner = new Html5QrcodeScanner(
-      'reader',
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      /* verbose= */ false
-    );
-    scanner.render(onSuccess, onScanFailure);
-    function onSuccess(decodedText: any, decodedResult: any) {
-      // handle the scanned code as you like, for example:
-
-      setScanResult(decodedText);
-
-      scanner.clear();
-      router.push(`/send?payee=${decodedText}`);
-    }
-
-    function onScanFailure(error: any) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      console.warn(`Code scan error = ${error}`);
-    }
-  };
 
   return (
     <div id='render'>
@@ -113,26 +88,18 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-      </div>
-      <div className='mt-10'>
-        <button
-          onClick={() => {
-            setScan(true);
-            handleScan();
-          }}
-        >
-          Scan
-        </button>
-      </div>
-      {scan && (
-        <div>
-          {scanResult ? (
-            <p>success</p>
-          ) : (
-            <div id='reader' style={{ width: '300px' }}></div>
-          )}
+        <div className='mt-20'>
+          <Link
+            href={{
+              pathname: '/transaction',
+            }}
+          >
+            <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
+              Scanner
+            </button>
+          </Link>
         </div>
-      )}
+      </div>
     </div>
   );
 }
