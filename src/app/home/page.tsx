@@ -15,10 +15,12 @@ import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import { Tab } from '@headlessui/react';
 
 // react
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-// secure storage
-import secureLocalStorage from 'react-secure-storage';
+// camera
+import { Camera } from 'react-camera-pro';
+import { QrReader } from 'react-qr-reader';
+import { Html5QrcodeScanner } from 'html5-qrcode';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -27,9 +29,35 @@ export default function Page() {
 
   console.log('kernalReduxState', kernalReduxState);
 
-  useEffect(() => {}, [kernalReduxState]);
+  useEffect(() => {
+    function onScanSuccess(decodedText, decodedResult) {
+      // handle the scanned code as you like, for example:
+      console.log(`Code matched = ${decodedText}`, decodedResult);
+    }
 
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      // for example:
+      console.warn(`Code scan error = ${error}`);
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+      'reader',
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      /* verbose= */ false
+    );
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  }, []);
+
+  // redux
   const dispatch = useDispatch();
+
+  // camera
+  const camera = useRef(null);
+
+  const [image, setImage] = useState(null);
+  const [data, setData] = useState('No result');
+
   return (
     <div id='render'>
       <div className='blurios p-4 pt-40'>
@@ -83,6 +111,7 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
+        <div id='reader' style={{ width: '600px' }}></div>
       </div>
     </div>
   );
