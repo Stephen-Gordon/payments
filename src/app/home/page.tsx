@@ -28,12 +28,12 @@ export default function Page() {
   );
 
   console.log('kernalReduxState', kernalReduxState);
-    const [scanResult, setScanResult] = useState('No result');
+  const [scanResult, setScanResult] = useState('No result');
   useEffect(() => {
     function onSuccess(result) {
       // handle the scanned code as you like, for example:
       setScanResult(decodedResult);
-      scanner.clear(); 
+      scanner.clear();
       console.log(`Code matched = ${decodedText}`, decodedResult);
     }
 
@@ -113,12 +113,13 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-        {
-          scanResult
-          ? <div>Success: <a href={scanResult}></a>
-          : <div id='reader' style={{ width: '300px' }}></div>
-        }
-        
+        {scanResult ? (
+          <div>
+            Success: <a href={scanResult}></a>
+          </div>
+        ) : (
+          <div id='reader' style={{ width: '300px' }}></div>
+        )}
       </div>
     </div>
   );
