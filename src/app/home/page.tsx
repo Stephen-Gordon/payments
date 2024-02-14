@@ -91,7 +91,7 @@ export default function Page() {
         <div className='mt-20'>
           <Link
             href={{
-              pathname: '/transaction',
+              pathname: '/scanner',
             }}
           >
             <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
