@@ -21,7 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'react-camera-pro';
 import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const kernalReduxState = useSelector(
