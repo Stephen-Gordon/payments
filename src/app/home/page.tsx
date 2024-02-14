@@ -88,7 +88,7 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-        <div className='mt-20'>
+        <div className='mt-100'>
           <Link
             href={{
               pathname: '/scanner',
