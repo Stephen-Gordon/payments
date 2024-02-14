@@ -30,8 +30,20 @@ export default function Page() {
 
   console.log('kernalReduxState', kernalReduxState);
   const [scanResult, setScanResult] = useState(null);
+  const [scan, setScan] = useState(false);
   const router = useRouter();
-  useEffect(() => {
+  useEffect(() => {}, []);
+
+  // redux
+  const dispatch = useDispatch();
+
+  const handleScan = () => {
+    let scanner = new Html5QrcodeScanner(
+      'reader',
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      /* verbose= */ false
+    );
+    scanner.render(onSuccess, onScanFailure);
     function onSuccess(decodedText: any, decodedResult: any) {
       // handle the scanned code as you like, for example:
 
@@ -46,21 +58,11 @@ export default function Page() {
       // for example:
       console.warn(`Code scan error = ${error}`);
     }
-
-    let scanner = new Html5QrcodeScanner(
-      'reader',
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      /* verbose= */ false
-    );
-    scanner.render(onSuccess, onScanFailure);
-  }, []);
-
-  // redux
-  const dispatch = useDispatch();
+  };
 
   return (
     <div id='render'>
-      <div className=' p-4 pt-40'>
+      <div className='blurios p-4 pt-40'>
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
@@ -111,16 +113,26 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-        <div className='absolute z-50'>
+      </div>
+      <div className='mt-10'>
+        <button
+          onClick={() => {
+            setScan(true);
+            handleScan();
+          }}
+        >
+          Scan
+        </button>
+      </div>
+      {scan && (
+        <div>
           {scanResult ? (
             <p>success</p>
           ) : (
-            <div id='reader' style={{ width: '300px' }}>
-              Scanner
-            </div>
+            <div id='reader' style={{ width: '300px' }}></div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
