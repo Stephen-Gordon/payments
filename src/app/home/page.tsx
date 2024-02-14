@@ -30,14 +30,13 @@ export default function Page() {
   console.log('kernalReduxState', kernalReduxState);
   const [scanResult, setScanResult] = useState(null);
   useEffect(() => {
-    function onSuccess(result) {
+    function onSuccess(result: any) {
       // handle the scanned code as you like, for example:
-      setScanResult(decodedResult);
+      setScanResult(result);
       scanner.clear();
-      console.log(`Code matched = ${decodedText}`, decodedResult);
     }
 
-    function onScanFailure(error) {
+    function onScanFailure(error: any) {
       // handle scan failure, usually better to ignore and keep scanning.
       // for example:
       console.warn(`Code scan error = ${error}`);
@@ -53,12 +52,6 @@ export default function Page() {
 
   // redux
   const dispatch = useDispatch();
-
-  // camera
-  const camera = useRef(null);
-
-  const [image, setImage] = useState(null);
-  const [data, setData] = useState('No result');
 
   return (
     <div id='render'>
