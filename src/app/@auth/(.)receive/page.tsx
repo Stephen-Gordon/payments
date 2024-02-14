@@ -22,11 +22,7 @@ export default function Page() {
         </div>
         <div className='grid justify-center bg-white p-4'>
           <div className='mt-4'>
-            <QRCode
-              bgColor='#fff'
-              fgColor='#000'
-              value={`http://192.168.1.9:3001/send?payee=${address}`}
-            />
+            <QRCode bgColor='#fff' fgColor='#000' value={address} />
           </div>
         </div>
       </div>

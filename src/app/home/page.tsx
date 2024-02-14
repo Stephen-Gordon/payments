@@ -21,6 +21,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Camera } from 'react-camera-pro';
 import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
+import { useRouter } from 'next/router';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -29,6 +30,7 @@ export default function Page() {
 
   console.log('kernalReduxState', kernalReduxState);
   const [scanResult, setScanResult] = useState(null);
+  const router = useRouter();
   useEffect(() => {
     function onSuccess(result: any) {
       // handle the scanned code as you like, for example:
@@ -107,9 +109,7 @@ export default function Page() {
           </Tab.Group>
         </div>
         {scanResult ? (
-          <div>
-            Success: <a href={scanResult}>{scanResult}</a>
-          </div>
+          router.push(`/send?payee=${scanResult}`)
         ) : (
           <div id='reader' style={{ width: '300px' }}></div>
         )}

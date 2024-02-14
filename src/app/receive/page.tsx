@@ -13,7 +13,7 @@ export default function Page() {
       <h1>Backup Receive Page</h1>
       <div className='bg-white p-4'>
         <div className='mt-4'>
-          <QRCode value='https://google.com' />
+          <QRCode value={address} />
         </div>
       </div>
     </>
