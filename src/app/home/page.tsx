@@ -28,10 +28,12 @@ export default function Page() {
   );
 
   console.log('kernalReduxState', kernalReduxState);
-
+    const [scanResult, setScanResult] = useState('No result');
   useEffect(() => {
-    function onScanSuccess(decodedText, decodedResult) {
+    function onSuccess(result) {
       // handle the scanned code as you like, for example:
+      setScanResult(decodedResult);
+      scanner.clear(); 
       console.log(`Code matched = ${decodedText}`, decodedResult);
     }
 
@@ -41,12 +43,12 @@ export default function Page() {
       console.warn(`Code scan error = ${error}`);
     }
 
-    let html5QrcodeScanner = new Html5QrcodeScanner(
+    let scanner = new Html5QrcodeScanner(
       'reader',
       { fps: 10, qrbox: { width: 250, height: 250 } },
       /* verbose= */ false
     );
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    scanner.render(onSuccess, onScanFailure);
   }, []);
 
   // redux
@@ -111,7 +113,12 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group>
         </div>
-        <div id='reader' style={{ width: '600px' }}></div>
+        {
+          scanResult
+          ? <div>Success: <a href={scanResult}></a>
+          : <div id='reader' style={{ width: '300px' }}></div>
+        }
+        
       </div>
     </div>
   );
