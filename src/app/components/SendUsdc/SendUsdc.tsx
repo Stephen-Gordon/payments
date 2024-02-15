@@ -21,6 +21,11 @@ import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import useCreateKernal from '@/app/utils/useCreateKernal';
 import secureLocalStorage from 'react-secure-storage';
 
+// Import restapi for function calls
+import { PushAPI, CONSTANTS } from '@pushprotocol/restapi';
+// Ethers or Viem, both are supported
+import { ethers } from 'ethers';
+import { ENV } from '@pushprotocol/restapi/src/lib/constants';
 export default function SendUsdc() {
   const [usdcAmount, setUsdcAmount] = useState<string>('1');
 
@@ -52,6 +57,7 @@ export default function SendUsdc() {
           name: 'local',
           value: secureLocalStorage.getItem('pk'),
         });
+
         setKernal(getKernal);
       } catch (error) {
         console.log(error);
