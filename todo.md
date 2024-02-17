@@ -11,3 +11,5 @@
 # get kernal from redux
 
 # add camera scanner
+
+# make universal back button

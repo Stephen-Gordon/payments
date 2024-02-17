@@ -7,6 +7,14 @@
   background-color: 'rgba(16, 16, 18, 0.9)';
   backdrop-filter: blur(20px);
 }
+.transparent-gradient {
+  background: linear-gradient(to top, transparent 10%, black 100%);
+  z-index: 1000;
+}
+.transparent-gradient-r {
+  background: linear-gradient(to bottom, transparent 10%, black 100%);
+  z-index: 1000;
+}
 
 :root {
   /* #region  /**=========== Primary Color =========== */

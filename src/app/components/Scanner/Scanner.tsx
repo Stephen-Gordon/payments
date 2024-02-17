@@ -26,15 +26,10 @@ export default function Scanner({
       <Sheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Sheet.Container
           style={{ backgroundColor: '#2C2D33', width: '100%', height: '100%' }}
-          className='bg-paper-one'
+          className=''
         >
-          <Sheet.Content
-            style={{
-              width: '100%',
-              height: '100%',
-            }}
-          >
-            <div className='absolute z-50 p-4'>
+          <Sheet.Content style={{ display: 'grid', alignContent: 'center' }}>
+            {/*  <div className='absolute z-50 p-4'>
               <div
                 onClick={() => {
                   setIsOpen(false);
@@ -43,17 +38,27 @@ export default function Scanner({
               >
                 <Undo2 size={20} color='#cbd5e1' />
               </div>
+            </div> */}
+            <div
+              style={{ height: '50vh' }}
+              className='transparent-gradient absolute w-screen '
+            ></div>
+
+            <div>
+              <div>
+                <QrScanner
+                  onDecode={(result) => {
+                    setIsOpen(false);
+                    router.push(`/send?payee=${result}`);
+                  }}
+                  onError={(error) => console.log(error?.message)}
+                />
+              </div>
             </div>
-            <div className='flex h-full w-full justify-center'>
-              <QrScanner
-                containerStyle={{ width: '100%', height: '100%' }}
-                onDecode={(result) => {
-                  setIsOpen(false);
-                  router.push(`/send?payee=${result}`);
-                }}
-                onError={(error) => console.log(error?.message)}
-              />
-            </div>
+            <div
+              style={{ height: '50vh' }}
+              className='transparent-gradient-r absolute bottom-0 z-50 w-screen '
+            ></div>
           </Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop
