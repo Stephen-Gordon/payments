@@ -1,79 +1,108 @@
-'use client';
+import { useEffect, useState } from 'react';
+import Head from 'next/head';
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { resetServiceWorker } from '@/app/utils/sw/service-worker';
-import { Notice } from '@/app/components/Notifications/Notice';
-import { notificationConfig } from '@/app/notificationConfig';
+const base64ToUint8Array = (base64) => {
+  const padding = '='.repeat((4 - (base64.length % 4)) % 4);
+  const b64 = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/');
 
-const notificationsSupported = () =>
-  'Notification' in window &&
-  'serviceWorker' in navigator &&
-  'PushManager' in window;
+  const rawData = window.atob(b64);
+  const outputArray = new Uint8Array(rawData.length);
 
-export default function Notifications() {
-  const [permission, setPermission] = useState(
-    window?.Notification?.permission || 'default'
-  );
-
-  if (!notificationsSupported()) {
-    return (
-      <Notice message='Please install this app on your home screen first!' />
-    );
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
   }
+  return outputArray;
+};
 
-  const requestPermission = async () => {
-    if (!notificationsSupported()) {
+const Notifications = () => {
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+  const [registration, setRegistration] = useState(null);
+
+  useEffect(() => {
+    if (
+      typeof window !== 'undefined' &&
+      'serviceWorker' in navigator &&
+      window.workbox !== undefined
+    ) {
+      // run only in browser
+      navigator.serviceWorker.ready.then((reg) => {
+        reg.pushManager.getSubscription().then((sub) => {
+          if (
+            sub &&
+            !(
+              sub.expirationTime &&
+              Date.now() > sub.expirationTime - 5 * 60 * 1000
+            )
+          ) {
+            setSubscription(sub);
+            setIsSubscribed(true);
+          }
+        });
+        setRegistration(reg);
+      });
+    }
+  }, []);
+
+  const subscribeButtonOnClick = async (event) => {
+    event.preventDefault();
+    const sub = await registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: base64ToUint8Array(
+        process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY
+      ),
+    });
+    // TODO: you should call your API to save subscription data on server in order to send web push notification from server
+    setSubscription(sub);
+    setIsSubscribed(true);
+    console.log('web push subscribed!');
+    console.log(sub);
+  };
+
+  const unsubscribeButtonOnClick = async (event) => {
+    event.preventDefault();
+    await subscription.unsubscribe();
+    // TODO: you should call your API to delete or invalidate subscription data on server
+    setSubscription(null);
+    setIsSubscribed(false);
+    console.log('web push unsubscribed!');
+  };
+
+  const sendNotificationButtonOnClick = async (event) => {
+    event.preventDefault();
+    if (subscription == null) {
+      console.error('web push not subscribed');
       return;
     }
 
-    const receivedPermission = await window?.Notification.requestPermission();
-    setPermission(receivedPermission);
-
-    if (receivedPermission === 'granted') {
-      subscribe();
-    }
+    await fetch('/api/notification', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        subscription,
+      }),
+    });
   };
 
   return (
     <>
-      <Notice message={`Notifications permission status: ${permission}`} />
-      <button onClick={requestPermission}>
-        Request permission and subscribe
+      <Head>
+        <title>next-pwa example</title>
+      </Head>
+      <h1>Next.js + PWA = AWESOME!</h1>
+      <button onClick={subscribeButtonOnClick} disabled={isSubscribed}>
+        Subscribe
       </button>
-      <Link href='/debug'>Debug options</Link>
+      <button onClick={unsubscribeButtonOnClick} disabled={!isSubscribed}>
+        Unsubscribe
+      </button>
+      <button onClick={sendNotificationButtonOnClick} disabled={!isSubscribed}>
+        Send Notification
+      </button>
     </>
   );
-}
-
-const saveSubscription = async (subscription: PushSubscription) => {
-  const ORIGIN = window.location.origin;
-  const BACKEND_URL = `${ORIGIN}/api/push`;
-
-  const response = await fetch(BACKEND_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(subscription),
-  });
-  return response.json();
 };
 
-const subscribe = async () => {
-  const swRegistration = await resetServiceWorker();
-
-  try {
-    const options = {
-      applicationServerKey: notificationConfig.PUBLIC_KEY,
-      userVisibleOnly: true,
-    };
-    const subscription = await swRegistration.pushManager.subscribe(options);
-
-    await saveSubscription(subscription);
-
-    console.log({ subscription });
-  } catch (err) {
-    console.error('Error', err);
-  }
-};
+export default Notifications;
