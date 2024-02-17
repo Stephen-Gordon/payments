@@ -22,6 +22,7 @@ import { Camera } from 'react-camera-pro';
 import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useRouter } from 'next/navigation';
+import Notifications from '@/app/components/Notifications/Notifications';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -38,6 +39,7 @@ export default function Page() {
   return (
     <div id='render'>
       <div className='blurios p-4 pt-40'>
+        <Notifications />
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
