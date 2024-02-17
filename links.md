@@ -49,3 +49,7 @@ https://docs.alchemy.com/docs/building-a-dapp-with-real-time-transaction-notific
 https://rocky-inlet-54906-985e627edeb8.herokuapp.com/
 
 https://github.com/alchemyplatform/webhook-examples
+
+# QR Code
+
+https://github.com/yudielcurbelo/react-qr-scanner#readme
