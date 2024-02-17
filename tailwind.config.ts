@@ -9,13 +9,18 @@ export default {
         primary: ['Inter', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        main: '#101012',
-        dark: '#101012',
+        main: '#13151a',
+        dark: '#13151a',
+        white: 'f3f1ec',
+        button: {
+          hover: '#2f323d',
+          border: '#f3f1ec',
+        },
         paper: {
-          one: '#2C2D33',
+          one: '#1d1f27',
           two: '#43444C',
         },
-        purple: '#33fb8f',
+        purple: '#6A48F2',
         primary: {
           // Customize it on globals.css :root
           50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
