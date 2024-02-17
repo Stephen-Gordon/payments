@@ -42,10 +42,10 @@ export default function RecentTransaction({ transaction }: any) {
               </div>
             </div>
           </div>
-          <div className='ml-2'>
+          <motion.div layoutId={`${transaction.hash}+title`} className='ml-2'>
             {transaction.from == address ? 'From' : ''}{' '}
             {truncateEthAddress(transaction.from)}
-          </div>
+          </motion.div>
         </div>
         <div className='flex text-white'>
           {transaction.from == address ? '+$' : '-$'}

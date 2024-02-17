@@ -11,7 +11,7 @@ export default {
       colors: {
         main: '#13151a',
         dark: '#13151a',
-        white: 'f3f1ec',
+        white: '#f3f1ec',
         button: {
           hover: '#2f323d',
           border: '#f3f1ec',
