@@ -11,11 +11,11 @@ export default {
       colors: {
         main: '#101012',
         dark: '#101012',
-        'paper': {
+        paper: {
           one: '#2C2D33',
           two: '#43444C',
         },
-        purple: '#6A48F2',
+        purple: '#33fb8f',
         primary: {
           // Customize it on globals.css :root
           50: 'rgb(var(--tw-color-primary-50) / <alpha-value>)',
@@ -30,7 +30,6 @@ export default {
           900: 'rgb(var(--tw-color-primary-900) / <alpha-value>)',
           950: 'rgb(var(--tw-color-primary-950) / <alpha-value>)',
         },
-
       },
       keyframes: {
         flicker: {
