@@ -3,7 +3,6 @@
 import Link from 'next/link';
 // components
 import Balance from '../components/Balance/Balance';
-import Send from '../components/Send/Send';
 import Activity from '@/app/components/activity/Activity';
 
 // redux
@@ -17,13 +16,12 @@ import { Tab } from '@headlessui/react';
 // react
 import { useEffect, useRef, useState } from 'react';
 
+// icon
+import { Send, QrCode } from 'lucide-react';
 // camera
-import { Camera } from 'react-camera-pro';
-import { QrReader } from 'react-qr-reader';
-import { Html5QrcodeScanner } from 'html5-qrcode';
+
 import { useRouter } from 'next/navigation';
 import Notifications from '@/app/components/Notifications/Notifications';
-import Button from '@/components/buttons/Button';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -45,40 +43,37 @@ export default function Page() {
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
-        <Button
-          onClick={() => {
-            router.push(`/send?payee=${decodedText}`);
-          }}
-        >
-          Hi{' '}
-        </Button>
 
-        <div className='mt-10 flex justify-between'>
-          <Link
-            onClick={() => {
-              dispatch(setSheet(true));
-            }}
-            href={{
-              pathname: '/search',
-            }}
-          >
-            <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
-              Send
-            </button>
-          </Link>
+        <div className='mt-10 grid grid-cols-2 gap-4'>
+          <div>
+            <Link
+              onClick={() => {
+                dispatch(setSheet(true));
+              }}
+              href={{
+                pathname: '/search',
+              }}
+            >
+              <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
+                <div>Send</div> <Send size={20} color='#cbd5e1' />
+              </button>
+            </Link>
+          </div>
 
-          <Link
-            onClick={() => {
-              dispatch(setSheet(true));
-            }}
-            href={{
-              pathname: '/receive',
-            }}
-          >
-            <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
-              Receive
-            </button>
-          </Link>
+          <div>
+            <Link
+              onClick={() => {
+                dispatch(setSheet(true));
+              }}
+              href={{
+                pathname: '/receive',
+              }}
+            >
+              <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
+                <div>Receive</div> <QrCode size={20} color='#cbd5e1' />
+              </button>
+            </Link>
+          </div>
         </div>
         <div className='mt-4'>
           <Tab.Group>
@@ -99,17 +94,6 @@ export default function Page() {
               <Tab.Panel>Content 2</Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
-        </div>
-        <div className='mt-100'>
-          <Link
-            href={{
-              pathname: '/scanner',
-            }}
-          >
-            <button className='bg-purple w-40 rounded px-4 py-2 text-lg text-white hover:bg-blue-700'>
-              Scanner
-            </button>
-          </Link>
         </div>
       </div>
     </div>

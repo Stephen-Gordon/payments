@@ -34,7 +34,7 @@ export default function Activity() {
 
   return (
     <>
-      <div className='bg-paper-one w-full rounded-xl p-4 text-xl'>
+      <div className='bg-paper-one w-full rounded-xl p-2 text-xl'>
         <div className='mt-4'>
           {transactions &&
             transactions.map((transaction: any, i: any) => (
