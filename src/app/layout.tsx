@@ -52,6 +52,9 @@ export const metadata: Metadata = {
   ],
 }; */
 
+import bgimage from '../../public/images/Rectangle.png';
+import { LayoutGroup } from 'framer-motion';
+
 export default function RootLayout({
   auth,
   transactionmodal,
@@ -130,11 +133,12 @@ export default function RootLayout({
           color='#5bbad5'
         />
         <link rel='shortcut icon' href='/favicon.ico' />
+        <link rel='preconnect' href='https://fonts.googleapis.com'></link>
+        <link rel='preconnect' href='https://fonts.gstatic.com'></link>
         <link
+          href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'
           rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
-        />
-
+        ></link>
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:url' content='https://yourdomain.com' />
         <meta name='twitter:title' content='PWA App' />
@@ -209,10 +213,6 @@ export default function RootLayout({
           color='#5bbad5'
         />
         <link rel='shortcut icon' href='/favicon.ico' />
-        <link
-          rel='stylesheet'
-          href='https://fonts.googleapis.com/css?family=Roboto:300,400,500'
-        />
 
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:url' content='https://yourdomain.com' />
@@ -279,20 +279,27 @@ export default function RootLayout({
           <PersistGate loading={null} persistor={persistor}>
             <WagmiProvider config={config!}>
               <QueryClientProvider client={queryClient}>
-                <div>{auth}</div>
-                <div>{transactionmodal}</div>
-                {/* <div className='items absolute -z-50 flex h-screen w-screen content-center items-center justify-center '>
-                  <div className='bg-purple h-1/2 w-1/2 rounded-full'></div>
-                </div> */}
-                <main
+                <LayoutGroup>
+                  <div>{auth}</div>
+                  <div>{transactionmodal}</div>
+                  {/*  <div
                   style={{
-                    backgroundColor: 'rgba(16, 16, 18, 0.9)',
-                    backdropFilter: 'blur(100px) saturate(1000%)',
+                    backgroundImage: `url(${bgimage.src})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
                   }}
-                  className='blurios bg-dark/90 h-screen w-screen text-gray-300'
-                >
-                  {children}
-                </main>
+                  className=' absolute -z-50 flex h-screen w-screen content-center items-center justify-center '
+                ></div> */}
+                  <main
+                    /* style={{
+                    backgroundColor: 'rgba(16, 16, 18, 0.9)',
+                  }} */
+                    className='bg-dark blurios h-screen w-screen text-gray-300'
+                  >
+                    {children}
+                  </main>
+                </LayoutGroup>
               </QueryClientProvider>
             </WagmiProvider>
           </PersistGate>
