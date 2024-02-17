@@ -28,6 +28,7 @@
     "@web3auth/ethereum-provider": "^7.3.1",
     "@web3auth/no-modal": "^7.3.1",
     "@web3auth/openlogin-adapter": "^7.3.1",
+    "@yudiel/react-qr-scanner": "^1.2.6",
     "@zerodev/presets": "^5.0.0",
     "@zerodev/sdk": "^5.0.0",
     "alchemy-sdk": "^3.1.2",

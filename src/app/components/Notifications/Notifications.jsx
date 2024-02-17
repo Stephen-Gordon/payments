@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 
-const base64ToUint8Array = (base64: any) => {
+const base64ToUint8Array = (base64) => {
   const padding = '='.repeat((4 - (base64.length % 4)) % 4);
   const b64 = (base64 + padding).replace(/-/g, '+').replace(/_/g, '/');
 
@@ -15,38 +15,34 @@ const base64ToUint8Array = (base64: any) => {
 };
 
 const Notifications = () => {
-  const [isSubscribed, setIsSubscribed] = useState<any>(false);
-  const [subscription, setSubscription] = useState<any>(null);
-  const [registration, setRegistration] = useState<any>(null);
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+  const [registration, setRegistration] = useState(null);
 
   useEffect(() => {
-    if (
-      typeof window !== 'undefined' &&
-      'serviceWorker' in navigator &&
-      (window as any).workbox !== undefined
-    ) {
-      // run only in browser
-      navigator.serviceWorker.ready.then((reg) => {
-        reg?.pushManager.getSubscription().then((sub) => {
-          if (
-            sub &&
-            !(
-              sub.expirationTime &&
-              Date.now() > sub.expirationTime - 5 * 60 * 1000
-            )
-          ) {
-            setSubscription(sub);
-            setIsSubscribed(true);
-          }
-        });
-        setRegistration(reg);
+    // run only in browser
+    console.log('Service Worker and Workbox are supported!');
+    navigator.serviceWorker.ready.then((reg) => {
+      reg?.pushManager?.getSubscription().then((sub) => {
+        if (
+          sub &&
+          !(
+            sub.expirationTime &&
+            Date.now() > sub.expirationTime - 5 * 60 * 1000
+          )
+        ) {
+          setSubscription(sub);
+          setIsSubscribed(true);
+        }
       });
-    }
+      console.log(subscription);
+      setRegistration(reg);
+    });
   }, []);
 
-  const subscribeButtonOnClick = async (event: any) => {
+  const subscribeButtonOnClick = async (event) => {
     event.preventDefault();
-    const sub = await registration?.pushManager.subscribe({
+    const sub = await registration?.pushManager?.subscribe({
       userVisibleOnly: true,
       applicationServerKey: base64ToUint8Array(
         process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY
@@ -59,7 +55,7 @@ const Notifications = () => {
     console.log(sub);
   };
 
-  const unsubscribeButtonOnClick = async (event: any) => {
+  const unsubscribeButtonOnClick = async (event) => {
     event.preventDefault();
     await subscription.unsubscribe();
     // TODO: you should call your API to delete or invalidate subscription data on server
@@ -68,7 +64,7 @@ const Notifications = () => {
     console.log('web push unsubscribed!');
   };
 
-  const sendNotificationButtonOnClick = async (event: any) => {
+  const sendNotificationButtonOnClick = async (event) => {
     event.preventDefault();
     if (subscription == null) {
       console.error('web push not subscribed');

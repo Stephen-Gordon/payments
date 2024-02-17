@@ -23,6 +23,7 @@ import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useRouter } from 'next/navigation';
 import Notifications from '@/app/components/Notifications/Notifications';
+import Button from '@/components/buttons/Button';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -32,17 +33,25 @@ export default function Page() {
   console.log('kernalReduxState', kernalReduxState);
 
   useEffect(() => {}, []);
-
+  const router = useRouter();
   // redux
   const dispatch = useDispatch();
-
+  let decodedText =
+    '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
   return (
     <div id='render'>
       <div className='blurios p-4 pt-40'>
-        <Notifications />
+        {/*   <Notifications /> */}
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
+        <Button
+          onClick={() => {
+            router.push(`/send?payee=${decodedText}`);
+          }}
+        >
+          Hi{' '}
+        </Button>
 
         <div className='mt-10 flex justify-between'>
           <Link
@@ -57,6 +66,7 @@ export default function Page() {
               Send
             </button>
           </Link>
+
           <Link
             onClick={() => {
               dispatch(setSheet(true));

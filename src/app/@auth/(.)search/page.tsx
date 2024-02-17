@@ -9,11 +9,14 @@ import Link from 'next/link';
 import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 import { useDispatch } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+import Scanner from '@/app/components/Scanner/Scanner';
 
 export default function Page() {
-  const [payee, setPayee] = useState(
+  const [payee, setPayee] = useState<string>(
     '0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c'
   );
+  const [scanner, setScanner] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const address = useGetAddress();
 
@@ -27,6 +30,7 @@ export default function Page() {
   return (
     <>
       <div className='grid'>
+        {scanner && <Scanner isOpen={isOpen} setIsOpen={setIsOpen} />}
         <div className='flex'>
           <div className='p-4 '>
             <div
@@ -43,7 +47,7 @@ export default function Page() {
             <p className='my-4 text-center text-xl text-gray-300'>Search</p>
           </div>
         </div>
-        <div className='px-4'>
+        <div className='flex px-4'>
           <input
             value={payee}
             onChange={(e) => setPayee(e.target.value)}
@@ -51,6 +55,15 @@ export default function Page() {
             placeholder='Search an Address'
             required
           />
+          <div
+            onClick={() => {
+              setIsOpen(true);
+              setScanner(true);
+            }}
+            className='rounded-lg border border-gray-600 bg-gray-700 p-4 text-white '
+          >
+            Scan
+          </div>
         </div>
 
         <div className='w-full p-4'>

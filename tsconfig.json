@@ -31,7 +31,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/config.ts",
-    "src/app/components/SendUsdc copy"
+    "src/app/components/SendUsdc copy",
+    "src/app/components/Notifications/Notifications.jsx"
   ],
   "exclude": ["node_modules"],
   "moduleResolution": ["node_modules", ".next", "node"]
