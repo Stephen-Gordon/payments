@@ -22,6 +22,14 @@ import { Camera } from 'react-camera-pro';
 import { QrReader } from 'react-qr-reader';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+const Notifications = dynamic(
+  () => import('@/app/components/Notifications/Notifications'),
+  {
+    ssr: false, // Make sure to render component client side to access window and Notification APIs
+  }
+);
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -38,6 +46,7 @@ export default function Page() {
   return (
     <div id='render'>
       <div className='blurios p-4 pt-40'>
+        <Notifications />
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>

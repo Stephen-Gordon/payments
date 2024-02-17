@@ -60,6 +60,7 @@
     "truncate-eth-address": "^1.0.2",
     "viem": "^2.5.0",
     "wagmi": "^2.5.2",
+    "web-push": "^3.6.7",
     "web3": "^4.4.0"
   },
   "devDependencies": {
@@ -71,6 +72,7 @@
     "@testing-library/react": "^13.4.0",
     "@types/react": "^18.2.45",
     "@types/testing-library__jest-dom": "^5.14.9",
+    "@types/web-push": "^3.6.3",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.16",
