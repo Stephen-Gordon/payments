@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
+    "@next/font": "^14.1.0",
     "@pushprotocol/restapi": "^1.6.8",
     "@radix-ui/themes": "^2.0.3",
     "@reduxjs/toolkit": "^2.1.0",
