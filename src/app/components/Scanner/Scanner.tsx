@@ -118,7 +118,10 @@ export default function Scanner({
               {/* 
               <div id='reader' width='600px' height='600px'></div> */}
               <QrScanner
-                onDecode={(result) => console.log(result)}
+                onDecode={(result) => {
+                  setIsOpen(false);
+                  router.push(`/send?payee=${result}`);
+                }}
                 onError={(error) => console.log(error?.message)}
               />
             </div>
