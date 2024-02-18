@@ -10,6 +10,7 @@ import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 import { useDispatch } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import Scanner from '@/app/components/Scanner/Scanner';
+import { useRouter } from 'next/navigation';
 
 export default function Page() {
   const [payee, setPayee] = useState<string>(
@@ -19,6 +20,9 @@ export default function Page() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const address = useGetAddress();
+
+  // router
+  const router = useRouter();
 
   const dispatch = useDispatch();
 
@@ -39,7 +43,13 @@ export default function Page() {
                 dispatch(setSheet(false));
               }}
             >
-              <BackButton />
+              <div
+                onClick={() => {
+                  router.push('/home');
+                }}
+              >
+                <BackButton />
+              </div>
             </div>
           </div>
 
