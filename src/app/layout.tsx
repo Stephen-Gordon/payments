@@ -281,7 +281,7 @@ export default function RootLayout({
               <QueryClientProvider client={queryClient}>
                 <LayoutGroup>
                   <div>{auth}</div>
-                  <div>{transactionmodal}</div>
+                  {/*   <div>{transactionmodal}</div> */}
                   {/*  <div
                   style={{
                     backgroundImage: `url(${bgimage.src})`,
