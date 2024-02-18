@@ -12,11 +12,6 @@ const nextConfig = {
     // your project has ESLint errors.
     ignoreDuringBuilds: true,
   },
-  devServer: {
-    // Custom options for the webpack dev server
-    // For example, to enable HMR for custom server code
-    hot: true,
-  },
 };
 
 // Configuration object tells the next-pwa plugin
