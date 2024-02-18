@@ -5,21 +5,25 @@ import useGetAddress from '@/app/hooks/useGetAddress';
 import useGetRecentTransactions from '@/app/hooks/useGetRecentTransactions';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 
 export default function Activity() {
   const [transactions, setTxs] = useState<any>([]);
-  const address = '0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c';
+  const [allTransactions, setAllTransactions] = useState<any>([]);
 
   const dispatch = useDispatch();
+
+  const transactionState = useSelector(
+    (state: any) => state.transactions.value
+  );
 
   useEffect(() => {
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions();
-
-        setTxs(recentTransactions?.transfers.slice(0, 3).reverse());
+        setAllTransactions(recentTransactions?.transfers);
+        dispatch(setTransactions(recentTransactions?.transfers));
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -29,30 +33,42 @@ export default function Activity() {
   }, []);
 
   useEffect(() => {
-    dispatch(setTransactions(transactions));
-  }, [transactions]); // Add transactions as a dependency
+    /*  dispatch(setTransactions(transactions)); */
+    console.log('transactionState', transactionState);
+    /*     setTxs(transactionState?.slice(0, 3));
+     */
+    setTxs([]);
+  }, [transactionState]); // Add transactions as a dependency
 
   return (
     <>
-      <div className='bg-paper-one w-full rounded-xl p-2 text-xl'>
-        <div className='mt-4'>
-          {transactions &&
-            transactions.map((transaction: any, i: any) => (
-              <div key={i}>
-                <RecentTransaction transaction={transaction} />
-              </div>
-            ))}
-          <div className='text-purple text-center'>
-            <Link
-              href={{
-                pathname: '/transactions',
-              }}
-            >
-              See all
-            </Link>
+      {transactions.length > 0 ? (
+        <div className='bg-paper-one w-full rounded-xl p-2 text-xl'>
+          <div className='mt-4'>
+            {transactions &&
+              transactions.map((transaction: any, i: any) => (
+                <div key={i}>
+                  <RecentTransaction transaction={transaction} />
+                </div>
+              ))}
+            <div className='text-purple text-center'>
+              <Link
+                href={{
+                  pathname: '/transactions',
+                }}
+              >
+                See all
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className='bg-paper-one w-full rounded-xl p-2 text-xl'>
+          <div className='mt-4 flex content-center justify-center'>
+            <div>You've got no transactions</div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

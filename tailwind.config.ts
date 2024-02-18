@@ -12,6 +12,7 @@ export default {
         main: '#13151a',
         dark: '#13151a',
         white: '#f3f1ec',
+        pink: '#28212e',
         button: {
           hover: '#2f323d',
           border: '#f3f1ec',
@@ -19,6 +20,7 @@ export default {
         paper: {
           one: '#1d1f27',
           two: '#43444C',
+          three: '#1c2530',
         },
         purple: '#6A48F2',
         primary: {
