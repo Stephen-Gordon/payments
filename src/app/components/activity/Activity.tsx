@@ -45,7 +45,7 @@ export default function Activity() {
       {transactions.length > 0 ? (
         <motion.div
           layoutId='activity'
-          className='bg-paper-one w-full rounded-xl p-2 text-xl'
+          className='from-paper-one to-pink w-full rounded-xl bg-gradient-to-tr p-2 text-xl'
         >
           <div className='mt-4'>
             {transactions &&

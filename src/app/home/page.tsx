@@ -1,6 +1,8 @@
 'use client';
 // next
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+
 // components
 import Balance from '../components/Balance/Balance';
 import Activity from '@/app/components/activity/Activity';
@@ -18,9 +20,10 @@ import { useEffect, useRef, useState } from 'react';
 
 // icon
 import { Send, QrCode } from 'lucide-react';
-// camera
 
-import { useRouter } from 'next/navigation';
+// framer motion
+import { motion } from 'framer-motion';
+
 import Notifications from '@/app/components/Notifications/Notifications';
 
 export default function Page() {
