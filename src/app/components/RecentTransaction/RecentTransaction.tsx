@@ -17,13 +17,10 @@ import { motion } from 'framer-motion';
 
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
-  const dispatch = useDispatch();
+
   return (
     <motion.div layoutId={transaction.hash}>
-      <Link
-        onClick={() => dispatch(setSheet(true))}
-        href={{ pathname: '/tx', query: { hash: transaction.hash } }}
-      >
+      <Link href={{ pathname: '/tx', query: { hash: transaction.hash } }}>
         <motion.div className='hover:bg-button-hover mb-4 flex content-center justify-between rounded-lg p-2 text-base transition-all duration-300'>
           <div className='flex items-center'>
             <div className='relative grid items-center justify-center'>
