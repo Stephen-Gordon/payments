@@ -13,3 +13,9 @@
 # add camera scanner
 
 # make universal back button
+
+# add paralax to homepage background
+
+# get balance from redux
+
+# make bottom navbar

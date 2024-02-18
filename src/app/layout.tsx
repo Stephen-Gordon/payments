@@ -282,20 +282,21 @@ export default function RootLayout({
                 <LayoutGroup>
                   <div>{auth}</div>
                   {/*   <div>{transactionmodal}</div> */}
-                  {/*  <div
-                  style={{
-                    backgroundImage: `url(${bgimage.src})`,
-                    backgroundPosition: 'center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                  }}
-                  className=' absolute -z-50 flex h-screen w-screen content-center items-center justify-center '
-                ></div> */}
+                  {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
+                    <div
+                      style={{
+                        backgroundImage: `url(${bgimage.src})`,
+                        backgroundPosition: 'center',
+                        backgroundSize: 'cover',
+                        backgroundRepeat: 'no-repeat',
+                      }}
+                    ></div>
+                  </div> */}
                   <main
-                    /* style={{
-                    backgroundColor: 'rgba(16, 16, 18, 0.9)',
-                  }} */
-                    className='bg-dark blurios h-screen w-screen text-gray-300'
+                    style={{
+                      backgroundColor: 'rgba(16, 16, 18, 1)',
+                    }}
+                    className=' h-screen w-screen text-gray-300'
                   >
                     {children}
                   </main>

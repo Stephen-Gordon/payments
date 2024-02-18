@@ -24,8 +24,8 @@ const SheetLayout = ({ children }) => {
         <Sheet.Container
           className='blurios'
           style={{
-            backgroundColor: 'rgba(16, 16, 18, 0.9)',
-            backdropFilter: 'blur(10px) saturate(1000%)',
+            backgroundColor: 'rgba(29, 31, 39, 0.8)',
+            backdropFilter: 'blur(20px) saturate(100%)',
           }}
         >
           {/*  <Sheet.Header></Sheet.Header> */}

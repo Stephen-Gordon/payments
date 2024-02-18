@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .blurios {
-  -webkit-backdrop-filter: blur(20px) saturate(1000%);
-  background-color: 'rgba(16, 16, 18, 0.9)';
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px) saturate(100%);
+  background-color: 'rgba(29, 31, 39, 0.8)';
+  backdrop-filter: blur(20px) saturate(100%);
 }
 .transparent-gradient {
   background: linear-gradient(to top, transparent 10%, black 100%);
