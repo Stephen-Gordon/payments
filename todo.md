@@ -19,3 +19,7 @@
 # get balance from redux
 
 # make bottom navbar
+
+- transfer
+- contacts
+- home
