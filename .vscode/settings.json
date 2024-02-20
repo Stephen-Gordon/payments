@@ -13,5 +13,8 @@
     "classNames",
     "containerClassName"
   ],
-  "typescript.preferences.importModuleSpecifier": "non-relative"
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "files.exclude": {
+    "**/node_modules": true
+  }
 }

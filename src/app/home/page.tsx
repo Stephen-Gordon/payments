@@ -25,6 +25,7 @@ import { Send, QrCode } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 import Notifications from '@/app/components/Notifications/Notifications';
+import SendNotification from '@/app/components/SendNotification/SendNotification';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -42,7 +43,7 @@ export default function Page() {
   return (
     <div id='render'>
       <div className='blurios p-4 pt-40'>
-        {/*   <Notifications /> */}
+        <SendNotification />
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
