@@ -6,6 +6,12 @@ https://www.youtube.com/watch?v=Onekwb2l9zg
 
 # PWA
 
+### serwist pwa
+
+https://github.com/serwist/serwist/
+https://serwist.pages.dev/docs/next/getting-started
+https://github.com/serwist/serwist/discussions/70
+
 https://t-i-show.medium.com/build-a-pwa-with-next-js-and-typescript-94ead0e3e6f2
 
 https://www.npmjs.com/package/next-pwa
