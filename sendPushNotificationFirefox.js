@@ -6,8 +6,8 @@ const sendPushNotification = async () => {
     'BK9FZUL3u5bgvs8NlurUeFesIq5dm3qEUwOlh3hL7wGPbNec2SELGLwjKU2jWv9P9GULDvlWlC04Lric-w8yEf8';
   const privateKey = 'EctJtRAxWnq18ayGbnjcHQ'; */
   const publicKey =
-    'BKIvDJTEdSWEOc3P_-QtcaNhcBYbpESr6KXM2S7oCmlnkdgwAz1wHn8T17OZDrpkDw5GkfiHwrePpgzh55e4Qt4';
-  const privateKey = '5Lys2yFtv71OQnusHfZNNQ';
+    'BDvbxVcRlXNePbMsC7qHV77hJSuOB5vlxEB9Q0RHAHVY1RX2aaKx6gTG7jn2CUcbp9y25XcRfQVgR0gUhLaPzYc';
+  const privateKey = 'KPlsUDm53-TTmJsK7Z14xw';
   /* webPush.setVapidDetails(
     'mailto:example@yourdomain.org',
     publicKey,
@@ -15,7 +15,7 @@ const sendPushNotification = async () => {
   ); */
   const pushSubscription = {
     endpoint:
-      'https://fcm.googleapis.com/fcm/send/cFpbxV7KLYc:APA91bHFlDQI1HYpYr7NMl2Y67B6WtjQRcejgewG1jhRPeJWR3wrIgIrYpWgkv8tOMsPUmAJcFHsB3up8EvpVWjfntCnir34fE827JK8u56fQ2FSmE8dhWZva21_lu08SxO2UUXjtSLf',
+      'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABl1KyryrbEsojoejhhY9xbKAKH4dax-lQ5i9rH65Q4eNAeQAfiDby2XvRwb2tQzcXIthNlpc29TYndS1QdoQuxRhrfdQimMA-t1_zK6f-VWVfLuQpxWWoev60jJsWDM2-MDOB9VbRhwokwdi6lwqqtATHVkFCapTJc3ZiLwz7dOFeC1KM',
     expirationTime: Math.floor(Date.now() / 1000) + 10,
 
     keys: {

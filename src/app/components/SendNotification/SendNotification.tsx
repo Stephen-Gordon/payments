@@ -1,5 +1,6 @@
 // app/SendNotification.tsx
 'use client';
+import useGetAddress from '@/app/hooks/useGetAddress';
 import type { MouseEventHandler } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -25,6 +26,26 @@ export default function SendNotification() {
   const [registration, setRegistration] =
     useState<ServiceWorkerRegistration | null>(null);
 
+  const address = useGetAddress();
+
+  const createUser = async (sub: any) => {
+    try {
+      console.log('going to create user');
+      await fetch('http://localhost:3002/api/users/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          address: address,
+          subscription: sub,
+        }),
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   useEffect(() => {
     if (
       typeof window !== 'undefined' &&
@@ -44,6 +65,8 @@ export default function SendNotification() {
             setSubscription(sub);
             console.log('suuuuub', sub);
             setIsSubscribed(true);
+
+            createUser(sub);
           }
         });
         setRegistration(reg);
@@ -71,6 +94,7 @@ export default function SendNotification() {
     // TODO: you should call your API to save subscription data on the server in order to send web push notification from the server
     setSubscription(sub);
     setIsSubscribed(true);
+    createUser(sub);
     setText('Web push subscribed!');
     alert('Web push subscribed!');
     console.log(sub);
