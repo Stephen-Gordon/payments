@@ -31,16 +31,19 @@ export default function SendNotification() {
   const createUser = async (sub: any) => {
     try {
       console.log('going to create user');
-      await fetch('http://localhost:3002/api/users/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          address: address,
-          subscription: sub,
-        }),
-      });
+      await fetch(
+        'https://payments-backend-01-0651b5f97107.herokuapp.com/api/users/register',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            address: address,
+            subscription: sub,
+          }),
+        }
+      );
     } catch (error) {
       console.error('Error:', error);
     }
