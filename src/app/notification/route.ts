@@ -9,21 +9,23 @@ export const POST = async (req: NextRequest) => {
   ) {
     throw new Error('Environment variables supplied not sufficient.');
   }
-  const { subscription } = (await req.json()) as {
+  const { subscription, message } = (await req.json()) as {
     subscription: webPush.PushSubscription;
+    message: string;
   };
-  console.log(req);
+  console.log(message);
   try {
     webPush.setVapidDetails(
       `mailto:${process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL}`,
       process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
       process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
     );
+
     const response = await webPush.sendNotification(
       subscription,
       JSON.stringify({
-        title: 'Hello Web Push',
-        message: 'Your web push notification is here!',
+        title: `Hello Web Push + ${message}`,
+        message: message,
       })
     );
     return new NextResponse(response.body, {

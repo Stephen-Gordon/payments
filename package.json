@@ -36,6 +36,7 @@
     "@zerodev/presets": "^5.0.0",
     "@zerodev/sdk": "^5.0.0",
     "alchemy-sdk": "^3.1.2",
+    "axios": "^1.6.7",
     "clsx": "^2.0.0",
     "ethers": "5.7",
     "framer-motion": "^11.0.3",
