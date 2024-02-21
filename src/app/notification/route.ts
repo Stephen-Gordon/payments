@@ -13,7 +13,7 @@ export const POST = async (req: NextRequest) => {
     subscription: webPush.PushSubscription;
     message: string;
   };
-  console.log(message);
+  console.log(subscription);
   try {
     webPush.setVapidDetails(
       `mailto:${process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL}`,
