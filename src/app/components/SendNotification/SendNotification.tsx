@@ -39,7 +39,7 @@ export default function SendNotification() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            address: address,
+            address: address.toLowerCase(),
             subscription: sub,
           }),
         }
