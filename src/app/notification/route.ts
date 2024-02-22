@@ -15,19 +15,21 @@ export const POST = async (req: NextRequest) => {
   };
   console.log(subscription);
   try {
-    webPush.setVapidDetails(
+    if(req){
+      webPush.setVapidDetails(
       `mailto:${process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL}`,
       process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
       process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
     );
-I   console.log("body", req?.body?.subscription, req?.body?.message)
+  console.log("body", req?.body?.subscription, req?.body?.message)
     const response = await webPush.sendNotification(
-      subscription: req.body.subscription,
+      subscription: req?.body?.subscription,
       JSON.stringify({
         title: `Hello Web Push + ${message}`,
         message: req.body.message,
       })
     );
+    }
     return new NextResponse(response.body, {
       status: response.statusCode,
       headers: response.headers,
