@@ -20,12 +20,12 @@ export const POST = async (req: NextRequest) => {
       process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
       process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
     );
-
+I   console.log("body", req?.body?.subscription, req?.body?.message)
     const response = await webPush.sendNotification(
-      subscription,
+      subscription: req.body.subscription,
       JSON.stringify({
         title: `Hello Web Push + ${message}`,
-        message: message,
+        message: req.body.message,
       })
     );
     return new NextResponse(response.body, {
