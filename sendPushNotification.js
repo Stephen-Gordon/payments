@@ -6,8 +6,8 @@ const sendPushNotification = async () => {
     'BK9FZUL3u5bgvs8NlurUeFesIq5dm3qEUwOlh3hL7wGPbNec2SELGLwjKU2jWv9P9GULDvlWlC04Lric-w8yEf8';
   const privateKey = 'EctJtRAxWnq18ayGbnjcHQ'; */
   const publicKey =
-    'BKIvDJTEdSWEOc3P_-QtcaNhcBYbpESr6KXM2S7oCmlnkdgwAz1wHn8T17OZDrpkDw5GkfiHwrePpgzh55e4Qt4';
-  const privateKey = '5Lys2yFtv71OQnusHfZNNQ';
+    'BKIvDJTEdSWEOc3P_-BI2yIGHOJHYrZaNv_hGamAKOX_VaMaEYILZetpjEva9PDd1S9HsP6afe7WATCHcpJmcoOKbSkEaE_zG2E8zlbIs';
+  const privateKey = 'M3WB6JVXESFaBuXTBFcJw';
   /* webPush.setVapidDetails(
     'mailto:example@yourdomain.org',
     publicKey,
@@ -15,7 +15,7 @@ const sendPushNotification = async () => {
   ); */
   const pushSubscription = {
     endpoint:
-      'https://fcm.googleapis.com/fcm/send/cFpbxV7KLYc:APA91bHFlDQI1HYpYr7NMl2Y67B6WtjQRcejgewG1jhRPeJWR3wrIgIrYpWgkv8tOMsPUmAJcFHsB3up8EvpVWjfntCnir34fE827JK8u56fQ2FSmE8dhWZva21_lu08SxO2UUXjtSLf',
+      'https://fcm.googleapis.com/fcm/send/d91W5xF9fDY:APA91bH4-ImywZYwrqaUCdP2mgUQVvmryYmeYi4lxslL568jcP0JdkrVUbcOvjsAi91g_cV3_idplV_F198LeOm11clff8Ili2xWorI-mLkFVAsPe6gWttXCEMxndqYnpvWEsOxiT-iC',
     expirationTime: Math.floor(Date.now() / 1000) + 10,
 
     keys: {

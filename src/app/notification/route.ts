@@ -24,7 +24,7 @@ export const POST = async (req: NextRequest) => {
       subscription,
       JSON.stringify({
         title: `Hello Web ${message}`,
-        message,
+        message: `Hello Web ${message}`,
       })
     );
     return new NextResponse(response.body, {

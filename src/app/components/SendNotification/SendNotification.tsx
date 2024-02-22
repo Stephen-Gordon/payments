@@ -68,8 +68,6 @@ export default function SendNotification() {
             setSubscription(sub);
             console.log('suuuuub', sub);
             setIsSubscribed(true);
-
-            createUser(sub);
           }
         });
         setRegistration(reg);
