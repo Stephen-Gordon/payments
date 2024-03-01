@@ -7,7 +7,7 @@ interface AddressState {
 }
 
 const initialState: AddressState = {
-  value: '0x6b3C5DeBB67505dfD66F3b3b80D1d24DF8DA886D',
+  value: '',
 };
 
 const addressSlice = createSlice({

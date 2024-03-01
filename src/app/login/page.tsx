@@ -29,6 +29,7 @@ import { setLogin } from '@/GlobalRedux/Features/login/loginSlice';
 
 // secure storage
 import secureLocalStorage from 'react-secure-storage';
+import { setAddress } from '@/GlobalRedux/Features/address/addressSlice';
 
 const chainConfig = {
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -161,6 +162,7 @@ export default function Page() {
     try {
       console.log('setting kernal');
       dispatch(setKernalClient(kernal));
+      dispatch(setAddress(kernal.account.address));
       console.log('kernal set');
     } catch (error) {
       console.log(error);
