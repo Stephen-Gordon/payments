@@ -1,13 +1,16 @@
 'use client';
+// Qr code generator
 import { QRCode } from 'react-qrcode-logo';
 // Redux
 import { useSelector } from 'react-redux';
-
 // react
 import { useState, useEffect } from 'react';
+import { RootState } from '@/GlobalRedux/store';
 
 export default function Qr() {
-  const address: string = useSelector((state: string) => state.address.value);
+  const address: string = useSelector(
+    (state: RootState) => state.address.value
+  );
 
   const [windowWidth, setWindowWidth] = useState(0);
 
@@ -25,9 +28,9 @@ export default function Qr() {
     // Event listener for window resize
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
+    // remove the event listener when the component unmounts
     return () => window.removeEventListener('resize', handleResize);
-  }, []); // Empty dependency array to run effect only once on mount
+  }, []);
   return (
     <>
       <QRCode

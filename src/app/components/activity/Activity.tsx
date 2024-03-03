@@ -42,7 +42,7 @@ export default function Activity() {
 
   return (
     <>
-      {transactions.length > 0 ? (
+      {transactions?.length > 0 ? (
         <motion.div
           layoutId='activity'
           className='from-paper-one to-pink w-full rounded-xl bg-gradient-to-tr p-2 text-xl'
