@@ -1,4 +1,4 @@
-{
+/* {
   "css.validate": false,
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
@@ -14,7 +14,6 @@
     "containerClassName"
   ],
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "files.exclude": {
-    "**/node_modules": true
-  }
+ 
 }
+ */

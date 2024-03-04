@@ -9,6 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 
 import { motion } from 'framer-motion';
+import { Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle, } from '@/app/components/ui/card';
+import { Button } from '../ui/button';
 
 export default function Activity() {
   const [transactions, setTxs] = useState<any>([]);
@@ -43,30 +50,35 @@ export default function Activity() {
   return (
     <>
       {transactions?.length > 0 ? (
-        <motion.div
-          layoutId='activity'
-          className='from-paper-one to-pink w-full rounded-xl bg-gradient-to-tr p-2 text-xl'
-        >
-          <div className='mt-4'>
-            {transactions &&
-              transactions.map((transaction: any, i: any) => (
-                <motion.div layoutId={`activity-${transaction.hash}`} key={i}>
-                  <RecentTransaction transaction={transaction} />
-                </motion.div>
-              ))}
-            <div className='text-purple text-center'>
-              <Link
-                href={{
-                  pathname: '/transactions',
-                }}
-              >
-                See all
-              </Link>
-            </div>
-          </div>
+        <motion.div layoutId='activity' className='w-full rounded-xl text-xl'>
+          <Card className=''>
+            <CardContent className='grid gap-1 p-1.5'>
+              <div className='mt-4'>
+                {transactions &&
+                  transactions.map((transaction: any, i: any) => (
+                    <motion.div
+                      layoutId={`activity-${transaction.hash}`}
+                      key={i}
+                    >
+                      <RecentTransaction transaction={transaction} />
+                    </motion.div>
+                  ))}
+                <div className='text-center'>
+                  <Link
+                    className='w-fit'
+                    href={{
+                      pathname: '/transactions',
+                    }}
+                  >
+                    <Button variant='ghost'>See All</Button>
+                  </Link>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
       ) : (
-        <div className='bg-paper-one w-full rounded-xl p-2 text-xl'>
+        <div className=' w-full rounded-xl p-2 text-xl'>
           <div className='mt-4 flex content-center justify-center'>
             <div>You've got no transactions</div>
           </div>

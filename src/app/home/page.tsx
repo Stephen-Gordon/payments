@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import Balance from '../components/Balance/Balance';
 import Activity from '@/app/components/activity/Activity';
 
+import { Button } from '@/app/components/ui/button';
+
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
@@ -21,8 +23,9 @@ import { useEffect, useRef, useState } from 'react';
 // icon
 import { Send, QrCode } from 'lucide-react';
 
-// framer motion
-import { motion } from 'framer-motion';
+
+// lucide
+import { Menu } from 'lucide-react';
 
 import Notifications from '@/app/components/Notifications/Notifications';
 import SendNotification from '@/app/components/SendNotification/SendNotification';
@@ -42,8 +45,20 @@ export default function Page() {
     '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
   return (
     <div id='render'>
+      <div className='absolute right-4 top-4'>
+        <Link
+          /* onClick={() => {
+            dispatch(setSheet(true));
+          }} */
+          href={{
+            pathname: '/menu',
+            query: { isNavOpen: true },
+          }}
+        >
+          <Menu />
+        </Link>
+      </div>
       <div className='blurios p-4 pt-40'>
-        <SendNotification />
         <div className='items-center text-center text-5xl'>
           <Balance />
         </div>
@@ -58,9 +73,9 @@ export default function Page() {
                 pathname: '/search',
               }}
             >
-              <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
+              <Button size={'lg'} variant={'outline'}>
                 <div>Send</div> <Send size={20} color='#cbd5e1' />
-              </button>
+              </Button>
             </Link>
           </div>
 
@@ -73,9 +88,12 @@ export default function Page() {
                 pathname: '/receive',
               }}
             >
-              <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
-                <div>Receive</div> <QrCode size={20} color='#cbd5e1' />
-              </button>
+              <Button size={'lg'} variant={'outline'}>
+                <div className='flex justify-between'>
+                  <div className=''>Receive</div>
+                  <QrCode size={20} color='#cbd5e1' />
+                </div>
+              </Button>
             </Link>
           </div>
         </div>

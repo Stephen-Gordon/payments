@@ -42,7 +42,7 @@ export default function Page() {
   return (
     <motion.div
       layoutId='activity'
-      className='from-paper-one to-pink w-full rounded-xl bg-gradient-to-tr p-4 text-xl'
+      className='w-full text-xl'
     >
       <h1>Transactions</h1>
       <div className='mt-4'>

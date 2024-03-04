@@ -1,26 +1,35 @@
 'use client';
 
-// components/SheetModal.js
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Sheet, { SheetRef } from 'react-modal-sheet';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/app/components/ui/drawer';
+import { useState } from 'react';
+
+
 const SheetLayout = ({ children }) => {
   const isOpen = useSelector((state) => state.sheet.value);
 
   useEffect(() => {
-    // Add your logic here to handle the sheet open state
     console.log('Sheet is open:', isOpen);
   }, [isOpen]);
 
   const dispatch = useDispatch();
+  const [snap, setSnap] = useState<number | string | null>('148px');
 
   return (
     <>
-      <Sheet isOpen={isOpen} onClose={() => dispatch(setSheet(false))}>
+      {/* <Sheet isOpen={isOpen} onClose={() => dispatch(setSheet(false))}>
         <Sheet.Container
           className='blurios'
           style={{
@@ -28,11 +37,20 @@ const SheetLayout = ({ children }) => {
             backdropFilter: 'blur(20px) saturate(100%)',
           }}
         >
-          {/*  <Sheet.Header></Sheet.Header> */}
           <Sheet.Content>{children}</Sheet.Content>
         </Sheet.Container>
         <Sheet.Backdrop onTap={() => dispatch(setSheet(false))} />
-      </Sheet>
+      </Sheet> */}
+      <Drawer
+        onClose={() => {
+          dispatch(setSheet(false));
+        }}
+        open={isOpen}
+      >
+        <DrawerContent className='bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter '>
+          {children}
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

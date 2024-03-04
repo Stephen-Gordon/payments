@@ -70,7 +70,7 @@ export default function Page() {
                 </button>
               </Link>
             </div>
-            <div className='bg-paper-two mt-4 rounded-xl p-4'>
+            <div className='bg-muted mt-4 rounded-xl p-4'>
               <div className='mb-4 flex justify-between'>
                 <p>Status</p>
                 <p>Completed</p>

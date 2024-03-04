@@ -14,9 +14,10 @@ import Link from 'next/link';
 // icons
 import { Send, QrCode } from 'lucide-react';
 
+import { Avatar } from '@/app/components/ui/avatar';
+import { RootState } from '@/GlobalRedux/store';
 export default function Page() {
   console.log('Tx Modal Page');
-  const isOpen = useSelector((state) => state.sheet.value);
   const dispatch = useDispatch();
 
   const [transaction, setTransaction] = useState<any>({});
@@ -45,21 +46,21 @@ export default function Page() {
         <motion.div
           key={hash}
           layoutId={hash}
-          initial={{ opacity: 1 }}
+          
           animate={{
-            opacity: 1,
             transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
-          exit={{ opacity: 0 }}
+          
           style={{
             width: '100vw',
             height: '100vh',
-            backgroundColor: '#2f323d',
           }}
+          className='bg-muted'
         >
           <div className='grid p-4'>
             <div className='my-4'>
               <div className='flex text-xl font-bold text-white'>
+                <Avatar className='bg-black'></Avatar>
                 {transaction.from == address ? '+$' : '-$'}
 
                 {transaction.value}
@@ -71,6 +72,7 @@ export default function Page() {
               <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                 <div>
                   <Link
+                    onClick={() => {}}
                     href={{
                       pathname: '/send',
                       query: { address: transaction.to },
@@ -95,7 +97,7 @@ export default function Page() {
                   </Link>
                 </div>
               </div>
-              <div className='bg-paper-one mt-4 rounded-xl p-4 text-slate-300'>
+              <div className='bg-accent mt-4 rounded-xl p-4 text-slate-300'>
                 <div className='mb-4 flex justify-between'>
                   <p>Status</p>
                   <p>Completed</p>

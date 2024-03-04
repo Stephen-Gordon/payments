@@ -1,18 +1,15 @@
 'use client';
 // react
 import { useEffect, useRef, useState } from 'react';
-
 // camera
 import { QrScanner } from '@yudiel/react-qr-scanner';
-
+// next
 import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 // sheet
 import Sheet, { SheetRef } from 'react-modal-sheet';
+// lucide icons
 import { Undo2 } from 'lucide-react';
-import Button from '@/components/buttons/Button';
-import { setCode } from 'viem/actions';
+// QR code
 import Qr from '@/app/components/Qr/Qr';
 
 // framer motion

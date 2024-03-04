@@ -29,8 +29,10 @@ export default function HomePage() {
 
   useEffect(() => {
     router.push('/home');
-  }, []);
+}, []);
 
+  
+ 
   return (
     <main>
       <Head>

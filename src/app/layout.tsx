@@ -26,6 +26,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { usePathname, useRouter } from 'next/navigation';
 import ReactPullToRefresh from 'react-pull-to-refresh';
 
+import { ThemeProvider } from '@/app/components/theme-provider';
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
 /* 
@@ -58,11 +59,13 @@ import { LayoutGroup } from 'framer-motion';
 export default function RootLayout({
   auth,
   transactionmodal,
+  drawer,
   children,
 }: {
   auth: React.ReactNode;
   transactionmodal: React.ReactNode;
   children: React.ReactNode;
+  drawer: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
 
@@ -81,7 +84,7 @@ export default function RootLayout({
  */
 
   return (
-    <html className='bg-dark h-full overflow-auto '>
+    <html className=' h-full overflow-auto '>
       <head>
         <title>Payments, Stephen Gordon</title>
         <title>Payments, Stephen Gordon</title>
@@ -275,14 +278,21 @@ export default function RootLayout({
       </Head>
 
       <body>
-        <Providers>
-          <PersistGate loading={null} persistor={persistor}>
-            <WagmiProvider config={config!}>
-              <QueryClientProvider client={queryClient}>
-                <LayoutGroup>
-                  <div>{auth}</div>
-                  {/*   <div>{transactionmodal}</div> */}
-                  {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='dark'
+          
+          disableTransitionOnChange
+        >
+          <Providers>
+            <PersistGate loading={null} persistor={persistor}>
+              <WagmiProvider config={config!}>
+                <QueryClientProvider client={queryClient}>
+                  <LayoutGroup>
+                    <div>{auth}</div>
+                    <div>{drawer}</div>
+                    {/*   <div>{transactionmodal}</div> */}
+                    {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
                     <div
                       style={{
                         backgroundImage: `url(${bgimage.src})`,
@@ -292,19 +302,20 @@ export default function RootLayout({
                       }}
                     ></div>
                   </div> */}
-                  <main
-                    style={{
-                      backgroundColor: 'rgba(16, 16, 18, 1)',
-                    }}
-                    className=' h-screen w-screen text-gray-300'
-                  >
-                    {children}
-                  </main>
-                </LayoutGroup>
-              </QueryClientProvider>
-            </WagmiProvider>
-          </PersistGate>
-        </Providers>
+                    <main
+                     /*  style={{
+                        backgroundColor: 'rgba(16, 16, 18, 1)',
+                      }} */
+                      className=' h-screen w-screen text-gray-300'
+                    >
+                      {children}
+                    </main>
+                  </LayoutGroup>
+                </QueryClientProvider>
+              </WagmiProvider>
+            </PersistGate>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
