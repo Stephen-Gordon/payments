@@ -26,6 +26,8 @@ import { PushAPI, CONSTANTS } from '@pushprotocol/restapi';
 // Ethers or Viem, both are supported
 import { ethers } from 'ethers';
 import { ENV } from '@pushprotocol/restapi/src/lib/constants';
+import { Input } from '../ui/input';
+import { Button } from '../ui/button';
 export default function SendUsdc() {
   const [usdcAmount, setUsdcAmount] = useState<string>('1');
 
@@ -107,7 +109,20 @@ export default function SendUsdc() {
   return (
     <>
       <div className='grid p-4 text-white'>
-        <input
+        <div className='w-full items-center'>
+          <Input
+            className='focus-visible:ring-ring w-full border-0 text-center text-5xl focus-visible:outline-none focus-visible:ring-0 '
+            placeholder='$0'
+            type='text'
+            pattern='\d+((\.|,)\d+)?'
+            onChange={(val) => {
+              setUsdcAmount(
+                val.target.value.replace(/[^0-9.,]/g, '').replace(/,/g, '.')
+              );
+            }}
+          />
+        </div>
+        {/* <input
           value={usdcAmount}
           onChange={(e) => {
             setUsdcAmount(e.target.value);
@@ -117,13 +132,14 @@ export default function SendUsdc() {
         />
         <div className='bg-paper-one grid h-24 w-full content-center items-center rounded-xl  text-center'>
           <p>{payee && truncateEthAddress(payee)}</p>
-        </div>
-        <button
+        </div> */}
+        {/* <button
           className='mt-5 rounded-xl bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700'
           onClick={() => sendTx()}
         >
           Send USDC
-        </button>
+        </button> */}
+        <Button onClick={() => sendTx()}>Send</Button>
       </div>
       {transactionStatus ||
         (loading && (
