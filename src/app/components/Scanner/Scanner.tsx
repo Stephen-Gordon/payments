@@ -23,7 +23,7 @@ export default function Scanner({
   setIsOpen: any;
 }) {
   const router = useRouter();
-  const [code, setCode] = useState(true);
+  const [code, setCode] = useState(false);
   return (
     <>
       <Sheet isOpen={isOpen} onClose={() => setIsOpen(false)}>
