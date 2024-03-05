@@ -55,7 +55,7 @@ export default function Page() {
             width: '100vw',
             height: '100vh',
           }}
-          className='bg-muted'
+          className='bg-background'
         >
           <div className='grid p-4'>
             <div className='my-4'>
@@ -97,7 +97,7 @@ export default function Page() {
                   </Link>
                 </div>
               </div>
-              <div className='bg-accent mt-4 rounded-xl p-4 text-slate-300'>
+              <div className='bg-muted mt-4 rounded-xl p-4 text-slate-300'>
                 <div className='mb-4 flex justify-between'>
                   <p>Status</p>
                   <p>Completed</p>

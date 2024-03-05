@@ -84,8 +84,12 @@ export default function RootLayout({
  */
 
   return (
-    <html className=' h-full overflow-auto '>
+    <html className='h-full overflow-auto '>
       <head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
+        />
         <title>Payments, Stephen Gordon</title>
         <title>Payments, Stephen Gordon</title>
         <meta name='application-name' content='PWA App' />
@@ -99,7 +103,6 @@ export default function RootLayout({
         <meta name='msapplication-TileColor' content='#2B5797' />
         <meta name='msapplication-tap-highlight' content='no' />
         <meta name='theme-color' content='#101012' />
-
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
         <link
           rel='apple-touch-icon'
@@ -116,7 +119,6 @@ export default function RootLayout({
           sizes='167x167'
           href='/icons/touch-icon-ipad-retina.png'
         />
-
         <link
           rel='icon'
           type='image/png'
@@ -160,13 +162,16 @@ export default function RootLayout({
           property='og:image'
           content='https://yourdomain.com/icons/apple-touch-icon.png'
         />
-
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
         />
       </head>
       <Head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
+        />
         <title>Payments, Stephen Gordon</title>
         <meta name='application-name' content='PWA App' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
@@ -179,7 +184,6 @@ export default function RootLayout({
         <meta name='msapplication-TileColor' content='#2B5797' />
         <meta name='msapplication-tap-highlight' content='no' />
         <meta name='theme-color' content='#000000' />
-
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
         <link
           rel='apple-touch-icon'
@@ -196,7 +200,6 @@ export default function RootLayout({
           sizes='167x167'
           href='/icons/touch-icon-ipad-retina.png'
         />
-
         <link
           rel='icon'
           type='image/png'
@@ -216,7 +219,6 @@ export default function RootLayout({
           color='#5bbad5'
         />
         <link rel='shortcut icon' href='/favicon.ico' />
-
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:url' content='https://yourdomain.com' />
         <meta name='twitter:title' content='PWA App' />
@@ -235,7 +237,6 @@ export default function RootLayout({
           property='og:image'
           content='https://yourdomain.com/icons/apple-touch-icon.png'
         />
-
         <link
           rel='apple-touch-startup-image'
           href='/images/apple_splash_2048.png'
@@ -273,7 +274,7 @@ export default function RootLayout({
         />
         <meta
           name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
         />
       </Head>
 
@@ -281,7 +282,6 @@ export default function RootLayout({
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
-          
           disableTransitionOnChange
         >
           <Providers>
@@ -303,7 +303,7 @@ export default function RootLayout({
                     ></div>
                   </div> */}
                     <main
-                     /*  style={{
+                      /*  style={{
                         backgroundColor: 'rgba(16, 16, 18, 1)',
                       }} */
                       className=' h-screen w-screen text-gray-300'

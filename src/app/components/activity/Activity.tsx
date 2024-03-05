@@ -50,9 +50,9 @@ export default function Activity() {
   return (
     <>
       {transactions?.length > 0 ? (
-        <motion.div layoutId='activity' className='w-full rounded-xl text-xl'>
+        <motion.div layoutId='activity' className='w-full bg-background rounded-full text-xl '>
           <Card className=''>
-            <CardContent className='grid gap-1 p-1.5'>
+            <CardContent className='grid gap-2 p-2 bg-background rounded-lg'>
               <div className='mt-4'>
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (

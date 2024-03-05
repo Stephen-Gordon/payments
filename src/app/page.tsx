@@ -36,6 +36,10 @@ export default function HomePage() {
   return (
     <main>
       <Head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
+        />
         <title>Payments, Stephen Gordon</title>
         <meta name='application-name' content='PWA App' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
@@ -142,7 +146,7 @@ export default function HomePage() {
         />
         <meta
           name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
         />
       </Head>
       {/*  <section className='h-screen w-screen bg-slate-900 text-white'>

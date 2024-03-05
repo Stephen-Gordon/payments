@@ -42,9 +42,9 @@ export default function Page() {
   return (
     <motion.div
       layoutId='activity'
-      className='w-full text-xl'
+      className='w-full text-xl p-4'
     >
-      <h1>Transactions</h1>
+      <div className='text-xl'>Transactions</div>
       <div className='mt-4'>
         {transactions &&
           transactions.map((transaction: any, i: any) => (

@@ -44,7 +44,7 @@ export default function Page() {
   let decodedText =
     '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
   return (
-    <div id='render'>
+    <div id='render' className=''>
       <div className='absolute right-4 top-4'>
         <Link
           /* onClick={() => {
@@ -58,12 +58,12 @@ export default function Page() {
           <Menu />
         </Link>
       </div>
-      <div className='blurios p-4 pt-40'>
-        <div className='items-center text-center text-5xl'>
+      <div className='blurios pt-40'>
+        <div className='items-center p-2 text-center text-5xl'>
           <Balance />
         </div>
 
-        <div className='mt-10 grid grid-cols-2 gap-4'>
+        <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
           <div>
             <Link
               onClick={() => {
@@ -73,8 +73,16 @@ export default function Page() {
                 pathname: '/search',
               }}
             >
-              <Button size={'lg'} variant={'outline'}>
-                <div>Send</div> <Send size={20} color='#cbd5e1' />
+              <Button className='text-xl' size={'lg'} variant={'outline'}>
+                <div className='flex grid-cols-3 content-center items-center'>
+                  <div className='text-xl'>
+                    <div>Send</div>
+                  </div>
+                  <div className='px-2'></div>
+                  <div>
+                    <Send size={20} color='#cbd5e1' />
+                  </div>
+                </div>
               </Button>
             </Link>
           </div>
@@ -88,17 +96,22 @@ export default function Page() {
                 pathname: '/receive',
               }}
             >
-              <Button size={'lg'} variant={'outline'}>
-                <div className='flex justify-between'>
-                  <div className=''>Receive</div>
-                  <QrCode size={20} color='#cbd5e1' />
+              <Button className='text-xl' size={'lg'} variant={'outline'}>
+                <div className='flex grid-cols-3 content-center items-center'>
+                  <div className='text-xl'>
+                    <div>Receive</div>
+                  </div>
+                  <div className='px-2'></div>
+                  <div>
+                    <QrCode size={22} color='#cbd5e1' />
+                  </div>
                 </div>
               </Button>
             </Link>
           </div>
         </div>
-        <div className='mt-4'>
-          <Tab.Group>
+        <div className='bg-accent mt-4 w-full rounded-t-xl p-4 min-h-[900px]'>
+          {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>
                 <Tab>
@@ -115,7 +128,18 @@ export default function Page() {
               </Tab.Panel>
               <Tab.Panel>Content 2</Tab.Panel>
             </Tab.Panels>
-          </Tab.Group>
+          </Tab.Group> */}
+         
+             {/*  <div className='mb-4 flex justify-between'>
+                
+                  <div className='text-lg text-gray-300'>Acttivity</div>
+               
+              </div> */}
+           
+           
+                <Activity />
+            
+         
         </div>
       </div>
     </div>

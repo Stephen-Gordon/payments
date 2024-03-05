@@ -27,12 +27,12 @@ export default function RecentTransaction({ transaction }: any) {
     <motion.div layoutId={transaction.hash}>
       <Link href={{ pathname: '/tx', query: { hash: transaction.hash } }}>
       
-            <motion.div className='bg-muted mb-4 flex content-center justify-between rounded-md border p-2 text-base transition-all duration-300'>
+            <motion.div className='bg-background mb-4 flex content-center justify-between rounded-md border p-2 text-base transition-all duration-300'>
               <div className='flex items-center'>
                 <div className='relative grid items-center justify-center'>
-                  <Avatar className='bg-black'></Avatar>
+                  <Avatar className='bg-slate-700'></Avatar>
                   <div className='absolute left-6 top-5'>
-                    <div className='bg-purple flex h-7 w-7 content-center items-center justify-center rounded-full '>
+                    <div className='bg-background border flex h-7 w-7 content-center items-center justify-center rounded-full '>
                       {transaction.from == address ? (
                         <ArrowLeft className='h-6 w-6' />
                       ) : (

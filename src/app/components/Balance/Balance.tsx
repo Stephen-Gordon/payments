@@ -22,5 +22,5 @@ export default function Balance() {
   }
 
   // Render the balance
-  return <div className='text-white'>{balanceState}</div>;
+  return <div className='text-white'>${balanceState}</div>;
 }

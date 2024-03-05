@@ -16,7 +16,7 @@ const useGetRecentTransactions = async () => {
       category: ['erc20'],
     });
 
-    return data;
+    return data.transfers.reverse();
   } catch (error) {
     console.log('error', error);
   }
