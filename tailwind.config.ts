@@ -1,4 +1,6 @@
 import type { Config } from "tailwindcss"
+    const defaultTheme = require('tailwindcss/defaultTheme');
+
 
 const config = {
   darkMode: ['class'],
@@ -18,6 +20,9 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         /* main: '#13151a',
         dark: '#13151a', */

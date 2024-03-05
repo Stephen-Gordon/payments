@@ -50,10 +50,16 @@ export default function Activity() {
   return (
     <>
       {transactions?.length > 0 ? (
-        <motion.div layoutId='activity' className='w-full bg-background rounded-full text-xl '>
+        <motion.div
+          layoutId='activity'
+          className='bg-muted w-full rounded-full text-xl '
+        >
           <Card className=''>
-            <CardContent className='grid gap-2 p-2 bg-background rounded-lg'>
-              <div className='mt-4'>
+            <CardHeader>
+              <CardTitle>Recent Transactions</CardTitle>
+            </CardHeader>
+            <CardContent className=''>
+              <div className='mt-4 space-y-8'>
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (
                     <motion.div
@@ -63,18 +69,20 @@ export default function Activity() {
                       <RecentTransaction transaction={transaction} />
                     </motion.div>
                   ))}
-                <div className='text-center'>
-                  <Link
-                    className='w-fit'
-                    href={{
-                      pathname: '/transactions',
-                    }}
-                  >
-                    <Button variant='ghost'>See All</Button>
-                  </Link>
-                </div>
               </div>
             </CardContent>
+            <CardFooter className='justify-center space-x-2'>
+              <Link
+                className='w-fit'
+                href={{
+                  pathname: '/transactions',
+                }}
+              >
+                <Button className='w-auto' variant='ghost'>
+                  See All
+                </Button>
+              </Link>
+            </CardFooter>
           </Card>
         </motion.div>
       ) : (

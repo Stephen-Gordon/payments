@@ -25,7 +25,6 @@ const SheetLayout = ({ children }) => {
   }, [isOpen]);
 
   const dispatch = useDispatch();
-  const [snap, setSnap] = useState<number | string | null>('148px');
 
   return (
     <>

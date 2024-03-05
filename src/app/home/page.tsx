@@ -73,14 +73,14 @@ export default function Page() {
                 pathname: '/search',
               }}
             >
-              <Button className='text-xl' size={'lg'} variant={'outline'}>
+              <Button className='text-xl' size={'lg'} variant={'default'}>
                 <div className='flex grid-cols-3 content-center items-center'>
                   <div className='text-xl'>
                     <div>Send</div>
                   </div>
                   <div className='px-2'></div>
                   <div>
-                    <Send size={20} color='#cbd5e1' />
+                    <Send size={20}  />
                   </div>
                 </div>
               </Button>
@@ -96,14 +96,14 @@ export default function Page() {
                 pathname: '/receive',
               }}
             >
-              <Button className='text-xl' size={'lg'} variant={'outline'}>
+              <Button className='text-xl' size={'lg'} variant={'default'}>
                 <div className='flex grid-cols-3 content-center items-center'>
                   <div className='text-xl'>
                     <div>Receive</div>
                   </div>
                   <div className='px-2'></div>
                   <div>
-                    <QrCode size={22} color='#cbd5e1' />
+                    <QrCode size={22}  />
                   </div>
                 </div>
               </Button>
@@ -130,11 +130,11 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group> */}
          
-             {/*  <div className='mb-4 flex justify-between'>
+            {/*   <div className='mb-4 flex justify-between'>
                 
-                  <div className='text-lg text-gray-300'>Acttivity</div>
+                  <div className='text-lg'>Activity</div>
                
-              </div> */}
+              </div>  */}
            
            
                 <Activity />

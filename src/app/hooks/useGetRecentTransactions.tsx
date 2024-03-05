@@ -14,6 +14,7 @@ const useGetRecentTransactions = async () => {
       fromBlock: '0x0',
       fromAddress: '0x6b3C5DeBB67505dfD66F3b3b80D1d24DF8DA886D',
       category: ['erc20'],
+      withMetadata: true,
     });
     data.transfers.reverse();
 
