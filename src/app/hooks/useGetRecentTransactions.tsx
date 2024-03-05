@@ -15,8 +15,9 @@ const useGetRecentTransactions = async () => {
       fromAddress: '0x6b3C5DeBB67505dfD66F3b3b80D1d24DF8DA886D',
       category: ['erc20'],
     });
+    data.transfers.reverse();
 
-    return data.transfers.reverse();
+    return data;
   } catch (error) {
     console.log('error', error);
   }
