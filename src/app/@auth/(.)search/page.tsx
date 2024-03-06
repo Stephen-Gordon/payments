@@ -20,12 +20,16 @@ import { Input } from '@/app/components/ui/input';
 import { Button } from '@/app/components/ui/button';
 import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 
+// drawer
+import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
+
 
 // icons 
 import { QrCode } from 'lucide-react';
+import RecentPayee from '@/app/components/RecentPayee.tsx/RecentPayee';
 export default function Page() {
   const [payee, setPayee] = useState<string>(
-    '0xc8C26Ab40fe4723519fE66B8dBb625FC070A982c'
+    ''
   );
   const [scanner, setScanner] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -46,28 +50,25 @@ export default function Page() {
     <>
       <div className='grid'>
         {scanner && <Scanner isOpen={isOpen} setIsOpen={setIsOpen} />}
-        <div className='flex'>
-          <div className='p-4 '>
+
+        <DrawerHeader>
+          <DrawerTitle className='grid grid-cols-3 items-center'>
             <div
-              className='w-fit'
               onClick={() => {
+                router.back();
                 dispatch(setSheet(false));
+
               }}
             >
-              <div
-                onClick={() => {
-                  router.push('/home');
-                }}
-              >
-                <BackButton />
-              </div>
+              <BackButton />
             </div>
-          </div>
-
-          <div className='my-4'>
-            <p className='my-4 text-center text-xl text-gray-300'>Send</p>
-          </div>
-        </div>
+            <p className='text-center'>Send</p>
+            <div className='ml-auto'>
+              <div></div>
+            </div>
+          </DrawerTitle>
+        </DrawerHeader>
+       
         <div className='flex px-4'>
           {/*   <input
           
@@ -80,7 +81,7 @@ export default function Page() {
           <div className='flex w-full content-center'>
             <input
               type='text'
-              id='website-admin'
+              onChange={(e) => setPayee(e.target.value)}
               className='border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-s-lg border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50'
               placeholder='Search an Address'
             />
@@ -138,6 +139,7 @@ export default function Page() {
             <button className='bg-purple w-full rounded p-4'>Go</button>
           </Link>
         </div>
+        <RecentPayee/>
 
         <div className='p-4'>
           <div className='text-lg text-gray-300'>Favorites</div>
