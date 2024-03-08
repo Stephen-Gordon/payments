@@ -64,7 +64,7 @@ export default function RecentTransaction({ transaction }: any) {
                 {truncateEthAddress(transaction.from)}
               </motion.div>
               <p className='text-muted-foreground text-sm'>
-                {transaction.metadata.blockTimestamp.slice(0, 10)}
+                {transaction?.metadata?.blockTimestamp.slice(0, 10)}
               </p>
             </div>
             <div className='ml-auto font-medium'>

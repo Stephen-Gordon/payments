@@ -42,14 +42,14 @@ const DrawerContent = React.forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      style={{height: 'calc(100vh - 4rem)', overflow: 'scroll'}}
+      style={{ height: 'calc(100vh - 4rem)' }}
       className={cn(
-        'bg-background/90 fixed inset-x-0 bottom-0 z-50 mt-24 flex flex-col rounded-t-[10px] border bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter',
+        'bg-background/90 fixed inset-x-0 bottom-0 z-50 mt-24 flex flex-col rounded-t-[10px] border-t bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter',
         className
       )}
       {...props}
     >
-      <div className='bg-muted mx-auto mt-4 h-2 w-[100px]  rounded-full bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter' />
+      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] overflow-y-scroll rounded-full bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter' />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

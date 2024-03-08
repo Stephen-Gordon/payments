@@ -3,14 +3,18 @@
 import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 // components
 import SendUsdc from '@/app/components/SendUsdc/SendUsdc';
+
 import { useRouter } from 'next/navigation';
 import { DrawerTitle, DrawerHeader } from '@/app/components/ui/drawer';
 // format address
 import truncateEthAddress from 'truncate-eth-address';
 // next
 import { useSearchParams } from 'next/navigation';
-import { Avatar } from '@/app/components/ui/avatar';
 
+// avatar
+import { Avatar } from '@/app/components/ui/avatar';
+// link
+import Link from 'next/link';
 export default function Page() {
   const router = useRouter();
 
@@ -32,7 +36,9 @@ export default function Page() {
             </div>
             <p className='text-center'>{payee && truncateEthAddress(payee)}</p>
             <div className='ml-auto'>
-              <Avatar className='h-9 w-9 bg-white'></Avatar>
+              <Link className="w-auto h-auto" href={{ pathname: `/send`, query: { payee: payee } }}>
+                <Avatar className='h-9 w-9 bg-white'></Avatar>
+              </Link>
             </div>
           </DrawerTitle>
         </DrawerHeader>

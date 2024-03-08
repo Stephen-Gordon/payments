@@ -57,7 +57,6 @@ export default function Page() {
               onClick={() => {
                 router.back();
                 dispatch(setSheet(false));
-
               }}
             >
               <BackButton />
@@ -68,7 +67,7 @@ export default function Page() {
             </div>
           </DrawerTitle>
         </DrawerHeader>
-       
+
         <div className='flex px-4'>
           {/*   <input
           
@@ -139,7 +138,9 @@ export default function Page() {
             <button className='bg-purple w-full rounded p-4'>Go</button>
           </Link>
         </div>
-        <RecentPayee/>
+        <div id='#recent-activity' className='p-4 space-y-8' >
+          <RecentPayee/>
+        </div>
 
         <div className='p-4'>
           <div className='text-lg text-gray-300'>Favorites</div>

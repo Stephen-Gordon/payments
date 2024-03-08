@@ -46,7 +46,7 @@ const SheetLayout = ({ children }) => {
         }}
         open={isOpen}
       >
-        <DrawerContent className='h-full bg-clip-padding backdrop-blur-sm backdrop-filter '>
+        <DrawerContent className='h-auto bg-clip-padding backdrop-blur-sm backdrop-filter '>
           {children}
         </DrawerContent>
       </Drawer>
