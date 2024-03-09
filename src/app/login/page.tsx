@@ -1,209 +1,99 @@
-'use client';
+'use client'
+import { useLogin, usePrivy } from '@privy-io/react-auth'
+import Head from 'next/head'
+import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { isAndroid } from 'react-device-detect'
 
-import Head from 'next/head';
+const Page = () => {
+  const [isInstalled, setIsInstalled] = useState(false)
+  const [installationPrompt, setInstallationPrompt] = useState<any>()
+  const router = useRouter()
+  const { ready, authenticated, login } = usePrivy()
+  /*   const { login } = useLogin({
+      // Set up an `onComplete` callback to run when `login` completes
+      onComplete(user, isNewUser, wasPreviouslyAuthenticated) {
+        console.log('🔑 ✅ Login success', {
+          user,
+          isNewUser,
+          wasPreviouslyAuthenticated,
+        })
+        router.push('/home')
+      },
+      // Set up an `onError` callback to run when there is a `login` error
+      onError(error) {
+        console.log('🔑 🚨 Login error', { error })
+      },
+    }) */
 
-// React
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-
-import Link from 'next/link';
-
-// Web3auth
-import { Web3AuthNoModal } from '@web3auth/no-modal';
-import { CHAIN_NAMESPACES, WALLET_ADAPTERS } from '@web3auth/base';
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
-import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
-
-import { useDispatch } from 'react-redux';
-
-// Components
-import useCreateKernal from '@/app/utils/useCreateKernal';
-
-// spinner
-import { RotatingLines } from 'react-loader-spinner';
-
-import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClientSlice';
-
-import { useRouter } from 'next/navigation';
-import { setLogin } from '@/GlobalRedux/Features/login/loginSlice';
-
-// secure storage
-import secureLocalStorage from 'react-secure-storage';
-import { setAddress } from '@/GlobalRedux/Features/address/addressSlice';
-
-const chainConfig = {
-  chainNamespace: CHAIN_NAMESPACES.EIP155,
-  chainId: '0xaa36a7',
-  rpcTarget: 'https://rpc.ankr.com/eth_sepolia',
-  displayName: 'Sepolia',
-  blockExplorer: 'https://etherscan.io/',
-  ticker: 'Eth',
-  tickerName: 'Eth',
-};
-
-const web3auth = new Web3AuthNoModal({
-  // @ts-ignore
-  clientId:
-    'BCUJ9sDhdO5iekR-oaXL7bIC5Dg3tPNyhtGp_4z_SLp3B0ZKp-0qmE9RFWxUdY4g1wNzJqkxr10d14ty-PoAqCI',
-  chainConfig,
-  web3AuthNetwork: 'sapphire_devnet',
-});
-
-const privateKeyProvider = new EthereumPrivateKeyProvider({
-  config: { chainConfig },
-});
-const openloginAdapter = new OpenloginAdapter({
-  privateKeyProvider: privateKeyProvider,
-});
-web3auth.configureAdapter(openloginAdapter);
-
-export default function Page() {
-  // Kernal State
-  const [kernalClient, setKernal] = useState<any>(null);
-  // Loading State
-  const [loading, setLoading] = useState<boolean>(false);
-  // Login Success State
-  const [loginSuccess, setLoginSuccess] = useState<boolean>(false);
-
-  const [error, setError] = useState<string>('');
-
-  // router
-  const router = useRouter();
-
-  // set the kernal client in redux
-  const dispatch = useDispatch();
-
-  // initial useEffect to setup the sdk
   useEffect(() => {
-    let value = secureLocalStorage.getItem('pk');
-    if (value) {
-      let option = {
-        name: 'local',
-        value: value,
-      };
-      const kernal = useCreateKernal(option);
-      setReduxKernal(kernal);
-      setReduxLogin();
+    // Helps you prompt your users to install your PWA
+    // See https://web.dev/learn/pwa/installation-prompt/
+    // iOS Safari does not have this event, so you will have
+    // to prompt users to add the PWA via your own UI (e.g. a
+    // pop-up modal)
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault()
+      setIsInstalled(false)
+      setInstallationPrompt(e)
+    })
+  }, [])
 
-      router.push('/home');
-    }
-
-    const init = async () => {
-      try {
-        // init the web3auth sdk
-        await web3auth.init();
-        console.log('web3auth initialized');
-      } catch (error) {
-        console.error(error);
+  useEffect(() => {
+    // Detect if the PWA is installed
+    // https://web.dev/learn/pwa/detection/#detecting-the-transfer
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        setIsInstalled(true)
       }
-    };
+    })
+  })
+  /*   useEffect(() => {
+      if (ready && authenticated) router.push("/home");
+    }, [ready, authenticated]); */
 
-    init();
-  }, []);
-
-  // Web3Auth login
-  const login = async () => {
-    try {
-      console.log('logging in');
-      setLoading(true);
-      const web3authProvider = await web3auth.connectTo(
-        WALLET_ADAPTERS.OPENLOGIN,
-        {
-          loginProvider: 'google',
-        }
-      );
-
-      if (web3auth.connected) {
-        console.log('logged in, calling setup');
-        setUp();
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const setReduxLogin = async () => {
-    try {
-      console.log('setting login');
-      dispatch(setLogin(true));
-      console.log('login set');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  // ZeroDev SDK setup
-  const setUp = async () => {
-    try {
-      if (web3auth) {
-        let option = {
-          name: 'web3auth',
-          value: web3auth,
-        };
-        const kernal = await useCreateKernal(option);
-        setKernal(kernal);
-        if (kernal.account) {
-          setLoading(false);
-          setLoginSuccess(true);
-          setReduxKernal(kernal);
-          setTimeout(() => {
-            router.push('/home');
-          }, 2000);
-        } else {
-          setError('Error creating account');
-        }
-        console.log('My account:', kernal.account.address);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const setReduxKernal = async (kernal: any) => {
-    try {
-      console.log('setting kernal');
-      dispatch(setKernalClient(kernal));
-      dispatch(setAddress(kernal.account.address));
-      console.log('kernal set');
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const promptToInstall = async () => {
+    if (!installationPrompt) return
+    installationPrompt.prompt()
+    installationPrompt.userChoice.then((response: { outcome: string }) => {
+      setIsInstalled(response.outcome === 'accepted')
+    })
+  }
 
   return (
-    <section className=' h-screen w-screen p-4 text-white'>
-      <div className='min-h-1/2 flex w-full content-end justify-center p-4 text-center'>
-        <div className='w-full'>
-          <div className='mb-12'>
-            <h1 className='text-4xl font-bold'>Sign in</h1>
-          </div>
-          <button
-            onClick={login}
-            className='blurios w-full rounded-lg border border-slate-500 px-8 py-4 text-white transition-all duration-300 hover:opacity-80'
-          >
-            {!loading ? (
-              'Sign in with Google'
-            ) : (
-              <RotatingLines
-                visible={true}
-                height='24'
-                width='24'
-                color='grey'
-                strokeWidth='5'
-                animationDuration='1'
-              />
-            )}
-            {error && error}
-          </button>
-        </div>
-      </div>
+    <>
+      <Head>
+        <title>Privy PWA Template</title>
+      </Head>
+      <main>
+        <div className='flex h-screen w-screen flex-col items-center justify-center'>
 
-      <Link
-        href={{
-          pathname: '/home',
-        }}
-      >
-        Home
-      </Link>
-    </section>
-  );
+          <h2 className='my-4 text-xl font-semibold text-gray-800'>
+            Privy PWA Template
+          </h2>
+          <div className='mt-2 w-1/2'>
+            {!isInstalled && isAndroid ? (
+              <button
+                className='my-4 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm disabled:bg-indigo-400'
+                onClick={promptToInstall}
+              >
+                Install App
+              </button>
+            ) : (
+              <button
+                className='my-4 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm disabled:bg-indigo-400'
+                onClick={login}
+                // Always check that Privy is `ready` and the user is not `authenticated` before calling `login`
+                disabled={!ready || authenticated}
+              >
+                Login
+              </button>
+            )}
+          </div>
+        </div>
+      </main>
+    </>
+  )
 }
+
+export default Page

@@ -27,6 +27,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import ReactPullToRefresh from 'react-pull-to-refresh';
 
 import { ThemeProvider } from '@/app/components/theme-provider';
+
+import { ZeroDevProvider } from '@zerodev/privy';
+
+// privy
+import { PrivyProvider } from '@privy-io/react-auth'
+
+
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
 /* 
@@ -36,6 +43,7 @@ export const metadata: Metadata = {
   description: 'PWA application with Next 13',
   generator: 'Next.js',
   manifest: '/manifest.json',
+
   keywords: ['nextjs', 'nextjs13', 'next13', 'pwa', 'next-pwa'],
   themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
   authors: [
@@ -55,6 +63,7 @@ export const metadata: Metadata = {
 
 import bgimage from '../../public/images/Rectangle.png';
 import { LayoutGroup } from 'framer-motion';
+import { sepolia } from 'viem/chains';
 
 export default function RootLayout({
   auth,
@@ -82,6 +91,8 @@ export default function RootLayout({
 
 
  */
+  console.log("layout")
+  console.log("NEXT_PUBLIC_PRIVY_APP_ID", process.env.NEXT_PUBLIC_PRIVY_APP_ID as string)
 
   return (
     <html className='h-full overflow-auto font-sans'>
@@ -91,7 +102,7 @@ export default function RootLayout({
           content='width=device-width, initial-scale=1, maximum-scale=1'
         /> */}
         <title>Payments, Stephen Gordon</title>
-        
+
         <meta name='application-name' content='PWA App' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
         <meta name='apple-mobile-web-app-status-bar-style' content='default' />
@@ -150,7 +161,7 @@ export default function RootLayout({
           content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover'
         />
       </head>
-  
+
 
       <body>
         <ThemeProvider
@@ -158,15 +169,29 @@ export default function RootLayout({
           defaultTheme='dark'
           disableTransitionOnChange
         >
-          <Providers>
-            <PersistGate loading={null} persistor={persistor}>
-              <WagmiProvider config={config!}>
-                <QueryClientProvider client={queryClient}>
-                  <LayoutGroup>
-                    <div>{auth}</div>
-                    <div>{drawer}</div>
-                    {/*   <div>{transactionmodal}</div> */}
-                    {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
+
+          <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
+            <PrivyProvider
+              onSuccess={() => router.push("/home")}
+              appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
+              config={{
+                defaultChain: sepolia,
+                loginMethods: ['sms', 'apple', 'google'],
+                embeddedWallets: {
+                  createOnLogin: 'users-without-wallets',
+                  noPromptOnSignature: true
+                },
+              }}
+            >
+              <Providers>
+                <PersistGate loading={null} persistor={persistor}>
+                  <WagmiProvider config={config!}>
+                    <QueryClientProvider client={queryClient}>
+                      <LayoutGroup>
+                        <div>{auth}</div>
+                        <div>{drawer}</div>
+                        {/*   <div>{transactionmodal}</div> */}
+                        {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
                     <div
                       style={{
                         backgroundImage: `url(${bgimage.src})`,
@@ -176,19 +201,21 @@ export default function RootLayout({
                       }}
                     ></div>
                   </div> */}
-                    <main
-                      /*  style={{
-                        backgroundColor: 'rgba(16, 16, 18, 1)',
-                      }} */
-                      className=' h-screen w-screen text-gray-300'
-                    >
-                      {children}
-                    </main>
-                  </LayoutGroup>
-                </QueryClientProvider>
-              </WagmiProvider>
-            </PersistGate>
-          </Providers>
+                        <main
+                          /*  style={{
+                            backgroundColor: 'rgba(16, 16, 18, 1)',
+                          }} */
+                          className=' h-screen w-screen text-gray-300'
+                        >
+                          {children}
+                        </main>
+                      </LayoutGroup>
+                    </QueryClientProvider>
+                  </WagmiProvider>
+                </PersistGate>
+              </Providers>
+            </PrivyProvider>
+          </ZeroDevProvider>
         </ThemeProvider>
       </body>
     </html>

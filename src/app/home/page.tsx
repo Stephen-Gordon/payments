@@ -14,8 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
-//headless UI
-import { Tab } from '@headlessui/react';
 
 // react
 import { useEffect, useRef, useState } from 'react';
@@ -23,28 +21,49 @@ import { useEffect, useRef, useState } from 'react';
 // icon
 import { Send, QrCode } from 'lucide-react';
 
+// privy
+import { usePrivySmartAccount } from '@zerodev/privy';
+
 
 // lucide
 import { Menu } from 'lucide-react';
 
+//privy
+import { usePrivy } from '@privy-io/react-auth';
+//components
 import Notifications from '@/app/components/Notifications/Notifications';
 import SendNotification from '@/app/components/SendNotification/SendNotification';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 
+
 export default function Page() {
+
+
+
+  const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
+
+
+
   const kernalReduxState = useSelector(
     (state: RootState) => state.kernalClient.value
   );
 
   console.log('kernalReduxState', kernalReduxState);
 
-  useEffect(() => { }, []);
+  useEffect(() => {
+    console.log("hi")
+    console.log('user', user)
+    console.log('zeroDevReady', zeroDevReady)
+
+  }, [zeroDevReady]);
   const router = useRouter();
   // redux
   const dispatch = useDispatch();
+
   let decodedText =
     '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
   return (
+
     <div id='render' className=''>
 
       <div className='absolute right-4 top-4'>
@@ -58,6 +77,16 @@ export default function Page() {
           }}
         >
           <Menu />
+        </Link>
+        <Link
+          /* onClick={() => {
+            dispatch(setSheet(true));
+          }} */
+          href={{
+            pathname: '/embedded-wallet',
+          }}
+        >
+          go
         </Link>
       </div>
       <div className='blurios'>
