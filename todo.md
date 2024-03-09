@@ -23,3 +23,6 @@
 - transfer
 - contacts
 - home
+
+
+fix web3auth popup

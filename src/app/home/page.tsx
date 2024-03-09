@@ -29,6 +29,7 @@ import { Menu } from 'lucide-react';
 
 import Notifications from '@/app/components/Notifications/Notifications';
 import SendNotification from '@/app/components/SendNotification/SendNotification';
+import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 
 export default function Page() {
   const kernalReduxState = useSelector(
@@ -37,7 +38,7 @@ export default function Page() {
 
   console.log('kernalReduxState', kernalReduxState);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   const router = useRouter();
   // redux
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export default function Page() {
     '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
   return (
     <div id='render' className=''>
+
       <div className='absolute right-4 top-4'>
         <Link
           /* onClick={() => {
@@ -58,8 +60,11 @@ export default function Page() {
           <Menu />
         </Link>
       </div>
-      <div className='blurios pt-40'>
-        <div className='items-center p-2 text-center text-5xl'>
+      <div className='blurios'>
+        <div className='absolute -z-50 '>
+          <BackgroundGradientAnimation />
+        </div>
+        <div className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'>
           <Balance />
         </div>
 
@@ -80,7 +85,7 @@ export default function Page() {
                   </div>
                   <div className='px-2'></div>
                   <div>
-                    <Send size={20}  />
+                    <Send size={20} />
                   </div>
                 </div>
               </Button>
@@ -103,7 +108,7 @@ export default function Page() {
                   </div>
                   <div className='px-2'></div>
                   <div>
-                    <QrCode size={22}  />
+                    <QrCode size={22} />
                   </div>
                 </div>
               </Button>
@@ -129,17 +134,17 @@ export default function Page() {
               <Tab.Panel>Content 2</Tab.Panel>
             </Tab.Panels>
           </Tab.Group> */}
-         
-            {/*   <div className='mb-4 flex justify-between'>
+
+          {/*   <div className='mb-4 flex justify-between'>
                 
                   <div className='text-lg'>Activity</div>
                
               </div>  */}
-           
-           
-                <Activity />
-            
-         
+
+
+          <Activity />
+
+
         </div>
       </div>
     </div>
