@@ -1,30 +1,22 @@
 'use client'
+import { setAddress } from '@/GlobalRedux/Features/address/addressSlice'
 import { useLogin, usePrivy } from '@privy-io/react-auth'
+import { usePrivySmartAccount } from '@zerodev/privy'
 import Head from 'next/head'
 import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { isAndroid } from 'react-device-detect'
+import { useDispatch } from 'react-redux'
 
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false)
   const [installationPrompt, setInstallationPrompt] = useState<any>()
   const router = useRouter()
-  const { ready, authenticated, login } = usePrivy()
-  /*   const { login } = useLogin({
-      // Set up an `onComplete` callback to run when `login` completes
-      onComplete(user, isNewUser, wasPreviouslyAuthenticated) {
-        console.log('🔑 ✅ Login success', {
-          user,
-          isNewUser,
-          wasPreviouslyAuthenticated,
-        })
-        router.push('/home')
-      },
-      // Set up an `onError` callback to run when there is a `login` error
-      onError(error) {
-        console.log('🔑 🚨 Login error', { error })
-      },
-    }) */
+  const { ready, authenticated, login, zeroDevReady, user,  } = usePrivySmartAccount()
+ 
+  // redux
+  const dispatch = useDispatch()
+
 
   useEffect(() => {
     // Helps you prompt your users to install your PWA
@@ -48,9 +40,16 @@ const Page = () => {
       }
     })
   })
-  /*   useEffect(() => {
-      if (ready && authenticated) router.push("/home");
-    }, [ready, authenticated]); */
+     useEffect(() => {
+      if (zeroDevReady && authenticated && user) {
+        console.log("login user",user)
+        // set user address
+        dispatch(setAddress(user?.wallet?.address ?? ''));        
+
+        // route home
+        router.push("/home");
+      }
+    }, [authenticated, zeroDevReady, user]); 
 
   const promptToInstall = async () => {
     if (!installationPrompt) return

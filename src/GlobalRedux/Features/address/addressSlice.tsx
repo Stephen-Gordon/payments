@@ -3,7 +3,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface AddressState {
-  value: string;
+  value: string | undefined;
 }
 
 const initialState: AddressState = {

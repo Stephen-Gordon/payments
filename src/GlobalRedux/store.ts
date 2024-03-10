@@ -17,7 +17,7 @@ export type RootState = {
     value: boolean;
   };
   address: {
-    value: string;
+    value: string | undefined;
   };
   balance: {
     value: string;
