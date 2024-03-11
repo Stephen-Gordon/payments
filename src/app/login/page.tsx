@@ -42,7 +42,7 @@ const Page = () => {
   })
      useEffect(() => {
       if (zeroDevReady && authenticated && user) {
-        console.log("login user",user)
+        
         // set user address
         dispatch(setAddress(user?.wallet?.address ?? ''));        
 
