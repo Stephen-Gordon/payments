@@ -31,8 +31,7 @@ import { ThemeProvider } from '@/app/components/theme-provider';
 import { ZeroDevProvider } from '@zerodev/privy';
 
 // privy
-import { PrivyProvider } from '@privy-io/react-auth'
-
+import { PrivyProvider } from '@privy-io/react-auth';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -91,8 +90,11 @@ export default function RootLayout({
 
 
  */
-  console.log("layout")
-  console.log("NEXT_PUBLIC_PRIVY_APP_ID", process.env.NEXT_PUBLIC_PRIVY_APP_ID as string)
+  console.log('layout');
+  console.log(
+    'NEXT_PUBLIC_PRIVY_APP_ID',
+    process.env.NEXT_PUBLIC_PRIVY_APP_ID as string
+  );
 
   return (
     <html className='h-full overflow-auto font-sans'>
@@ -162,24 +164,22 @@ export default function RootLayout({
         />
       </head>
 
-
       <body>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
           disableTransitionOnChange
         >
-
           <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
             <PrivyProvider
-              onSuccess={() => router.push("/home")}
+              onSuccess={() => router.push('/home')}
               appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
               config={{
                 defaultChain: sepolia,
                 loginMethods: ['sms', 'apple', 'google'],
                 embeddedWallets: {
                   createOnLogin: 'users-without-wallets',
-                  noPromptOnSignature: true
+                  noPromptOnSignature: true,
                 },
               }}
             >

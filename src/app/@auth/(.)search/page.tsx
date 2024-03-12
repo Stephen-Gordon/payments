@@ -23,14 +23,19 @@ import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 // drawer
 import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
 
+//viem
+import { isAddress } from 'viem';
 
-// icons 
+// icons
 import { QrCode } from 'lucide-react';
+import { X } from 'lucide-react';
+
 import RecentPayee from '@/app/components/RecentPayee.tsx/RecentPayee';
+// motion
+import { AnimatePresence, motion } from 'framer-motion';
+//
 export default function Page() {
-  const [payee, setPayee] = useState<string>(
-    ''
-  );
+  const [payee, setPayee] = useState<string>('');
   const [scanner, setScanner] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -39,12 +44,15 @@ export default function Page() {
   // router
   const router = useRouter();
 
+  const isTrue = isAddress(payee);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     // Add logic here to listen to the input value
     console.log('Input value:', payee);
-  }, [payee]);
+    console.log('isTrue:', isTrue);
+  }, [payee, isTrue]);
 
   return (
     <>
@@ -53,75 +61,127 @@ export default function Page() {
 
         <DrawerHeader>
           <DrawerTitle className='grid grid-cols-3 items-center'>
-            <div
-              onClick={() => {
-                router.back();
-                dispatch(setSheet(false));
-              }}
-            >
-              <BackButton />
+            <div>
+              <BackButton
+                onClick={() => {
+                  router.back();
+                  dispatch(setSheet(false));
+                }}
+              />
             </div>
             <p className='text-center'>Send</p>
-            <div className='ml-auto'>
-              <div></div>
-            </div>
+            <div className='ml-auto'></div>
           </DrawerTitle>
         </DrawerHeader>
 
         <div className='flex px-4'>
-        
           <form className='w-full'>
-            <div className='flex w-full content-center'>
-            <input
-
-              type='text'
-              onChange={(e) => setPayee(e.target.value)}
-              className='border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-s-lg border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50'
-              placeholder='Search an Address'
-            />
-            <span className='rounded-s-0 inline-flex items-center rounded-e-md border bg-transparent px-3  py-1 text-sm '>
-              <Button type='submit' size={'sm'} variant={'secondary'}>
-                Paste
-              </Button>
-            </span>
-          </div>
-          </form>
-
-        
-        </div>
-        {/* Scan a Qr code */}
-        <div
-          onClick={() => {
-            setIsOpen(true);
-            setScanner(true);
-          }}
-          className='mt-4 space-y-8 px-4'
-        >
-          <div className='flex w-full items-center '>
-            <QrCode className='h-7' />
-            <div className='ml-4 space-y-1'>
-              <div className='text-sm font-medium leading-none'>
-                Scan a Qr Code
+            <div className='relative flex w-full content-center'>
+              <Input
+                onChange={(e) => setPayee(e.target.value)}
+                value={payee}
+                id='search-input'
+                className='h-9 w-full'
+                placeholder='Search an Address'
+                type='text'
+              />
+              <div className='pointer-events-none absolute right-0 top-0 flex w-full items-center justify-end '>
+                <AnimatePresence>
+                  {payee !== '' && (
+                    <motion.div
+                      key='clear'
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setPayee('')}
+                      className=''
+                    >
+                      <X className='h-8' />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <p className='text-muted-foreground text-sm'>
-                Tap to scan an address
-              </p>
             </div>
-          </div>
+          </form>
         </div>
-        <div className='w-full p-4'>
-          <Link
-            href={{
-              pathname: '/send',
-              query: { payee: payee },
-            }}
-          >
-            <button className='bg-purple w-full rounded p-4'>Go</button>
-          </Link>
+
+        <div className='mt-4 space-y-8 px-4'>
+          {isTrue ? (
+            <>
+              {/* <div className='w-full p-4'>
+                <Link
+                  href={{
+                    pathname: '/send',
+                    query: { payee: payee },
+                  }}
+                >
+                  <button className='bg-purple w-full rounded p-4'>Go</button>
+                </Link>
+              </div> */}
+            </>
+          ) : (
+            <>
+              <AnimatePresence>
+                {payee != '' && (
+                  <div
+                    key='valid-address'
+                    className='text-muted-foreground text-sm'
+                  >
+                    Please enter a valid address
+                  </div>
+                )}
+              </AnimatePresence>
+            </>
+          )}
         </div>
-        <div id='#recent-activity' className='p-4 space-y-8' >
-          <RecentPayee/>
-        </div>
+
+        <AnimatePresence>
+          {payee == '' && (
+            <>
+              <motion.div
+                key='search-page'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='w-full'
+              >
+                <div className='w-full p-4'>
+                  <Link
+                    href={{
+                      pathname: '/send',
+                      query: { payee: payee },
+                    }}
+                  >
+                    <button className='bg-purple w-full rounded p-4'>Go</button>
+                  </Link>
+                </div>
+                {/* Scan a Qr code */}
+                <div
+                  onClick={() => {
+                    setIsOpen(true);
+                    setScanner(true);
+                  }}
+                  className='mt-4 space-y-8 px-4'
+                >
+                  <div className='flex w-full items-center '>
+                    <QrCode className='h-7' />
+                    <div className='ml-4 space-y-1'>
+                      <div className='text-sm font-medium leading-none'>
+                        Scan a Qr Code
+                      </div>
+                      <p className='text-muted-foreground text-sm'>
+                        Tap to scan an address
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div id='#recent-activity' className='space-y-8 p-4'>
+                  <RecentPayee />
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         {/* <div className='p-4'>
           <div className='text-lg text-gray-300'>Favorites</div>

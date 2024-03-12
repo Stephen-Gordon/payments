@@ -18,11 +18,11 @@ import { Card, CardContent, CardHeader } from '../ui/card';
 
 export default function RecentPayee(): JSX.Element {
   const [payees, setPayees] = useState<string[]>([]);
-  const address :string | undefined = useGetAddress();
+  const address: string | undefined = useGetAddress();
   useEffect(() => {
-    console.log("hi from recent payee")
+    console.log('hi from recent payee');
     const fetchRecentTransactions = async () => {
-       try {
+      try {
         const recentTransactions = await useGetRecentTransactions(address);
         console.log('recentTransactions in payee', recentTransactions);
         if (recentTransactions) {
@@ -38,7 +38,6 @@ export default function RecentPayee(): JSX.Element {
       } catch (error) {
         console.error('Error fetching recent transactions:', error);
       }
-      
     };
 
     fetchRecentTransactions();
@@ -46,18 +45,11 @@ export default function RecentPayee(): JSX.Element {
 
   return (
     <>
-     
-        
-      <div className='text-sm font-medium leading-none'>
-      Recent Transfers
-      </div>
-          {payees.map((payee) => (
-       
+      <div className='text-sm font-medium leading-none'>Recent Transfers</div>
+      {payees.map((payee) => (
         <div key={payee}>
-          <motion.div layoutId={payee}>
-            <Link
-              href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
-            >
+          <motion.div>
+            <Link href={{ pathname: `/payee`, query: { payeeAddress: payee } }}>
               <div className='space-y-8'>
                 <div className='flex w-full items-center '>
                   <Avatar className='h-9 w-9 bg-white'></Avatar>
@@ -75,8 +67,6 @@ export default function RecentPayee(): JSX.Element {
           </motion.div>
         </div>
       ))}
-    
-      
     </>
   );
 }
