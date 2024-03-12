@@ -46,11 +46,11 @@ export default function RecentPayee(): JSX.Element {
 
   return (
     <>
-     <Card>
-        <CardHeader>
-          <div className=''>Recent Transfers</div>
-        </CardHeader>
-        <CardContent>
+     
+        
+      <div className='text-sm font-medium leading-none'>
+      Recent Transfers
+      </div>
           {payees.map((payee) => (
        
         <div key={payee}>
@@ -75,8 +75,7 @@ export default function RecentPayee(): JSX.Element {
           </motion.div>
         </div>
       ))}
-        </CardContent>
-      </Card>
+    
       
     </>
   );
