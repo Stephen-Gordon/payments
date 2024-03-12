@@ -23,6 +23,9 @@ export default function Activity() {
 
   const dispatch = useDispatch();
 
+  // address
+  const address = useGetAddress();
+
   const transactionState = useSelector(
     (state: any) => state.transactions.value
   );
@@ -30,7 +33,7 @@ export default function Activity() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const recentTransactions = await useGetRecentTransactions();
+        const recentTransactions = await useGetRecentTransactions(address);
         setAllTransactions(recentTransactions?.transfers);
         dispatch(setTransactions(recentTransactions?.transfers));
       } catch (error) {

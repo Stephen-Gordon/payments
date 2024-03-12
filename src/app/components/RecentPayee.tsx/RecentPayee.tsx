@@ -13,24 +13,30 @@ import truncateEthAddress from 'truncate-eth-address';
 // components
 import { Avatar } from '@/app/components/ui/avatar';
 import { AssetTransfersResponse } from 'alchemy-sdk';
+import useGetAddress from '@/app/hooks/useGetAddress';
+import { Card, CardContent, CardHeader } from '../ui/card';
 
 export default function RecentPayee(): JSX.Element {
   const [payees, setPayees] = useState<string[]>([]);
-
+  const address :string | undefined = useGetAddress();
   useEffect(() => {
+    console.log("hi from recent payee")
     const fetchRecentTransactions = async () => {
-      const recentTransactions = await useGetRecentTransactions();
-      console.log('recentTransactions', recentTransactions);
-
-      
-
-      if (recentTransactions) {
-        const uniquePayees = recentTransactions.transfers
-          .map((transaction) => transaction.to || transaction.from)
-          .filter((value, index, self) => self.indexOf(value) === index);
-
-        setPayees(uniquePayees);
-        console.log("uniquePayees", uniquePayees)
+       try {
+        const recentTransactions = await useGetRecentTransactions(address);
+        console.log('recentTransactions in payee', recentTransactions);
+        if (recentTransactions) {
+          const uniquePayees = Array.from(
+            new Set(
+              recentTransactions.transfers.map(
+                (transaction) => transaction.to || transaction.from
+              )
+            )
+          );
+          setPayees(uniquePayees);
+        }
+      } catch (error) {
+        console.error('Error fetching recent transactions:', error);
       }
       
     };
@@ -40,7 +46,13 @@ export default function RecentPayee(): JSX.Element {
 
   return (
     <>
-      {payees.map((payee) => (
+     <Card>
+        <CardHeader>
+          <div className=''>Recent Transfers</div>
+        </CardHeader>
+        <CardContent>
+          {payees.map((payee) => (
+       
         <div key={payee}>
           <motion.div layoutId={payee}>
             <Link
@@ -63,6 +75,9 @@ export default function RecentPayee(): JSX.Element {
           </motion.div>
         </div>
       ))}
+        </CardContent>
+      </Card>
+      
     </>
   );
 }

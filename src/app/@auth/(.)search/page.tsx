@@ -69,14 +69,7 @@ export default function Page() {
         </DrawerHeader>
 
         <div className='flex px-4'>
-          {/*   <input
-          
-            value={payee}
-            onChange={(e) => setPayee(e.target.value)}
-            className=' w-full rounded-lg border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
-            placeholder='Search an Address'
-            required
-          /> */}
+        
           <div className='flex w-full content-center'>
             <input
               type='text'
@@ -91,22 +84,7 @@ export default function Page() {
             </span>
           </div>
 
-          {/*  <div className='flex w-full max-w-sm items-center space-x-2'>
-            <Input
-              value={payee}
-              onChange={(e) => setPayee(e.target.value)}
-              type='email'
-              placeholder='Email'
-            />
-
-            <Button type='submit'>Subscribe</Button>
-          </div> */}
-          {/*  <div
-            
-            className='rounded-lg border border-gray-600 bg-gray-700 p-4 text-white '
-          >
-            Scan
-          </div> */}
+        
         </div>
         {/* Scan a Qr code */}
         <div
@@ -142,33 +120,33 @@ export default function Page() {
           <RecentPayee/>
         </div>
 
-        <div className='p-4'>
+        {/* <div className='p-4'>
           <div className='text-lg text-gray-300'>Favorites</div>
           <div className='mb-4 flex content-center justify-between text-base'>
             <div className='flex items-center'>
               <div className='relative grid items-center justify-center'>
                 <div className='h-12 w-12 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 '>
-                  {/* Circle */}
+              
                 </div>
               </div>
               <div className='ml-2 text-gray-300'>John</div>
             </div>
 
-            {/*  {transaction.blockNum} */}
+          
           </div>
           <div className='mb-4 flex content-center justify-between text-base'>
             <div className='flex items-center'>
               <div className='relative grid items-center justify-center'>
                 <div className='h-12 w-12 rounded-full bg-gradient-to-r from-pink-500 to-orange-500 '>
-                  {/* Circle */}
+             
                 </div>
               </div>
               <div className='ml-2 text-gray-300'>Joe</div>
             </div>
 
-            {/*  {transaction.blockNum} */}
+         
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

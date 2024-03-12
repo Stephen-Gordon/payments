@@ -41,10 +41,10 @@ const Page = () => {
     })
   })
      useEffect(() => {
-      if (zeroDevReady && authenticated && user) {
+      if (zeroDevReady && authenticated && user.wallet.address) {
         
         // set user address
-        dispatch(setAddress(user?.wallet?.address ?? ''));        
+        dispatch(setAddress(user?.wallet?.address));        
 
         // route home
         router.push("/home");

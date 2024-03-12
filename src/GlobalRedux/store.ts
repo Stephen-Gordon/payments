@@ -20,7 +20,7 @@ export type RootState = {
     value: string | undefined;
   };
   balance: {
-    value: string;
+    value: string | undefined;
   };
   search: {
     value: boolean;
@@ -41,7 +41,7 @@ const persistConfig = {
 };
 
 // Combine reducers with RootState type
-const rootReducer = combineReducers<RootState>({
+const rootReducer = combineReducers<any>({
   login: loginReducer,
   address: addressReducer,
   search: searchReducer,

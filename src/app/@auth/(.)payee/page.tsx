@@ -57,12 +57,12 @@ export default function Page() {
 
   const end = useRef<any>(null);
 
-
+  
   // effect
   useEffect(() => {
     end.current.scrollIntoView({})
     const fetchRecentTransactions = async () => {
-      const recentTransactions = await useGetRecentTransactions();
+      const recentTransactions = await useGetRecentTransactions(address);
 
       if (recentTransactions) {
         // Filter transactions where either to or from address matches payeeAddress

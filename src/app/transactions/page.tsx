@@ -9,11 +9,16 @@ import { motion } from 'framer-motion';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
+import useGetAddress from '../hooks/useGetAddress';
 export default function Page() {
   const [transactions, setTxs] = useState<any>([]);
   const [allTransactions, setAllTransactions] = useState<any>([]);
 
   const dispatch = useDispatch();
+
+  // address
+  const address = useGetAddress();
+  
 
   const transactionState = useSelector(
     (state: any) => state.transactions.value
@@ -22,7 +27,7 @@ export default function Page() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const recentTransactions = await useGetRecentTransactions();
+        const recentTransactions = await useGetRecentTransactions(address);
         setAllTransactions(recentTransactions?.transfers);
         dispatch(setTransactions(recentTransactions?.transfers));
       } catch (error) {

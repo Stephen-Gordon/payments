@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
 export default function Balance() {
   const dispatch = useDispatch();
+  
   const addressState = useSelector((state: RootState) => state.address.value);
   console.log('addressState in balance', addressState);
   const balanceState = useSelector((state: RootState) => state.balance.value);

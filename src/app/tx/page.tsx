@@ -75,7 +75,7 @@ export default function Page() {
                     onClick={() => {}}
                     href={{
                       pathname: '/send',
-                      query: { address: transaction.to },
+                      query: { address: transaction.from },
                     }}
                   >
                     <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>

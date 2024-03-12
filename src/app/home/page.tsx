@@ -34,6 +34,7 @@ import { usePrivy } from '@privy-io/react-auth';
 import Notifications from '@/app/components/Notifications/Notifications';
 import SendNotification from '@/app/components/SendNotification/SendNotification';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
+import useGetAddress from '../hooks/useGetAddress';
 
 
 export default function Page() {
@@ -48,7 +49,6 @@ export default function Page() {
     (state: RootState) => state.kernalClient.value
   );
 
-  console.log('kernalReduxState', kernalReduxState);
 
   useEffect(() => {
     console.log("hi")
@@ -59,6 +59,7 @@ export default function Page() {
   const router = useRouter();
   // redux
   const dispatch = useDispatch();
+    const address = useGetAddress();
 
   let decodedText =
     '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
@@ -95,6 +96,7 @@ export default function Page() {
         </div>
         <div className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'>
           <Balance />
+          { address }
         </div>
 
         <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
