@@ -70,19 +70,22 @@ export default function Page() {
 
         <div className='flex px-4'>
         
-          <div className='flex w-full content-center'>
+          <form className='w-full'>
+            <div className='flex w-full content-center'>
             <input
+
               type='text'
               onChange={(e) => setPayee(e.target.value)}
               className='border-input placeholder:text-muted-foreground focus-visible:ring-ring flex h-9 w-full rounded-s-lg border bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 disabled:cursor-not-allowed disabled:opacity-50'
               placeholder='Search an Address'
             />
             <span className='rounded-s-0 inline-flex items-center rounded-e-md border bg-transparent px-3  py-1 text-sm '>
-              <Button size={'sm'} variant={'secondary'}>
+              <Button type='submit' size={'sm'} variant={'secondary'}>
                 Paste
               </Button>
             </span>
           </div>
+          </form>
 
         
         </div>
