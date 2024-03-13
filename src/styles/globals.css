@@ -5,6 +5,11 @@
 /* * {
   touch-action: none;
 } */
+
+* {
+  touch-action: pan-y;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

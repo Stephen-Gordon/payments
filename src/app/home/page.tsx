@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
-
 // react
 import { useEffect, useRef, useState } from 'react';
 
@@ -24,49 +23,35 @@ import { Send, QrCode } from 'lucide-react';
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
 
-
 // lucide
 import { Menu } from 'lucide-react';
 
-//privy
-import { usePrivy } from '@privy-io/react-auth';
 //components
-import Notifications from '@/app/components/Notifications/Notifications';
-import SendNotification from '@/app/components/SendNotification/SendNotification';
+
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 import useGetAddress from '../hooks/useGetAddress';
 
-
 export default function Page() {
-
-
-
+  // privy
   const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
 
-
-
-  const kernalReduxState = useSelector(
-    (state: RootState) => state.kernalClient.value
-  );
-
+  // next
+  const router = useRouter();
 
   useEffect(() => {
-    console.log("hi")
-    console.log('user', user)
-    console.log('zeroDevReady', zeroDevReady)
-
+    console.log('hi');
+    console.log('user', user);
+    console.log('zeroDevReady', zeroDevReady);
   }, [zeroDevReady]);
-  const router = useRouter();
+
   // redux
   const dispatch = useDispatch();
-    const address = useGetAddress();
 
-  let decodedText =
-    '0x819a46d27ddeb3ac2bde6edea1b31f452ab4517ebeace7df2aee4399641ab4ed';
+  // hooks
+  const address = useGetAddress();
+
   return (
-
     <div id='render' className=''>
-
       <div className='absolute right-4 top-4'>
         <Link
           /* onClick={() => {
@@ -96,7 +81,7 @@ export default function Page() {
         </div>
         <div className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'>
           <Balance />
-          { address }
+          {address}
         </div>
 
         <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
@@ -146,7 +131,7 @@ export default function Page() {
             </Link>
           </div>
         </div>
-        <div className='bg-accent mt-4 w-full rounded-t-xl p-4 min-h-[900px]'>
+        <div className='bg-accent mt-4 min-h-[900px] w-full rounded-t-xl p-4'>
           {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>
@@ -172,10 +157,7 @@ export default function Page() {
                
               </div>  */}
 
-
           <Activity />
-
-
         </div>
       </div>
     </div>

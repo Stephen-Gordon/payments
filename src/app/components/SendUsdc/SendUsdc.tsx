@@ -94,7 +94,7 @@ export default function SendUsdc() {
         setTimeout(() => {
           dispatch(setSheet(false));
           /* router.push(`/transaction?hash=${txnHash}`); */
-          router.push('/home');
+          const balance = router.push('/home');
         }, 1000);
       }
     } catch (error) {
