@@ -80,7 +80,7 @@ export default function Page() {
                 onChange={(e) => setPayee(e.target.value)}
                 value={payee}
                 id='search-input relative'
-                className='h-9 w-full'
+                className='h-10 w-full text-lg'
                 placeholder='Search an Address'
                 type='text'
               />
