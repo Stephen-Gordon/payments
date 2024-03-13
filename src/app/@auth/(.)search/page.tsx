@@ -90,7 +90,10 @@ export default function Page() {
                     <motion.div
                       key='clear'
                       initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
+                      animate={{
+                        opacity: 1,
+                        transition: { duration: 0.4, ease: 'easeInOut' },
+                      }}
                       exit={{ opacity: 0 }}
                       className='pr-4 '
                     >
@@ -113,7 +116,10 @@ export default function Page() {
                 <motion.div
                   key='send-button'
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.4, ease: 'easeInOut' },
+                  }}
                   exit={{ opacity: 0 }}
                   className='w-full'
                 >
@@ -144,7 +150,10 @@ export default function Page() {
                 <motion.div
                   key='vaild-address'
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { duration: 0.4, ease: 'easeInOut' },
+                  }}
                   exit={{ opacity: 0 }}
                   className='w-full'
                 >
@@ -168,7 +177,10 @@ export default function Page() {
               <motion.div
                 key='search-page'
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.4, ease: 'easeInOut' },
+                }}
                 exit={{ opacity: 0 }}
                 className='w-full'
               >

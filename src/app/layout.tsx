@@ -205,7 +205,8 @@ export default function RootLayout({
                           /*  style={{
                             backgroundColor: 'rgba(16, 16, 18, 1)',
                           }} */
-                          className=' h-screen w-screen text-gray-300'
+                          vaul-drawer-wrapper=''
+                          className='min-h-[100vh] text-gray-300'
                         >
                           {children}
                         </main>

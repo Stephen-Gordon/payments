@@ -16,7 +16,6 @@ import {
 } from '@/app/components/ui/drawer';
 import { useState } from 'react';
 
-
 const SheetLayout = ({ children }) => {
   const isOpen = useSelector((state) => state.sheet.value);
 
@@ -41,12 +40,14 @@ const SheetLayout = ({ children }) => {
         <Sheet.Backdrop onTap={() => dispatch(setSheet(false))} />
       </Sheet> */}
       <Drawer
+        shouldScaleBackground={true}
         onClose={() => {
           dispatch(setSheet(false));
         }}
         open={isOpen}
       >
-        <DrawerContent className='h-auto bg-clip-padding backdrop-blur-sm backdrop-filter '>
+        <DrawerContent /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
+        >
           {children}
         </DrawerContent>
       </Drawer>
