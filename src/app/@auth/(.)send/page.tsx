@@ -36,7 +36,10 @@ export default function Page() {
             </div>
             <p className='text-center'>{payee && truncateEthAddress(payee)}</p>
             <div className='ml-auto'>
-              <Link className="w-auto h-auto" href={{ pathname: `/send`, query: { payee: payee } }}>
+              <Link
+                className='h-auto w-auto'
+                href={{ pathname: `/send`, query: { payee: payee } }}
+              >
                 <Avatar className='h-9 w-9 bg-white'></Avatar>
               </Link>
             </div>
@@ -44,7 +47,7 @@ export default function Page() {
         </DrawerHeader>
       </div>
 
-      <div className='mt-10'>
+      <div className=''>
         <SendUsdc />
       </div>
     </>

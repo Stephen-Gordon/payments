@@ -3,7 +3,11 @@
 // Next
 import { useRouter, useSearchParams } from 'next/navigation';
 // drawer
-import { DrawerFooter, DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
+import {
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/app/components/ui/drawer';
 //avatar
 import { Avatar } from '@/app/components/ui/avatar';
 // truc address
@@ -11,13 +15,13 @@ import truncateEthAddress from 'truncate-eth-address';
 // backbutton
 import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 // react
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 // hooks
 import useGetRecentTransactions from '@/app/hooks/useGetRecentTransactions';
 import useGetAddress from '@/app/hooks/useGetAddress';
 
 // motion
-import {motion} from 'framer-motion';
+import { motion } from 'framer-motion';
 // redux
 import { useDispatch } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
@@ -30,7 +34,7 @@ import Link from 'next/link';
 
 // date
 //import { format, parseISO } from 'date-fns';
-import {  format, parseISO, set } from 'date-fns';
+import { format, parseISO, set } from 'date-fns';
 interface Transaction {
   to: string;
   from: string;
@@ -38,29 +42,26 @@ interface Transaction {
   metadata: {
     blockTimestamp: string;
   };
-
 }
-
 
 export default function Page() {
   const searchParams = useSearchParams();
   let payeeAddress = searchParams.get('payeeAddress');
-  
+
   // hooks
   const dispatch = useDispatch();
   const address = useGetAddress();
   const router = useRouter();
 
   // state
-  const [ transactions, setTransactions ] = useState<Transaction[]>([]);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
 
   const end = useRef<any>(null);
 
-  
   // effect
   useEffect(() => {
-    end.current.scrollIntoView({})
+    end.current.scrollIntoView({});
     const fetchRecentTransactions = async () => {
       const recentTransactions = await useGetRecentTransactions(address);
 
@@ -100,17 +101,11 @@ export default function Page() {
         );
         setGroupedTransactions(arrayOfMonthArrays);
         console.log('groupedTransactionsByMonth', arrayOfMonthArrays);
-
       }
-
-
     };
 
     fetchRecentTransactions();
   }, [payeeAddress]);
-
-  
-
 
   return (
     <>
@@ -135,7 +130,10 @@ export default function Page() {
       <div className='overflow-auto p-4'>
         {groupedTransactions.map((month, i) => (
           <div key={i} className='grid'>
-            <div style={{marginBottom: '32px'}} className='w-full flex justify-center'>
+            <div
+              style={{ marginBottom: '32px' }}
+              className='flex w-full justify-center'
+            >
               <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
                 {month.monthName}
               </p>
@@ -177,9 +175,6 @@ export default function Page() {
       <DrawerFooter>
         <div>
           <Link
-            onClick={() => {
-              dispatch(setSheet(true));
-            }}
             href={{
               pathname: '/send',
               query: { payee: payeeAddress },

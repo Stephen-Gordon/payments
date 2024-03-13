@@ -1,37 +1,29 @@
 'use client';
 // Viem
-import { encodeFunctionData, parseUnits, erc20Abi, parseEther } from 'viem';
+import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Next
 import { useSearchParams } from 'next/navigation';
 
-// Loading
-import { RotatingLines } from 'react-loader-spinner';
-
 // React
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import truncateEthAddress from 'truncate-eth-address';
 import Success from '@/app/components/Success/Success';
 import { useRouter } from 'next/navigation';
 
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
-import useCreateKernal from '@/app/utils/useCreateKernal';
-import secureLocalStorage from 'react-secure-storage';
-
-// Import restapi for function calls
-import { PushAPI, CONSTANTS } from '@pushprotocol/restapi';
 
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
+import KeyPad from '../KeyPad/KeyPad';
 
 export default function SendUsdc() {
-
   // privy
   const { zeroDevReady, user, sendTransaction } = usePrivySmartAccount();
 
@@ -40,9 +32,8 @@ export default function SendUsdc() {
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [kernal, setKernal] = useState<any>(null);
-
-  /* const kernal = useSelector((state: RootState) => state.kernalClient.value); */
+  // ref
+  const inputRef: any = useRef(null);
 
   // next router
   const router = useRouter();
@@ -59,13 +50,14 @@ export default function SendUsdc() {
   const usdc = '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8';
 
   useEffect(() => {
-    console.log("user in send page ", user)
+    //inputRef.current.focus();
+    console.log('USDC amount', usdcAmount);
     if (zeroDevReady) {
-      console.log("ready to send")
+      console.log('ready to send');
     } else {
-      console.log("not ready to send")
+      console.log('not ready to send');
     }
-  }, [zeroDevReady]);
+  }, [usdcAmount]);
 
   // Send transaction function
   const sendTx = async () => {
@@ -73,6 +65,14 @@ export default function SendUsdc() {
       // Encode the data with Viem Function
       // Requires the abi of the contract, the function name, and the arguments address and amount
       // @ts-ignore
+      if (!zeroDevReady) {
+        console.log('not ready to send');
+        return;
+      }
+      if (usdcAmount == '' || usdcAmount == '0') {
+        console.log('amount is 0');
+        return;
+      }
       const encoded: any = encodeFunctionData({
         // @ts-ignore
         abi: erc20Abi,
@@ -97,7 +97,6 @@ export default function SendUsdc() {
           router.push('/home');
         }, 1000);
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -105,37 +104,23 @@ export default function SendUsdc() {
 
   return (
     <>
-      <div className='grid p-4 text-white'>
-        <div className='w-full items-center'>
-          <Input
-            className='focus-visible:ring-ring w-full border-0 text-center text-5xl focus-visible:outline-none focus-visible:ring-0 '
-            placeholder='$0'
-            type='text'
-            pattern='\d+((\.|,)\d+)?'
-            onChange={(val) => {
-              setUsdcAmount(
-                val.target.value.replace(/[^0-9.,]/g, '').replace(/,/g, '.')
-              );
-            }}
-          />
-        </div>
-
-        <Button onClick={() => sendTx()}>Send</Button>
+      <div className='grid content-start justify-center p-4 text-white'>
+        <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
+        <Button
+          disabled={usdcAmount == '0' || usdcAmount == '' || usdcAmount == '.'}
+          className={`mt-4`}
+          onClick={() => sendTx()}
+        >
+          Send
+        </Button>
       </div>
+
       {transactionStatus ||
         (loading && (
           <>
             <Success transactionStatus={transactionStatus} loading={loading} />
           </>
         ))}
-      <button
-        onClick={() => {
-          dispatch(setSheet(false));
-          router.push('/home');
-        }}
-      >
-        close
-      </button>
     </>
   );
 }

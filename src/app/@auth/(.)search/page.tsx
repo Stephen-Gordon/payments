@@ -27,8 +27,7 @@ import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
 import { isAddress } from 'viem';
 
 // icons
-import { QrCode } from 'lucide-react';
-import { X } from 'lucide-react';
+import { QrCode, X, Send } from 'lucide-react';
 
 import RecentPayee from '@/app/components/RecentPayee.tsx/RecentPayee';
 // motion
@@ -76,16 +75,16 @@ export default function Page() {
 
         <div className='flex px-4'>
           <form className='w-full'>
-            <div className='relative flex w-full content-center'>
+            <div className='relative grid w-full content-center'>
               <Input
                 onChange={(e) => setPayee(e.target.value)}
                 value={payee}
-                id='search-input'
+                id='search-input relative'
                 className='h-9 w-full'
                 placeholder='Search an Address'
                 type='text'
               />
-              <div className='pointer-events-none absolute right-0 top-0 flex w-full items-center justify-end '>
+              <div className=' absolute right-0 z-50 flex w-auto justify-end '>
                 <AnimatePresence>
                   {payee !== '' && (
                     <motion.div
@@ -93,10 +92,12 @@ export default function Page() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      onClick={() => setPayee('')}
-                      className=''
+                      className='pr-4 '
                     >
-                      <X className='h-8' />
+                      <X
+                        className='pointer-events-auto grid h-8 w-8 content-center items-center'
+                        onClick={() => setPayee('')}
+                      />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -108,28 +109,54 @@ export default function Page() {
         <div className='mt-4 space-y-8 px-4'>
           {isTrue ? (
             <>
-              {/* <div className='w-full p-4'>
-                <Link
-                  href={{
-                    pathname: '/send',
-                    query: { payee: payee },
-                  }}
+              <AnimatePresence>
+                <motion.div
+                  key='send-button'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className='w-full'
                 >
-                  <button className='bg-purple w-full rounded p-4'>Go</button>
-                </Link>
-              </div> */}
+                  <Link
+                    href={{
+                      pathname: '/send',
+                      query: { payee: payee },
+                    }}
+                  >
+                    <Button className='text-xl' size={'lg'} variant={'default'}>
+                      <div className='flex grid-cols-3 content-center items-center'>
+                        <div className='text-xl'>
+                          <div>Send</div>
+                        </div>
+                        <div className='px-2'></div>
+                        <div>
+                          <Send size={20} />
+                        </div>
+                      </div>
+                    </Button>
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
             </>
           ) : (
             <>
               <AnimatePresence>
-                {payee != '' && (
-                  <div
-                    key='valid-address'
-                    className='text-muted-foreground text-sm'
-                  >
-                    Please enter a valid address
-                  </div>
-                )}
+                <motion.div
+                  key='vaild-address'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className='w-full'
+                >
+                  {payee != '' && (
+                    <div
+                      key='valid-address'
+                      className='text-muted-foreground text-sm'
+                    >
+                      Please enter a valid address
+                    </div>
+                  )}
+                </motion.div>
               </AnimatePresence>
             </>
           )}
@@ -145,7 +172,7 @@ export default function Page() {
                 exit={{ opacity: 0 }}
                 className='w-full'
               >
-                <div className='w-full p-4'>
+                {/* <div className='w-full p-4'>
                   <Link
                     href={{
                       pathname: '/send',
@@ -154,7 +181,7 @@ export default function Page() {
                   >
                     <button className='bg-purple w-full rounded p-4'>Go</button>
                   </Link>
-                </div>
+                </div> */}
                 {/* Scan a Qr code */}
                 <div
                   onClick={() => {
