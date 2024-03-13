@@ -22,7 +22,7 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
 
   return (
     <div className='mx-auto flex max-w-xs flex-col justify-center'>
-      <div className='m-auto text-center text-8xl font-extralight tabular-nums text-white'>
+      <div className='m-auto text-center text-5xl font-extralight tabular-nums text-white'>
         ${usdcAmount || 0}
       </div>
       <div className='mt-9 flex flex-wrap justify-between gap-4'>

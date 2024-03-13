@@ -74,37 +74,41 @@ export default function Page() {
         </DrawerHeader>
 
         <div className='flex px-4'>
-          <form className='w-full'>
-            <div className='relative grid w-full content-center'>
-              <Input
+          <form className='bg-muted w-full rounded-xl p-2 '>
+            <div className='relative flex w-full content-center'>
+              <span className='text-muted-foreground m-auto flex content-center items-start pr-4 text-center text-sm font-bold'>
+                To
+              </span>
+              <input
+                autoFocus
                 onChange={(e) => setPayee(e.target.value)}
                 value={payee}
                 id='search-input relative'
-                className='h-10 w-full text-lg'
+                style={{ border: 'none', backgroundColor: 'transparent' }}
+                className='bg-default h-10 w-full truncate border-none  text-lg focus:border-none focus:bg-transparent focus:outline-none focus-visible:ring-0 active:bg-transparent '
                 placeholder='Search an Address'
                 type='text'
               />
-              <div className=' absolute right-0 z-50 flex w-auto justify-end '>
-                <AnimatePresence>
-                  {payee !== '' && (
-                    <motion.div
-                      key='clear'
-                      initial={{ opacity: 0 }}
-                      animate={{
-                        opacity: 1,
-                        transition: { duration: 0.4, ease: 'easeInOut' },
-                      }}
-                      exit={{ opacity: 0 }}
-                      className='pr-4 '
-                    >
-                      <X
-                        className='pointer-events-auto grid h-8 w-8 content-center items-center'
-                        onClick={() => setPayee('')}
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
+
+              <AnimatePresence>
+                {payee !== '' && (
+                  <motion.div
+                    key='clear'
+                    initial={{ opacity: 0 }}
+                    animate={{
+                      opacity: 1,
+                      transition: { duration: 0.4, ease: 'easeInOut' },
+                    }}
+                    exit={{ opacity: 0 }}
+                    className='ml-auto grid content-center justify-end'
+                  >
+                    <X
+                      className='text-muted-foreground h-8 w-8 '
+                      onClick={() => setPayee('')}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </form>
         </div>
