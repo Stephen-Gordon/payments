@@ -40,7 +40,12 @@ export default function Page() {
                 className='h-auto w-auto'
                 href={{ pathname: `/send`, query: { payee: payee } }}
               >
-                <Avatar className='h-9 w-9 bg-white'></Avatar>
+                <Link
+                  className='h-auto w-auto'
+                  href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
+                >
+                  <Avatar className='h-9 w-9 bg-white'></Avatar>
+                </Link>
               </Link>
             </div>
           </DrawerTitle>

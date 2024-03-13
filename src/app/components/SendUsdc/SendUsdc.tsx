@@ -19,6 +19,8 @@ import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 
+import { Send } from 'lucide-react';
+
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
 import KeyPad from '../KeyPad/KeyPad';
@@ -108,10 +110,18 @@ export default function SendUsdc() {
         <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
         <Button
           disabled={usdcAmount == '0' || usdcAmount == '' || usdcAmount == '.'}
-          className={`mt-4`}
+          className={`mt-4 h-12 text-3xl font-bold`}
           onClick={() => sendTx()}
         >
-          Send
+          <div className='flex grid-cols-3 content-center items-center'>
+            <div className=''>
+              <div>Send</div>
+            </div>
+            <div className='px-2'></div>
+            <div>
+              <Send size={20} />
+            </div>
+          </div>
         </Button>
       </div>
 

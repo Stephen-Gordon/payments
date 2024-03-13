@@ -64,9 +64,10 @@ export default function Page() {
     end.current.scrollIntoView({});
     const fetchRecentTransactions = async () => {
       const recentTransactions = await useGetRecentTransactions(address);
-
+      console.log('recentTransactions', recentTransactions);
       if (recentTransactions) {
         // Filter transactions where either to or from address matches payeeAddress
+        console.log('filtering with payeeAddress', payeeAddress);
         const filteredTransactions: Transaction[] =
           recentTransactions.transfers.filter(
             (transaction) => transaction.to || transaction.from == payeeAddress
@@ -127,73 +128,89 @@ export default function Page() {
         </DrawerTitle>
       </DrawerHeader>
 
-      <div className='overflow-auto p-4'>
-        {groupedTransactions.map((month, i) => (
-          <div key={i} className='grid'>
-            <div
-              style={{ marginBottom: '32px' }}
-              className='flex w-full justify-center'
-            >
-              <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
-                {month.monthName}
-              </p>
-            </div>
-            <div className='grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl text-white'>
-              {month.transactions.map((transaction, j) => (
-                <div key={j}>
-                  {transaction.to !== payeeAddress ? (
-                    <div
-                      style={{ marginBottom: '32px' }}
-                      className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
-                    >
-                      <p className='text-muted-foreground text-xs'>
-                        You Received
-                      </p>
-                      <div>${transaction.value}</div>
-                    </div>
-                  ) : (
-                    <div
-                      style={{ marginBottom: '32px' }}
-                      className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
-                    >
-                      <p className='text-muted-foreground text-xs'>You Sent</p>
-                      <div>${transaction.value}</div>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+      {!groupedTransactions && (
+        <div className='grid content-center justify-center'>
+          <div className='text-center text-white'>
+            <p>
+              You've got no transfers with {truncateEthAddress(payeeAddress)}
+            </p>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
-      <div className='overflow-auto p-4'>
-        {/* End Ref */}
-        <div ref={end}></div>
-      </div>
-
-      <DrawerFooter>
-        <div>
-          <Link
-            href={{
-              pathname: '/send',
-              query: { payee: payeeAddress },
-            }}
-          >
-            <Button className='text-xl' size={'lg'} variant={'default'}>
-              <div className='flex grid-cols-3 content-center items-center'>
-                <div className='text-xl'>
-                  <div>Send</div>
+      {groupedTransactions && (
+        <>
+          <div className='overflow-auto p-4'>
+            {groupedTransactions.map((month, i) => (
+              <div key={i} className='grid'>
+                <div
+                  style={{ marginBottom: '32px' }}
+                  className='flex w-full justify-center'
+                >
+                  <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
+                    {month.monthName}
+                  </p>
                 </div>
-                <div className='px-2'></div>
-                <div>
-                  <Send size={20} />
+                <div className='grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl text-white'>
+                  {month.transactions.map((transaction, j) => (
+                    <div key={j}>
+                      {transaction.to !== payeeAddress ? (
+                        <div
+                          style={{ marginBottom: '32px' }}
+                          className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
+                        >
+                          <p className='text-muted-foreground text-xs'>
+                            You Received
+                          </p>
+                          <div>${transaction.value}</div>
+                        </div>
+                      ) : (
+                        <div
+                          style={{ marginBottom: '32px' }}
+                          className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
+                        >
+                          <p className='text-muted-foreground text-xs'>
+                            You Sent
+                          </p>
+                          <div>${transaction.value}</div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
-            </Button>
-          </Link>
-        </div>
-      </DrawerFooter>
+            ))}
+          </div>
+
+          <div className='overflow-auto p-4'>
+            {/* End Ref */}
+            <div ref={end}></div>
+          </div>
+
+          <DrawerFooter className='bottom-4 '>
+            <div className=''>
+              <Link
+                href={{
+                  pathname: '/send',
+                  query: { payee: payeeAddress },
+                }}
+              >
+                <Button className='text-xl' size={'lg'} variant={'default'}>
+                  <div className='flex grid-cols-3 content-center items-center'>
+                    <div className='text-xl'>
+                      <div>Send</div>
+                    </div>
+                    <div className='px-2'></div>
+                    <div>
+                      <Send size={20} />
+                    </div>
+                  </div>
+                </Button>
+              </Link>
+            </div>
+          </DrawerFooter>
+        </>
+      )}
     </>
   );
 }
