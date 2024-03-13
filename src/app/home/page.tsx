@@ -81,7 +81,7 @@ export default function Page() {
         </div>
         <div className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'>
           <Balance />
-          {address}
+          {/*   {address} */}
         </div>
 
         <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
