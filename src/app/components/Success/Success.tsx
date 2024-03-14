@@ -49,7 +49,7 @@ export default function Success({
       getData();
 
       setTimeout(() => {
-        router.push(`/tx?hash=${transactionHash}`);
+        router.push(`/transaction?hash=${transactionHash}`);
       }, 500);
     }
   }, [transactionStatus]);
