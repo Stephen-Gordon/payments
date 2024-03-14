@@ -98,7 +98,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
         </div>
       </div>
       { loading == true || transactionStatus == true ? (<>
-      <Success transactionStatus={transactionStatus} loading={loading} transactionHash={}/>
+      <Success transactionStatus={transactionStatus} loading={loading} transactionHash={transactionHash}/>
       </>) : (
         <></>
       )}
