@@ -45,28 +45,49 @@ export default function RecentPayee(): JSX.Element {
 
   return (
     <>
-      <div className='text-sm font-medium leading-none'>Recent Transfers</div>
-      {payees.map((payee) => (
-        <div key={payee}>
-          <motion.div>
-            <Link href={{ pathname: `/payee`, query: { payeeAddress: payee } }}>
-              <div className='space-y-8'>
-                <div className='flex w-full items-center '>
-                  <Avatar className='h-9 w-9 bg-white'></Avatar>
-                  <div className='ml-4 space-y-1'>
-                    <motion.div
-                      layoutId={`${payee}`}
-                      className='text-sm font-medium leading-none'
-                    >
-                      {truncateEthAddress(payee)}
-                    </motion.div>
+      {payees.length > 0 ? (
+        <>
+          <div className='text-sm font-medium leading-none'>
+            Recent Transfers
+          </div>
+          {payees.map((payee) => (
+            <div key={payee}>
+              <motion.div>
+                <Link
+                  href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
+                >
+                  <div className='space-y-8'>
+                    <div className='flex w-full items-center '>
+                      <Avatar className='h-9 w-9 bg-white'></Avatar>
+                      <div className='ml-4 space-y-1'>
+                        <motion.div
+                          layoutId={`${payee}`}
+                          className='text-sm font-medium leading-none'
+                        >
+                          {truncateEthAddress(payee)}
+                        </motion.div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </Link>
+              </motion.div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <Card>
+            <CardHeader className='text-sm font-medium leading-none'>
+              Recent Transfers
+            </CardHeader>
+            <CardContent>
+              <div className='text-muted-foreground text-sm'>
+                No recent transfers
               </div>
-            </Link>
-          </motion.div>
-        </div>
-      ))}
+            </CardContent>
+          </Card>
+        </>
+      )}
     </>
   );
 }
