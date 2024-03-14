@@ -142,7 +142,7 @@ export default function Page() {
         </div>
       )}
 
-      {/*   {groupedTransactions && (
+      {groupedTransactions && (
         <>
           <div className='overflow-auto p-4'>
             {groupedTransactions.map((month, i) => (
@@ -187,7 +187,6 @@ export default function Page() {
           </div>
 
           <div className='overflow-auto p-4'>
-           
             <div ref={end}></div>
           </div>
 
@@ -214,7 +213,7 @@ export default function Page() {
             </div>
           </DrawerFooter>
         </>
-      )} */}
+      )}
     </>
   );
 }
