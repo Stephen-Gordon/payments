@@ -45,7 +45,6 @@ export default function Page() {
       {!isLoading && (
         <motion.div
           key={hash}
-          layoutId={hash}
           animate={{
             transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
