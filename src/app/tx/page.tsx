@@ -45,12 +45,11 @@ export default function Page() {
       {!isLoading && (
         <motion.div
           key={hash}
-          layoutId={hash}
-          
+          /* layoutId={hash} */
+
           animate={{
             transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
           }}
-          
           style={{
             width: '100vw',
             height: '100vh',
