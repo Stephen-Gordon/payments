@@ -26,12 +26,18 @@ import { Avatar } from '@/app/components/ui/avatar';
 // link
 import Link from 'next/link';
 import useSendUsdc from '@/app/hooks/useSendUsdc';
+import Success from '@/app/components/Success/Success';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setPendingTxSlice } from '@/GlobalRedux/Features/pendingTx/pendingTxSlice';
 interface ConfirmProps {
   showConfirm: boolean;
 }
 
 export default function Page({ showConfirm }: ConfirmProps) {
   const router = useRouter();
+
+  const dispatch = useDispatch();
 
   // get search params
   const searchParams = useSearchParams();
@@ -40,12 +46,14 @@ export default function Page({ showConfirm }: ConfirmProps) {
   const { sendUsdc, transactionStatus, loading, transactionHash } =
     useSendUsdc();
 
+
+
   const handleSend = () => {
     if (!payee || !amount) return;
     console.log('calling hook');
     sendUsdc(amount, payee);
+    
   };
-
   return (
     <>
       <DrawerHeader>
@@ -89,6 +97,12 @@ export default function Page({ showConfirm }: ConfirmProps) {
           {truncateEthAddress(payee)}
         </div>
       </div>
+      { loading == true || transactionStatus == true ? (<>
+      <Success transactionStatus={transactionStatus} loading={loading} transactionHash={transactionHash}/>
+      </>) : (
+        <></>
+      )}
+      
       <DrawerFooter>
         <Button
           onClick={handleSend}

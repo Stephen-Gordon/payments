@@ -128,13 +128,6 @@ export default function SendUsdc() {
           </Link>
         </DrawerFooter>
       </div>
-
-      {transactionStatus ||
-        (loading && (
-          <>
-            <Success transactionStatus={transactionStatus} loading={loading} />
-          </>
-        ))}
     </>
   );
 }

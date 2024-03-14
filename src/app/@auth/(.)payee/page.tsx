@@ -45,6 +45,7 @@ interface Transaction {
 }
 
 export default function Page() {
+  // get search params
   const searchParams = useSearchParams();
   let payeeAddress = searchParams.get('payeeAddress');
 
@@ -57,6 +58,7 @@ export default function Page() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
 
+  // refs
   const end = useRef<any>(null);
 
   // effect
@@ -108,6 +110,8 @@ export default function Page() {
     fetchRecentTransactions();
   }, [payeeAddress]);
 
+  useEffect(() => {}, []);
+
   return (
     <>
       <DrawerHeader>
@@ -138,7 +142,7 @@ export default function Page() {
         </div>
       )}
 
-      {groupedTransactions && (
+      {/*   {groupedTransactions && (
         <>
           <div className='overflow-auto p-4'>
             {groupedTransactions.map((month, i) => (
@@ -183,7 +187,7 @@ export default function Page() {
           </div>
 
           <div className='overflow-auto p-4'>
-            {/* End Ref */}
+           
             <div ref={end}></div>
           </div>
 
@@ -210,7 +214,7 @@ export default function Page() {
             </div>
           </DrawerFooter>
         </>
-      )}
+      )} */}
     </>
   );
 }
