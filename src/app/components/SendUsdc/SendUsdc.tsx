@@ -24,6 +24,7 @@ import { Send } from 'lucide-react';
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
 import KeyPad from '../KeyPad/KeyPad';
+import Link from 'next/link';
 
 export default function SendUsdc() {
   // privy
@@ -32,7 +33,7 @@ export default function SendUsdc() {
   const [usdcAmount, setUsdcAmount] = useState<string>('1');
 
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   // ref
   const inputRef: any = useRef(null);
@@ -108,21 +109,30 @@ export default function SendUsdc() {
     <>
       <div className='grid content-start justify-center p-4 text-white'>
         <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
-        <Button
-          disabled={usdcAmount == '0' || usdcAmount == '' || usdcAmount == '.'}
-          className={`mt-4 h-12 text-3xl font-bold`}
-          onClick={() => sendTx()}
+        <Link
+          href={{
+            pathname: '/confirm',
+            query: { payee: payee, amount: usdcAmount },
+          }}
         >
-          <div className='flex grid-cols-3 content-center items-center'>
-            <div className=''>
-              <div>Send</div>
+          <Button
+            disabled={
+              usdcAmount == '0' || usdcAmount == '' || usdcAmount == '.'
+            }
+            className={`mt-4 h-12 text-3xl font-bold`}
+            /* onClick={() => sendTx()} */
+          >
+            <div className='flex grid-cols-3 content-center items-center'>
+              <div className=''>
+                <div>Send</div>
+              </div>
+              <div className='px-2'></div>
+              <div>
+                <Send size={20} />
+              </div>
             </div>
-            <div className='px-2'></div>
-            <div>
-              <Send size={20} />
-            </div>
-          </div>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       {transactionStatus ||
