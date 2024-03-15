@@ -54,25 +54,15 @@ export default function Page() {
     <div id='render' className=''>
       <div className='absolute right-4 top-4'>
         <Link
-          /* onClick={() => {
+          /*   onClick={() => {
             dispatch(setSheet(true));
-          }} */
+          }}  */
           href={{
             pathname: '/menu',
             query: { isNavOpen: true },
           }}
         >
-          <Menu />
-        </Link>
-        <Link
-          /* onClick={() => {
-            dispatch(setSheet(true));
-          }} */
-          href={{
-            pathname: '/embedded-wallet',
-          }}
-        >
-          go
+          <Menu onClick={() => router.push(`/menu?isNavOpen=true`)} />
         </Link>
       </div>
       <div className='blurios'>

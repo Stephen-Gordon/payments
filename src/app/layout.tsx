@@ -33,35 +33,8 @@ import { ZeroDevProvider } from '@zerodev/privy';
 // privy
 import { PrivyProvider } from '@privy-io/react-auth';
 
-// !STARTERCONF Change these default meta
-// !STARTERCONF Look at @/constant/config to change them
-/* 
-
-export const metadata: Metadata = {
-  title: 'PWA with Next 13',
-  description: 'PWA application with Next 13',
-  generator: 'Next.js',
-  manifest: '/manifest.json',
-
-  keywords: ['nextjs', 'nextjs13', 'next13', 'pwa', 'next-pwa'],
-  themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#fff' }],
-  authors: [
-    { name: 'Rajesh Prajapati' },
-    {
-      name: 'Rajesh Prajapati',
-      url: 'https://www.linkedin.com/in/raazeshp96/',
-    },
-  ],
-  viewport:
-    'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover',
-  icons: [
-    { rel: 'apple-touch-icon', url: 'icons/icon-128x128.png' },
-    { rel: 'icon', url: 'icons/icon-128x128.png' },
-  ],
-}; */
-
 import bgimage from '../../public/images/Rectangle.png';
-import { LayoutGroup } from 'framer-motion';
+import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
 
 export default function RootLayout({
@@ -76,33 +49,11 @@ export default function RootLayout({
   drawer: React.ReactNode;
 }) {
   const queryClient = new QueryClient();
-
   const router = useRouter();
-  const pathname = usePathname();
-  /*   const loginState = useSelector((state: RootState) => state.login.value);
-
-  // Redirect to login if not authenticated
-  if (!loginState && pathname !== '/login') {
-    router.push('/login');
-    return null;
-  }
-  console.log(loginState);
-
-
- */
-  console.log('layout');
-  console.log(
-    'NEXT_PUBLIC_PRIVY_APP_ID',
-    process.env.NEXT_PUBLIC_PRIVY_APP_ID as string
-  );
 
   return (
     <html className='h-full overflow-auto font-sans'>
       <head>
-        {/* <meta
-          name='viewport'
-          content='width=device-width, initial-scale=1, maximum-scale=1'
-        /> */}
         <title>Payments, Stephen Gordon</title>
 
         <meta name='application-name' content='PWA App' />
@@ -187,11 +138,16 @@ export default function RootLayout({
                 <PersistGate loading={null} persistor={persistor}>
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
-                      <LayoutGroup>
-                        <div>{auth}</div>
-                        <div>{drawer}</div>
-                        {/*   <div>{transactionmodal}</div> */}
-                        {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
+                      <AnimatePresence
+                        mode='wait'
+                        initial={false}
+                        onExitComplete={() => window.scrollTo(0, 0)}
+                      >
+                        <LayoutGroup>
+                          <div>{auth}</div>
+                          <div>{drawer}</div>
+                          {/*   <div>{transactionmodal}</div> */}
+                          {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
                     <div
                       style={{
                         backgroundImage: `url(${bgimage.src})`,
@@ -201,16 +157,17 @@ export default function RootLayout({
                       }}
                     ></div>
                   </div> */}
-                        <main
-                          /*  style={{
+                          <main
+                            /*  style={{
                             backgroundColor: 'rgba(16, 16, 18, 1)',
                           }} */
-                          vaul-drawer-wrapper=''
-                          className='min-h-[100vh] text-gray-300'
-                        >
-                          {children}
-                        </main>
-                      </LayoutGroup>
+                            vaul-drawer-wrapper=''
+                            className='min-h-[100vh] text-gray-300'
+                          >
+                            {children}
+                          </main>
+                        </LayoutGroup>
+                      </AnimatePresence>
                     </QueryClientProvider>
                   </WagmiProvider>
                 </PersistGate>

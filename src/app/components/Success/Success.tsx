@@ -59,25 +59,26 @@ export default function Success({
         style={{ borderRadius: '40px', padding: '16px' }}
         className='bg-background inset fixed z-50 grid h-fit space-y-8 overflow-hidden rounded-t-[40px] border-t bg-opacity-100 '
       >
-        <div className='relative'>
-          <AnimatePresence>
-            {transactionStatus && (
-              <div key={'check-circle'} className='grid w-full justify-center '>
-                <CheckCircle2 size='64' color='#4ade80' />
+        <div className='relative w-full items-center justify-center'>
+          {transactionStatus && (
+            <div key={'check-circle'} className='grid w-full justify-center '>
+              <CheckCircle2 size='64' color='#4ade80' />
+            </div>
+          )}
+          {loading && (
+            <div key={'loader'} className='grid w-full justify-center '>
+              <div className='grid w-full justify-center '>
+                <Loader2
+                  size='64'
+                  className='animate-spin justify-self-center '
+                  color='white'
+                />
               </div>
-            )}
-            {loading && (
-              <div
-                key={'loader'}
-                className='grid w-full items-center justify-center '
-              >
-                <Loader2 size='64' className='animate-spin ' color='white' />
-                <p className='text-muted-foreground text-center text-sm'>
-                  Your payment is on the way
-                </p>
-              </div>
-            )}
-          </AnimatePresence>
+              <p className='text-muted-foreground text-center text-sm'>
+                Your payment is on the way
+              </p>
+            </div>
+          )}
         </div>
       </DrawerContent>
     </Drawer>
