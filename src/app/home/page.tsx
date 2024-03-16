@@ -31,12 +31,19 @@ import { Menu } from 'lucide-react';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 import useGetAddress from '../hooks/useGetAddress';
 
+import { useInView, motion, useScroll, useTransform } from 'framer-motion';
+
 export default function Page() {
   // privy
   const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
 
   // next
   const router = useRouter();
+
+  let { scrollYProgress } = useScroll();
+  let y = useTransform(scrollYProgress, [0, 1], ['0', '-10%']);
+  let opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  let scale = useTransform(scrollYProgress, [0, 1], ['100%', '80%']);
 
   useEffect(() => {
     console.log('hi');
@@ -69,12 +76,18 @@ export default function Page() {
         <div className='absolute -z-50 '>
           <BackgroundGradientAnimation />
         </div>
-        <div className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'>
+        <motion.div
+          style={{ y, scale, opacity }}
+          className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
+        >
           <Balance />
           {/*   {address} */}
-        </div>
+        </motion.div>
 
-        <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
+        <motion.div
+          style={{ y, scale, opacity }}
+          className='mt-10 grid grid-cols-2 gap-2 p-2'
+        >
           <div>
             <Link
               onClick={() => {
@@ -120,8 +133,8 @@ export default function Page() {
               </Button>
             </Link>
           </div>
-        </div>
-        <div className='bg-accent mt-4 min-h-[900px] w-full rounded-t-xl p-4'>
+        </motion.div>
+        <div className='bg-accent mt-4 min-h-[900px] w-full rounded-t-3xl p-4'>
           {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>

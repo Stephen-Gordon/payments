@@ -9,12 +9,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 
 import { motion } from 'framer-motion';
-import { Card,
+import {
+  Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle, } from '@/app/components/ui/card';
+  CardTitle,
+} from '@/app/components/ui/card';
 import { Button } from '../ui/button';
 
 export default function Activity() {

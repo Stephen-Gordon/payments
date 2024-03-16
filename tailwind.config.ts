@@ -82,11 +82,11 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        first: "moveVertical 30s ease infinite",
-        second: "moveInCircle 20s reverse infinite",
-        third: "moveInCircle 40s linear infinite",
-        fourth: "moveHorizontal 40s ease infinite",
-        fifth: "moveInCircle 20s ease infinite",
+        first: "moveVertical 150s ease infinite",
+        second: "moveInCircle 180s reverse infinite",
+        third: "moveInCircle 200s linear infinite",
+        fourth: "moveHorizontal 150s ease infinite",
+        fifth: "moveInCircle 150s ease infinite",
       },
       keyframes: {
         'accordion-down': {
