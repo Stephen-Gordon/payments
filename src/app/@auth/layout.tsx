@@ -2,7 +2,6 @@
 import SheetLayout from '@/app/components/Layouts/SheetLayout';
 import { Metadata } from 'next';
 import * as React from 'react';
-import TransitionLayout from '../components/Layouts/TransitionLayout';
 
 export default function ComponentsLayout({
   children,
@@ -11,9 +10,7 @@ export default function ComponentsLayout({
 }) {
   return (
     <>
-      <SheetLayout>
-        <TransitionLayout>{children}</TransitionLayout>
-      </SheetLayout>
+      <SheetLayout>{children}</SheetLayout>
     </>
   );
 }

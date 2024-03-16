@@ -27,7 +27,7 @@ export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
 
   return (
-    <motion.div layoutId={transaction.hash}>
+    <div className=''>
       <Link href={{ pathname: '/tx', query: { hash: transaction.hash } }}>
         {/* <motion.div className='bg-background mb-4 flex content-center justify-between rounded-md border p-2 text-base transition-all duration-300'>
           <div className='flex items-center'>
@@ -78,6 +78,6 @@ export default function RecentTransaction({ transaction }: any) {
           </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 }

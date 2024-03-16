@@ -67,7 +67,10 @@ export default function Page() {
             {transactions &&
               transactions.map((transaction: any, i: any) => (
                 <motion.div
-                  /* layoutId={`activity-${transaction.hash}`} */ key={i}
+                  className='h-fit w-full'
+                  layoutId={transaction.hash}
+                  /*  layoutId={`activity-${transaction.hash}`} */
+                  key={i}
                 >
                   <RecentTransaction transaction={transaction} />
                 </motion.div>

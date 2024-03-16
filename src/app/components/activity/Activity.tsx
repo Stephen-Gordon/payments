@@ -70,6 +70,8 @@ export default function Activity() {
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (
                     <motion.div
+                      className='h-fit w-full'
+                      layoutId={transaction.hash}
                       /*  layoutId={`activity-${transaction.hash}`} */
                       key={i}
                     >
