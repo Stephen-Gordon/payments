@@ -16,8 +16,11 @@ import truncateEthAddress from 'truncate-eth-address';
 // framer motion
 import { motion } from 'framer-motion';
 
-
-import { Avatar, AvatarFallback, AvatarImage } from '@/app/components/ui/avatar';
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/app/components/ui/avatar';
 import { Card, CardContent } from '../ui/card';
 
 export default function RecentTransaction({ transaction }: any) {
@@ -57,7 +60,7 @@ export default function RecentTransaction({ transaction }: any) {
             <Avatar className='h-9 w-9 bg-white'></Avatar>
             <div className='ml-4 space-y-1'>
               <motion.div
-                layoutId={`${transaction.hash}+title`}
+                /* layoutId={`${transaction.hash}+title`} */
                 className='text-sm font-medium leading-none'
               >
                 {transaction.from == address ? 'From' : ''}{' '}

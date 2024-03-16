@@ -43,7 +43,7 @@ export default function Page() {
   let { scrollYProgress } = useScroll();
   let y = useTransform(scrollYProgress, [0, 1], ['0', '-10%']);
   let opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  let scale = useTransform(scrollYProgress, [0, 1], ['100%', '80%']);
+  let scale = useTransform(scrollYProgress, [0, 1], ['100%', '90%']);
 
   useEffect(() => {
     console.log('hi');
@@ -134,7 +134,7 @@ export default function Page() {
             </Link>
           </div>
         </motion.div>
-        <div className='bg-accent mt-4 min-h-[900px] w-full rounded-t-3xl p-4'>
+        <div className='bg-accent/90 relative mt-4 min-h-[900px] w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
           {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>

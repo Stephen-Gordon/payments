@@ -61,14 +61,16 @@ export default function Activity() {
         >
           <Card className=''>
             <CardHeader>
-              <CardTitle>Recent Transactions</CardTitle>
+              <motion.div layoutId='activity-title'>
+                <CardTitle>Recent Transactions</CardTitle>
+              </motion.div>
             </CardHeader>
             <CardContent className=''>
               <div className='mt-4 space-y-8'>
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (
                     <motion.div
-                      layoutId={`activity-${transaction.hash}`}
+                      /*  layoutId={`activity-${transaction.hash}`} */
                       key={i}
                     >
                       <RecentTransaction transaction={transaction} />

@@ -10,6 +10,12 @@ import { motion } from 'framer-motion';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 import useGetAddress from '../hooks/useGetAddress';
+import {
+  CardTitle,
+  CardHeader,
+  Card,
+  CardContent,
+} from '../components/ui/card';
 export default function Page() {
   const [transactions, setTxs] = useState<any>([]);
   const [allTransactions, setAllTransactions] = useState<any>([]);
@@ -18,7 +24,6 @@ export default function Page() {
 
   // address
   const address = useGetAddress();
-  
 
   const transactionState = useSelector(
     (state: any) => state.transactions.value
@@ -45,19 +50,31 @@ export default function Page() {
   }, [transactionState]); // Add transactions as a dependency
 
   return (
-    <motion.div
-      layoutId='activity'
-      className='w-full text-xl p-4'
-    >
-      <div className='text-xl'>Transactions</div>
-      <div className='mt-4'>
-        {transactions &&
-          transactions.map((transaction: any, i: any) => (
-            <motion.div layoutId={`activity-${transaction.hash}`} key={i}>
-              <RecentTransaction transaction={transaction} />
-            </motion.div>
-          ))}
-      </div>
+    <motion.div layoutId='activity' className='absolute z-50 w-full  text-xl'>
+      <Card style={{ border: '0px' }}>
+        <CardHeader>
+          <motion.div layoutId='activity-title'>
+            <CardTitle>Recent Transactions</CardTitle>
+          </motion.div>
+        </CardHeader>
+        <CardContent className='border-0 border-none'>
+          <motion.div
+            /* initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }} */
+            className=' space-y-6'
+          >
+            {transactions &&
+              transactions.map((transaction: any, i: any) => (
+                <motion.div
+                  /* layoutId={`activity-${transaction.hash}`} */ key={i}
+                >
+                  <RecentTransaction transaction={transaction} />
+                </motion.div>
+              ))}
+          </motion.div>
+        </CardContent>
+      </Card>
     </motion.div>
   );
 }
