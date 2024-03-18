@@ -30,7 +30,7 @@ export type RootState = {
   };
   transactions: [
     {
-      value: {};
+      value: {} | undefined;
     }
   ];
   pendingTx : {

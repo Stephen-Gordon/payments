@@ -110,8 +110,6 @@ export default function Page() {
     fetchRecentTransactions();
   }, [payeeAddress]);
 
-  useEffect(() => {}, []);
-
   return (
     <>
       <DrawerHeader>

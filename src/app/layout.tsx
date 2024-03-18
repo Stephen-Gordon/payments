@@ -36,6 +36,7 @@ import { PrivyProvider } from '@privy-io/react-auth';
 import bgimage from '../../public/images/Rectangle.png';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
+import BottomNavbar from './components/BottomNav/BottomNav';
 
 export default function RootLayout({
   auth,
@@ -165,6 +166,7 @@ export default function RootLayout({
                             className='min-h-[100vh] text-gray-300'
                           >
                             {children}
+                            <BottomNavbar />
                           </main>
                         </LayoutGroup>
                       </AnimatePresence>

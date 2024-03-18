@@ -134,6 +134,34 @@ export default function Page() {
             </Link>
           </div>
         </motion.div>
+        <div className='bg-accent/90 relative mt-4 min-h-[900px] w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+          {/*  <Tab.Group>
+            <Tab.List>
+              <div className='mb-4 flex justify-between'>
+                <Tab>
+                  <div className='text-lg text-gray-300'>Account</div>
+                </Tab>
+                <Tab>
+                  <div className='text-lg text-gray-300'>Activity</div>
+                </Tab>
+              </div>
+            </Tab.List>
+            <Tab.Panels>
+              <Tab.Panel>
+                <Activity />
+              </Tab.Panel>
+              <Tab.Panel>Content 2</Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group> */}
+
+          {/*   <div className='mb-4 flex justify-between'>
+                
+                  <div className='text-lg'>Activity</div>
+               
+              </div>  */}
+
+          <Activity />
+        </div>
       </div>
     </div>
   );
