@@ -11,7 +11,10 @@ const BottomNavbar = () => {
   const dispatch = useDispatch();
 
   return (
-    <nav className='bg-background/50 sticky bottom-0 left-0 flex w-full justify-between bg-opacity-10 bg-clip-padding p-4 px-8 saturate-200 backdrop-blur-xl backdrop-filter'>
+    <nav
+      style={{ zIndex: 2000 }}
+      className='bg-background/50 fixed bottom-0 flex w-full justify-between overflow-hidden bg-opacity-10 bg-clip-padding p-4 px-8 saturate-200 backdrop-blur-xl backdrop-filter'
+    >
       <Link href='/home'>
         <Home
           onClick={() => {

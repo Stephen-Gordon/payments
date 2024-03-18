@@ -139,11 +139,7 @@ export default function RootLayout({
                 <PersistGate loading={null} persistor={persistor}>
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
-                      <AnimatePresence
-                        mode='wait'
-                        initial={false}
-                        onExitComplete={() => window.scrollTo(0, 0)}
-                      >
+                      <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
                           <div>{auth}</div>
                           <div>{drawer}</div>
@@ -166,8 +162,10 @@ export default function RootLayout({
                             className='min-h-[100vh] text-gray-300'
                           >
                             {children}
-                            <BottomNavbar />
                           </main>
+                          <div className='w-full overflow-hidden'>
+                            <BottomNavbar />
+                          </div>
                         </LayoutGroup>
                       </AnimatePresence>
                     </QueryClientProvider>
