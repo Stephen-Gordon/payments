@@ -13,7 +13,7 @@ const BottomNavbar = () => {
   return (
     <nav
       style={{ zIndex: 2000 }}
-      className='bg-background/50 fixed bottom-0 flex w-full justify-between overflow-hidden bg-opacity-10 bg-clip-padding p-4 px-8 saturate-200 backdrop-blur-xl backdrop-filter'
+      className='bg-background/50 fixed bottom-0 flex w-full justify-between overflow-hidden bg-opacity-10 bg-clip-padding p-4 px-8 pb-8 saturate-200 backdrop-blur-xl backdrop-filter'
     >
       <Link href='/home'>
         <Home
