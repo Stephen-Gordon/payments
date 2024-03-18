@@ -19,7 +19,7 @@ import '@/styles/colors.css';
 import { siteConfig } from '@/constant/config';
 
 // Redux
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState, persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
@@ -37,6 +37,7 @@ import bgimage from '../../public/images/Rectangle.png';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 export default function RootLayout({
   auth,
@@ -51,6 +52,7 @@ export default function RootLayout({
 }) {
   const queryClient = new QueryClient();
   const router = useRouter();
+
 
   return (
     <html className='h-full overflow-auto font-sans'>
@@ -143,23 +145,10 @@ export default function RootLayout({
                         <LayoutGroup>
                           <div>{auth}</div>
                           <div>{drawer}</div>
-                          {/*   <div>{transactionmodal}</div> */}
-                          {/* <div className=' absolute -z-50 flex h-1/2 w-1/2  justify-center '>
-                    <div
-                      style={{
-                        backgroundImage: `url(${bgimage.src})`,
-                        backgroundPosition: 'center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat',
-                      }}
-                    ></div>
-                  </div> */}
+
                           <main
-                            /*  style={{
-                            backgroundColor: 'rgba(16, 16, 18, 1)',
-                          }} */
                             vaul-drawer-wrapper=''
-                            className='min-h-[100vh] text-gray-300'
+                            className='h-[100vh] text-gray-300'
                           >
                             {children}
                           </main>

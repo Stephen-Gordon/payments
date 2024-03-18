@@ -18,6 +18,7 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { Button } from '../ui/button';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 export default function Activity() {
   const [transactions, setTxs] = useState<any>([]);
@@ -56,13 +57,14 @@ export default function Activity() {
     <>
       {transactions?.length > 0 ? (
         <motion.div
+          key='activity-key'
           layoutId='activity'
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.3 }}
           className='bg-muted w-full rounded-full text-xl '
         >
           <Card className=''>
             <CardHeader>
-              <motion.div layoutId='activity-title'>
+              <motion.div>
                 <CardTitle>Recent Transactions</CardTitle>
               </motion.div>
             </CardHeader>
@@ -87,7 +89,13 @@ export default function Activity() {
                   pathname: '/transactions',
                 }}
               >
-                <Button className='w-auto' variant='ghost'>
+                <Button
+                  onClick={() => {
+                    dispatch(setSheet(true));
+                  }}
+                  className='w-auto'
+                  variant='ghost'
+                >
                   See All
                 </Button>
               </Link>

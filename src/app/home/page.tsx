@@ -26,6 +26,7 @@ import { usePrivySmartAccount } from '@zerodev/privy';
 // lucide
 import { Menu } from 'lucide-react';
 
+import { usePathname } from 'next/navigation';
 //components
 
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
@@ -51,6 +52,17 @@ export default function Page() {
     console.log('zeroDevReady', zeroDevReady);
   }, [zeroDevReady]);
 
+  // next
+  const pathname = usePathname();
+
+  // pathname use effect
+  useEffect(() => {
+    if (pathname === '/home') {
+      dispatch(setSheet(false));
+    }
+    console.log(`Route changed to: ${pathname}`);
+  }, [pathname]);
+
   // redux
   const dispatch = useDispatch();
 
@@ -58,7 +70,7 @@ export default function Page() {
   const address = useGetAddress();
 
   return (
-    <div id='render' className=''>
+    <div id='render' className='min-h-[150vh]'>
       <div className='absolute right-4 top-4'>
         <Link
           /*   onClick={() => {
@@ -133,7 +145,7 @@ export default function Page() {
             </Link>
           </div>
         </motion.div>
-        <div className='bg-accent/90 relative mt-4 min-h-[900px] w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+        <div className='bg-accent/90 relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
           {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>

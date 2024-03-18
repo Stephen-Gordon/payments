@@ -26,6 +26,9 @@ export default function Page() {
 
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
 
+  // animate
+  const [showTxs, setShowTxs] = useState<boolean>(true);
+
   const dispatch = useDispatch();
 
   // address
@@ -90,58 +93,58 @@ export default function Page() {
   }, [transactionState]); // Add transactions as a dependency
 
   return (
-    <motion.div layoutId='activity' className=' z-50 w-full text-xl'>
+    <motion.div
+      layoutId='activity'
+      transition={{ duration: 0.3 }} /*  onAnimationComplete={(definition) => {
+        setShowTxs(true);
+      }} */
+      className='absolute w-full text-xl'
+    >
       <Card style={{ border: '0px' }}>
         <CardHeader>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
+          <motion.div transition={{ duration: 0.4 }}>
             <CardTitle>Recent Transactions</CardTitle>
           </motion.div>
         </CardHeader>
         <CardContent className='border-0 border-none'>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            {groupedTransactions && (
+          <motion.div>
+            {showTxs && (
               <>
-                <div className='overflow-auto'>
-                  {groupedTransactions.map((month, i) => (
-                    <div key={i} className='grid'>
-                      <div
-                        style={{ marginBottom: '32px' }}
-                        className='flex w-full justify-center'
-                      >
-                        <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
-                          {month.monthName}
-                        </p>
-                      </div>
-                      {month.transactions.map((transaction, j) => (
-                        <motion.div
-                          className='grid h-fit w-full space-y-6'
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{
-                            duration: 0.4,
-                            delay: j * 0.2,
-                            ease: 'easeInOut', // Using a custom easing function
-                          }}
-                          key={j}
-                        >
-                          <div className='mb-6 grid h-fit w-full'>
-                            <RecentTransaction
-                              transaction={month.transactions[j]}
-                            />
+                {groupedTransactions && (
+                  <>
+                    <div className='overflow-auto'>
+                      {groupedTransactions.map((month, i) => (
+                        <div key={i} className='grid'>
+                          <div
+                            style={{ marginBottom: '32px' }}
+                            className='flex w-full justify-center'
+                          >
+                            <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
+                              {month.monthName}
+                            </p>
                           </div>
-                        </motion.div>
+                          {month.transactions.map((transaction, j) => (
+                            <motion.div
+                              className='grid h-fit w-full space-y-6'
+                              transition={{
+                                duration: 0.4,
+                                delay: j * 0.2,
+                                ease: 'easeInOut', // Using a custom easing function
+                              }}
+                              key={j}
+                            >
+                              <div className='mb-6 grid h-fit w-full'>
+                                <RecentTransaction
+                                  transaction={month.transactions[j]}
+                                />
+                              </div>
+                            </motion.div>
+                          ))}
+                        </div>
                       ))}
                     </div>
-                  ))}
-                </div>
+                  </>
+                )}
               </>
             )}
           </motion.div>
