@@ -42,7 +42,7 @@ export default function Page() {
 
   let { scrollYProgress } = useScroll();
   let y = useTransform(scrollYProgress, [0, 1], ['0', '-10%']);
-  let opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  let opacity = useTransform(scrollYProgress, [0.5, 1], [1, 0.5]);
   let scale = useTransform(scrollYProgress, [0, 1], ['100%', '90%']);
 
   useEffect(() => {

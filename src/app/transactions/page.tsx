@@ -22,6 +22,8 @@ export default function Page() {
 
   const dispatch = useDispatch();
 
+  const initial = 0.4;
+
   // address
   const address = useGetAddress();
 
@@ -50,25 +52,31 @@ export default function Page() {
   }, [transactionState]); // Add transactions as a dependency
 
   return (
-    <motion.div layoutId='activity' className='absolute z-50 w-full  text-xl'>
+    <motion.div layoutId='activity' className=' z-50 w-full text-xl'>
       <Card style={{ border: '0px' }}>
         <CardHeader>
-          <motion.div layoutId='activity-title'>
+          <motion.div>
             <CardTitle>Recent Transactions</CardTitle>
           </motion.div>
         </CardHeader>
         <CardContent className='border-0 border-none'>
           <motion.div
-            /* initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }} */
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 },
+            }}
             className=' space-y-6'
           >
             {transactions &&
               transactions.map((transaction: any, i: any) => (
                 <motion.div
                   className='h-fit w-full'
-                  layoutId={transaction.hash}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.4, delay: i * 0.2 }}
                   /*  layoutId={`activity-${transaction.hash}`} */
                   key={i}
                 >

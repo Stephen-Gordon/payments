@@ -59,13 +59,13 @@ export default function RecentTransaction({ transaction }: any) {
           <div className='flex w-full items-center '>
             <Avatar className='h-9 w-9 bg-white'></Avatar>
             <div className='ml-4 space-y-1'>
-              <motion.div
+              <div
                 /* layoutId={`${transaction.hash}+title`} */
                 className='text-sm font-medium leading-none'
               >
                 {transaction.from == address ? 'From' : ''}{' '}
                 {truncateEthAddress(transaction.from)}
-              </motion.div>
+              </div>
               <p className='text-muted-foreground text-sm'>
                 {transaction?.metadata?.blockTimestamp.slice(0, 10)}
               </p>

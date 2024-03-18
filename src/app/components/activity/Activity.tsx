@@ -57,7 +57,8 @@ export default function Activity() {
       {transactions?.length > 0 ? (
         <motion.div
           layoutId='activity'
-          className='bg-muted w-full rounded-full text-xl '
+          transition={{ duration: 0.4 }}
+          className='bg-muted absolute w-full rounded-full text-xl '
         >
           <Card className=''>
             <CardHeader>
@@ -66,19 +67,18 @@ export default function Activity() {
               </motion.div>
             </CardHeader>
             <CardContent className=''>
-              <div className='mt-4 space-y-8'>
+             <div className='mt-4 space-y-8'>
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (
                     <motion.div
                       className='h-fit w-full'
                       layoutId={transaction.hash}
-                      /*  layoutId={`activity-${transaction.hash}`} */
                       key={i}
                     >
                       <RecentTransaction transaction={transaction} />
                     </motion.div>
                   ))}
-              </div>
+              </div> 
             </CardContent>
             <CardFooter className='justify-center space-x-2'>
               <Link

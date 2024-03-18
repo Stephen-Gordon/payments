@@ -52,25 +52,20 @@ export default function RecentPayee(): JSX.Element {
           </div>
           {payees.map((payee) => (
             <div key={payee}>
-              <motion.div>
-                <Link
-                  href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
-                >
-                  <div className='space-y-8'>
-                    <div className='flex w-full items-center '>
-                      <Avatar className='h-9 w-9 bg-white'></Avatar>
-                      <div className='ml-4 space-y-1'>
-                        <motion.div
-                          layoutId={`${payee}`}
-                          className='text-sm font-medium leading-none'
-                        >
-                          {truncateEthAddress(payee)}
-                        </motion.div>
+              <Link
+                href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
+              >
+                <div className='space-y-8'>
+                  <div className='flex w-full items-center '>
+                    <Avatar className='h-9 w-9 bg-white'></Avatar>
+                    <div className='ml-4 space-y-1'>
+                      <div className='text-sm font-medium leading-none'>
+                        {truncateEthAddress(payee)}
                       </div>
                     </div>
                   </div>
-                </Link>
-              </motion.div>
+                </div>
+              </Link>
             </div>
           ))}
         </>
