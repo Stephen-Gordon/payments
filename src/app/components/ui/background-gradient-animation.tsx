@@ -130,8 +130,8 @@ export const BackgroundGradientAnimation = ({
         <div
           className={cn(
             `absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]`,
-            `left-[calc(50%-var(--size)/2)] top-[calc(50%-var(--size)/2)] h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
-            `[transform-origin:center_center]`,
+            `top-0 h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
+
             `animate-first`,
             `opacity-100`
           )}
@@ -139,8 +139,8 @@ export const BackgroundGradientAnimation = ({
         <div
           className={cn(
             `absolute [background:radial-gradient(circle_at_center,_rgba(var(--second-color),_0.8)_0,_rgba(var(--second-color),_0)_50%)_no-repeat]`,
-            `left-[calc(50%-var(--size)/2)] top-[calc(50%-var(--size)/2)] h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
-            `[transform-origin:calc(50%-400px)]`,
+            `top-0 h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
+            ``,
             `animate-second`,
             `opacity-100`
           )}
@@ -148,8 +148,8 @@ export const BackgroundGradientAnimation = ({
         <div
           className={cn(
             `absolute [background:radial-gradient(circle_at_center,_rgba(var(--third-color),_0.8)_0,_rgba(var(--third-color),_0)_50%)_no-repeat]`,
-            `left-[calc(50%-var(--size)/2)] top-[calc(50%-var(--size)/2)] h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
-            `[transform-origin:calc(50%-200px)]`,
+            `top-0 h-[var(--size)] w-[var(--size)] [mix-blend-mode:var(--blending-value)]`,
+            ``,
             `animate-third`,
             `opacity-100`
           )}

@@ -22,8 +22,6 @@ export default function Page() {
 
   const dispatch = useDispatch();
 
-  const initial = 0.4;
-
   // address
   const address = useGetAddress();
 
