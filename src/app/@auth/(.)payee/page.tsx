@@ -188,7 +188,7 @@ export default function Page() {
             <div ref={end}></div>
           </div>
 
-          <DrawerFooter className='bottom-4 '>
+          <DrawerFooter className='sticky bottom-4  '>
             <div className=''>
               <Link
                 href={{

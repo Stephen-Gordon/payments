@@ -63,8 +63,7 @@ export default function Page() {
         <Link
           /*   onClick={() => {
             dispatch(setSheet(true));
-          }}  */
-          href={{
+          }}  */ href={{
             pathname: '/menu',
             query: { isNavOpen: true },
           }}
