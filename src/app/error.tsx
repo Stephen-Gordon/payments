@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-import TextButton from '@/components/buttons/TextButton';
 
 export default function Error({
   error,
@@ -24,9 +23,7 @@ export default function Error({
           <h1 className='mt-8 text-4xl md:text-6xl'>
             Oops, something went wrong!
           </h1>
-          <TextButton variant='basic' onClick={reset} className='mt-4'>
-            Try again
-          </TextButton>
+          
         </div>
       </section>
     </main>
