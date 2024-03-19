@@ -153,7 +153,7 @@ export default function Page() {
                     {month.monthName}
                   </p>
                 </div>
-                <div className='grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl text-white'>
+                <div className='grid grid-flow-row auto-rows-max overflow-scroll h-[calc(100vh-80px)] grid-cols-1 gap-2 text-xl text-white'>
                   {month.transactions.map((transaction, j) => (
                     <div key={j}>
                       {transaction.to !== payeeAddress ? (
@@ -187,31 +187,30 @@ export default function Page() {
           <div className='overflow-auto p-4'>
             <div ref={end}></div>
           </div>
-
-          <DrawerFooter className='fixed bottom-20  '>
-            <div className=''>
-              <Link
-                href={{
-                  pathname: '/send',
-                  query: { payee: payeeAddress },
-                }}
-              >
-                <Button className='text-xl' size={'lg'} variant={'default'}>
-                  <div className='flex grid-cols-3 content-center items-center'>
-                    <div className='text-xl'>
-                      <div>Send</div>
-                    </div>
-                    <div className='px-2'></div>
-                    <div>
-                      <Send size={20} />
-                    </div>
-                  </div>
-                </Button>
-              </Link>
-            </div>
-          </DrawerFooter>
         </>
       )}
+      <DrawerFooter style={{zIndex: 3000}} className='fixed w-full bottom-4  '>
+        <div className='w-full'>
+          <Link
+            href={{
+              pathname: '/send',
+              query: { payee: payeeAddress },
+            }}
+          >
+            <Button className='text-xl' size={'lg'} variant={'default'}>
+              <div className='flex grid-cols-3 content-center items-center'>
+                <div className='text-xl'>
+                  <div>Send</div>
+                </div>
+                <div className='px-2'></div>
+                <div>
+                  <Send size={20} />
+                </div>
+              </div>
+            </Button>
+          </Link>
+        </div>
+      </DrawerFooter>
     </>
   );
 }

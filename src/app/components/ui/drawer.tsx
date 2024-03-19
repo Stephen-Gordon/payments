@@ -49,7 +49,7 @@ const DrawerContent = React.forwardRef<
       )}
       {...props}
     >
-      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] overflow-y-scroll rounded-full bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter' />
+      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter' />
       {children}
     </DrawerPrimitive.Content>
   </DrawerPortal>

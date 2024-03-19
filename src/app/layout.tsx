@@ -1,7 +1,6 @@
 'use client';
 
-import { Metadata } from 'next';
-import * as React from 'react';
+import React from 'react';
 
 import { useEffect } from 'react';
 import '@radix-ui/themes/styles.css';
@@ -11,20 +10,15 @@ import { Providers } from '../GlobalRedux/provider';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { WagmiProvider } from 'wagmi';
 import config from '@/app/config';
-import Head from 'next/head';
 import '@/styles/globals.css';
-// !STARTERCONF This is for demo purposes, remove @/styles/colors.css import immediately
 import '@/styles/colors.css';
 
-import { siteConfig } from '@/constant/config';
 
 // Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, persistor } from '@/GlobalRedux/store';
+import {  persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
-import { usePathname, useRouter } from 'next/navigation';
-import ReactPullToRefresh from 'react-pull-to-refresh';
+import { useRouter } from 'next/navigation';
 
 import { ThemeProvider } from '@/app/components/theme-provider';
 
@@ -33,11 +27,12 @@ import { ZeroDevProvider } from '@zerodev/privy';
 // privy
 import { PrivyProvider } from '@privy-io/react-auth';
 
-import bgimage from '../../public/images/Rectangle.png';
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
-import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+// pwa
+import PWAPrompt from 'react-ios-pwa-prompt';
+
 
 export default function RootLayout({
   auth,
@@ -52,6 +47,8 @@ export default function RootLayout({
 }) {
   const queryClient = new QueryClient();
   const router = useRouter();
+
+
 
 
   return (
@@ -127,7 +124,7 @@ export default function RootLayout({
           <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
             <PrivyProvider
               onSuccess={() => router.push('/home')}
-              appId={process.env.NEXT_PUBLIC_PRIVY_APP_ID as string}
+              appId={'cltk97hyk016h7afh32g4363z'}
               config={{
                 defaultChain: sepolia,
                 loginMethods: ['sms', 'apple', 'google'],
@@ -143,6 +140,13 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
+                          <PWAPrompt
+                            promptOnVisit={1}
+                            timesToShow={3}
+                            copyClosePrompt='Close'
+                            permanentlyHideOnDismiss={false}
+                          />
+
                           <div>{auth}</div>
                           <div>{drawer}</div>
 

@@ -8,9 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // Next
 import { useSearchParams } from 'next/navigation';
 
-// Loading
-import { RotatingLines } from 'react-loader-spinner';
-
 // React
 import { useEffect, useState } from 'react';
 import truncateEthAddress from 'truncate-eth-address';
