@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '@radix-ui/themes/styles.css';
 // Redux
 import { Providers } from '../GlobalRedux/provider';
@@ -18,7 +18,7 @@ import '@/styles/colors.css';
 import {  persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { ThemeProvider } from '@/app/components/theme-provider';
 
@@ -26,11 +26,14 @@ import { ZeroDevProvider } from '@zerodev/privy';
 
 // privy
 import { PrivyProvider } from '@privy-io/react-auth';
+import { usePrivySmartAccount } from '@zerodev/privy';
 
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
-// pwa
+import AuthPage from './components/AuthPage/AuthPage';
+
+
 
 
 export default function RootLayout({
@@ -48,6 +51,30 @@ export default function RootLayout({
   const router = useRouter();
 
 
+  
+  const [isInstalled, setIsInstalled] = useState<boolean | null>(null);
+
+  const [showNav, setShowNav] = useState<boolean>(true);
+
+  const pathname = usePathname();
+
+
+
+  useEffect(() => {
+    if (window) {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        setIsInstalled(true);
+        router.push('/home');
+        
+
+      } else {
+        setIsInstalled(false);
+        router.push('/');
+      }
+    }
+  }, []);
+
+ 
 
 
   return (
@@ -122,11 +149,15 @@ export default function RootLayout({
         >
           <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
             <PrivyProvider
+            
               onSuccess={() => router.push('/home')}
               appId={'cltk97hyk016h7afh32g4363z'}
               config={{
+                appearance: {
+                   theme: 'dark', 
+                },
                 defaultChain: sepolia,
-                loginMethods: ['sms', 'apple', 'google'],
+                loginMethods: ['apple', 'google', 'email'],
                 embeddedWallets: {
                   createOnLogin: 'users-without-wallets',
                   noPromptOnSignature: true,
@@ -139,20 +170,20 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
-                        
+                          <AuthPage>
+                            <div>{auth}</div>
+                            <div>{drawer}</div>
 
-                          <div>{auth}</div>
-                          <div>{drawer}</div>
-
-                          <main
-                            vaul-drawer-wrapper=''
-                            className='h-[100vh] text-gray-300'
-                          >
-                            {children}
-                          </main>
-                          <div className='w-full overflow-hidden'>
-                            <BottomNavbar />
-                          </div>
+                            <main
+                              vaul-drawer-wrapper=''
+                              className='h-[100vh] text-gray-300'
+                            >
+                              {children}
+                            </main>
+                            <div className='w-full overflow-hidden'>
+                              <BottomNavbar />
+                            </div>
+                          </AuthPage>
                         </LayoutGroup>
                       </AnimatePresence>
                     </QueryClientProvider>

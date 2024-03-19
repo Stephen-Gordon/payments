@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { isAndroid } from 'react-device-detect'
 import { useDispatch } from 'react-redux'
+import { Button } from '../components/ui/button'
 
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false)
@@ -59,34 +60,24 @@ const Page = () => {
     })
   }
 
+   
+ 
   return (
     <>
-      <Head>
-        <title>Privy PWA Template</title>
-      </Head>
+      
       <main>
         <div className='flex h-screen w-screen flex-col items-center justify-center'>
 
           <h2 className='my-4 text-xl font-semibold text-gray-800'>
-            Privy PWA Template
+            Payments
           </h2>
           <div className='mt-2 w-1/2'>
             {!isInstalled && isAndroid ? (
-              <button
-                className='my-4 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm disabled:bg-indigo-400'
-                onClick={promptToInstall}
-              >
-                Install App
-              </button>
+              
+              <Button onClick={promptToInstall}>Install App</Button>
             ) : (
-              <button
-                className='my-4 w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm disabled:bg-indigo-400'
-                onClick={login}
-                // Always check that Privy is `ready` and the user is not `authenticated` before calling `login`
-                disabled={!ready || authenticated}
-              >
-                Login
-              </button>
+             
+              <Button disabled={!ready || authenticated} onClick={login}>Login</Button>
             )}
           </div>
         </div>
