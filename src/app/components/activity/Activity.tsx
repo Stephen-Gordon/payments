@@ -87,12 +87,13 @@ export default function Activity() {
                 className='w-fit'
                 href={{
                   pathname: '/transactions',
+                  query: { isSheetOpen: true },
                 }}
               >
                 <Button
-                  onClick={() => {
+                  /* onClick={() => {
                     dispatch(setSheet(true));
-                  }}
+                  }} */
                   className='w-auto'
                   variant='ghost'
                 >

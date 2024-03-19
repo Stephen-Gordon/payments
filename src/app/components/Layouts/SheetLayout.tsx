@@ -15,6 +15,7 @@ import {
   DrawerTitle,
 } from '@/app/components/ui/drawer';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const SheetLayout = ({ children }) => {
   const isOpen = useSelector((state) => state.sheet.value);
@@ -24,6 +25,8 @@ const SheetLayout = ({ children }) => {
   }, [isOpen]);
 
   const dispatch = useDispatch();
+
+  const router = useRouter();
 
   return (
     <>
@@ -42,6 +45,7 @@ const SheetLayout = ({ children }) => {
       <Drawer
         shouldScaleBackground={true}
         onClose={() => {
+          /* router.push('/', undefined, { shallow: true }); */
           dispatch(setSheet(false));
         }}
         open={isOpen}

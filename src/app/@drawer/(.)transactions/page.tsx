@@ -17,17 +17,26 @@ import {
   CardContent,
 } from '@/app/components/ui/card';
 
+// next
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+
 //import { format, parseISO } from 'date-fns';
 import { format, parseISO, set } from 'date-fns';
 
 export default function Page() {
+  //next
+  const searchParams = useSearchParams();
+  let isSheetOpen = searchParams.get('isSheetOpen');
+
+  // state
   const [transactions, setTxs] = useState<any[]>([]);
   const [allTransactions, setAllTransactions] = useState<any>([]);
 
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
 
   // animate
-  const [showMoreTx, setShowMoreTx] = useState<boolean>(false);
+  const [showMoreTx, setShowMoreTx] = useState<boolean>(true);
 
   const isOpen = useSelector((state: any) => state.sheet.value);
 
@@ -97,15 +106,9 @@ export default function Page() {
     console.log('groupedTransactionsByMonth', arrayOfMonthArrays);
   }, [transactionState]); // Add transactions as a dependency
 
-  useEffect(() => {
-    setTimeout(() => {
-      setShowMoreTx(true);
-    }, 3000);
-  }, []);
-
   return (
     <>
-      {isOpen && (
+      {isSheetOpen && (
         <motion.div
           key='activity-key'
           layoutId='activity'
@@ -163,13 +166,19 @@ export default function Page() {
                                 ))}
                               {showMoreTx && (
                                 <motion.div
-                                  transition={{ delay: 3, duration: 1 }}
+                                  key={'transactions-dealyed'}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: 0.4, delay: 0.4 }}
                                 >
                                   {month.transactions
                                     .slice(4, -1)
                                     .map((transaction, j) => (
                                       <motion.div
                                         className='grid h-fit w-full space-y-6'
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
                                         transition={{
                                           duration: 0.4,
                                           delay: j * 0.2,
