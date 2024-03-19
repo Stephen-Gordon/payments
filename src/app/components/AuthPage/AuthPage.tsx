@@ -12,13 +12,25 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
     const { authenticated, login, zeroDevReady, user } = usePrivySmartAccount();
 
     useEffect(() => {
-      if ( authenticated && zeroDevReady) {
-        // route home
-        console.log('authenticated');
-        router.push('/home');
-      } else {
-        router.push('/login');
-      }
+
+       useEffect(() => {
+         if (window) {
+           if (window.matchMedia('(display-mode: standalone)').matches) {
+             if (authenticated && zeroDevReady) {
+               // route home
+               console.log('authenticated');
+               router.push('/home');
+             } else {
+               router.push('/login');
+             }
+           } else {
+
+             router.push('/');
+           }
+         }
+       }, []);
+
+      
     }, [ authenticated, zeroDevReady]);
     return (
         <> {children}</>
