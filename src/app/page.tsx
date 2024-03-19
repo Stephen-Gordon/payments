@@ -1,50 +1,46 @@
 'use client';
+import React, { useState, useEffect } from 'react';
+import AddToHomeScreen from '@/app/components/AddToHomeScreen/AddToHomeScreen';
+import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 
-import Head from 'next/head';
-
-// React
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-
-// Web3auth
-import { Web3AuthNoModal } from '@web3auth/no-modal';
-import { CHAIN_NAMESPACES, IProvider, WALLET_ADAPTERS } from '@web3auth/base';
-import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
-import { OpenloginAdapter } from '@web3auth/openlogin-adapter';
-
-import { useDispatch } from 'react-redux';
-
-// Components
-import Balance from '@/app/components/Balance/Balance';
-import useCreateKernal from '@/app/utils/useCreateKernal';
-import Link from 'next/link';
-//
-import { setKernalClient } from '@/GlobalRedux/Features/kernalClient/kernalClientSlice';
-
-import { parseEther } from 'viem';
-import { useRouter } from 'next/navigation';
+import useUserAgent from '@/app/hooks/useUserAgent';
 
 export default function HomePage() {
-  const router = useRouter();
+  const [welcomeMessage, setWelcomeMessage] =
+    useState<string>('Checking device...');
+  const { isMobile, userAgentString, userAgent } = useUserAgent();
 
   useEffect(() => {
-    router.push('/home');
-}, []);
+    const welcomeMessage = isMobile
+      ? 'You are on a mobile device.'
+      : 'You are on a desktop device. Please use a mobile device to view this app.';
+    setWelcomeMessage(welcomeMessage);
+  }, [isMobile]);
 
-  
- 
   return (
-    <main>
-     
-      {/*  <section className='h-screen w-screen bg-slate-900 text-white'>
-        <Link
-          href={{
-            pathname: '/home',
-          }}
-        >
-          Home
-        </Link>
-      </section> */}
+    <main className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
+      <motion.h1
+        className='text-center text-4xl font-bold'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.1 }}
+      >
+        Welcome to Payments
+      </motion.h1>
+      <motion.p
+        className='text-center'
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
+        {welcomeMessage}
+      </motion.p>
+      {userAgentString && (
+        <p className='text-center text-xs text-gray-400'>{userAgentString}</p>
+      )}
+      <AddToHomeScreen />
+      
     </main>
   );
 }

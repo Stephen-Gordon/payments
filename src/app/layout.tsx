@@ -31,7 +31,6 @@ import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 // pwa
-import PWAPrompt from 'react-ios-pwa-prompt';
 
 
 export default function RootLayout({
@@ -140,12 +139,7 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
-                          <PWAPrompt
-                            promptOnVisit={1}
-                            timesToShow={3}
-                            copyClosePrompt='Close'
-                            permanentlyHideOnDismiss={false}
-                          />
+                        
 
                           <div>{auth}</div>
                           <div>{drawer}</div>
