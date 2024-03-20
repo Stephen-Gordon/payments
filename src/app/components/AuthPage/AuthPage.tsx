@@ -11,7 +11,7 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
     
     const { authenticated, login, zeroDevReady, user } = usePrivySmartAccount();
 
-    useEffect(() => {
+   /*  useEffect(() => {
 
 
          if (window) {
@@ -31,7 +31,7 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
 
 
       
-    }, [ authenticated, zeroDevReady]);
+    }, [ authenticated, zeroDevReady]); */
     return (
         <> {children}</>
     )

@@ -10,12 +10,11 @@ import Activity from '@/app/components/activity/Activity';
 import { Button } from '@/app/components/ui/button';
 
 // redux
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/GlobalRedux/store';
+import { useDispatch } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 // react
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 
 // icon
 import { Send, QrCode } from 'lucide-react';
@@ -32,7 +31,7 @@ import { usePathname } from 'next/navigation';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 import useGetAddress from '../hooks/useGetAddress';
 
-import { useInView, motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function Page() {
   // privy
@@ -91,7 +90,7 @@ export default function Page() {
           style={{ y, scale, opacity }}
           className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
         >
-          <Balance />
+         {/*  <Balance /> */}
           {/*   {address} */}
         </motion.div>
 

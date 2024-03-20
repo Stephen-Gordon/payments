@@ -10,7 +10,7 @@ import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
 import useGetBalance from '@/app/hooks/useGetBalance';
 
 // React
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 
 // next
 import { usePathname } from 'next/navigation';
