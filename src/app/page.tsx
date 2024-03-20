@@ -9,10 +9,7 @@ import useUserAgent from '@/app/hooks/useUserAgent';
 // next
 import { useRouter } from 'next/navigation';
 
-
-
 export default function HomePage() {
-
   const router = useRouter();
 
   const [welcomeMessage, setWelcomeMessage] =
@@ -28,6 +25,7 @@ export default function HomePage() {
 
   return (
     <main className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
+      <p className=''>{welcomeMessage}</p>
       <AddToHomeScreen />
     </main>
   );

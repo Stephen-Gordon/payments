@@ -13,9 +13,8 @@ import config from '@/app/config';
 import '@/styles/globals.css';
 import '@/styles/colors.css';
 
-
 // Redux
-import {  persistor } from '@/GlobalRedux/store';
+import { persistor } from '@/GlobalRedux/store';
 
 import { PersistGate } from 'redux-persist/integration/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -33,9 +32,6 @@ import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
 
-
-
-
 export default function RootLayout({
   auth,
   transactionmodal,
@@ -50,16 +46,13 @@ export default function RootLayout({
   const queryClient = new QueryClient();
   const router = useRouter();
 
-
-  
   const [isInstalled, setIsInstalled] = useState<boolean | null>(null);
 
   const [showNav, setShowNav] = useState<boolean>(true);
 
   const pathname = usePathname();
 
-
-
+  /* 
   useEffect(() => {
     if (window) {
       if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -73,9 +66,7 @@ export default function RootLayout({
       }
     }
   }, []);
-
- 
-
+ */
 
   return (
     <html className='h-full overflow-auto font-sans'>
@@ -149,12 +140,11 @@ export default function RootLayout({
         >
           <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
             <PrivyProvider
-            
               onSuccess={() => router.push('/home')}
               appId={'cltk97hyk016h7afh32g4363z'}
               config={{
                 appearance: {
-                   theme: 'dark', 
+                  theme: 'dark',
                 },
                 defaultChain: sepolia,
                 loginMethods: ['apple', 'google', 'email'],
