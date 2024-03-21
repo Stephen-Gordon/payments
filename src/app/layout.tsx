@@ -54,9 +54,13 @@ export default function RootLayout({
 
   const pathname = usePathname();
 
-  
+  const { authenticated, zeroDevReady } = usePrivySmartAccount();
 
-  /* 
+
+  useEffect(() => {})
+
+/* 
+  
   useEffect(() => {
     if (window) {
       if (window.matchMedia('(display-mode: standalone)').matches) {
@@ -69,8 +73,21 @@ export default function RootLayout({
         router.push('/');
       }
     }
-  }, []);
- */
+  }, []); */
+
+   useEffect(() => {
+    
+
+     if (authenticated && zeroDevReady) {
+       // route home
+       console.log('authenticated');
+       router.push('/home');
+       return;
+     } else {
+       router.push('/login');
+     }
+   }, [authenticated, zeroDevReady]); 
+ 
 
   return (
     <html className='h-full overflow-auto font-sans'>

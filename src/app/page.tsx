@@ -15,8 +15,7 @@ import Link from 'next/link';
 export default function HomePage() {
   const router = useRouter();
 
-  
-  
+ 
   const [welcomeMessage, setWelcomeMessage] =
     useState<string>('Checking device...');
   const { isMobile, userAgentString, userAgent, isStandalone } = useUserAgent();
