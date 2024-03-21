@@ -25,11 +25,15 @@ import { useSearchParams } from 'next/navigation';
 import { Avatar } from '@/app/components/ui/avatar';
 // link
 import Link from 'next/link';
+
+// hooks
 import useSendUsdc from '@/app/hooks/useSendUsdc';
+
+// components
 import Success from '@/app/components/Success/Success';
-import { useEffect } from 'react';
+// redux
 import { useDispatch } from 'react-redux';
-import { setPendingTxSlice } from '@/GlobalRedux/Features/pendingTx/pendingTxSlice';
+
 interface ConfirmProps {
   showConfirm: boolean;
 }
@@ -43,6 +47,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
   const searchParams = useSearchParams();
   let payee = searchParams.get('payee');
   let amount = searchParams.get('amount');
+  
   const { sendUsdc, transactionStatus, loading, transactionHash } =
     useSendUsdc();
 
@@ -52,8 +57,8 @@ export default function Page({ showConfirm }: ConfirmProps) {
     if (!payee || !amount) return;
     console.log('calling hook');
     sendUsdc(amount, payee);
-    
   };
+
   return (
     <>
       <DrawerHeader>

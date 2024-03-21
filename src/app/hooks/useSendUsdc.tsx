@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+// react
+import { useState} from 'react';
+// viem
 import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
+// privy
 import { usePrivySmartAccount } from '@zerodev/privy';
-import { useDispatch } from 'react-redux';
-import { setPendingTxSlice } from '@/GlobalRedux/Features/pendingTx/pendingTxSlice';
 
 const useSendUsdc = () => {
-  const { zeroDevReady, user, sendTransaction } = usePrivySmartAccount();
+  const { zeroDevReady, sendTransaction } = usePrivySmartAccount();
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [transactionHash, setTransactionHash] = useState<string>('');
@@ -23,7 +24,6 @@ const useSendUsdc = () => {
       });
 
       setLoading(true);
-      console.log('loading is true');
       const txnHash = await sendTransaction({
         to: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8', // USDC contract address
         value: BigInt(0),
@@ -33,10 +33,7 @@ const useSendUsdc = () => {
       if (txnHash) {
         setLoading(false);
         setTransactionStatus(true);
-
         setTransactionHash(txnHash);
-
-        console.log('Transaction Hash:', txnHash);
       }
     } catch (error) {
       console.log(error);
