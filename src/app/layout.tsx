@@ -32,6 +32,8 @@ import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
 
+
+
 export default function RootLayout({
   auth,
   transactionmodal,
@@ -51,6 +53,8 @@ export default function RootLayout({
   const [showNav, setShowNav] = useState<boolean>(true);
 
   const pathname = usePathname();
+
+  
 
   /* 
   useEffect(() => {

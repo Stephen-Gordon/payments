@@ -14,7 +14,7 @@ export default function HomePage() {
 
   const [welcomeMessage, setWelcomeMessage] =
     useState<string>('Checking device...');
-  const { isMobile, userAgentString, userAgent } = useUserAgent();
+  const { isMobile, userAgentString, userAgent, isStandalone } = useUserAgent();
 
   useEffect(() => {
     const welcomeMessage = isMobile
@@ -27,6 +27,7 @@ export default function HomePage() {
     <main className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
       <p className=''>{welcomeMessage}</p>
       <AddToHomeScreen />
+      
     </main>
   );
 }
