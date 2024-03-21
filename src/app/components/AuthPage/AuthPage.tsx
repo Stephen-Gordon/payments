@@ -18,8 +18,8 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
 
      useEffect(() => {
 
-      /* Uncomment for auth   */
-       /* if (window) {
+
+       if (window) {
         console.log("window is here") 
          if (window.matchMedia('(display-mode: standalone)').matches) {
           console.log('standalone')
@@ -35,7 +35,7 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
            router.push('/');
          }
 
-       } */
+       }
 
          
 

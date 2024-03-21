@@ -11,6 +11,7 @@ import { Button } from '../components/ui/button';
 
 import { motion } from 'framer-motion';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
+import Link from 'next/link';
 
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false);
@@ -74,6 +75,7 @@ const Page = () => {
                 <Button className='mt-4' disabled={!ready || authenticated} onClick={login}>
                   Login
                 </Button>
+                <Link href={'/home'}>home</Link>
 
           
         </div>
