@@ -9,9 +9,15 @@ import useUserAgent from '@/app/hooks/useUserAgent';
 // next
 import { useRouter } from 'next/navigation';
 
+// privy 
+import { usePrivySmartAccount } from '@zerodev/privy';
+import { Link } from 'lucide-react';
+
 export default function HomePage() {
   const router = useRouter();
 
+  
+  
   const [welcomeMessage, setWelcomeMessage] =
     useState<string>('Checking device...');
   const { isMobile, userAgentString, userAgent, isStandalone } = useUserAgent();
@@ -27,6 +33,8 @@ export default function HomePage() {
     <main className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
       <p className=''>{welcomeMessage}</p>
       <AddToHomeScreen />
+
+      <Link href='home'>Home</Link>
       
     </main>
   );

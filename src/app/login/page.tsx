@@ -48,19 +48,12 @@ const Page = () => {
     if (zeroDevReady && authenticated && user.wallet.address) {
       // set user address
       dispatch(setAddress(user?.wallet?.address));
-
+      
       // route home
       router.push('/home');
     }
   }, [authenticated, zeroDevReady, user]);
 
-  const promptToInstall = async () => {
-    if (!installationPrompt) return;
-    installationPrompt.prompt();
-    installationPrompt.userChoice.then((response: { outcome: string }) => {
-      setIsInstalled(response.outcome === 'accepted');
-    });
-  };
 
   return (
     <>
