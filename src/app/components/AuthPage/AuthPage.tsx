@@ -19,7 +19,7 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
      useEffect(() => {
 
 
-       if (window) {
+     /*   if (window) {
         console.log("window is here") 
          if (window.matchMedia('(display-mode: standalone)').matches) {
           console.log('standalone')
@@ -35,7 +35,18 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
            router.push('/');
          }
 
-       }
+       } */
+
+          
+               
+               if (authenticated && zeroDevReady) {
+                 // route home
+                 console.log('authenticated');
+                 router.push('/home');
+               } else {
+                 router.push('/login');
+               }
+           
 
          
 
