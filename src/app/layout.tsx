@@ -54,8 +54,6 @@ export default function RootLayout({
 
   const pathname = usePathname();
 
-  const { authenticated, zeroDevReady } = usePrivySmartAccount();
-
 
   useEffect(() => {})
 
@@ -75,7 +73,7 @@ export default function RootLayout({
     }
   }, []); */
 
-   useEffect(() => {
+   /* useEffect(() => {
     
 
      if (authenticated && zeroDevReady) {
@@ -86,7 +84,7 @@ export default function RootLayout({
      } else {
        router.push('/login');
      }
-   }, [authenticated, zeroDevReady]); 
+   }, [authenticated, zeroDevReady]);  */
  
 
   return (

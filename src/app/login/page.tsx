@@ -16,35 +16,34 @@ import Link from 'next/link';
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false);
   const [installationPrompt, setInstallationPrompt] = useState<any>();
+
+  // router
   const router = useRouter();
+
+  // privy
   const { ready, authenticated, login, zeroDevReady, user } =
     usePrivySmartAccount();
 
   // redux
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Helps you prompt your users to install your PWA
-    // See https://web.dev/learn/pwa/installation-prompt/
-    // iOS Safari does not have this event, so you will have
-    // to prompt users to add the PWA via your own UI (e.g. a
-    // pop-up modal)
+ /*  useEffect(() => {
+    
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       setIsInstalled(false);
       setInstallationPrompt(e);
     });
-  }, []);
+  }, []); */
 
-  useEffect(() => {
-    // Detect if the PWA is installed
-    // https://web.dev/learn/pwa/detection/#detecting-the-transfer
+ /*  useEffect(() => {
+   
     window.addEventListener('DOMContentLoaded', () => {
       if (window.matchMedia('(display-mode: standalone)').matches) {
         setIsInstalled(true);
       }
     });
-  });
+  }); */
   useEffect(() => {
     if (zeroDevReady && authenticated ) {
       // set user address
@@ -53,7 +52,7 @@ const Page = () => {
       // route home
       router.push('/home');
     }
-  }, [authenticated, zeroDevReady, user]);
+  }, [authenticated, zeroDevReady]);
 
 
   return (

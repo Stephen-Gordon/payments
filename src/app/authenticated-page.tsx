@@ -2,6 +2,7 @@
 import { usePrivy } from '@privy-io/react-auth'
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { usePrivySmartAccount } from '@zerodev/privy'
 
 interface Props {
     children: React.ReactNode
@@ -9,17 +10,17 @@ interface Props {
 
 const AuthenticatedPage = ({ children }: Props) => {
     const router = useRouter()
-    const { ready, authenticated } = usePrivy()
+    const { zeroDevReady, authenticated } = usePrivySmartAccount()
 
     useEffect(() => {
-        if (ready && !authenticated) router.push('/')
-    }, [ready, authenticated, router])
+        if (zeroDevReady && !authenticated) router.push('/home')
+    }, [zeroDevReady, authenticated, router])
 
     return (
         <div>
 
-            <main className='mx-auto max-w-screen-md pt-20 pb-16 px-safe sm:pb-0'>
-                <div className='p-6'>{children}</div>
+            <main className=''>
+                <div className=''>{children}</div>
             </main>
 
         </div>
