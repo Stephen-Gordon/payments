@@ -2,6 +2,7 @@
 import SheetLayout from '@/app/components/Layouts/SheetLayout';
 import { Metadata } from 'next';
 import * as React from 'react';
+import AuthPage from '../components/AuthPage/AuthPage';
 
 export default function ComponentsLayout({
   children,
@@ -10,7 +11,9 @@ export default function ComponentsLayout({
 }) {
   return (
     <>
-      <SheetLayout>{children}</SheetLayout>
+      <AuthPage>
+        <SheetLayout>{children}</SheetLayout>
+      </AuthPage>
     </>
   );
 }

@@ -19,6 +19,7 @@ import {
 
 //import { format, parseISO } from 'date-fns';
 import { format, parseISO, set } from 'date-fns';
+import AuthPage from '../components/AuthPage/AuthPage';
 
 export default function Page() {
   const [transactions, setTxs] = useState<any[]>([]);
@@ -93,63 +94,67 @@ export default function Page() {
   }, [transactionState]); // Add transactions as a dependency
 
   return (
-    <motion.div
-      layoutId='activity'
-      transition={{ duration: 0.3 }} /*  onAnimationComplete={(definition) => {
+    <AuthPage>
+      <motion.div
+        layoutId='activity'
+        transition={{
+          duration: 0.3,
+        }} /*  onAnimationComplete={(definition) => {
         setShowTxs(true);
       }} */
-      className='absolute w-full text-xl'
-    >
-      <Card style={{ border: '0px' }}>
-        <CardHeader>
-          <motion.div transition={{ duration: 0.4 }}>
-            <CardTitle>Recent Transactions</CardTitle>
-          </motion.div>
-        </CardHeader>
-        <CardContent className='border-0 border-none'>
-          <motion.div>
-            {showTxs && (
-              <>
-                {groupedTransactions && (
-                  <>
-                    <div className='overflow-auto'>
-                      {groupedTransactions.map((month, i) => (
-                        <div key={i} className='grid'>
-                          <div
-                            style={{ marginBottom: '32px' }}
-                            className='flex w-full justify-center'
-                          >
-                            <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
-                              {month.monthName}
-                            </p>
-                          </div>
-                          {month.transactions.map((transaction, j) => (
-                            <motion.div
-                              className='grid h-fit w-full space-y-6'
-                              transition={{
-                                duration: 0.4,
-                                delay: j * 0.2,
-                                ease: 'easeInOut', // Using a custom easing function
-                              }}
-                              key={j}
+        className='absolute w-full text-xl'
+      >
+        <Card style={{ border: '0px' }}>
+          <CardHeader>
+            <motion.div transition={{ duration: 0.4 }}>
+              <CardTitle>Recent Transactions</CardTitle>
+            </motion.div>
+          </CardHeader>
+          <CardContent className='border-0 border-none'>
+            <motion.div>
+              {showTxs && (
+                <>
+                  {groupedTransactions && (
+                    <>
+                      <div className='overflow-auto'>
+                        {groupedTransactions.map((month, i) => (
+                          <div key={i} className='grid'>
+                            <div
+                              style={{ marginBottom: '32px' }}
+                              className='flex w-full justify-center'
                             >
-                              <div className='mb-6 grid h-fit w-full'>
-                                <RecentTransaction
-                                  transaction={month.transactions[j]}
-                                />
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </>
-            )}
-          </motion.div>
-        </CardContent>
-      </Card>
-    </motion.div>
+                              <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
+                                {month.monthName}
+                              </p>
+                            </div>
+                            {month.transactions.map((transaction, j) => (
+                              <motion.div
+                                className='grid h-fit w-full space-y-6'
+                                transition={{
+                                  duration: 0.4,
+                                  delay: j * 0.2,
+                                  ease: 'easeInOut', // Using a custom easing function
+                                }}
+                                key={j}
+                              >
+                                <div className='mb-6 grid h-fit w-full'>
+                                  <RecentTransaction
+                                    transaction={month.transactions[j]}
+                                  />
+                                </div>
+                              </motion.div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+            </motion.div>
+          </CardContent>
+        </Card>
+      </motion.div>
+    </AuthPage>
   );
 }

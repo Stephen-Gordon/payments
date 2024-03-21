@@ -34,6 +34,7 @@ import useGetAddress from '../hooks/useGetAddress';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 import useGetTokenBalance from '../hooks/useGetTokenBalance';
+import AuthPage from '../components/AuthPage/AuthPage';
 
 export default function Page() {
   // privy
@@ -70,83 +71,84 @@ export default function Page() {
   const usdcBalance = useGetTokenBalance(address as string) 
   console.log('usdcBalance', usdcBalance);
   return (
-    <div id='render' className='min-h-[150vh]'>
-      <div className='absolute right-4 top-4'>
-        <Link
-          /*   onClick={() => {
+    <AuthPage>
+      <div id='render' className='min-h-[150vh]'>
+        <div className='absolute right-4 top-4'>
+          <Link
+            /*   onClick={() => {
             dispatch(setSheet(true));
           }}  */ href={{
-            pathname: '/menu',
-            query: { isNavOpen: true },
-          }}
-        >
-          <Menu onClick={() => router.push(`/menu?isNavOpen=true`)} />
-        </Link>
-      </div>
-      <div className='blurios'>
-        <div className='absolute -z-50 '>
-          <BackgroundGradientAnimation />
+              pathname: '/menu',
+              query: { isNavOpen: true },
+            }}
+          >
+            <Menu onClick={() => router.push(`/menu?isNavOpen=true`)} />
+          </Link>
         </div>
-        <motion.div
-          style={{ y, scale, opacity }}
-          className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
-        >
-         {/*  <Balance /> */}
-          {/*   {address} */}
-        </motion.div>
-
-        <motion.div
-          style={{ y, scale, opacity }}
-          className='mt-10 grid grid-cols-2 gap-2 p-2'
-        >
-          <div>
-            <Link
-              onClick={() => {
-                dispatch(setSheet(true));
-              }}
-              href={{
-                pathname: '/search',
-              }}
-            >
-              <Button className='text-xl' size={'lg'} variant={'default'}>
-                <div className='flex grid-cols-3 content-center items-center'>
-                  <div className='text-xl'>
-                    <div>Send</div>
-                  </div>
-                  <div className='px-2'></div>
-                  <div>
-                    <Send size={20} />
-                  </div>
-                </div>
-              </Button>
-            </Link>
+        <div className='blurios'>
+          <div className='absolute -z-50 '>
+            <BackgroundGradientAnimation />
           </div>
+          <motion.div
+            style={{ y, scale, opacity }}
+            className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
+          >
+            {/*  <Balance /> */}
+            {/*   {address} */}
+          </motion.div>
 
-          <div>
-            <Link
-              onClick={() => {
-                dispatch(setSheet(true));
-              }}
-              href={{
-                pathname: '/receive',
-              }}
-            >
-              <Button className='text-xl' size={'lg'} variant={'default'}>
-                <div className='flex grid-cols-3 content-center items-center'>
-                  <div className='text-xl'>
-                    <div>Receive</div>
+          <motion.div
+            style={{ y, scale, opacity }}
+            className='mt-10 grid grid-cols-2 gap-2 p-2'
+          >
+            <div>
+              <Link
+                onClick={() => {
+                  dispatch(setSheet(true));
+                }}
+                href={{
+                  pathname: '/search',
+                }}
+              >
+                <Button className='text-xl' size={'lg'} variant={'default'}>
+                  <div className='flex grid-cols-3 content-center items-center'>
+                    <div className='text-xl'>
+                      <div>Send</div>
+                    </div>
+                    <div className='px-2'></div>
+                    <div>
+                      <Send size={20} />
+                    </div>
                   </div>
-                  <div className='px-2'></div>
-                  <div>
-                    <QrCode size={22} />
+                </Button>
+              </Link>
+            </div>
+
+            <div>
+              <Link
+                onClick={() => {
+                  dispatch(setSheet(true));
+                }}
+                href={{
+                  pathname: '/receive',
+                }}
+              >
+                <Button className='text-xl' size={'lg'} variant={'default'}>
+                  <div className='flex grid-cols-3 content-center items-center'>
+                    <div className='text-xl'>
+                      <div>Receive</div>
+                    </div>
+                    <div className='px-2'></div>
+                    <div>
+                      <QrCode size={22} />
+                    </div>
                   </div>
-                </div>
-              </Button>
-            </Link>
-          </div>
-        </motion.div>
-        <div className='bg-accent/90 relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
-          {/*  <Tab.Group>
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+          <div className='bg-accent/90 relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+            {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>
                 <Tab>
@@ -165,15 +167,16 @@ export default function Page() {
             </Tab.Panels>
           </Tab.Group> */}
 
-          {/*   <div className='mb-4 flex justify-between'>
+            {/*   <div className='mb-4 flex justify-between'>
                 
                   <div className='text-lg'>Activity</div>
                
               </div>  */}
 
-          <Activity />
+            <Activity />
+          </div>
         </div>
       </div>
-    </div>
+    </AuthPage>
   );
 }

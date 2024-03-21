@@ -1,11 +1,14 @@
-'use client'
-import { useRouter } from 'next/router';
-// Next
-import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Page() {
-  const searchParams = useSearchParams();
-  let address = searchParams.get('address');
-
-  return <p>Payee: {address}</p>;
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/home');
+  }, []);
+  return (
+    <>
+      <h1> backup payee</h1>
+    </>
+  );
 }
