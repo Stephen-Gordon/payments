@@ -23,7 +23,7 @@ export default function HomePage() {
 
   useEffect(() => {
     const welcomeMessage = isMobile
-      ? 'You are on a mobile device.'
+      ? ''
       : 'You are on a desktop device. Please use a mobile device to view this app.';
     setWelcomeMessage(welcomeMessage);
   }, [isMobile]);
