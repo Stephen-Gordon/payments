@@ -17,10 +17,9 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
     const { userAgent, isMobile, isStandalone, isIOS } = useUserAgent();
 
      useEffect(() => {
-      /* console.log("standalone in auth page " , isStandalone) */
 
-
-       if (window) {
+      /* Uncomment for auth   */
+       /* if (window) {
         console.log("window is here") 
          if (window.matchMedia('(display-mode: standalone)').matches) {
           console.log('standalone')
@@ -36,20 +35,8 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
            router.push('/');
          }
 
-       }
+       } */
 
-    /*   if (!isStandalone) {
-
-        router.push('/');
-      } */
-     /*  if (authenticated && zeroDevReady) {
-        // route home
-        console.log('authenticated');
-        router.push('/home');
-      } else {
-        router.push('/login');
-      }
-            */
          
 
 

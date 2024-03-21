@@ -33,6 +33,8 @@ import useGetAddress from '../hooks/useGetAddress';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 
+import useGetTokenBalance from '../hooks/useGetTokenBalance';
+
 export default function Page() {
   // privy
   const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
@@ -46,9 +48,7 @@ export default function Page() {
   let scale = useTransform(scrollYProgress, [0, 1], ['100%', '90%']);
 
   useEffect(() => {
-    console.log('hi');
     console.log('user', user);
-    console.log('zeroDevReady', zeroDevReady);
   }, [zeroDevReady]);
 
   // next
@@ -67,7 +67,8 @@ export default function Page() {
 
   // hooks
   const address = useGetAddress();
-
+  const usdcBalance = useGetTokenBalance(address as string) 
+  console.log('usdcBalance', usdcBalance);
   return (
     <div id='render' className='min-h-[150vh]'>
       <div className='absolute right-4 top-4'>

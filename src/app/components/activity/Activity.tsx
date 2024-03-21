@@ -49,7 +49,6 @@ export default function Activity() {
 
   useEffect(() => {
     /*  dispatch(setTransactions(transactions)); */
-    console.log('transactionState', transactionState);
     setTxs(transactionState?.slice(0, 3));
   }, [transactionState]); // Add transactions as a dependency
 
