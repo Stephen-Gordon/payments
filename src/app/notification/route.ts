@@ -23,7 +23,7 @@ export const POST = async (req: NextRequest) => {
     const response = await webPush.sendNotification(
       subscription,
       JSON.stringify({
-        title: `PWA Payments`,
+        title: `Payments`,
         message: `${message}`,
       })
     );

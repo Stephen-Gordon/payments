@@ -77,17 +77,20 @@ export default function RootLayout({
       <head>
         <title>Payments, Stephen Gordon</title>
 
-        <meta name='application-name' content='PWA App' />
+        <meta name='application-name' content='Payments' />
         <meta name='apple-mobile-web-app-capable' content='yes' />
-        <meta name='apple-mobile-web-app-status-bar-style' content='default' />
-        <meta name='apple-mobile-web-app-title' content='PWA App' />
-        <meta name='description' content='PWA Payments, Stephen Gordon' />
+        <meta
+          name='apple-mobile-web-app-status-bar-style'
+          content='black-transparent'
+        />
+        <meta name='apple-mobile-web-app-title' content='Payments' />
+        <meta name='description' content='Payments, Stephen Gordon' />
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='msapplication-config' content='/icons/browserconfig.xml' />
         <meta name='msapplication-TileColor' content='#2B5797' />
         <meta name='msapplication-tap-highlight' content='no' />
-        <meta name='theme-color' content='#101012' />
+        <meta name='theme-color' content='#020817' />
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
         <link
           rel='apple-touch-icon'

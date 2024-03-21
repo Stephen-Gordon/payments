@@ -9,6 +9,9 @@ import { isAndroid } from 'react-device-detect';
 import { useDispatch } from 'react-redux';
 import { Button } from '../components/ui/button';
 
+import { motion } from 'framer-motion';
+import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
+
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false);
   const [installationPrompt, setInstallationPrompt] = useState<any>();
@@ -61,18 +64,25 @@ const Page = () => {
 
   return (
     <>
-      <main>
-        <div className='flex h-screen w-screen flex-col items-center justify-center'>
-          <h2 className='my-4 text-xl font-semibold text-gray-800'>Payments</h2>
-          <div className='mt-2 w-1/2'>
-            {!isInstalled && isAndroid ? (
-              <Button onClick={promptToInstall}>Install App</Button>
-            ) : (
-              <Button disabled={!ready || authenticated} onClick={login}>
-                Login
-              </Button>
-            )}
-          </div>
+      <main className='relative'>
+        <div className='absolute -z-50 '> 
+          <BackgroundGradientAnimation/>
+        </div>
+        <div className='grid p-4 justify-center mt-[30vh]'>
+
+                <div className=' space-y-2 text-center'>
+                  <motion.h1 key="create-an-account" initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity:0 }} className='text-2xl font-semibold tracking-tight'>
+                    Log in or Sign up
+                  </motion.h1>
+                {/*   <motion.p  initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity:0 }} className='text-muted-foreground text-sm'>
+                    Enter your email below to create your account
+                  </motion.p> */}
+                </div>
+                <Button className='mt-4' disabled={!ready || authenticated} onClick={login}>
+                  Login
+                </Button>
+
+          
         </div>
       </main>
     </>

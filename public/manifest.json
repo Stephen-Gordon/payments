@@ -1,8 +1,8 @@
 {
-  "name": "Next-13 PWA",
-  "short_name": "PWA",
-  "theme_color": "#101012",
-  "background_color": "#101012",
+  "name": "Payments",
+  "short_name": "Payments",
+  "theme_color": "#020817",
+  "background_color": "#020817",
   "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
