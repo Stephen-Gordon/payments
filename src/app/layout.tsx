@@ -169,7 +169,7 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
-                          <AuthPage>
+                          
                             <div>{auth}</div>
                             <div>{drawer}</div>
 
@@ -182,7 +182,7 @@ export default function RootLayout({
                             <div className='w-full overflow-hidden'>
                               <BottomNavbar />
                             </div>
-                          </AuthPage>
+                          
                         </LayoutGroup>
                       </AnimatePresence>
                     </QueryClientProvider>
