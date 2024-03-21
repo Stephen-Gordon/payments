@@ -34,7 +34,7 @@ export default function HomePage() {
       <p className=''>{welcomeMessage}</p>
       <AddToHomeScreen />
 
-      <Link href='home'>Home</Link>
+      <Link href='/home'>Home</Link>
       
     </main>
   );
