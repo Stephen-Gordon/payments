@@ -11,8 +11,7 @@ import { useRouter } from 'next/navigation';
 
 // privy 
 import { usePrivySmartAccount } from '@zerodev/privy';
-import { Link } from 'lucide-react';
-
+import Link from 'next/link';
 export default function HomePage() {
   const router = useRouter();
 
