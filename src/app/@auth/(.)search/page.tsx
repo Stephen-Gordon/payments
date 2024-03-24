@@ -43,9 +43,9 @@ import { Avatar } from '@/app/components/ui/avatar';
 
 // types
 import { Contact } from '@/app/types/types';
-import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect';
 
-
+import { TextGenerateEffect
+ } from '@/app/components/ui/text-generate-effect';
 export default function Page() {
   const [payee, setPayee] = useState<string>('');
   const [scanner, setScanner] = useState<boolean>(false);
@@ -102,7 +102,10 @@ export default function Page() {
                 }}
               />
             </div>
-            <TextGenerateEffect words='Search'></TextGenerateEffect>
+            <p className='text-center'>
+
+              <TextGenerateEffect words='Search'></TextGenerateEffect>
+            </p>
             <div className='ml-auto'></div>
           </DrawerTitle>
         </DrawerHeader>

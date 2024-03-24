@@ -91,7 +91,7 @@ export default function AddAContact({
 
   return (
     <Credenza open={open}>
-      <CredenzaContent className='w-full h-fit'>
+      <CredenzaContent className='w-full h-fit bg-card' >
         <CredenzaHeader className='w-full'>
           <CredenzaTitle><TextGenerateEffect words='Add a Contact'></TextGenerateEffect></CredenzaTitle>
         </CredenzaHeader>
