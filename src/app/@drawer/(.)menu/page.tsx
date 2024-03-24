@@ -24,7 +24,7 @@ export default function Page() {
   return (
     <>
       <Drawer shouldScaleBackground={true} open={isNavOpen}>
-        <DrawerContent>
+        <DrawerContent className='ios'>
           <SendNotification />
           <DrawerHeader>
             <DrawerTitle>Are you absolutely sure?</DrawerTitle>

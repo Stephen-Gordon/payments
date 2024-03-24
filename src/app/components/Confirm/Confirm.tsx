@@ -65,7 +65,7 @@ export default function Confirm({ showConfirm, payee, amount }: ConfirmProps) {
           </DrawerTitle>
         </DrawerHeader>
 
-        <DrawerContent>
+        <DrawerContent className='ios'>
           <div className='p-4'>
             <div className='ml-4 space-y-1'>
               <p className='text-muted-foreground text-sm'>You're sending</p>

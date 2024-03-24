@@ -28,7 +28,15 @@ const DrawerOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
-    className={cn('fixed inset-0 z-50 bg-black/80', className)}
+    style={{
+      backgroundImage: 'radial-gradient(transparent 30%, black)',
+      WebkitMaskImage:
+        '-webkit-radial-gradient(900px at center, transparent 30%, black)',
+    }}
+    className={cn(
+      'fixed inset-0 z-50 bg-white bg-gradient-to-t [mask-image:radial-gradient(900px_at_center,transparent_30%,white)] dark:bg-black',
+      className
+    )}
     {...props}
   />
 ));
@@ -37,19 +45,21 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+>(({ className, dontShowDrag, children, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
       /* style={{ height: 'calc(100vh - 2rem)' }} */
       className={cn(
-        ' ios bg-background/80 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[16px] border-t',
+        '  bg-background/80 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[16px] border-t',
         className
       )}
       {...props}
     >
-      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full ' />
+      {!dontShowDrag && (
+        <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full ' />
+      )}
       <div className='overflow-auto'> {children}</div>
     </DrawerPrimitive.Content>
   </DrawerPortal>

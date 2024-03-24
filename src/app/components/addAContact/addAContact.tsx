@@ -5,14 +5,28 @@ import {
   CredenzaHeader,
   CredenzaTitle,
   CredenzaContent,
+  CredenzaClose,
 } from '@/app/components/ui/credenza';
 import { Input } from '../ui/input';
 import { Avatar } from '../ui/avatar';
 import { Button } from '../ui/button';
+
+// redux
 import { setContacts } from '@/GlobalRedux/Features/contacts/contactsSlice';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+
+// react
+import { useEffect, useState } from 'react';
+
+// types
 import { Contact } from '@/app/types/types';
+
+// framer
+import { motion } from 'framer-motion';
+import { isAddress } from 'viem';
+import { TextGenerateEffect } from '../ui/text-generate-effect';
+
+
 
 interface AddAContactProps {
   open: boolean;
@@ -27,7 +41,24 @@ export default function AddAContact({
   contactsState,
   payee,
 }: AddAContactProps) {
+
+
+  // state
   const [newContactName, setNewContactName] = useState<string>('');
+  const [newContactAddress, setNewContactAddress] = useState<string>('');
+
+  const [showAddButton, setShowAddButton] = useState<boolean>(true);
+
+  // error
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (newContactName === '' || newContactAddress === '' || showErrorMessage ) {
+      setShowAddButton(false);
+    } else {
+      setShowAddButton(true);
+    }
+  }, [newContactName, newContactAddress])
 
   const isContactAvailable = (name: string): boolean => {
     return contactsState.some(
@@ -35,8 +66,10 @@ export default function AddAContact({
     );
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewContactName(e.target.value);
+  const handleAddAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isAddressValid = isAddress(e.target.value);
+    setNewContactAddress(e.target.value);
+    !isAddressValid && setShowErrorMessage(true);
   };
 
   const dispatch = useDispatch();
@@ -58,37 +91,78 @@ export default function AddAContact({
 
   return (
     <Credenza open={open}>
-      <CredenzaContent>
-        <CredenzaHeader>
-          <CredenzaTitle>Add a Contact</CredenzaTitle>
+      <CredenzaContent className='w-full h-fit'>
+        <CredenzaHeader className='w-full'>
+          <CredenzaTitle><TextGenerateEffect words='Add a Contact'></TextGenerateEffect></CredenzaTitle>
         </CredenzaHeader>
-        <CredenzaBody>
-          <div className='grid w-full items-center justify-center'>
-            <Avatar className='h-9 w-9'></Avatar>
-            <div className='flex flex-col space-y-4'>
-              <div>
-                <label htmlFor='name'>Name</label>
+
+        <div className='grid p-4 space-y-6' >
+          <div className='w-full' style={{ width: '100%' }}>
+            <Input
+              onChange={(e) => setNewContactName(e.target.value)}
+              type='text'
+              id='name'
+              name='name'
+              style={{ width: '100%' }}
+              value={newContactName}
+              placeholder='Name'
+              className='w-full'
+            />
+          </div>
+          {payee == '' && (
+            <div className='w-full'>
+              <div className='w-full'>
                 <Input
-                  onChange={handleChange}
+                  onChange={handleAddAddress}
                   type='text'
-                  id='name'
-                  name='name'
-                  value={newContactName}
-                  placeholder='Name'
+                  id='address'
+                  name='address'
+                  value={newContactAddress}
+                  placeholder='Address'
                   className='w-full'
                 />
               </div>
+
+              <motion.div
+                key='vaild-address-contacts'
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: 1,
+                  transition: { duration: 0.4, ease: 'easeInOut' },
+                }}
+                exit={{ opacity: 0 }}
+                className='w-full'
+              >
+                {showErrorMessage && (
+                  <div
+                    key='valid-address'
+                    className='text-muted-foreground text-sm mt-2'
+                  >
+                    Please enter a valid address
+                  </div>
+                )}
+              </motion.div>
             </div>
-          </div>
-        </CredenzaBody>
+          )}
+        </div>
+
         <CredenzaFooter>
-          <Button
-            className='w-full'
-            variant={'default'}
-            onClick={handleAddContact}
-          >
-            Add To Contacts
-          </Button>
+          {showAddButton && (
+            <motion.div
+              key='add-contact-button'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Button
+                className='w-full'
+                variant={'default'}
+                onClick={handleAddContact}
+              >
+                Add To Contacts
+              </Button>
+            </motion.div>
+          )}
           <Button
             className='w-full'
             variant={'destructive'}

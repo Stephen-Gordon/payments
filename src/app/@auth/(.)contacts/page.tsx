@@ -30,8 +30,19 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
 import { Contact } from '@/app/types/types';
+import { User2 } from 'lucide-react';
+
+import { Button } from '@/app/components/ui/button';
+import AddAContact from '@/app/components/addAContact/addAContact';
+import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect';
 
 export default function Page() {
+
+  // state
+  const [showAddContact, setShowAddContact] = useState<boolean>(false);
+  const [payee, setPayee] = useState<Contact | null>(null);
+
+
   //next
   const searchParams = useSearchParams();
   let isNavOpen = searchParams.get('isNavOpen');
@@ -43,10 +54,16 @@ export default function Page() {
 
   const contactsState = useSelector((state: RootState) => state.contacts.value);
 
+  const handleContactsClick = () => {
+    setShowAddContact(true);
+  }
+
   return (
     <>
       <DrawerHeader>
-        <DrawerTitle>Contacts</DrawerTitle>
+        <DrawerTitle>
+          <TextGenerateEffect words='Contacts'></TextGenerateEffect>
+        </DrawerTitle>
       </DrawerHeader>
       <Card style={{ border: '0px' }}>
         <CardContent className='border-0 border-none'>
@@ -64,20 +81,55 @@ export default function Page() {
                     query: { payeeAddress: contact.address },
                   }}
                 >
-                    <div className='flex w-full items-center '>
-                      <Avatar className='h-9 w-9 bg-white'></Avatar>
-                      <div className='ml-4 space-y-1'>
-                        <div className='text-sm font-medium leading-none'>
-                          {contact.name}
-                        </div>
+                  <div className='flex w-full items-center '>
+                    <Avatar className='h-9 w-9 bg-white'></Avatar>
+                    <div className='ml-4 space-y-1'>
+                      <div className='text-sm font-medium leading-none'>
+                        {contact.name}
                       </div>
                     </div>
+                  </div>
                 </Link>
               </motion.div>
             ))}
           </div>
         </CardContent>
       </Card>
+      <DrawerFooter
+        style={{ zIndex: 3000 }}
+        className='fixed bottom-4 w-full  '
+      >
+        <div className='w-full'>
+          <Button
+            onClick={handleContactsClick}
+            className='text-xl'
+            size={'lg'}
+            variant={'default'}
+          >
+            <div className='flex grid-cols-3 content-center items-center'>
+              <div className='text-xl'>
+                <div>New Contact</div>
+              </div>
+              <div className='px-2'></div>
+              <div>
+                <User2
+                  strokeWidth={1}
+                  className='stroke-background'
+                  size={20}
+                />
+              </div>
+            </div>
+          </Button>
+        </div>
+      </DrawerFooter>
+      <AddAContact
+        open={showAddContact}
+        setShowAddContact={setShowAddContact}
+        contactsState={contactsState}
+        payee={''}
+      />
     </>
   );
 }
+
+

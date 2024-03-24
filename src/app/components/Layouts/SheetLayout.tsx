@@ -12,6 +12,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerOverlay,
   DrawerTitle,
 } from '@/app/components/ui/drawer';
 import { useState } from 'react';
@@ -50,7 +51,9 @@ const SheetLayout = ({ children }) => {
         }}
         open={isOpen}
       >
-        <DrawerContent /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
+        <DrawerOverlay />
+        <DrawerContent
+          className='ios' /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
         >
           {children}
         </DrawerContent>

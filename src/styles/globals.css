@@ -11,8 +11,8 @@
 }
 
 .ios {
-  backdrop-filter: blur(100px) saturate(1000%);
-    -webkit-backdrop-filter: blur(100px) saturate(1000%);
+  backdrop-filter: blur(100px) ;
+    -webkit-backdrop-filter: blur(100px) ;
         } 
 @layer base {
   :root {

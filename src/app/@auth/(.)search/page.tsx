@@ -43,6 +43,7 @@ import { Avatar } from '@/app/components/ui/avatar';
 
 // types
 import { Contact } from '@/app/types/types';
+import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect';
 
 
 export default function Page() {
@@ -101,7 +102,7 @@ export default function Page() {
                 }}
               />
             </div>
-            <p className='text-center'>Send</p>
+            <TextGenerateEffect words='Search'></TextGenerateEffect>
             <div className='ml-auto'></div>
           </DrawerTitle>
         </DrawerHeader>

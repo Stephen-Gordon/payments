@@ -47,15 +47,13 @@ export default function Page() {
 
   return (
     <>
-      <Drawer  shouldScaleBackground={true} open={isNavOpen}>
-        <DrawerContent>
+      <Drawer shouldScaleBackground={true} open={isNavOpen}>
+        <DrawerContent className='ios'>
           <DrawerHeader>
             <DrawerTitle>Contacts</DrawerTitle>
           </DrawerHeader>
           <Card style={{ border: '0px' }}>
-            
             <CardContent className='border-0 border-none'>
-              
               {contactsState.map((contact, index) => (
                 <motion.div
                   key={contact.id}
@@ -63,23 +61,23 @@ export default function Page() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                 >
-                    <Link
-                      href={{
-                        pathname: `/payee`,
-                        query: { payeeAddress: contact.address },
-                      }}
-                    >
-                      <div className='space-y-8'>
-                        <div className='flex w-full items-center '>
-                          <Avatar className='h-9 w-9 bg-white'></Avatar>
-                          <div className='ml-4 space-y-1'>
-                            <div className='text-sm font-medium leading-none'>
-                              {contact.name}
-                            </div>
+                  <Link
+                    href={{
+                      pathname: `/payee`,
+                      query: { payeeAddress: contact.address },
+                    }}
+                  >
+                    <div className='space-y-8'>
+                      <div className='flex w-full items-center '>
+                        <Avatar className='h-9 w-9 bg-white'></Avatar>
+                        <div className='ml-4 space-y-1'>
+                          <div className='text-sm font-medium leading-none'>
+                            {contact.name}
                           </div>
                         </div>
                       </div>
-                    </Link>
+                    </div>
+                  </Link>
                 </motion.div>
               ))}
             </CardContent>
