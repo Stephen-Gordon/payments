@@ -29,7 +29,7 @@ const BottomNavbar = () => {
   return (
     <>
       {showNav && (
-        <nav className='bg-background/50 fixed bottom-0 z-40 flex w-full justify-between overflow-hidden bg-opacity-10 bg-clip-padding p-4 px-8 pb-8 saturate-200 backdrop-blur-xl backdrop-filter'>
+        <nav style={{backdropFilter: 'blur(100px)'}} className='fixed transition-all duration-500 bottom-0 z-40 bg-opacity-0 flex w-full justify-between overflow-hidden p-4 px-8 pb-8 '>
           <Link href='/home'>
             <Home
               className='stroke-muted-foreground'
@@ -56,8 +56,7 @@ const BottomNavbar = () => {
               dispatch(setSheet(true));
             }}
           >
-            <BookUser
-              className='stroke-muted-foreground' strokeWidth={1} />
+            <BookUser className='stroke-muted-foreground' strokeWidth={1} />
           </Link>
           <Link
             href={{
