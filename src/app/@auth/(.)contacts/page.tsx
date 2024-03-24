@@ -99,7 +99,7 @@ export default function Page() {
               <>
                 <div className=' w-full rounded-xl p-2 text-xl'>
                   <div className='mt-4 flex content-center justify-center'>
-                    <div>You've got no transactions</div>
+                    <div>You've got no Contacts</div>
                   </div>
                 </div>
               </>

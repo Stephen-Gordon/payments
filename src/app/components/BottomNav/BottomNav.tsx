@@ -30,7 +30,7 @@ const BottomNavbar = () => {
     <>
       {showNav && (
         <nav style={{backdropFilter: 'blur(100px)'}} className='fixed transition-all duration-500 bottom-0 z-40 bg-opacity-0 flex w-full justify-between overflow-hidden p-4 px-8 pb-8 '>
-          <Link href='/home'>
+          {/* <Link href='/home'>
             <Home
               className='stroke-muted-foreground'
               strokeWidth={1}
@@ -38,7 +38,7 @@ const BottomNavbar = () => {
                 dispatch(setSheet(false));
               }}
             />
-          </Link>
+          </Link> */}
           <Link href='/search'>
             <Send
               className='stroke-muted-foreground'

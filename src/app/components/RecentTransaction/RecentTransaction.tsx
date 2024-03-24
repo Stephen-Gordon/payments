@@ -27,6 +27,8 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
 
+  const payeeName = useFindPayeeName(transaction.from);
+
   return (
     <div className=''>
       <Link href={{ pathname: '/tx', query: { hash: transaction.hash } }}>
@@ -65,7 +67,7 @@ export default function RecentTransaction({ transaction }: any) {
                 className='text-sm font-medium leading-none'
               >
                 {transaction.from == address ? 'From' : ''}{' '}
-                { useFindPayeeName(transaction.to)}
+                { payeeName}
               </div>
               <p className='text-muted-foreground text-sm'>
                 {transaction?.metadata?.blockTimestamp.slice(0, 10)}
