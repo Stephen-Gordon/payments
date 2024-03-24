@@ -33,6 +33,8 @@ export default function Page() {
 
   const address = useSelector((state: any) => state.address.value);
 
+  const payeeName = useFindPayeeName(transaction.from);
+
   useEffect(() => {
     console.log('txState', txState);
     const filteredTransaction = txState.filter((tx: any) => tx.hash == hash);
@@ -68,7 +70,7 @@ export default function Page() {
                 </div>
                 <div className='text-blue-400'>
                   {transaction.from == address ? 'From' : 'To'}{' '}
-                  {useFindPayeeName(transaction.from)}
+                  {payeeName}
                 </div>
                 <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                   <div>

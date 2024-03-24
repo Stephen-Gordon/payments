@@ -46,7 +46,7 @@ const SheetLayout = ({ children }) => {
       <Drawer
         shouldScaleBackground={true}
         onClose={() => {
-          /* router.push('/', undefined, { shallow: true }); */
+         router.replace('/home'); 
           dispatch(setSheet(false));
         }}
         open={isOpen}

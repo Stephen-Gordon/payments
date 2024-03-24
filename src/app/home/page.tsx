@@ -70,7 +70,7 @@ export default function Page() {
 
 
 
-  useEffect(() => {
+ /*  useEffect(() => {
     dispatch(
       setContacts([
         {
@@ -87,7 +87,7 @@ export default function Page() {
         },
       ])
     );
-  },[])
+  },[]) */
 
   // redux
   const dispatch = useDispatch();

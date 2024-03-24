@@ -36,6 +36,7 @@ import Link from 'next/link';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 import { format, parseISO, set } from 'date-fns';
+import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect';
 interface Transaction {
   to: string;
   from: string;
@@ -123,7 +124,9 @@ export default function Page() {
             <BackButton />
           </div>
           <p className='text-center'>
-            {payeeAddress && useFindPayeeName(payeeAddress)}
+            <TextGenerateEffect
+              words={`${payeeAddress && useFindPayeeName(payeeAddress)} ` as string}
+            />
           </p>
           <div className='ml-auto'>
             <Avatar className='h-9 w-9 bg-white'></Avatar>
