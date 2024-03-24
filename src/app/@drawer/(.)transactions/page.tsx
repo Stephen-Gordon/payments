@@ -51,6 +51,9 @@ export default function Page() {
   // address
   const address = useGetAddress();
 
+  // router
+  const router = useRouter();
+
   const transactionState = useSelector(
     (state: any) => state.transactions.value
   );
@@ -93,7 +96,6 @@ export default function Page() {
         groups[monthKey].push(transaction);
         return groups;
       }, {});
-    console.log('read me ', groupedTransactionsByMonth);
 
     // Convert grouped transactions object into an array of arrays with month names
     const arrayOfMonthArrays: {
@@ -120,7 +122,7 @@ export default function Page() {
           }} /*  onAnimationComplete={(definition) => {
         setShowTxs(true);
       }} */
-          className='bg-background absolute z-50 h-screen w-full overflow-hidden text-xl'
+          className='bg-background absolute z-50 min-h-screen w-full overflow-hidden text-xl'
         >
           <Card style={{ border: '0px' }}>
             <CardHeader>
@@ -132,7 +134,7 @@ export default function Page() {
                 >
                   <BackButton />
                 </div>
-                <p className='text-center'>Sending</p>
+                <p className='text-center'>Recent Transactions</p>
                 <div className='ml-auto'></div>
               </CardTitle>
             </CardHeader>
