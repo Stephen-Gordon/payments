@@ -45,41 +45,39 @@ export default function Page() {
 
   return (
     <>
-      
-          <DrawerHeader>
-            <DrawerTitle>Contacts</DrawerTitle>
-          </DrawerHeader>
-          <Card style={{ border: '0px' }}>
-            <CardContent className='border-0 border-none'>
-              {contactsState.map((contact, index) => (
-                <motion.div
-                  key={contact.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+      <DrawerHeader>
+        <DrawerTitle>Contacts</DrawerTitle>
+      </DrawerHeader>
+      <Card style={{ border: '0px' }}>
+        <CardContent className='border-0 border-none'>
+          <div className='space-y-6'>
+            {contactsState.map((contact, index) => (
+              <motion.div
+                key={contact.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
+                  href={{
+                    pathname: `/payee`,
+                    query: { payeeAddress: contact.address },
+                  }}
                 >
-                  <Link
-                    href={{
-                      pathname: `/payee`,
-                      query: { payeeAddress: contact.address },
-                    }}
-                  >
-                    <div className='space-y-8'>
-                      <div className='flex w-full items-center '>
-                        <Avatar className='h-9 w-9 bg-white'></Avatar>
-                        <div className='ml-4 space-y-1'>
-                          <div className='text-sm font-medium leading-none'>
-                            {contact.name}
-                          </div>
+                    <div className='flex w-full items-center '>
+                      <Avatar className='h-9 w-9 bg-white'></Avatar>
+                      <div className='ml-4 space-y-1'>
+                        <div className='text-sm font-medium leading-none'>
+                          {contact.name}
                         </div>
                       </div>
                     </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </CardContent>
-          </Card>
-        
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
     </>
   );
 }
