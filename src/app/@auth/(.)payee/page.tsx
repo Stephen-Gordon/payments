@@ -142,7 +142,7 @@ export default function Page() {
 
       {groupedTransactions && (
         <>
-          <div className='overflow-auto p-4'>
+          <div className='p-4'>
             {groupedTransactions.map((month, i) => (
               <div key={i} className='grid'>
                 <div
@@ -153,7 +153,7 @@ export default function Page() {
                     {month.monthName}
                   </p>
                 </div>
-                <div className='grid grid-flow-row auto-rows-max overflow-scroll h-[calc(100vh-80px)] grid-cols-1 gap-2 text-xl text-white'>
+                <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
                   {month.transactions.map((transaction, j) => (
                     <div key={j}>
                       {transaction.to !== payeeAddress ? (
@@ -184,7 +184,7 @@ export default function Page() {
             ))}
           </div>
 
-          <div className='overflow-auto p-4'>
+          <div className=' p-4'>
             <div ref={end}></div>
           </div>
         </>
