@@ -46,11 +46,13 @@ const BottomNavbar = () => {
           </Link>
           <Link
             href={{
-              pathname: '/menu',
-              query: { isNavOpen: true },
+              pathname: '/contacts',
+            }}
+            onClick={() => {
+              dispatch(setSheet(true));
             }}
           >
-            <BookUser onClick={() => router.push(`/contacts`)} />
+            <BookUser />
           </Link>
           <Link
             href={{
