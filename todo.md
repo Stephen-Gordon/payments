@@ -33,3 +33,5 @@ API authorization
 
 
 fix up menu and notificaitons
+
+remove a contact

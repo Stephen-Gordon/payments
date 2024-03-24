@@ -22,6 +22,7 @@ import {
   AvatarImage,
 } from '@/app/components/ui/avatar';
 import { Card, CardContent } from '../ui/card';
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
@@ -64,7 +65,7 @@ export default function RecentTransaction({ transaction }: any) {
                 className='text-sm font-medium leading-none'
               >
                 {transaction.from == address ? 'From' : ''}{' '}
-                {truncateEthAddress(transaction.from)}
+                { useFindPayeeName(transaction.to)}
               </div>
               <p className='text-muted-foreground text-sm'>
                 {transaction?.metadata?.blockTimestamp.slice(0, 10)}

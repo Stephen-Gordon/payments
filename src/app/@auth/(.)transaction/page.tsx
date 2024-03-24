@@ -16,6 +16,7 @@ import { Send, QrCode } from 'lucide-react';
 
 import { Avatar } from '@/app/components/ui/avatar';
 import { RootState } from '@/GlobalRedux/store';
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 export default function Page() {
   console.log('Tx Modal Page');
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export default function Page() {
               </div>
               <div className='text-blue-400'>
                 {transaction.from == address ? 'From' : 'To'}{' '}
-                {truncateEthAddress(transaction.from)}
+                { useFindPayeeName(transaction.from)}
               </div>
               <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                 <div>

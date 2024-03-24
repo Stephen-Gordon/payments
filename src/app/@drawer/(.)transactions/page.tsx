@@ -17,6 +17,9 @@ import {
   CardContent,
 } from '@/app/components/ui/card';
 
+import BackButton from '@/app/components/Navigation/BackButton/BackButton';
+
+
 // next
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -121,9 +124,17 @@ export default function Page() {
         >
           <Card style={{ border: '0px' }}>
             <CardHeader>
-              <motion.div>
-                <CardTitle>Recent Transactions</CardTitle>
-              </motion.div>
+              <CardTitle className='grid grid-cols-3 items-center'>
+                <div
+                  onClick={() => {
+                    router.back();
+                  }}
+                >
+                  <BackButton />
+                </div>
+                <p className='text-center'>Sending</p>
+                <div className='ml-auto'></div>
+              </CardTitle>
             </CardHeader>
             <CardContent className='border-0 border-none'>
               <motion.div>

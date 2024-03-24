@@ -64,6 +64,7 @@ export default function Page() {
       dispatch(setSheet(false));
     }
     console.log(`Route changed to: ${pathname}`);
+    console.log("MY ADDRESS IS", address)
   }, [pathname]);
 
 

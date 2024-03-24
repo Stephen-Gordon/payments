@@ -15,6 +15,7 @@ import { useSearchParams } from 'next/navigation';
 import { Avatar } from '@/app/components/ui/avatar';
 // link
 import Link from 'next/link';
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 export default function Page() {
   const router = useRouter();
 
@@ -34,7 +35,7 @@ export default function Page() {
             >
               <BackButton />
             </div>
-            <p className='text-center'>{payee && truncateEthAddress(payee)}</p>
+            <p className='text-center'>{payee && useFindPayeeName(payee)}</p>
             <div className='ml-auto'>
               <Link
                 className='h-auto w-auto'

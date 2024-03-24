@@ -23,6 +23,7 @@ import { Card, CardContent, CardHeader } from '../ui/card';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
  import { Contact } from '@/app/types/types';
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
   function Payee ({payee, contactsState} : {payee: string, payees: any, contactsState: Contact[]}) {
     
@@ -41,7 +42,7 @@ import { RootState } from '@/GlobalRedux/store';
                 <Avatar className='h-9 w-9 bg-white'></Avatar>
                 <div className='ml-4 space-y-1'>
                   <div className='text-sm font-medium leading-none'>
-                    {payeeName}
+                    {useFindPayeeName(payee)}
                   </div>
                 </div>
               </div>

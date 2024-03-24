@@ -33,6 +33,7 @@ import useSendUsdc from '@/app/hooks/useSendUsdc';
 import Success from '@/app/components/Success/Success';
 // redux
 import { useDispatch } from 'react-redux';
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 interface ConfirmProps {
   showConfirm: boolean;
@@ -72,20 +73,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
           </div>
           <p className='text-center'>Sending</p>
           <div className='ml-auto'>
-            <Link
-              className='h-auto w-auto'
-              href={{ pathname: `/send`, query: { payee: payee } }}
-            >
-              <Link
-                className='h-auto w-auto'
-                href={{
-                  pathname: `/payee`,
-                  query: { payeeAddress: payee },
-                }}
-              >
-                <Avatar className='h-9 w-9 bg-white'></Avatar>
-              </Link>
-            </Link>
+            
           </div>
         </DrawerTitle>
       </DrawerHeader>
@@ -99,7 +87,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
           To
         </p>
         <div className='text-3xl font-bold leading-none'>
-          {truncateEthAddress(payee)}
+          {payee && useFindPayeeName(payee) }
         </div>
       </div>
       { loading == true || transactionStatus == true ? (<>

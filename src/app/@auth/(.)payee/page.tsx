@@ -32,8 +32,9 @@ import { Send, QrCode } from 'lucide-react';
 // link
 import Link from 'next/link';
 
-// date
-//import { format, parseISO } from 'date-fns';
+//hooks
+import useFindPayeeName from '@/app/hooks/useFindPayeeName';
+
 import { format, parseISO, set } from 'date-fns';
 interface Transaction {
   to: string;
@@ -65,7 +66,7 @@ export default function Page() {
   useEffect(() => {
     end.current.scrollIntoView({});
     const fetchRecentTransactions = async () => {
-      const recentTransactions = await useGetRecentTransactions(address);
+      const recentTransactions = await useGetRecentTransactions(address as string);
       console.log('recentTransactions', recentTransactions);
       if (recentTransactions) {
         // Filter transactions where either to or from address matches payeeAddress
@@ -122,7 +123,7 @@ export default function Page() {
             <BackButton />
           </div>
           <p className='text-center'>
-            {payeeAddress && truncateEthAddress(payeeAddress)}
+            {payeeAddress && useFindPayeeName(payeeAddress)}
           </p>
           <div className='ml-auto'>
             <Avatar className='h-9 w-9 bg-white'></Avatar>
@@ -134,7 +135,8 @@ export default function Page() {
         <div className='grid content-center justify-center'>
           <div className='text-center text-white'>
             <p>
-              You've got no transfers with {truncateEthAddress(payeeAddress)}
+              You've got no transfers with{' '}
+              {payeeAddress && useFindPayeeName(payeeAddress)}
             </p>
           </div>
         </div>
@@ -189,7 +191,10 @@ export default function Page() {
           </div>
         </>
       )}
-      <DrawerFooter style={{zIndex: 3000}} className='fixed w-full bottom-4  '>
+      <DrawerFooter
+        style={{ zIndex: 3000 }}
+        className='fixed bottom-4 w-full  '
+      >
         <div className='w-full'>
           <Link
             href={{
