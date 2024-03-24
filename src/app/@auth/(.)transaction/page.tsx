@@ -41,6 +41,8 @@ export default function Page() {
     setIsLoading(false);
   }, [txState]);
 
+  const payeeName = useFindPayeeName(transaction.from);
+
   return (
     <>
       {!isLoading && (
@@ -65,7 +67,7 @@ export default function Page() {
               </div>
               <div className='text-blue-400'>
                 {transaction.from == address ? 'From' : 'To'}{' '}
-                { useFindPayeeName(transaction.from)}
+               {payeeName}
               </div>
               <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                 <div>

@@ -7,8 +7,8 @@ const useFindPayeeName = (payeeAddress: string) => {
   const contactsState = useSelector((state: RootState) => state.contacts.value);
 
   const findPayeeName = (payeeAddress: string): string | null => {
-    if (!payeeAddress || contactsState.length === 0) {
-      return null;
+    if ( contactsState.length === 0) {
+      return truncateEthAddress(payeeAddress);
     }
 
     const contact = contactsState.find(
