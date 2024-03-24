@@ -1,6 +1,6 @@
 // components/BottomNavbar.js
 import Link from 'next/link';
-import { Home, Send, Settings } from 'lucide-react';
+import { BookUser, Home, Send, Settings } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
@@ -23,8 +23,6 @@ const BottomNavbar = () => {
     }
   }, [pathname])
 
-
-
   // redux
   const dispatch = useDispatch();
 
@@ -46,7 +44,14 @@ const BottomNavbar = () => {
               }}
             />
           </Link>
-
+          <Link
+            href={{
+              pathname: '/menu',
+              query: { isNavOpen: true },
+            }}
+          >
+            <BookUser onClick={() => router.push(`/contacts`)} />
+          </Link>
           <Link
             href={{
               pathname: '/menu',
