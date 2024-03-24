@@ -27,3 +27,9 @@
 fix web3auth popup
 
 get an individual tx hook
+
+
+API authorization 
+
+
+fix up menu and notificaitons

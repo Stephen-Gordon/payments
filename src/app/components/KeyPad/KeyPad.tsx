@@ -1,3 +1,4 @@
+'use client'
 import { useButton } from '@react-aria/button';
 import { FocusRing } from '@react-aria/focus';
 import { motion, useAnimation } from 'framer-motion';
@@ -19,6 +20,7 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
   useEffect(() => {
     setUsdcAmount(nums.join(''));
   }, [nums]);
+  
 
   return (
     <div className='mx-auto flex max-w-xs flex-col justify-center'>
@@ -48,6 +50,7 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
     </div>
   );
 }
+
 
 function Button({
   onClick = () => {},

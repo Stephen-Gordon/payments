@@ -9,9 +9,8 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
 
     const router = useRouter();
 
-    
-    const { authenticated } = usePrivySmartAccount();
-
+    //const { authenticated } = usePrivySmartAccount();
+    const authenticated = true;
      useEffect(() => {
 
         if (!authenticated) {
@@ -20,6 +19,8 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
 
     }, [authenticated]); 
     return (
-        <>{children}</>
+        <>{authenticated && (
+            <>{children}</>
+        )}</>
     )
 }

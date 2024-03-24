@@ -11,6 +11,8 @@ import transactionsSliceReducer from './Features/transactions/transactionsSlice'
 import sheetSliceReducer from './Features/sheet/sheetSlice';
 import balanceSliceReducer from './Features/balance/balanceSlice';
 import pendingTxSliceReducer from './Features/pendingTx/pendingTxSlice';
+import contactsSliceReducer from './Features/contacts/contactsSlice';
+
 // Define RootState type
 export type RootState = {
   login: {
@@ -33,10 +35,12 @@ export type RootState = {
       value: {} | undefined;
     }
   ];
-  pendingTx : {
+  pendingTx: {
     value: {};
-  
-  }
+  };
+  contacts: {
+    value: [];
+  };
 };
 
 const persistConfig = {
@@ -54,6 +58,7 @@ const rootReducer = combineReducers<any>({
   sheet: sheetSliceReducer,
   balance: balanceSliceReducer,
   pendingTx: pendingTxSliceReducer,
+  contacts: contactsSliceReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

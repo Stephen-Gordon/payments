@@ -44,17 +44,17 @@ const DrawerContent = React.forwardRef<
       ref={ref}
       /* style={{ height: 'calc(100vh - 2rem)' }} */
       className={cn(
-        'bg-background/90 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[10px] border-t bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter',
+        ' ios bg-background/80 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[16px] border-t',
         className
       )}
       {...props}
     >
-      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full bg-opacity-10 bg-clip-padding backdrop-blur-sm backdrop-filter' />
-      {children}
+      <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full ' />
+      <div className='overflow-auto'> {children}</div>
     </DrawerPrimitive.Content>
   </DrawerPortal>
 ));
-DrawerContent.displayName = 'DrawerContent';
+DrawerContent.displayName = 'DrawerContent';  
 
 const DrawerHeader = ({
   className,

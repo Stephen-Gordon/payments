@@ -27,35 +27,68 @@ import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
 import { isAddress } from 'viem';
 
 // icons
-import { QrCode, X, Send } from 'lucide-react';
+import { QrCode, X, Send, UserPlus } from 'lucide-react';
 
 import RecentPayee from '@/app/components/RecentPayee.tsx/RecentPayee';
 // motion
 import { AnimatePresence, motion } from 'framer-motion';
-//
+import AddAContact from '@/app/components/addAContact/addAContact';
+
+// redux
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { setContacts } from '@/GlobalRedux/Features/contacts/contactsSlice';
+
+import { Avatar } from '@/app/components/ui/avatar';
+
+// types
+import { Contact } from '@/app/types/types';
+
+
 export default function Page() {
   const [payee, setPayee] = useState<string>('');
   const [scanner, setScanner] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
+  const [showAddContact , setShowAddContact] = useState<boolean>(false);
+
   const address = useGetAddress();
+
+
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
 
   // router
   const router = useRouter();
 
-  const isTrue = isAddress(payee);
+  const isAnAddress = isAddress(payee);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     // Add logic here to listen to the input value
     console.log('Input value:', payee);
-    console.log('isTrue:', isTrue);
-  }, [payee, isTrue]);
+    console.log('isAnAddress:', isAnAddress);
+    console.log('contactsState:', contactsState);
+  }, [payee, isAnAddress, contactsState]);
+
+
+
+
+  const handleAddUser = () => {
+    setShowAddContact(true); 
+  }
+
+  
 
   return (
     <>
-      <div className='grid'>
+      <div className='grid h-full'>
+        <AddAContact
+          open={showAddContact}
+          setShowAddContact={setShowAddContact}
+          contactsState={contactsState}
+          payee={payee}
+        />
         {scanner && <Scanner isOpen={isOpen} setIsOpen={setIsOpen} />}
 
         <DrawerHeader>
@@ -102,10 +135,24 @@ export default function Page() {
                     exit={{ opacity: 0 }}
                     className='ml-auto grid content-center justify-end'
                   >
-                    <X
-                      className='text-muted-foreground h-8 w-8 '
-                      onClick={() => setPayee('')}
-                    />
+                    {isAnAddress &&
+                    !contactsState.some(
+                      (contact: Contact) => contact.address == payee
+                    ) ? (
+                      <>
+                        <div onClick={handleAddUser} className='flex'>
+                          <UserPlus />
+                          Save
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <X
+                          className='text-muted-foreground h-8 w-8 '
+                          onClick={() => setPayee('')}
+                        />
+                      </>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -114,7 +161,7 @@ export default function Page() {
         </div>
 
         <div className='mt-4 space-y-8 px-4'>
-          {isTrue ? (
+          {isAnAddress ? (
             <>
               <AnimatePresence>
                 <motion.div
@@ -221,6 +268,36 @@ export default function Page() {
                 <div id='#recent-activity' className='space-y-8 p-4'>
                   <RecentPayee />
                 </div>
+                {contactsState.length > 0 && (
+                  <>
+                    <div id='#contacts' className='space-y-8 p-4'>
+                      <div className='text-sm font-medium leading-none'>
+                        Contacts
+                      </div>
+                      {contactsState.map((contact: Contact) => (
+                        <div key={contact.address}>
+                          <Link
+                            href={{
+                              pathname: `/payee`,
+                              query: { payeeAddress: contact.address },
+                            }}
+                          >
+                            <div className='space-y-8'>
+                              <div className='flex w-full items-center '>
+                                <Avatar className='h-9 w-9 bg-white'></Avatar>
+                                <div className='ml-4 space-y-1'>
+                                  <div className='text-sm font-medium leading-none'>
+                                    {contact.name}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
               </motion.div>
             </>
           )}

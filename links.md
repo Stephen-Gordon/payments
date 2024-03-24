@@ -66,3 +66,7 @@ https://farrynheight.com/
 
 // pwa prompt
 https://medium.com/designly/creating-an-install-to-home-screen-prompt-in-a-next-js-progressive-web-app-588a3e7a6747
+
+
+# add to contacts drawer
+https://github.com/redpangilinan/credenza?tab=readme-ov-file

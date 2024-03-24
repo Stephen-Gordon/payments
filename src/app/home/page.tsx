@@ -10,7 +10,7 @@ import Activity from '@/app/components/activity/Activity';
 import { Button } from '@/app/components/ui/button';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 // react
@@ -35,6 +35,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 import useGetTokenBalance from '../hooks/useGetTokenBalance';
 import AuthPage from '../components/AuthPage/AuthPage';
+import { setContacts } from '@/GlobalRedux/Features/contacts/contactsSlice';
 
 export default function Page() {
   // privy
@@ -55,6 +56,8 @@ export default function Page() {
   // next
   const pathname = usePathname();
 
+  
+
   // pathname use effect
   useEffect(() => {
     if (pathname === '/home') {
@@ -62,6 +65,28 @@ export default function Page() {
     }
     console.log(`Route changed to: ${pathname}`);
   }, [pathname]);
+
+
+
+
+  useEffect(() => {
+    dispatch(
+      setContacts([
+        {
+          name: 'John Doe',
+          address: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
+        },
+        {
+          name: 'Jim Harris',
+          address: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C9',
+        },
+        {
+          name: 'Ben Frank',
+          address: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C7',
+        },
+      ])
+    );
+  },[])
 
   // redux
   const dispatch = useDispatch();
@@ -93,7 +118,7 @@ export default function Page() {
             style={{ y, scale, opacity }}
             className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
           >
-            {/*  <Balance /> */}
+            <Balance /> 
             {/*   {address} */}
           </motion.div>
 
