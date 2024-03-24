@@ -35,3 +35,5 @@ API authorization
 fix up menu and notificaitons
 
 remove a contact
+
+add refero to design doc
