@@ -6,12 +6,12 @@ import { useInView, motion, useScroll, useTransform } from 'framer-motion';
 export const BackgroundGradientAnimation = ({
   gradientBackgroundStart = 'rgb(108, 0, 162)',
   gradientBackgroundEnd = 'rgb(0, 17, 82)',
-  firstColor = '228, 83, 104',
+  firstColor = '9, 69, 223',
   secondColor = '9, 69, 223',
-  thirdColor = '223, 9, 9',
-  fourthColor = '200, 50, 50',
-  fifthColor = '180, 180, 50',
-  pointerColor = '140, 100, 255',
+  thirdColor = '9, 69, 223',
+  fourthColor = '9, 69, 223',
+  fifthColor = '9, 69, 223',
+  pointerColor = '9, 69, 223',
   size = '80%',
   blendingValue = 'hard-light',
   children,
@@ -43,7 +43,7 @@ export const BackgroundGradientAnimation = ({
 
   let { scrollYProgress } = useScroll();
   let y = useTransform(scrollYProgress, [0, 1], ['0', '-50%']);
-  let opacity = useTransform(scrollYProgress, [0, 0.7], [0.7, 0]);
+  let opacity = useTransform(scrollYProgress, [0, 0.6], [0.6, 0]);
   let scale = useTransform(scrollYProgress, [0, 1], ['100%', '20%']);
   let scale2 = useTransform(scrollYProgress, [0, 1], ['100%', '60%']);
 
@@ -97,7 +97,7 @@ export const BackgroundGradientAnimation = ({
   return (
     <div
       className={cn(
-        'bg-background relative left-0 top-0 h-screen w-screen overflow-hidden opacity-30',
+        'bg-background relative left-0 top-0 h-screen w-screen overflow-hidden opacity-20',
         containerClassName
       )}
     >

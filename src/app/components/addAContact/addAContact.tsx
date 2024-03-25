@@ -106,7 +106,7 @@ export default function AddAContact({
               style={{ width: '100%' }}
               value={newContactName}
               placeholder='Name'
-              className='w-full'
+              className='w-full text-base'
             />
           </div>
           {payee == '' && (
@@ -119,7 +119,7 @@ export default function AddAContact({
                   name='address'
                   value={newContactAddress}
                   placeholder='Address'
-                  className='w-full'
+                  className='w-full text-base'
                 />
               </div>
 

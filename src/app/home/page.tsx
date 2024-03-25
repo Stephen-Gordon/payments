@@ -36,6 +36,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import useGetTokenBalance from '../hooks/useGetTokenBalance';
 import AuthPage from '../components/AuthPage/AuthPage';
 import { setContacts } from '@/GlobalRedux/Features/contacts/contactsSlice';
+import CreditCard from '../components/CreditCard/CreditCard';
+import { LampDemo } from '../components/ui/lamp';
 
 export default function Page() {
   // privy
@@ -100,16 +102,7 @@ export default function Page() {
     <AuthPage>
       <div id='render' className='min-h-[150vh]'>
         <div className='absolute right-4 top-4'>
-          <Link
-            /*   onClick={() => {
-            dispatch(setSheet(true));
-          }}  */ href={{
-              pathname: '/menu',
-              query: { isNavOpen: true },
-            }}
-          >
-            <Menu onClick={() => router.push(`/menu?isNavOpen=true`)} />
-          </Link>
+         
         </div>
         <div className='blurios'>
           <div className='absolute -z-50 '>
@@ -117,10 +110,11 @@ export default function Page() {
           </div>
           <motion.div
             style={{ y, scale, opacity }}
-            className='items-center p-2  pt-40 text-center text-5xl mix-blend-exclusion'
+            className='items-center p-2 text-center text-5xl mix-blend-exclusion'
           >
-            <Balance /> 
+            {/*  <Balance />  */}
             {/*   {address} */}
+            <CreditCard />
           </motion.div>
 
           <motion.div
@@ -174,6 +168,7 @@ export default function Page() {
             </div>
           </motion.div>
           <div className='bg-accent/90 relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+            
             {/*  <Tab.Group>
             <Tab.List>
               <div className='mb-4 flex justify-between'>
