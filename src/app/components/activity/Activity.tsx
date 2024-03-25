@@ -18,7 +18,6 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { Button } from '../ui/button';
-import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 export default function Activity() {
   const [transactions, setTxs] = useState<any>([]);
@@ -49,7 +48,7 @@ export default function Activity() {
 
   useEffect(() => {
     /*  dispatch(setTransactions(transactions)); */
-    setTxs(transactionState?.slice(0, 3));
+    setTxs(transactionState?.slice(0, 5));
   }, [transactionState]); // Add transactions as a dependency
 
   return (
@@ -59,7 +58,7 @@ export default function Activity() {
           key='activity-key'
           layoutId='activity'
           transition={{ duration: 0.3 }}
-          className='bg-muted w-full rounded-full text-xl '
+          className='bg-slate-50/10 backdrop-blur-xl w-full rounded-full text-xl '
         >
           <Card className=''>
             <CardHeader>
@@ -67,7 +66,7 @@ export default function Activity() {
                 <CardTitle>Recent Transactions</CardTitle>
               </motion.div>
             </CardHeader>
-            <CardContent className=''>
+            <CardContent className=' '>
               <div className='mt-4 space-y-8'>
                 {transactions &&
                   transactions.map((transaction: any, i: any) => (

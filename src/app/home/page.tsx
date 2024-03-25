@@ -167,7 +167,7 @@ export default function Page() {
               </Link>
             </div>
           </motion.div>
-          <div className='bg-accent/90 relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+          <div className=' relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
             
             {/*  <Tab.Group>
             <Tab.List>
