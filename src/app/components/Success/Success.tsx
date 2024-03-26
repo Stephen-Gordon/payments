@@ -41,6 +41,18 @@ export default function Success({
 
   //hooks
   const address = useGetAddress();
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (transactionStatus || loading) {
+      setDrawerOpen(true);
+    }
+    if (transactionStatus) {
+      setDrawerOpen(false);
+    }
+  
+
+  }, [transactionStatus, loading, transactionHash])
 
   useEffect(() => {
     if (transactionStatus) {
@@ -65,7 +77,7 @@ export default function Success({
   }, [transactionStatus]);
   return (
     <>
-      <Drawer nested={true} dismissible={false} open={true}>
+      <Drawer nested={true} dismissible={false} open={drawerOpen}>
         <DrawerContent
           dontShowDrag={true}
           className=' flex h-full w-full border-none bg-black/90 transition-all duration-400 ease-in-out'
