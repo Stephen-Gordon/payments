@@ -5,11 +5,31 @@ import { TextGenerateEffect } from "../ui/text-generate-effect";
 import truncateEthAddress from "truncate-eth-address";
 import { motion } from "framer-motion";
 import { usePrivySmartAccount } from "@zerodev/privy";
+import useGetBalance from "@/app/hooks/useGetBalance";
+import { useSelector } from "react-redux";
+
+import { useEffect, useState } from "react";
+
 export default function CreditCard() {
     
+
+    const [balanceToShow, setBalanceToShow] = useState<string>('')
+
     const address = useGetAddress();
 
     const {user } = usePrivySmartAccount()
+
+    const reduxBalance = useSelector((state: any) => state.balance.value)
+    
+    const hookBalance = useGetBalance(address as string)
+
+
+    useEffect(() => {
+      setBalanceToShow(reduxBalance)
+      if (hookBalance !== reduxBalance) {
+        setBalanceToShow(hookBalance)
+      }
+    }, [hookBalance, reduxBalance])
 
     return (
       <>
@@ -27,7 +47,7 @@ export default function CreditCard() {
             </div>
 
             <div className='absolute z-50 grid h-full w-full content-center items-center justify-center  p-2 text-center text-5xl text-card-foreground mix-blend-exclusion '>
-              <TextGenerateEffect words='$56'></TextGenerateEffect>
+              {balanceToShow}
             </div>
             <div className='absolute z-50 mb-auto flex h-full w-full content-end justify-between p-4'>
               <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-base mix-blend-exclusion'>
