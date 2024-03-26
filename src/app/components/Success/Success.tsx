@@ -20,33 +20,8 @@ import useGetAddress from '@/app/hooks/useGetAddress';
 import { MultiStepLoader as Loader } from '../ui/multi-step-loader';
 import { IconSquareRoundedX } from '@tabler/icons-react';
 import { TextGenerateEffect } from '../ui/text-generate-effect';
+import useGetBalance from '@/app/hooks/useGetBalance';
 
-const loadingStates = [
-  {
-    text: 'Loading your Payment',
-  },
-  {
-    text: "It's on the way",
-  },
-  {
-    text: 'Meeting Tyler Durden',
-  },
-  {
-    text: 'He makes soap',
-  },
-  {
-    text: 'We goto a bar',
-  },
-  {
-    text: 'Start a fight',
-  },
-  {
-    text: 'We like it',
-  },
-  {
-    text: 'Welcome to F**** C***',
-  },
-];
 
 
 export default function Success({
@@ -81,8 +56,9 @@ export default function Success({
       getData();
 
       setTimeout(() => {
+        const updateUserBalance = useGetBalance(address as string);
         router.push(`/transaction?hash=${transactionHash}`);
-      }, 500);
+      }, 300);
     }
   }, [transactionStatus]);
   return (
@@ -144,7 +120,7 @@ export default function Success({
                       className='w-full'
                     >
                       <TextGenerateEffect
-                        className='mt-4 text-center text-sm text-black'
+                        className='mt-4 text-center text-sm text-muted-foreground'
                         words='Your payment is on the way'
                       ></TextGenerateEffect>
                     </motion.div>
