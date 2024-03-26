@@ -48,14 +48,9 @@ export default function RootLayout({
   const queryClient = new QueryClient();
   const router = useRouter();
 
-  const [isInstalled, setIsInstalled] = useState<boolean | null>(null);
-
-  const [showNav, setShowNav] = useState<boolean>(true);
-
-  const pathname = usePathname();
 
 
-  useEffect(() => {})
+
 
 /* 
   
@@ -184,20 +179,20 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
-                          
+                          <div vaul-drawer-wrapper=''
+                              className='h-[100vh] text-gray-300'>
                             <div>{auth}</div>
                             <div>{drawer}</div>
 
                             <main
-                              vaul-drawer-wrapper=''
-                              className='h-[100vh] text-gray-300'
+                              
                             >
                               {children}
                             </main>
                             <div className='w-full overflow-hidden'>
                               <BottomNavbar />
                             </div>
-                          
+                          </div>
                         </LayoutGroup>
                       </AnimatePresence>
                     </QueryClientProvider>

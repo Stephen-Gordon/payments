@@ -61,14 +61,14 @@ export default function Page() {
   
 
   // pathname use effect
-  useEffect(() => {
-    if (pathname === '/home') {
+  /* useEffect(() => {
+    if (pathname == '/home') {
       dispatch(setSheet(false));
     }
     console.log(`Route changed to: ${pathname}`);
     console.log("MY ADDRESS IS", address)
   }, [pathname]);
-
+ */
 
 
 

@@ -45,10 +45,7 @@ const SheetLayout = ({ children }) => {
       </Sheet> */}
       <Drawer
         shouldScaleBackground={true}
-        onClose={() => {
-         router.replace('/home'); 
-          dispatch(setSheet(false));
-        }}
+        onClose={() => dispatch(setSheet(false))}
         open={isOpen}
       >
         <DrawerOverlay />

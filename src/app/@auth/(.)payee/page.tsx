@@ -123,11 +123,14 @@ export default function Page() {
           >
             <BackButton />
           </div>
-          <p className='text-center'>
-            <TextGenerateEffect
-              words={`${payeeAddress && useFindPayeeName(payeeAddress)} ` as string}
-            />
-          </p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
+          >
+            {payeeAddress && useFindPayeeName(payeeAddress)}
+          </motion.p>
           <div className='ml-auto'>
             <Avatar className='h-9 w-9 bg-white'></Avatar>
           </div>
