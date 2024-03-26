@@ -91,8 +91,17 @@ const config = {
         third: 'moveInCircle 60s linear infinite',
         fourth: 'moveHorizontal 60s ease infinite',
         fifth: 'moveInCircle 60s ease infinite',
+        shimmer: 'shimmer 2s linear infinite',
       },
       keyframes: {
+        shimmer: {
+          from: {
+            backgroundPosition: '0 0',
+          },
+          to: {
+            backgroundPosition: '-200% 0',
+          },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },

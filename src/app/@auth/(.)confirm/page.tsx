@@ -34,6 +34,7 @@ import Success from '@/app/components/Success/Success';
 // redux
 import { useDispatch } from 'react-redux';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
+import { ArrowDown, SendHorizonal, Send } from 'lucide-react';
 
 interface ConfirmProps {
   showConfirm: boolean;
@@ -71,7 +72,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
           >
             <BackButton />
           </div>
-          <p className='text-center'>Sending</p>
+          <p className='text-center'>Review</p>
           <div className='ml-auto'>
             
           </div>
@@ -80,13 +81,22 @@ export default function Page({ showConfirm }: ConfirmProps) {
 
       <div className='space-y-6 p-4'>
         <div className='space-y-1'>
-          <p className='text-muted-foreground text-lg'>You're sending</p>
-          <div className='pb-4 text-3xl font-bold leading-none'>${amount}</div>
+          <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
+              ${amount}
+          </div>
+          <p className='text-muted-foreground text-center text-lg'>You're sending</p>
+
         </div>
-        <p className='text-muted-foreground bg-muted w-fit rounded-full px-4 py-2 text-lg  '>
+        
+        <div className='grid justify-center'>
+          <p className='text-muted-foreground bg-muted w-fit rounded-full px-4 py-2 text-lg  '>
           To
         </p>
-        <div className='text-3xl font-bold leading-none'>
+        </div>
+        
+        
+          
+        <div className='text-lg text-center text-muted-foreground font-bold leading-none'>
           {payee && useFindPayeeName(payee) }
         </div>
       </div>
@@ -97,18 +107,20 @@ export default function Page({ showConfirm }: ConfirmProps) {
       )}
       
       <DrawerFooter>
-        <Button
-          onClick={handleSend}
-          className='text-xl'
-          size={'lg'}
-          variant={'default'}
-        >
-          <div className='flex content-center items-center'>
+       
+      <button onClick={handleSend}
+          className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+          <div className='flex grid-cols-3 content-center items-center'>
             <div className='text-xl'>
               <div>Send</div>
             </div>
+            <div className='px-2'></div>
+            <div>
+              <Send size={20} className='bg-muted-foreground' />
+            </div>
           </div>
-        </Button>
+        </button>
+
       </DrawerFooter>
     </>
   );
