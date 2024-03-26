@@ -25,7 +25,6 @@ const config = {
       },
     },
     extend: {
-
       fontFamily: {
         sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
       },
@@ -87,11 +86,11 @@ const config = {
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        first: "moveVertical 150s ease infinite",
-        second: "moveInCircle 180s reverse infinite",
-        third: "moveInCircle 200s linear infinite",
-        fourth: "moveHorizontal 150s ease infinite",
-        fifth: "moveInCircle 150s ease infinite",
+        first: 'moveVertical 60s ease infinite',
+        second: 'moveInCircle 60s reverse infinite',
+        third: 'moveInCircle 60s linear infinite',
+        fourth: 'moveHorizontal 60s ease infinite',
+        fifth: 'moveInCircle 60s ease infinite',
       },
       keyframes: {
         'accordion-down': {
@@ -103,36 +102,36 @@ const config = {
           to: { height: '0' },
         },
         moveHorizontal: {
-          "0%": {
-            transform: "translateX(-50%) translateY(-10%)",
+          '0%': {
+            transform: 'translateX(-50%) translateY(-10%)',
           },
-          "50%": {
-            transform: "translateX(50%) translateY(10%)",
+          '50%': {
+            transform: 'translateX(50%) translateY(10%)',
           },
-          "100%": {
-            transform: "translateX(-50%) translateY(-10%)",
+          '100%': {
+            transform: 'translateX(-50%) translateY(-10%)',
           },
         },
         moveInCircle: {
-          "0%": {
-            transform: "rotate(0deg)",
+          '0%': {
+            transform: 'rotate(0deg)',
           },
-          "50%": {
-            transform: "rotate(180deg)",
+          '50%': {
+            transform: 'rotate(180deg)',
           },
-          "100%": {
-            transform: "rotate(360deg)",
+          '100%': {
+            transform: 'rotate(360deg)',
           },
         },
         moveVertical: {
-          "0%": {
-            transform: "translateY(-50%)",
+          '0%': {
+            transform: 'translateY(-50%)',
           },
-          "50%": {
-            transform: "translateY(50%)",
+          '50%': {
+            transform: 'translateY(50%)',
           },
-          "100%": {
-            transform: "translateY(-50%)",
+          '100%': {
+            transform: 'translateY(-50%)',
           },
         },
       },
