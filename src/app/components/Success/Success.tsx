@@ -21,6 +21,7 @@ import { MultiStepLoader as Loader } from '../ui/multi-step-loader';
 import { IconSquareRoundedX } from '@tabler/icons-react';
 import { TextGenerateEffect } from '../ui/text-generate-effect';
 import useGetBalance from '@/app/hooks/useGetBalance';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 
 
@@ -47,9 +48,7 @@ export default function Success({
     if (transactionStatus || loading) {
       setDrawerOpen(true);
     }
-    if (transactionStatus) {
-      setDrawerOpen(false);
-    }
+ 
   
 
   }, [transactionStatus, loading, transactionHash])
@@ -70,8 +69,9 @@ export default function Success({
       console.log("got data")
 
       setTimeout(() => {
-
-        router.push(`/tx?hash=${transactionHash}`);
+      setDrawerOpen(false);
+      
+         dispatch(setSheet(false)); 
       }, 300);
     }
   }, [transactionStatus]);
@@ -80,7 +80,7 @@ export default function Success({
       <Drawer nested={true} dismissible={false} open={drawerOpen}>
         <DrawerContent
           dontShowDrag={true}
-          className=' flex h-full w-full border-none bg-black/90 transition-all duration-400 ease-in-out'
+          className='flex h-full w-full border-none bg-black/90 transition-all duration-400 ease-in-out'
         >
           {/*    <motion.div
             className='ios'
@@ -133,10 +133,10 @@ export default function Success({
                       transition={{ delay: 0.4 }}
                       className='w-full'
                     >
-                      <TextGenerateEffect
+                     {/*  <TextGenerateEffect
                         className='mt-4 text-center text-sm text-muted-foreground'
                         words='Your payment is on the way'
-                      ></TextGenerateEffect>
+                      ></TextGenerateEffect> */}
                     </motion.div>
                   </div>
                 )}

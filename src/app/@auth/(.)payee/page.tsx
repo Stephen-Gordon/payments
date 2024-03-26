@@ -167,7 +167,7 @@ export default function Page() {
                 <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
                   {month.transactions.map((transaction, j) => (
                     <div key={j}>
-                      {transaction.to !== payeeAddress ? (
+                      {transaction.to == payeeAddress ? (
                         <div
                           style={{ marginBottom: '32px' }}
                           className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
