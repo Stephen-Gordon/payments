@@ -33,10 +33,7 @@ const DrawerOverlay = React.forwardRef<
       WebkitMaskImage:
         '-webkit-radial-gradient(900px at center, transparent 30%, black)',
     }}
-    className={cn(
-      'fixed inset-0 z-50 bg-white bg-gradient-to-t [mask-image:radial-gradient(900px_at_center,transparent_30%,white)] dark:bg-black',
-      className
-    )}
+    className={cn('fixed inset-0 z-50  bg-black/80 transition-all duration-700', className)}
     {...props}
   />
 ));
