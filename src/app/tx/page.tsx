@@ -17,10 +17,15 @@ import { Send, QrCode } from 'lucide-react';
 import { Avatar } from '@/app/components/ui/avatar';
 import { RootState } from '@/GlobalRedux/store';
 import AuthPage from '../components/AuthPage/AuthPage';
+
+// hooks
 import useFindPayeeName from '../hooks/useFindPayeeName';
+
+// types
+import { Contact } from '@/app/types/types';
+
 export default function Page() {
-  console.log('Tx Modal Page');
-  const dispatch = useDispatch();
+  
 
   const [transaction, setTransaction] = useState<any>({});
 
@@ -33,13 +38,34 @@ export default function Page() {
 
   const address = useSelector((state: any) => state.address.value);
 
-  const payeeName = useFindPayeeName(transaction.from);
+  const [payeeName, setPayeeName] = useState<string | null>('');
 
+
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
+
+  const findPayeeName = (payeeAddress: string): string | null => {
+    if (!contactsState || contactsState.length === 0) {
+      return truncateEthAddress(payeeAddress);
+    }
+
+    // Ensure to lower case both sides to match
+    const contact = contactsState.find(
+      (element: Contact) =>
+        element.address?.toLocaleLowerCase() ===
+        payeeAddress.toLocaleLowerCase()
+    );
+
+    return contact ? contact.name : truncateEthAddress(payeeAddress);
+  };
+  
   useEffect(() => {
-    console.log('txState', txState);
+    
+
     const filteredTransaction = txState.filter((tx: any) => tx.hash == hash);
 
     setTransaction(filteredTransaction[0]);
+    
+    setPayeeName(filteredTransaction[0].to);
     console.log('filteredTransaction', filteredTransaction);
     setIsLoading(false);
   }, [txState]);
@@ -62,15 +88,15 @@ export default function Page() {
           >
             <div className='grid p-4'>
               <div className='my-4'>
-                <div className='flex text-xl font-bold text-white'>
-                  <Avatar className='bg-black'></Avatar>
-                  {transaction.from == address ? '+$' : '-$'}
+                <div className='flex text-xl font-bold'>
+                  <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
+                    {transaction.from == address ? '+$' : '-$'}
 
-                  {transaction.value}
+                    {transaction.value}
+                  </div>
                 </div>
                 <div className='text-blue-400'>
-                  {transaction.from == address ? 'From' : 'To'}{' '}
-                  {payeeName}
+                   {payeeName && findPayeeName(payeeName)}
                 </div>
                 <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                   <div>

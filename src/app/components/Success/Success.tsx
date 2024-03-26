@@ -44,6 +44,7 @@ export default function Success({
 
   useEffect(() => {
     if (transactionStatus) {
+      console.log('tx successful, getting data', transactionStatus);
       const getData = async () => {
         try {
           const recentTransactions = await useGetRecentTransactions(address);
@@ -54,10 +55,11 @@ export default function Success({
       };
 
       getData();
+      console.log("got data")
 
       setTimeout(() => {
-        const updateUserBalance = useGetBalance(address as string);
-        router.push(`/transaction?hash=${transactionHash}`);
+
+        router.push(`/tx?hash=${transactionHash}`);
       }, 300);
     }
   }, [transactionStatus]);

@@ -18,8 +18,8 @@ const useGetTokenBalance = async (ownerAddress: string) => {
       tokenContractAddresses
     );
             
-    console.log('Token balance for Address');
-    console.log(data);
+    /* console.log('Token balance for Address');
+    console.log(data); */
         
     return data;
   } catch (error) {
