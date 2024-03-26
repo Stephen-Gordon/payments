@@ -29,7 +29,7 @@ const BottomNavbar = () => {
   return (
     <>
       {showNav && (
-        <nav style={{backdropFilter: 'blur(100px)'}} className='fixed transition-all duration-500 bottom-0 z-40 bg-opacity-0 flex w-full justify-between overflow-hidden p-4 px-8 pb-8 '>
+        <nav className='fixed bottom-0 z-40 flex w-full justify-between overflow-hidden bg-transparent bg-opacity-0 bg-gradient-to-tr from-slate-50/10 p-4 pt-4 px-8 pb-8 backdrop-blur-xl transition-all duration-500 '>
           {/* <Link href='/home'>
             <Home
               className='stroke-muted-foreground'
