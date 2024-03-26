@@ -172,30 +172,33 @@ export default function Page() {
                           style={{ marginBottom: '32px' }}
                           className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
                         >
+                          <div className='pb-4'>${transaction.value}</div>
+
                           <p className='text-muted-foreground text-xs'>
                             You Received
                           </p>
-                          <p className='text-muted-foreground pb-4 text-xs'>
+                          <p className='text-muted-foreground text-xs'>
                             <TimeAgo
                               date={transaction.metadata.blockTimestamp}
                             />
                           </p>
-                          <div>${transaction.value}</div>
                         </div>
                       ) : (
                         <div
                           style={{ marginBottom: '32px' }}
                           className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
                         >
+                          <div className='pb-4'>${transaction.value}</div>
+
                           <p className='text-muted-foreground text-xs'>
                             You Sent
                           </p>
-                          <p className='text-muted-foreground pb-4 text-xs'>
+
+                          <p className='text-muted-foreground text-xs'>
                             <TimeAgo
                               date={transaction.metadata.blockTimestamp}
                             />
                           </p>
-                          <div>${transaction.value}</div>
                         </div>
                       )}
                     </div>
