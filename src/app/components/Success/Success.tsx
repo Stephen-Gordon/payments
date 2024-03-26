@@ -72,7 +72,7 @@ export default function Success({
       setDrawerOpen(false);
       
          dispatch(setSheet(false)); 
-      }, 300);
+      }, 1000);
     }
   }, [transactionStatus]);
   return (
@@ -133,10 +133,10 @@ export default function Success({
                       transition={{ delay: 0.4 }}
                       className='w-full'
                     >
-                     {/*  <TextGenerateEffect
+                      <TextGenerateEffect
                         className='mt-4 text-center text-sm text-muted-foreground'
                         words='Your payment is on the way'
-                      ></TextGenerateEffect> */}
+                      ></TextGenerateEffect>
                     </motion.div>
                   </div>
                 )}
