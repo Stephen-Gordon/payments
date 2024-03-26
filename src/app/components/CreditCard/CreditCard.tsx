@@ -6,9 +6,10 @@ import truncateEthAddress from "truncate-eth-address";
 import { motion } from "framer-motion";
 import { usePrivySmartAccount } from "@zerodev/privy";
 import useGetBalance from "@/app/hooks/useGetBalance";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
+import { setBalance } from "@/GlobalRedux/Features/balance/balanceSlice";
 
 export default function CreditCard() {
     
@@ -20,16 +21,24 @@ export default function CreditCard() {
     const {user } = usePrivySmartAccount()
 
     const reduxBalance = useSelector((state: any) => state.balance.value)
+
+
     
     const hookBalance = useGetBalance(address as string)
 
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
+      console.log('redux balance', reduxBalance)
       setBalanceToShow(reduxBalance)
       if (hookBalance !== reduxBalance) {
         setBalanceToShow(hookBalance)
+        dispatch(setBalance(hookBalance))
       }
     }, [hookBalance, reduxBalance])
+
+
 
     return (
       <>
