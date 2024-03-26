@@ -24,6 +24,8 @@ import {
 import { Card, CardContent } from '../ui/card';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
+import TimeAgo from 'react-timeago';
+
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
 
@@ -66,11 +68,13 @@ export default function RecentTransaction({ transaction }: any) {
                 /* layoutId={`${transaction.hash}+title`} */
                 className='text-sm font-medium leading-none'
               >
-                {transaction.from == address ? 'From' : ''}{'Sent to '}
-                { payeeName}
+                {transaction.from == address ? 'From' : ''}
+                {'Sent to '}
+                {payeeName}
               </div>
               <p className='text-muted-foreground text-sm'>
-                {transaction?.metadata?.blockTimestamp.slice(0, 10)}
+                <TimeAgo date={transaction.metadata.blockTimestamp} />
+
               </p>
             </div>
             <div className='ml-auto font-medium'>

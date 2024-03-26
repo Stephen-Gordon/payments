@@ -36,7 +36,10 @@ import Link from 'next/link';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 import { format, parseISO, set } from 'date-fns';
-import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect';
+
+// format date
+import TimeAgo from 'react-timeago';
+
 interface Transaction {
   to: string;
   from: string;
@@ -172,6 +175,11 @@ export default function Page() {
                           <p className='text-muted-foreground text-xs'>
                             You Received
                           </p>
+                          <p className='text-muted-foreground pb-4 text-xs'>
+                            <TimeAgo
+                              date={transaction.metadata.blockTimestamp}
+                            />
+                          </p>
                           <div>${transaction.value}</div>
                         </div>
                       ) : (
@@ -181,6 +189,11 @@ export default function Page() {
                         >
                           <p className='text-muted-foreground text-xs'>
                             You Sent
+                          </p>
+                          <p className='text-muted-foreground pb-4 text-xs'>
+                            <TimeAgo
+                              date={transaction.metadata.blockTimestamp}
+                            />
                           </p>
                           <div>${transaction.value}</div>
                         </div>
@@ -199,9 +212,9 @@ export default function Page() {
       )}
       <DrawerFooter
         style={{ zIndex: 3000 }}
-        className='fixed bottom-4 w-full  '
+        className='fixed bottom-0 w-full  bg-white/10 backdrop-blur-xl '
       >
-        <div className='w-full'>
+        <div className='w-full ' style={{ paddingBottom: '16px' }}>
           <Link
             href={{
               pathname: '/send',

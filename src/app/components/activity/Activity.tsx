@@ -58,7 +58,7 @@ export default function Activity() {
           key='activity-key'
           layoutId='activity'
           transition={{ duration: 0.3 }}
-          className='w-full rounded-2xl bg-gradient-to-tr from-accent to bg-accent/80  backdrop-blur-xl '
+          className='w-full rounded-2xl bg-gradient-to-br from-background to bg-accent/80  backdrop-blur-xl '
         >
           <Card className='bg-transparent '>
             <CardHeader>

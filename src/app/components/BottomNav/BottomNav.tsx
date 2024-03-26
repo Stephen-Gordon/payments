@@ -16,7 +16,7 @@ const BottomNavbar = () => {
   const [showNav, setShowNav] = useState(true);
 
    useEffect(() => {
-    if (pathname == '/' || pathname == '/login') {
+    if (pathname == '/' || pathname == '/login' || pathname == '/tx') {
       setShowNav(false);
     } else {
       setShowNav(true);
@@ -29,7 +29,7 @@ const BottomNavbar = () => {
   return (
     <>
       {showNav && (
-        <nav className='fixed bottom-0 z-40 flex w-full justify-between overflow-hidden bg-transparent bg-opacity-0 bg-gradient-to-tr from-slate-50/10 p-4 pt-4 px-8 pb-8 backdrop-blur-xl transition-all duration-500 '>
+        <nav className='fixed bottom-0 z-40 flex w-full justify-between overflow-hidden bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl transition-all duration-500 '>
           {/* <Link href='/home'>
             <Home
               className='stroke-muted-foreground'

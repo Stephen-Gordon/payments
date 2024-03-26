@@ -122,7 +122,7 @@ export default function Page() {
           }} /*  onAnimationComplete={(definition) => {
         setShowTxs(true);
       }} */
-          className='from-accent to bg-accent/80 absolute z-50 min-h-screen w-full overflow-hidden bg-gradient-to-tr  text-xl backdrop-blur-xl'
+          className='from-background to bg-accent/80 absolute z-50 min-h-screen w-full overflow-hidden bg-gradient-to-br  text-xl backdrop-blur-xl'
         >
           <Card style={{ border: '0px' }} className='bg-transparent'>
             <CardHeader>

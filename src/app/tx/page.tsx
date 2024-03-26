@@ -24,6 +24,11 @@ import useFindPayeeName from '../hooks/useFindPayeeName';
 // types
 import { Contact } from '@/app/types/types';
 
+// components
+import { Button } from '@/app/components/ui/button';
+
+import TimeAgo from 'react-timeago';
+import BackButton from '../components/Navigation/BackButton/BackButton';
 export default function Page() {
   
 
@@ -39,6 +44,8 @@ export default function Page() {
   const address = useSelector((state: any) => state.address.value);
 
   const [payeeName, setPayeeName] = useState<string | null>('');
+
+  const dispatch = useDispatch();
 
 
   const contactsState = useSelector((state: RootState) => state.contacts.value);
@@ -84,9 +91,14 @@ export default function Page() {
               width: '100vw',
               height: '100vh',
             }}
-            className='bg-background'
+            className='from-background to bg-accent/80 bg-gradient-to-br  backdrop-blur-xl'
           >
-            <div className='grid p-4'>
+            <div className='grid p-4 '>
+              <div className='absolute z-50'>
+                <Link href={'/home'}>
+                  <BackButton />
+                </Link>
+              </div>
               <div className='my-4'>
                 <div className='flex text-xl font-bold'>
                   <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
@@ -95,34 +107,64 @@ export default function Page() {
                     {transaction.value}
                   </div>
                 </div>
-                <div className='text-blue-400'>
-                   {payeeName && findPayeeName(payeeName)}
+                <div className='text-muted-foreground text-center'>
+                  {payeeName && findPayeeName(payeeName)}
                 </div>
-                <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
+                <div className='text-muted-foreground text-center'>
+                  <TimeAgo date={transaction.metadata.blockTimestamp} />
+                </div>
+                <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
                   <div>
                     <Link
-                      onClick={() => {}}
+                      onClick={() => {
+                        dispatch(setSheet(true));
+                      }}
                       href={{
-                        pathname: '/send',
-                        query: { address: transaction.from },
+                        pathname: '/search',
                       }}
                     >
-                      <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
-                        <div className='text-white'>Send</div>{' '}
-                        <Send size={20} color='#cbd5e1' />
-                      </button>
+                      <Button
+                        className='text-xl'
+                        size={'lg'}
+                        variant={'default'}
+                      >
+                        <div className='flex grid-cols-3 content-center items-center'>
+                          <div className='text-xl'>
+                            <div>Send</div>
+                          </div>
+                          <div className='px-2'></div>
+                          <div>
+                            <Send size={20} />
+                          </div>
+                        </div>
+                      </Button>
                     </Link>
                   </div>
+
                   <div>
                     <Link
+                      onClick={() => {
+                        dispatch(setSheet(true));
+                      }}
                       href={{
                         pathname: '/receive',
                       }}
                     >
-                      <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
-                        <div className='text-white'>Receive</div>{' '}
-                        <QrCode size={20} color='#cbd5e1' />
-                      </button>
+                      <Button
+                        className='text-xl'
+                        size={'lg'}
+                        variant={'default'}
+                      >
+                        <div className='flex grid-cols-3 content-center items-center'>
+                          <div className='text-xl'>
+                            <div>Receive</div>
+                          </div>
+                          <div className='px-2'></div>
+                          <div>
+                            <QrCode size={22} />
+                          </div>
+                        </div>
+                      </Button>
                     </Link>
                   </div>
                 </div>

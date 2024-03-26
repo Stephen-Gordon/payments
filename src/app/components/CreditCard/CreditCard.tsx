@@ -42,11 +42,11 @@ export default function CreditCard() {
           }}
         >
           <HoverBorderGradient className='relative grid h-52 w-full rounded-xl shadow-lg'>
-            <div className='absolute -z-50 h-full w-full rounded-xl bg-transparent bg-gradient-to-tr from-slate-50/10 backdrop-blur-xl'>
+            <div className='absolute -z-50 h-full w-full rounded-xl bg-transparent bg-gradient-to-br from-slate-50/10 backdrop-blur-xl'>
               <></>
             </div>
 
-            <div className='absolute z-50 grid h-full w-full content-center items-center justify-center  p-2 text-center text-5xl text-card-foreground mix-blend-exclusion '>
+            <div className='text-card-foreground absolute z-50 grid h-full w-full content-center items-center  justify-center p-2 text-center text-5xl mix-blend-exclusion '>
               {balanceToShow}
             </div>
             <div className='absolute z-50 mb-auto flex h-full w-full content-end justify-between p-4'>
