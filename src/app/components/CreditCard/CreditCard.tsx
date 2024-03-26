@@ -51,7 +51,7 @@ export default function CreditCard() {
           }}
         >
           <HoverBorderGradient className='relative grid h-52 w-full rounded-xl shadow-lg'>
-            <div className='absolute -z-50 h-full w-full rounded-xl bg-transparent bg-gradient-to-br from-slate-50/10 backdrop-blur-xl'>
+            <div className='absolute -z-50 h-full w-full  rounded-xl bg-gradient-to-br from-slate-50/10  to-[#E45368]/40 via-background  backdrop-blur-2xl'>
               <></>
             </div>
 
