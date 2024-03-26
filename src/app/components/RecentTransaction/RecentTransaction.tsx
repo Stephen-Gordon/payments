@@ -27,7 +27,7 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
 
-  const payeeName = useFindPayeeName(transaction.from);
+  const payeeName = useFindPayeeName(transaction.to);
 
   return (
     <div className=''>
@@ -66,7 +66,7 @@ export default function RecentTransaction({ transaction }: any) {
                 /* layoutId={`${transaction.hash}+title`} */
                 className='text-sm font-medium leading-none'
               >
-                {transaction.from == address ? 'From' : ''}{' '}
+                {transaction.from == address ? 'From' : ''}{'Sent to '}
                 { payeeName}
               </div>
               <p className='text-muted-foreground text-sm'>
