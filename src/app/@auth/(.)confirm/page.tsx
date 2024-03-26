@@ -36,6 +36,11 @@ import { useDispatch } from 'react-redux';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 import { ArrowDown, SendHorizonal, Send } from 'lucide-react';
 
+// redux
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { Contact } from '@/app/types/types';
+
 interface ConfirmProps {
   showConfirm: boolean;
 }
@@ -52,6 +57,22 @@ export default function Page({ showConfirm }: ConfirmProps) {
   
   const { sendUsdc, transactionStatus, loading, transactionHash } =
     useSendUsdc();
+
+
+    const contactsState = useSelector((state: RootState) => state.contacts.value);
+
+  const findPayeeName = (payeeAddress: string): string | null => {
+    if (!contactsState || contactsState.length === 0) {
+      return truncateEthAddress(payeeAddress);
+    }
+
+    // Ensure to lower case both sides to match
+    const contact = contactsState.find(
+      (element: Contact) => element.address?.toLocaleLowerCase() === payeeAddress.toLocaleLowerCase()
+    );
+
+    return contact ? contact.name : truncateEthAddress(payeeAddress);
+  };
 
 
 
@@ -97,7 +118,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
         
           
         <div className='text-lg text-center text-muted-foreground font-bold leading-none'>
-          {payee && useFindPayeeName(payee) }
+          {payee && findPayeeName(payee) }
         </div>
       </div>
       { loading == true || transactionStatus == true ? (<>
