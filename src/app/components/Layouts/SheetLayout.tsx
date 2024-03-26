@@ -53,7 +53,7 @@ const SheetLayout = ({ children }) => {
       >
         <DrawerOverlay />
         <DrawerContent
-          className='ios' /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
+          className='' /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
         >
           {children}
         </DrawerContent>

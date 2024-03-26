@@ -58,9 +58,9 @@ export default function Activity() {
           key='activity-key'
           layoutId='activity'
           transition={{ duration: 0.3 }}
-          className='bg-slate-50/10 backdrop-blur-xl w-full rounded-full text-xl '
+          className='w-full rounded-2xl bg-gradient-to-tr from-accent to bg-accent/80  backdrop-blur-xl '
         >
-          <Card className=''>
+          <Card className='bg-transparent '>
             <CardHeader>
               <motion.div>
                 <CardTitle>Recent Transactions</CardTitle>

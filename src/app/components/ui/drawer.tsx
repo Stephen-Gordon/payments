@@ -52,7 +52,7 @@ const DrawerContent = React.forwardRef<
       ref={ref}
       /* style={{ height: 'calc(100vh - 2rem)' }} */
       className={cn(
-        '  bg-background/80 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[16px] border-t',
+        '  from-background to bg-background/80 fixed inset-x-0 bottom-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[16px] border-t bg-gradient-to-t text-xl backdrop-blur-2xl',
         className
       )}
       {...props}
