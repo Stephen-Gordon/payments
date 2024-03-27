@@ -121,7 +121,7 @@ export default function SendUsdc() {
             <Button className='text-xl' size={'lg'} variant={'default'}>
               <div className='flex content-center items-center'>
                 <div className='text-xl'>
-                  <div>Review</div>
+                  <div>Send</div>
                 </div>
               </div>
             </Button>

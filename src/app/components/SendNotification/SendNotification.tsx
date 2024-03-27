@@ -160,28 +160,30 @@ export default function SendNotification() {
 
   return (
     <>
-      <p>{text}</p>
-      <button
-        type='button'
-        onClick={subscribeButtonOnClick}
-        disabled={isSubscribed}
-      >
-        Subscribe
-      </button>
-      <button
-        type='button'
-        onClick={unsubscribeButtonOnClick}
-        disabled={!isSubscribed}
-      >
-        Unsubscribe
-      </button>
-      <button
-        type='button'
-        onClick={sendNotificationButtonOnClick}
-        disabled={!isSubscribed}
-      >
-        Send Notification
-      </button>
+      <div className='grid'>
+        <p>{text}</p>
+        <button
+          type='button'
+          onClick={subscribeButtonOnClick}
+          disabled={isSubscribed}
+        >
+          Subscribe
+        </button>
+        <button
+          type='button'
+          onClick={unsubscribeButtonOnClick}
+          disabled={!isSubscribed}
+        >
+          Unsubscribe
+        </button>
+        <button
+          type='button'
+          onClick={sendNotificationButtonOnClick}
+          disabled={!isSubscribed}
+        >
+          Send Notification
+        </button>
+      </div>
     </>
   );
 }

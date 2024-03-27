@@ -26,11 +26,6 @@ export default function Page() {
       <Drawer shouldScaleBackground={true} open={isNavOpen}>
         <DrawerContent className='ios'>
           <SendNotification />
-          <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
-          </DrawerHeader>
-
           <DrawerFooter>
             <Button>Submit</Button>
             <DrawerClose
