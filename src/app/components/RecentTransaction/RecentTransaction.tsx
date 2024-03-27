@@ -25,6 +25,10 @@ import { Card, CardContent } from '../ui/card';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 import TimeAgo from 'react-timeago';
+import { formatUnits } from 'viem';
+import { fromUnixTime } from 'date-fns';
+
+
 
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
@@ -33,7 +37,7 @@ export default function RecentTransaction({ transaction }: any) {
 
   return (
     <div className=''>
-      <Link href={{ pathname: '/tx', query: { hash: transaction.hash } }}>
+      <Link href={{ pathname: '/tx', query: { hash: transaction.blockHash } }}>
         {/* <motion.div className='bg-background mb-4 flex content-center justify-between rounded-md border p-2 text-base transition-all duration-300'>
           <div className='flex items-center'>
             <div className='relative grid items-center justify-center'>
@@ -68,19 +72,23 @@ export default function RecentTransaction({ transaction }: any) {
                 /* layoutId={`${transaction.hash}+title`} */
                 className='text-sm font-medium leading-none'
               >
-                {transaction.from == address ? 'From' : ''}
-                {'Sent to '}
+                {transaction.from.toLocaleLowerCase() !==
+                address.toLocaleLowerCase()
+                  ? 'From '
+                  : 'To '}
+
                 {payeeName}
               </div>
               <p className='text-muted-foreground text-sm'>
-                <TimeAgo date={transaction.metadata.blockTimestamp} />
-
+                <TimeAgo date={fromUnixTime(transaction.timeStamp)} />
               </p>
             </div>
             <div className='ml-auto font-medium'>
-              {transaction.from == address ? '+$' : '-$'}
-
-              {transaction.value}
+              {transaction.from.toLocaleLowerCase() !==
+              address.toLocaleLowerCase()
+                ? '+$'
+                : '-$'}
+              {formatUnits(transaction.value, 6)}
             </div>
           </div>
         </div>

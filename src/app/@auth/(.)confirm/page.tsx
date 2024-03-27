@@ -80,6 +80,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
     if (!payee || !amount) return;
     console.log('calling hook');
     sendUsdc(amount, payee);
+    
   };
 
   return (

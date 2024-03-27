@@ -34,7 +34,7 @@ export default function Page() {
 
   useEffect(() => {
     console.log('txState', txState);
-    const filteredTransaction = txState.filter((tx: any) => tx.hash == hash);
+    const filteredTransaction = txState.filter((tx: any) => tx.blockHash == hash);
 
     setTransaction(filteredTransaction[0]);
     console.log('filteredTransaction', filteredTransaction);
@@ -66,8 +66,7 @@ export default function Page() {
                 {transaction.value}
               </div>
               <div className='text-blue-400'>
-                {transaction.from == address ? 'From' : 'To'}{' '}
-               {payeeName}
+                {transaction.from == address ? 'From' : 'To'} {payeeName}
               </div>
               <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
                 <div>
@@ -105,7 +104,7 @@ export default function Page() {
                 <div className='flex justify-between'>
                   <p>Tx Hash</p>
                   <p className='text-blue-400'>
-                    {truncateEthAddress(transaction.hash)}
+                    {truncateEthAddress(transaction.blockHash)}
                   </p>
                 </div>
               </div>

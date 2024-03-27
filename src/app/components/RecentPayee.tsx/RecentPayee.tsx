@@ -64,19 +64,27 @@ export default function RecentPayee(): JSX.Element {
       (state: RootState) => state.contacts.value
     );
 
+    const transactionState = useSelector(
+      (state: RootState) => state.transactions.value
+    );
   
   // get recent transactions 
   useEffect(() => {
 
-
-    const fetchRecentTransactions = async () => {
+    const uniquePayees = Array.from(
+      new Set(
+        transactionState.map((transaction) => transaction.to || transaction.from)
+      )
+    );
+    setPayees(uniquePayees);
+    /* const fetchRecentTransactions = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
         console.log('recentTransactions in payee', recentTransactions);
         if (recentTransactions) {
           const uniquePayees = Array.from(
             new Set(
-              recentTransactions.transfers.map(
+              recentTransactions.map(
                 (transaction) => transaction.to || transaction.from
               )
             )
@@ -88,7 +96,7 @@ export default function RecentPayee(): JSX.Element {
       }
     };
 
-    fetchRecentTransactions();
+    fetchRecentTransactions(); */
   }, []);
 
  

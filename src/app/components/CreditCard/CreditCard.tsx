@@ -31,11 +31,13 @@ export default function CreditCard() {
 
     useEffect(() => {
       console.log('redux balance', reduxBalance)
-      setBalanceToShow(reduxBalance)
+      console.log('hook balance', hookBalance)
+      
       if (hookBalance !== reduxBalance) {
-        setBalanceToShow(hookBalance)
-        dispatch(setBalance(hookBalance))
+        setBalanceToShow(hookBalance as string)
+        dispatch(setBalance(hookBalance as string))
       }
+      
     }, [hookBalance, reduxBalance])
 
 

@@ -28,7 +28,12 @@ import { Contact } from '@/app/types/types';
 import { Button } from '@/app/components/ui/button';
 
 import TimeAgo from 'react-timeago';
+
+import { fromUnixTime } from 'date-fns';
+
 import BackButton from '../components/Navigation/BackButton/BackButton';
+import { formatUnits } from 'viem';
+
 export default function Page() {
   
 
@@ -68,7 +73,9 @@ export default function Page() {
   useEffect(() => {
     
 
-    const filteredTransaction = txState.filter((tx: any) => tx.hash == hash);
+    const filteredTransaction = txState.filter(
+      (tx: any) => tx.blockHash == hash
+    );
 
     setTransaction(filteredTransaction[0]);
     
@@ -104,16 +111,16 @@ export default function Page() {
                   <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
                     {transaction.from == address ? '+$' : '-$'}
 
-                    {transaction.value}
+                    {formatUnits(transaction.value, 6)}
                   </div>
                 </div>
                 <div className='text-muted-foreground text-center'>
                   {payeeName && findPayeeName(payeeName)}
                 </div>
                 <div className='text-muted-foreground text-center'>
-                  <TimeAgo date={transaction.metadata.blockTimestamp} />
+                  <TimeAgo date={fromUnixTime(transaction.timeStamp)} />{' '}
                 </div>
-                <div className='mt-10 grid grid-cols-2 gap-2 p-2'>
+                <div className='mt-10 grid grid-cols-1 gap-2 p-2'>
                   <div>
                     <Link
                       onClick={() => {
@@ -130,7 +137,7 @@ export default function Page() {
                       >
                         <div className='flex grid-cols-3 content-center items-center'>
                           <div className='text-xl'>
-                            <div>Send</div>
+                            <div>Send Again</div>
                           </div>
                           <div className='px-2'></div>
                           <div>
@@ -141,32 +148,7 @@ export default function Page() {
                     </Link>
                   </div>
 
-                  <div>
-                    <Link
-                      onClick={() => {
-                        dispatch(setSheet(true));
-                      }}
-                      href={{
-                        pathname: '/receive',
-                      }}
-                    >
-                      <Button
-                        className='text-xl'
-                        size={'lg'}
-                        variant={'default'}
-                      >
-                        <div className='flex grid-cols-3 content-center items-center'>
-                          <div className='text-xl'>
-                            <div>Receive</div>
-                          </div>
-                          <div className='px-2'></div>
-                          <div>
-                            <QrCode size={22} />
-                          </div>
-                        </div>
-                      </Button>
-                    </Link>
-                  </div>
+                 
                 </div>
                 <div className='bg-muted mt-4 rounded-xl p-4 text-slate-300'>
                   <div className='mb-4 flex justify-between'>
@@ -176,7 +158,7 @@ export default function Page() {
                   <div className='flex justify-between'>
                     <p>Tx Hash</p>
                     <p className='text-blue-400'>
-                      {truncateEthAddress(transaction.hash)}
+                      {truncateEthAddress(transaction.blockHash)}
                     </p>
                   </div>
                 </div>

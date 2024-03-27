@@ -4,7 +4,7 @@ import RecentTransaction from '@/app/components/RecentTransaction/RecentTransact
 import useGetAddress from '@/app/hooks/useGetAddress';
 import useGetRecentTransactions from '@/app/hooks/useGetRecentTransactions';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 
@@ -19,6 +19,8 @@ import {
 } from '@/app/components/ui/card';
 import { Button } from '../ui/button';
 
+
+
 export default function Activity() {
   const [transactions, setTxs] = useState<any>([]);
   const [allTransactions, setAllTransactions] = useState<any>([]);
@@ -26,18 +28,26 @@ export default function Activity() {
   const dispatch = useDispatch();
 
   // address
-  const address = useGetAddress();
+  const address = useGetAddress(); 
 
   const transactionState = useSelector(
     (state: any) => state.transactions.value
   );
+   
 
   useEffect(() => {
     const getData = async () => {
       try {
+        // get all
         const recentTransactions = await useGetRecentTransactions(address);
-        setAllTransactions(recentTransactions?.transfers);
-        dispatch(setTransactions(recentTransactions?.transfers));
+        
+        dispatch(setTransactions(recentTransactions));
+
+        // set state
+        setTxs(recentTransactions);
+        console.log('transState', transactionState);
+
+        
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -46,19 +56,18 @@ export default function Activity() {
     getData();
   }, []);
 
-  useEffect(() => {
-    /*  dispatch(setTransactions(transactions)); */
-    setTxs(transactionState?.slice(0, 5));
-  }, [transactionState]); // Add transactions as a dependency
+  
 
+
+  
   return (
     <>
-      {transactions?.length > 0 ? (
+      {transactionState?.length > 0 ? (
         <motion.div
           key='activity-key'
           layoutId='activity'
           transition={{ duration: 0.3 }}
-          className='w-full rounded-2xl bg-gradient-to-br from-background to bg-accent/80  backdrop-blur-xl '
+          className='from-background to bg-accent/80 w-full rounded-2xl bg-gradient-to-br  backdrop-blur-xl '
         >
           <Card className='bg-transparent '>
             <CardHeader>
@@ -68,11 +77,11 @@ export default function Activity() {
             </CardHeader>
             <CardContent className=' '>
               <div className='mt-4 space-y-8'>
-                {transactions &&
-                  transactions.map((transaction: any, i: any) => (
+                {transactionState &&
+                  transactionState.slice(0,5).map((transaction: any, i: any) => (
                     <motion.div
                       className='h-fit w-full'
-                      layoutId={transaction.hash}
+                      layoutId={transaction.blockHash}
                       key={i}
                     >
                       <RecentTransaction transaction={transaction} />

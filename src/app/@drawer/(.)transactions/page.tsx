@@ -25,7 +25,7 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 
 //import { format, parseISO } from 'date-fns';
-import { format, parseISO, set } from 'date-fns';
+import { format, parseISO, set, fromUnixTime } from 'date-fns';
 
 export default function Page() {
   //next
@@ -62,17 +62,15 @@ export default function Page() {
     to: string;
     from: string;
     value: string;
-    metadata: {
-      blockTimestamp: string;
-    };
+    timeStamp: string;
   }
 
   useEffect(() => {
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
-        setAllTransactions(recentTransactions?.transfers);
-        dispatch(setTransactions(recentTransactions?.transfers));
+        setAllTransactions(recentTransactions);
+        dispatch(setTransactions(recentTransactions));
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -81,13 +79,17 @@ export default function Page() {
     getData();
   }, []);
 
+
+
   useEffect(() => {
+
+    console.log("transState in page",transactionState)
     setTxs(transactionState);
 
     const groupedTransactionsByMonth: { [key: string]: any[] } =
       transactions.reduce((groups, transaction) => {
         const monthKey = format(
-          parseISO(transaction.metadata.blockTimestamp),
+          fromUnixTime(transaction.timeStamp),
           'yyyy-MM'
         );
         if (!groups[monthKey]) {
@@ -168,7 +170,7 @@ export default function Page() {
                                     key={j}
                                   >
                                     <motion.div
-                                      layoutId={transaction.hash}
+                                      layoutId={transaction.blockHash}
                                       className='mb-6 grid h-fit w-full '
                                     >
                                       <RecentTransaction
@@ -200,7 +202,7 @@ export default function Page() {
                                         key={j}
                                       >
                                         <motion.div
-                                          layoutId={transaction.hash}
+                                          layoutId={transaction.blockHash}
                                           className='mb-6 grid h-fit w-full '
                                         >
                                           <RecentTransaction

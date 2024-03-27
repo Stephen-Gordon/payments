@@ -22,6 +22,7 @@ import { IconSquareRoundedX } from '@tabler/icons-react';
 import { TextGenerateEffect } from '../ui/text-generate-effect';
 import useGetBalance from '@/app/hooks/useGetBalance';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
+import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
 
 
 
@@ -67,7 +68,8 @@ export default function Success({
 
       getData();
       console.log("got data")
-
+      const balance = useGetBalance(address as string);
+      dispatch(setBalance(balance as string));
       setTimeout(() => {
       setDrawerOpen(false);
       

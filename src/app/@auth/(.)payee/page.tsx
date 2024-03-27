@@ -35,10 +35,13 @@ import Link from 'next/link';
 //hooks
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
-import { format, parseISO, set } from 'date-fns';
+import { format, parseISO, set, fromUnixTime } from 'date-fns';
+import Moralis from 'moralis';
+
 
 // format date
 import TimeAgo from 'react-timeago';
+import { formatUnits } from 'viem';
 
 interface Transaction {
   to: string;
@@ -66,28 +69,56 @@ export default function Page() {
   // refs
   const end = useRef<any>(null);
 
+  useEffect(() => {
+    const moralisFetch = async () => {
+          
+    try {
+      await Moralis.start({
+        apiKey:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjY4NTRjOTU5LTk5NGEtNGYwZC04MjA0LTA4YWM2MmE3Y2EwOSIsIm9yZ0lkIjoiMzc2ODcxIiwidXNlcklkIjoiMzg3Mjg5IiwidHlwZUlkIjoiMTQxNjQyOTUtNzg4MS00Yzk2LTkxM2ItNTQ5YjBiZjU2M2FkIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MDc3NDAwOTgsImV4cCI6NDg2MzUwMDA5OH0.GrOEC01ujomn_3cVNZKKxCkd5QVP52i5I3HsFxSp23Q',
+      });
+
+      const response = await Moralis.EvmApi.token.getWalletTokenTransfers({
+        chain: '0xaa36a7',
+        order: 'DESC',
+        address: '0x0B0c7d71cb31240742Af35278dfe46112377Bf08',
+      });
+
+      console.log("moralis", response.raw);
+    } catch (e) {
+      console.error(e);
+    }
+    }
+    moralisFetch();
+  }, [])
+
   // effect
   useEffect(() => {
     end.current.scrollIntoView({});
     const fetchRecentTransactions = async () => {
-      const recentTransactions = await useGetRecentTransactions(address as string);
+      const recentTransactions = await useGetRecentTransactions(
+        address as string
+      );
       console.log('recentTransactions', recentTransactions);
       if (recentTransactions) {
         // Filter transactions where either to or from address matches payeeAddress
         console.log('filtering with payeeAddress', payeeAddress);
-        const filteredTransactions: Transaction[] =
-          recentTransactions.transfers.filter(
-            (transaction) => transaction.to || transaction.from == payeeAddress
-          );
-        console.log('filteredTransactions', filteredTransactions);
+
+        const filteredTransactions: any = recentTransactions.filter(
+          (t) =>
+            t.to?.toLocaleLowerCase() === payeeAddress?.toLocaleLowerCase() ||
+            t.from?.toLocaleLowerCase() === payeeAddress?.toLocaleLowerCase()
+        );
+        console.log('filteredTransactionssssss', filteredTransactions);
         setTransactions(filteredTransactions);
 
         // Group transactions by month
-        // Group transactions by month
         const groupedTransactionsByMonth: { [key: string]: Transaction[] } =
           filteredTransactions.reduce((groups, transaction) => {
+            if (!transaction.timeStamp) return groups; // Skip transactions with no timestamp
+
             const monthKey = format(
-              parseISO(transaction.metadata.blockTimestamp),
+              fromUnixTime(transaction.timeStamp),
               'yyyy-MM'
             );
             if (!groups[monthKey]) {
@@ -114,6 +145,7 @@ export default function Page() {
 
     fetchRecentTransactions();
   }, [payeeAddress]);
+
 
   return (
     <>
@@ -167,19 +199,19 @@ export default function Page() {
                 <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
                   {month.transactions.map((transaction, j) => (
                     <div key={j}>
-                      {transaction.to == payeeAddress ? (
+                      {transaction.from == payeeAddress ? (
                         <div
                           style={{ marginBottom: '32px' }}
                           className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
                         >
-                          <div className='pb-4'>${transaction.value}</div>
+                          <div className='pb-4'>${formatUnits(transaction.value, 6)}</div>
 
                           <p className='text-muted-foreground text-xs'>
                             You Received
                           </p>
                           <p className='text-muted-foreground text-xs'>
                             <TimeAgo
-                              date={transaction.metadata.blockTimestamp}
+                              date={fromUnixTime(transaction.timeStamp)}
                             />
                           </p>
                         </div>
@@ -188,7 +220,7 @@ export default function Page() {
                           style={{ marginBottom: '32px' }}
                           className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
                         >
-                          <div className='pb-4'>${transaction.value}</div>
+                          <div className='pb-4'>${formatUnits(transaction.value, 6)}</div>
 
                           <p className='text-muted-foreground text-xs'>
                             You Sent
@@ -196,7 +228,7 @@ export default function Page() {
 
                           <p className='text-muted-foreground text-xs'>
                             <TimeAgo
-                              date={transaction.metadata.blockTimestamp}
+                              date={fromUnixTime(transaction.timeStamp)}
                             />
                           </p>
                         </div>
