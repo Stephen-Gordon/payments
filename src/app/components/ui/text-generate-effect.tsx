@@ -42,10 +42,10 @@ export const TextGenerateEffect = ({
   };
 
   return (
-    <div className={cn('font-bold', className)}>
-      <div className=' font-inherit leading-snug tracking-wide text-inherit mix-blend-exclusion '>
+    
+      <div className=' font-normal leading-relaxed tracking-wide text-inherit  '>
         {renderWords()}
       </div>
-    </div>
+
   );
 };

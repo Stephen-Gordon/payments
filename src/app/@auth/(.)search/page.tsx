@@ -102,7 +102,7 @@ export default function Page() {
                 }}
               />
             </div>
-            <p className='text-center'>
+            <p className='text-center font-normal'>
 
               <TextGenerateEffect words='Search'></TextGenerateEffect>
             </p>

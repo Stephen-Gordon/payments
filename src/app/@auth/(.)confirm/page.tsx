@@ -118,7 +118,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
         
         
           
-        <div className='text-lg text-center text-muted-foreground font-bold leading-none'>
+        <div className='text-lg text-center text-muted-foreground font-normal leading-none'>
           {payee && findPayeeName(payee) }
         </div>
       </div>
