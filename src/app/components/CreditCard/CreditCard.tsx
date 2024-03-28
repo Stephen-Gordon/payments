@@ -72,19 +72,19 @@ export default function CreditCard() {
             duration: 0.3,
           }}
         >
-          <HoverBorderGradient className='relative grid h-52 w-full rounded-xl shadow-lg'>
-            <div className='via-background absolute -z-50 h-full  w-full rounded-xl bg-gradient-to-br  from-slate-50/10 to-[#E45368]/40  backdrop-blur-2xl'>
+          <HoverBorderGradient className='relative grid h-52 w-full rounded-xl shadow-lg overflow'>
+            <div className='via-background absolute -z-10 h-full  w-full rounded-xl bg-gradient-to-br  from-slate-50/10 to-[#E45368]/40  backdrop-blur-2xl'>
               <></>
             </div>
 
-            <div className='text-card-foreground absolute z-50 grid h-full w-full content-center items-center  justify-center p-2 text-center text-5xl mix-blend-exclusion '>
+            <div className='text-card-foreground absolute z-10 grid h-full w-full content-center items-center  justify-center p-2 text-center text-5xl '>
               {reduxBalance && formatUnits(reduxBalance, 6)}
             </div>
-            <div className='absolute z-50 mb-auto flex h-full w-full content-end justify-between p-4'>
-              <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-base mix-blend-exclusion'>
+            <div className='sticky z-10 mb-auto flex h-full w-full content-end justify-between p-4'>
+              <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-base'>
                 {user?.google?.name}
               </div>
-              <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-right text-base mix-blend-exclusion'>
+              <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-right text-base'>
                 {truncateEthAddress(address as string)}
               </div>
             </div>

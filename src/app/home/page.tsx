@@ -101,12 +101,12 @@ export default function Page() {
       <div id='render' className='relative'>
        
         <div>
-          {/* <div className='absolute -z-50 '>
+         {/*  <div className='absolute -z-50 '>
             <BackgroundGradientAnimation />
-          </div>  */}
+          </div>   */}
           <motion.div
            /*  style={{ y, scale, opacity }} */
-            className='items-center p-2 text-center text-5xl mix-blend-exclusion'
+            className='items-center p-2 text-center text-5xl'
           >
             {/*  <Balance />  */}
             {/*   {address} */}
