@@ -93,8 +93,7 @@ export default function Activity() {
               <Link
                 className='w-fit'
                 href={{
-                  pathname: '/transactions',
-                  query: { isSheetOpen: true },
+                  pathname: '/transactions'
                 }}
               >
                 <Button

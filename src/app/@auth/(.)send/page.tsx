@@ -56,9 +56,9 @@ export default function Page() {
         </DrawerHeader>
       </div>
 
-      <div className=''>
+      
         <SendUsdc />
-      </div>
+
     </>
   );
 }

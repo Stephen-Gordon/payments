@@ -9,23 +9,38 @@ import { motion } from 'framer-motion';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
-import useGetAddress from '../hooks/useGetAddress';
+import useGetAddress from '@/app/hooks/useGetAddress';
 import {
   CardTitle,
   CardHeader,
   Card,
   CardContent,
-} from '../components/ui/card';
+} from '@/app/components/ui/card';
+
+import BackButton from '@/app/components/Navigation/BackButton/BackButton';
+
+// next
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 //import { format, parseISO } from 'date-fns';
-import { format, parseISO, set } from 'date-fns';
-import AuthPage from '../components/AuthPage/AuthPage';
+import { format, parseISO, set, fromUnixTime } from 'date-fns';
 
 export default function Page() {
+  //next
+  const searchParams = useSearchParams();
+  let isSheetOpen = searchParams.get('isSheetOpen');
+
+  // state
   const [transactions, setTxs] = useState<any[]>([]);
   const [allTransactions, setAllTransactions] = useState<any>([]);
 
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
+
+  // animate
+  const [showMoreTx, setShowMoreTx] = useState<boolean>(true);
+
+  const isOpen = useSelector((state: any) => state.sheet.value);
 
   // animate
   const [showTxs, setShowTxs] = useState<boolean>(true);
@@ -35,6 +50,9 @@ export default function Page() {
   // address
   const address = useGetAddress();
 
+  // router
+  const router = useRouter();
+
   const transactionState = useSelector(
     (state: any) => state.transactions.value
   );
@@ -43,17 +61,15 @@ export default function Page() {
     to: string;
     from: string;
     value: string;
-    metadata: {
-      blockTimestamp: string;
-    };
+    timeStamp: string;
   }
 
   useEffect(() => {
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
-        setAllTransactions(recentTransactions?.transfers);
-        dispatch(setTransactions(recentTransactions?.transfers));
+        setAllTransactions(recentTransactions);
+        dispatch(setTransactions(recentTransactions));
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -63,21 +79,18 @@ export default function Page() {
   }, []);
 
   useEffect(() => {
+    console.log('transState in page', transactionState);
     setTxs(transactionState);
 
     const groupedTransactionsByMonth: { [key: string]: any[] } =
       transactions.reduce((groups, transaction) => {
-        const monthKey = format(
-          parseISO(transaction.metadata.blockTimestamp),
-          'yyyy-MM'
-        );
+        const monthKey = format(fromUnixTime(transaction.timeStamp), 'yyyy-MM');
         if (!groups[monthKey]) {
           groups[monthKey] = [];
         }
         groups[monthKey].push(transaction);
         return groups;
       }, {});
-    console.log('read me ', groupedTransactionsByMonth);
 
     // Convert grouped transactions object into an array of arrays with month names
     const arrayOfMonthArrays: {
@@ -94,67 +107,105 @@ export default function Page() {
   }, [transactionState]); // Add transactions as a dependency
 
   return (
-    <AuthPage>
-      <motion.div
-        layoutId='activity'
-        transition={{
-          duration: 0.3,
-        }} /*  onAnimationComplete={(definition) => {
-        setShowTxs(true);
-      }} */
-        className='absolute w-full text-xl'
-      >
-        <Card style={{ border: '0px' }}>
-          <CardHeader>
-            <motion.div transition={{ duration: 0.4 }}>
-              <CardTitle>Recent Transactions</CardTitle>
-            </motion.div>
-          </CardHeader>
-          <CardContent className='border-0 border-none'>
-            <motion.div>
-              {showTxs && (
-                <>
-                  {groupedTransactions && (
-                    <>
-                      <div className='overflow-auto'>
-                        {groupedTransactions.map((month, i) => (
-                          <div key={i} className='grid'>
-                            <div
-                              style={{ marginBottom: '32px' }}
-                              className='flex w-full justify-center'
-                            >
-                              <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
-                                {month.monthName}
-                              </p>
-                            </div>
-                            {month.transactions.map((transaction, j) => (
-                              <motion.div
-                                className='grid h-fit w-full space-y-6'
-                                transition={{
-                                  duration: 0.4,
-                                  delay: j * 0.2,
-                                  ease: 'easeInOut', // Using a custom easing function
-                                }}
-                                key={j}
+    <>
+      
+        <motion.div
+          className='from-background to bg-accent/80 absolute z-50 min-h-screen w-full overflow-hidden bg-gradient-to-br  text-xl backdrop-blur-xl'
+        >
+          <Card style={{ border: '0px' }} className='bg-transparent'>
+            <CardHeader>
+              <CardTitle className='grid grid-cols-3 items-center'>
+                <div
+                  onClick={() => {
+                    router.back();
+                  }}
+                >
+                  <BackButton />
+                </div>
+                <p className='text-center'>Recent Transactions</p>
+                <div className='ml-auto'></div>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className='border-0 border-none'>
+              <motion.div>
+                {showTxs && (
+                  <>
+                    {groupedTransactions && (
+                      <>
+                        <div className=''>
+                          {groupedTransactions.map((month, i) => (
+                            <div key={i} className='grid'>
+                              <div
+                                style={{ marginBottom: '32px' }}
+                                className='flex w-full justify-center'
                               >
-                                <div className='mb-6 grid h-fit w-full'>
-                                  <RecentTransaction
-                                    transaction={month.transactions[j]}
-                                  />
-                                </div>
-                              </motion.div>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </>
-                  )}
-                </>
-              )}
-            </motion.div>
-          </CardContent>
-        </Card>
-      </motion.div>
-    </AuthPage>
+                                <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
+                                  {month.monthName}
+                                </p>
+                              </div>
+                              {month.transactions.map((transaction, j) => (
+                                <motion.div
+                                  className='grid h-fit w-full space-y-6'
+                                  transition={{
+                                    /*   duration: 0.4, */
+                                    /* delay: j * 0.2, */
+                                    ease: 'easeInOut', // Using a custom easing function
+                                  }}
+                                  key={j}
+                                >
+                                  <motion.div className='mb-6 grid h-fit w-full '>
+                                    <RecentTransaction
+                                      transaction={month.transactions[j]}
+                                    />
+                                  </motion.div>
+                                </motion.div>
+                              ))}
+                              {/*  {showMoreTx && (
+                                <motion.div
+                                  key={'transactions-dealyed'}
+                                  initial={{ opacity: 0 }}
+                                  animate={{ opacity: 1 }}
+                                  exit={{ opacity: 0 }}
+                                  transition={{ duration: 0.4, delay: 0.4 }}
+                                >
+                                  {month.transactions
+                                    .slice(5, 20)
+                                    .map((transaction, j) => (
+                                      <motion.div
+                                        className='grid h-fit w-full space-y-6'
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{
+                                          duration: 0.4,
+                                          delay: j * 0.2,
+                                          ease: 'easeInOut', // Using a custom easing function
+                                        }}
+                                        key={j}
+                                      >
+                                        <motion.div
+                                          layoutId={transaction.blockHash}
+                                          className='mb-6 grid h-fit w-full '
+                                        >
+                                          <RecentTransaction
+                                            transaction={month.transactions[j]}
+                                          />
+                                        </motion.div>
+                                      </motion.div>
+                                    ))}
+                                </motion.div>
+                              )} */}
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </>
+                )}
+              </motion.div>
+            </CardContent>
+          </Card>
+        </motion.div>
+
+    </>
   );
 }

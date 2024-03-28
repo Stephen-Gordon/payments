@@ -63,71 +63,29 @@ export default function SendUsdc() {
     }
   }, [usdcAmount]);
 
-  // Send transaction function
-  const sendTx = async () => {
-    try {
-      // Encode the data with Viem Function
-      // Requires the abi of the contract, the function name, and the arguments address and amount
-      // @ts-ignore
-      if (!zeroDevReady) {
-        console.log('not ready to send');
-        return;
-      }
-      if (usdcAmount == '' || usdcAmount == '0') {
-        console.log('amount is 0');
-        return;
-      }
-      const encoded: any = encodeFunctionData({
-        // @ts-ignore
-        abi: erc20Abi,
-        functionName: 'transfer',
-        args: [payee as `0x${string}`, parseUnits(usdcAmount, 6)],
-      });
-      console.log('Sending USDC');
-      setLoading(true);
-      const txnHash = await sendTransaction({
-        to: usdc, // ERC20 address
-        value: BigInt(0), // default to 0
-        data: encoded,
-      });
-      console.log('Txn hash:', txnHash);
-
-      if (txnHash) {
-        setLoading(false);
-        setTransactionStatus(true);
-        setTimeout(() => {
-          dispatch(setSheet(false));
-          /* router.push(`/transaction?hash=${txnHash}`); */
-          const balance = router.push('/home');
-        }, 1000);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
 
   return (
     <>
       <div className='grid content-start justify-center p-4 text-white'>
         <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
-
-        <DrawerFooter>
-          <Link
-            href={{
-              pathname: '/confirm',
-              query: { payee: payee, amount: usdcAmount },
-            }}
-          >
-            <Button className='text-xl' size={'lg'} variant={'default'}>
-              <div className='flex content-center items-center'>
-                <div className='text-xl'>
-                  <div>Send</div>
-                </div>
-              </div>
-            </Button>
-          </Link>
-        </DrawerFooter>
       </div>
+      <DrawerFooter>
+        <Link
+          href={{
+            pathname: '/confirm',
+            query: { payee: payee, amount: usdcAmount },
+          }}
+        >
+          <Button className='text-xl' size={'lg'} variant={'default'}>
+            <div className='flex content-center items-center'>
+              <div className='text-xl'>
+                <div>Send</div>
+              </div>
+            </div>
+          </Button>
+        </Link>
+      </DrawerFooter>
     </>
   );
 }
