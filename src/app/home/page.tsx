@@ -109,7 +109,7 @@ export default function Page() {
             <BackgroundGradientAnimation />
           </div>
           <motion.div
-            style={{ y, scale, opacity }}
+           /*  style={{ y, scale, opacity }} */
             className='items-center p-2 text-center text-5xl mix-blend-exclusion'
           >
             {/*  <Balance />  */}
@@ -118,7 +118,7 @@ export default function Page() {
           </motion.div>
 
           <motion.div
-            style={{ y, scale, opacity }}
+           /*  style={{ y, scale, opacity }} */
             className='mt-10 grid grid-cols-2 gap-2 p-2'
           >
             <div>
