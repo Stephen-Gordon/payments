@@ -53,7 +53,7 @@ export default function AddAContact({
   const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
 
   useEffect(() => {
-    if (newContactName === '' || newContactAddress === '' || showErrorMessage ) {
+    if (newContactName === '' || showErrorMessage ) {
       setShowAddButton(false);
     } else {
       setShowAddButton(true);

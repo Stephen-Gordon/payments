@@ -24,7 +24,8 @@ import useGetBalance from '@/app/hooks/useGetBalance';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
 
-
+// axios
+import axios from 'axios';
 
 export default function Success({
   transactionStatus,
@@ -44,6 +45,8 @@ export default function Success({
   //hooks
   const address = useGetAddress();
   const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const [balanceToShow, setBalanceToShow] = useState<string>('');
 
   useEffect(() => {
     if (transactionStatus || loading) {
@@ -68,15 +71,32 @@ export default function Success({
 
       getData();
       console.log("got data")
-      const balance = useGetBalance(address as string);
-      dispatch(setBalance(balance as string));
-      setTimeout(() => {
-      setDrawerOpen(false);
-      
-         dispatch(setSheet(false)); 
-      }, 1000);
+
+      axios
+        .get(
+          `https://api-sepolia.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8&address=${address}&tag=latest&apikey=F7A22CIQFVT5UDPBHKFN8GXYN9EXTS4G65`
+        )
+        .then((r) => {
+          console.log('axios balance', r.data);
+          setBalanceToShow(r.data.result);
+          dispatch(setBalance(r.data.result));
+          setTimeout(() => {
+            setDrawerOpen(false);
+
+            dispatch(setSheet(false));
+          }, 1000);
+        })
+        .catch((e) => {
+          console.log('axios balance error', e);
+        });
+
+
     }
   }, [transactionStatus]);
+
+
+
+
   return (
     <>
       <Drawer nested={true} dismissible={false} open={drawerOpen}>

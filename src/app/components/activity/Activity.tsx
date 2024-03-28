@@ -77,7 +77,7 @@ export default function Activity() {
             </CardHeader>
             <CardContent className=' '>
               <div className='mt-4 space-y-8'>
-                {transactionState &&
+                {Array.isArray(transactionState)  &&
                   transactionState.slice(0,5).map((transaction: any, i: any) => (
                     <motion.div
                       className='h-fit w-full'

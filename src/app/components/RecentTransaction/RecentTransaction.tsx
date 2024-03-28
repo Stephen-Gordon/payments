@@ -7,7 +7,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 // next
 import Link from 'next/link';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 // truncate-eth-address
@@ -27,13 +27,17 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 import TimeAgo from 'react-timeago';
 import { formatUnits } from 'viem';
 import { fromUnixTime } from 'date-fns';
+import { RootState } from '@/GlobalRedux/store';
 
 
 
 export default function RecentTransaction({ transaction }: any) {
   const address = useGetAddress();
 
-  const payeeName = useFindPayeeName(transaction.to);
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
+
+  const payeeName = useFindPayeeName(transaction.to, contactsState);
+
 
   return (
     <div className=''>

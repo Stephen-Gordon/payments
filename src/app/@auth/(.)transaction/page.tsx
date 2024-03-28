@@ -40,8 +40,9 @@ export default function Page() {
     console.log('filteredTransaction', filteredTransaction);
     setIsLoading(false);
   }, [txState]);
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
 
-  const payeeName = useFindPayeeName(transaction.from);
+  const payeeName = useFindPayeeName(transaction.from, contactsState);
 
   return (
     <>

@@ -3,8 +3,7 @@ import { RootState } from '@/GlobalRedux/store';
 import { Contact } from '@/app/types/types';
 import truncateEthAddress from 'truncate-eth-address';
 
-const useFindPayeeName = (payeeAddress: string) => {
-  const contactsState = useSelector((state: RootState) => state.contacts.value);
+const useFindPayeeName = (payeeAddress: string, contactsState : any) => {
 
   const findPayeeName = (payeeAddress: string): string | null => {
     if (!contactsState || contactsState.length === 0) {

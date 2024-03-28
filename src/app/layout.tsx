@@ -179,19 +179,17 @@ export default function RootLayout({
                     <QueryClientProvider client={queryClient}>
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
-                          <div vaul-drawer-wrapper=''
-                              className='h-[100vh] text-gray-300'>
+                          <div
+                            vaul-drawer-wrapper=''
+                            className='h-[100vh] text-gray-300'
+                          >
                             <div>{auth}</div>
                             <div>{drawer}</div>
 
-                            <main
-                              
-                            >
-                              {children}
-                            </main>
-                            <div className='w-full overflow-hidden'>
-                              <BottomNavbar />
-                            </div>
+                            <main>{children}</main>
+                          </div>
+                          <div className='w-full overflow-hidden'>
+                            <BottomNavbar />
                           </div>
                         </LayoutGroup>
                       </AnimatePresence>

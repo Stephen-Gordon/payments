@@ -16,12 +16,15 @@ import { Avatar } from '@/app/components/ui/avatar';
 // link
 import Link from 'next/link';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
 export default function Page() {
   const router = useRouter();
 
   // get search params
   const searchParams = useSearchParams();
   let payee = searchParams.get('payee');
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
 
   return (
     <>
@@ -35,7 +38,7 @@ export default function Page() {
             >
               <BackButton />
             </div>
-            <p className='text-center'>{payee && useFindPayeeName(payee)}</p>
+            <p className='text-center'>{payee && useFindPayeeName(payee, contactsState)}</p>
             <div className='ml-auto'>
               <Link
                 className='h-auto w-auto'

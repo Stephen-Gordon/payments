@@ -1,46 +1,24 @@
-/* // wagmi
-'use client';
-import { useBalance } from 'wagmi';
+import axios from 'axios';
 
-// Redux
+const useGetBalance = async (address: string) => {
+  
+ try {
+   const data = await axios
+     .get(
+       `https://api-sepolia.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8&address=${address}&tag=latest&apikey=F7A22CIQFVT5UDPBHKFN8GXYN9EXTS4G65`
+     )
+     .then((res) => {
+       console.log('axios balance', res.data);
+       return res.data.result;
+     });
 
-import { RootState } from '@/GlobalRedux/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
-
-const useGetBalance = (address: string) => {
-  const result = useBalance({
-    // @ts-ignore
-    address: address,
-    token: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
-  });
-
-  const dispatch = useDispatch();
-  dispatch(setBalance(result?.data?.formatted));
-
-  return result?.data?.formatted;
+   console.log('axios ', data);
+   return data;
+ } catch (e) {
+   console.error("axios balance", e);
+ }
 };
 
-export default useGetBalance;
- */
-// wagmi
-'use client';
-import { useBalance } from 'wagmi';
 
-// Redux
-
-import { RootState } from '@/GlobalRedux/store';
-import { useDispatch, useSelector } from 'react-redux';
-
-const useGetBalance = (address: string) => {
-  const result = useBalance({
-    // @ts-ignore
-    address: address,
-    token: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
-  });
-
-
-  return result?.data?.formatted;
-};
 
 export default useGetBalance;

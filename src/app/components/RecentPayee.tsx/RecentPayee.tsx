@@ -33,6 +33,7 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
   // If a matching contact is found, use its name, otherwise use truncated payee address
   const payeeName = matchedContact ? matchedContact.name : truncateEthAddress(payee);
   
+
     return (
       <>
         <div key={payee}>
@@ -42,7 +43,7 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
                 <Avatar className='h-9 w-9 bg-white'></Avatar>
                 <div className='ml-4 space-y-1'>
                   <div className='text-sm font-medium leading-none'>
-                    {useFindPayeeName(payee)}
+                    {useFindPayeeName(payee, contactsState)}
                   </div>
                 </div>
               </div>

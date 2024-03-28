@@ -23,12 +23,12 @@ import useGetAddress from '@/app/hooks/useGetAddress';
 // motion
 import { motion } from 'framer-motion';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 // components
 import { Button } from '@/app/components/ui/button';
 // lucide
-import { Send, QrCode } from 'lucide-react';
+import { Send, QrCode, UserPlus } from 'lucide-react';
 // link
 import Link from 'next/link';
 
@@ -42,6 +42,7 @@ import Moralis from 'moralis';
 // format date
 import TimeAgo from 'react-timeago';
 import { formatUnits } from 'viem';
+import AddAContact from '@/app/components/addAContact/addAContact';
 
 interface Transaction {
   to: string;
@@ -65,6 +66,15 @@ export default function Page() {
   // state
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
+  const [showAddContact, setShowAddContact] = useState<boolean>(false);
+
+
+
+  const contactsState = useSelector((state: any) => state.contacts.value);
+
+  const isInContacts = contactsState.some(
+    (contact: any) => contact.address == payeeAddress
+  );
 
   // refs
   const end = useRef<any>(null);
@@ -146,6 +156,10 @@ export default function Page() {
     fetchRecentTransactions();
   }, [payeeAddress]);
 
+   const handleAddUser = () => {
+     setShowAddContact(true);
+   };
+
 
   return (
     <>
@@ -164,11 +178,22 @@ export default function Page() {
             transition={{ duration: 1 }}
             className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
           >
-            {payeeAddress && useFindPayeeName(payeeAddress)}
+            {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
           </motion.p>
-          <div className='ml-auto'>
-            <Avatar className='h-9 w-9 bg-white'></Avatar>
-          </div>
+          {!isInContacts && (
+            <div className='ml-auto'>
+              <div
+                onClick={handleAddUser}
+                className='text-muted-foreground flex space-x-2 text-base font-light'
+              >
+                <UserPlus
+                  strokeWidth={2}
+                  className='fill-muted-foreground stroke-muted-foreground'
+                />
+                <p>Save</p>
+              </div>{' '}
+            </div>
+          )}
         </DrawerTitle>
       </DrawerHeader>
 
@@ -177,7 +202,7 @@ export default function Page() {
           <div className='text-center text-white'>
             <p>
               You've got no transfers with{' '}
-              {payeeAddress && useFindPayeeName(payeeAddress)}
+              {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
             </p>
           </div>
         </div>
@@ -204,7 +229,9 @@ export default function Page() {
                           style={{ marginBottom: '32px' }}
                           className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
                         >
-                          <div className='pb-4'>${formatUnits(transaction.value, 6)}</div>
+                          <div className='pb-4'>
+                            ${formatUnits(transaction.value, 6)}
+                          </div>
 
                           <p className='text-muted-foreground text-xs'>
                             You Received
@@ -220,7 +247,9 @@ export default function Page() {
                           style={{ marginBottom: '32px' }}
                           className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
                         >
-                          <div className='pb-4'>${formatUnits(transaction.value, 6)}</div>
+                          <div className='pb-4'>
+                            ${formatUnits(transaction.value, 6)}
+                          </div>
 
                           <p className='text-muted-foreground text-xs'>
                             You Sent
@@ -270,6 +299,14 @@ export default function Page() {
           </Link>
         </div>
       </DrawerFooter>
+      {!isInContacts && (
+        <AddAContact
+          open={showAddContact}
+          setShowAddContact={setShowAddContact}
+          contactsState={contactsState}
+          payee={payeeAddress}
+        />
+      )}
     </>
   );
 }

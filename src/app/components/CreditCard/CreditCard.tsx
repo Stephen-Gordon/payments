@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useEffect, useState } from "react";
 import { setBalance } from "@/GlobalRedux/Features/balance/balanceSlice";
+import axios from "axios";
+import { formatUnits } from "viem";
 
 export default function CreditCard() {
     
@@ -24,11 +26,11 @@ export default function CreditCard() {
 
 
     
-    const hookBalance = useGetBalance(address as string)
+    //const hookBalance = useGetBalance(address as string)
 
     const dispatch = useDispatch()
 
-
+/* 
     useEffect(() => {
       console.log('redux balance', reduxBalance)
       console.log('hook balance', hookBalance)
@@ -39,8 +41,26 @@ export default function CreditCard() {
       }
       
     }, [hookBalance, reduxBalance])
+ */
 
+    useEffect(() => {
+      axios.get(
+        `https://api-sepolia.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8&address=${address}&tag=latest&apikey=F7A22CIQFVT5UDPBHKFN8GXYN9EXTS4G65`
+      ).then((r) => {
+        console.log('axios balance', r.data)
+        setBalanceToShow(r.data.result)
+                
+        dispatch(setBalance(r.data.result));
+        console.log('balance to show', balanceToShow);
+      }).catch((e) => {
+        console.log('axios balance error', e)
+      })
+    }, [])
 
+    useEffect(() => {
+            
+
+    }, [balanceToShow])
 
     return (
       <>
@@ -53,12 +73,12 @@ export default function CreditCard() {
           }}
         >
           <HoverBorderGradient className='relative grid h-52 w-full rounded-xl shadow-lg'>
-            <div className='absolute -z-50 h-full w-full  rounded-xl bg-gradient-to-br from-slate-50/10  to-[#E45368]/40 via-background  backdrop-blur-2xl'>
+            <div className='via-background absolute -z-50 h-full  w-full rounded-xl bg-gradient-to-br  from-slate-50/10 to-[#E45368]/40  backdrop-blur-2xl'>
               <></>
             </div>
 
             <div className='text-card-foreground absolute z-50 grid h-full w-full content-center items-center  justify-center p-2 text-center text-5xl mix-blend-exclusion '>
-              {balanceToShow}
+              {reduxBalance && formatUnits(reduxBalance, 6)}
             </div>
             <div className='absolute z-50 mb-auto flex h-full w-full content-end justify-between p-4'>
               <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-base mix-blend-exclusion'>

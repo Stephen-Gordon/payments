@@ -47,7 +47,7 @@ export default function Page() {
 
   return (
     <>
-      <Drawer shouldScaleBackground={true} open={isNavOpen}>
+      <Drawer shouldScaleBackground={false} open={isNavOpen}>
         <DrawerContent className='ios'>
           <DrawerHeader>
             <DrawerTitle>Contacts</DrawerTitle>
