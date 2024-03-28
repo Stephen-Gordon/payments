@@ -26,7 +26,7 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans', ...defaultTheme.fontFamily.sans],
+        sans: ['Nunito Sans', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         /* main: '#13151a',
