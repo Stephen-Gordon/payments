@@ -11,6 +11,7 @@ import QRCode from 'react-qr-code';
 // Redux
 import { useSelector } from 'react-redux';
 import Qr from '@/app/components/Qr/Qr';
+import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
 
 export default function Page() {
   const address = useSelector((state: string) => state.address.value);
@@ -18,9 +19,10 @@ export default function Page() {
   return (
     <>
       <div className='grid'>
-        <div className='my-4 '>
-          <p className='my-4 text-center text-xl text-gray-300'>Receive</p>
-        </div>
+        <DrawerHeader>
+          <DrawerTitle>Receive</DrawerTitle>
+        </DrawerHeader>
+       
         <div className='grid justify-center'>
           <div className='mt-4 '>
             <Qr />

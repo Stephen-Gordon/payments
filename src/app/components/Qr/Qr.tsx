@@ -17,7 +17,7 @@ export default function Qr() {
   useEffect(() => {
     function handleResize() {
       const screenWidth = window.innerWidth; // Get the screen width
-      const tenPercentOfScreenWidth = screenWidth * 0.1; // Calculate 10% of the screen width
+      const tenPercentOfScreenWidth = screenWidth * 0.3; // Calculate 10% of the screen width
       const screenWidthMinusTenPercent = screenWidth - tenPercentOfScreenWidth; // Subtract 10% from the screen width
       setWindowWidth(screenWidthMinusTenPercent); // Set the state with the modified screen width
     }
