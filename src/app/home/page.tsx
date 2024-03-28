@@ -35,9 +35,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 
 import useGetTokenBalance from '../hooks/useGetTokenBalance';
 import AuthPage from '../components/AuthPage/AuthPage';
-import { setContacts } from '@/GlobalRedux/Features/contacts/contactsSlice';
 import CreditCard from '../components/CreditCard/CreditCard';
-import { LampDemo } from '../components/ui/lamp';
 
 export default function Page() {
   // privy
@@ -100,14 +98,12 @@ export default function Page() {
   console.log('usdcBalance', usdcBalance);
   return (
     <AuthPage>
-      <div id='render' className='min-h-[150vh]'>
-        <div className='absolute right-4 top-4'>
-         
-        </div>
-        <div className='blurios'>
-          <div className='absolute -z-50 '>
+      <div id='render' className='relative'>
+       
+        <div>
+          {/* <div className='absolute -z-50 '>
             <BackgroundGradientAnimation />
-          </div>
+          </div>  */}
           <motion.div
            /*  style={{ y, scale, opacity }} */
             className='items-center p-2 text-center text-5xl mix-blend-exclusion'
@@ -119,7 +115,7 @@ export default function Page() {
 
           <motion.div
            /*  style={{ y, scale, opacity }} */
-            className='mt-10 grid grid-cols-2 gap-2 p-2'
+            className='mt-4 grid grid-cols-2 gap-2 p-2'
           >
             <div>
               <Link
@@ -168,32 +164,9 @@ export default function Page() {
               </Link>
             </div>
           </motion.div>
-          <div className=' relative mt-4 w-full rounded-t-3xl bg-opacity-10 bg-clip-padding p-4 backdrop-blur-sm backdrop-filter'>
+          <div className='mt-4 p-2 pb-32 '>
             
-            {/*  <Tab.Group>
-            <Tab.List>
-              <div className='mb-4 flex justify-between'>
-                <Tab>
-                  <div className='text-lg text-gray-300'>Account</div>
-                </Tab>
-                <Tab>
-                  <div className='text-lg text-gray-300'>Activity</div>
-                </Tab>
-              </div>
-            </Tab.List>
-            <Tab.Panels>
-              <Tab.Panel>
-                <Activity />
-              </Tab.Panel>
-              <Tab.Panel>Content 2</Tab.Panel>
-            </Tab.Panels>
-          </Tab.Group> */}
-
-            {/*   <div className='mb-4 flex justify-between'>
-                
-                  <div className='text-lg'>Activity</div>
-               
-              </div>  */}
+         
 
             <Activity />
           </div>

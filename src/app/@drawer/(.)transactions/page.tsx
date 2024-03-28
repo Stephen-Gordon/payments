@@ -117,10 +117,10 @@ export default function Page() {
     <>
       {isSheetOpen && (
         <motion.div
-          key='activity-key'
+          
           layoutId='activity'
           transition={{
-            duration: 0.3,
+            duration: 0.4,
           }} /*  onAnimationComplete={(definition) => {
         setShowTxs(true);
       }} */
@@ -158,7 +158,6 @@ export default function Page() {
                                 </p>
                               </div>
                               {month.transactions
-                                .slice(0, 5)
                                 .map((transaction, j) => (
                                   <motion.div
                                     className='grid h-fit w-full space-y-6'
@@ -170,7 +169,7 @@ export default function Page() {
                                     key={j}
                                   >
                                     <motion.div
-                                      layoutId={transaction.blockHash}
+
                                       className='mb-6 grid h-fit w-full '
                                     >
                                       <RecentTransaction
@@ -179,7 +178,7 @@ export default function Page() {
                                     </motion.div>
                                   </motion.div>
                                 ))}
-                              {showMoreTx && (
+                             {/*  {showMoreTx && (
                                 <motion.div
                                   key={'transactions-dealyed'}
                                   initial={{ opacity: 0 }}
@@ -188,7 +187,7 @@ export default function Page() {
                                   transition={{ duration: 0.4, delay: 0.4 }}
                                 >
                                   {month.transactions
-                                    .slice(4, -1)
+                                    .slice(5, 20)
                                     .map((transaction, j) => (
                                       <motion.div
                                         className='grid h-fit w-full space-y-6'
@@ -212,7 +211,7 @@ export default function Page() {
                                       </motion.div>
                                     ))}
                                 </motion.div>
-                              )}
+                              )} */}
                             </div>
                           ))}
                         </div>

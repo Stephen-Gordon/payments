@@ -177,22 +177,15 @@ export default function RootLayout({
                 <PersistGate loading={null} persistor={persistor}>
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
-                      <AnimatePresence >
-                        <LayoutGroup>
-                          <div
-/*                             vaul-drawer-wrapper=''
- */                            className='h-[100vh]'
-                          >
-                            <div>{auth}</div>
-                            <div>{drawer}</div>
+                      <LayoutGroup>
+                        <div vaul-drawer-wrapper='' className='min-h-[100vh]'>
+                          {auth}
+                          {drawer}
 
-                            <main>{children}</main>
-                          </div>
-                          <div className='w-full overflow-hidden'>
-                            <BottomNavbar />
-                          </div>
-                        </LayoutGroup>
-                      </AnimatePresence>
+                          {children}
+                          <BottomNavbar />
+                        </div>
+                      </LayoutGroup>
                     </QueryClientProvider>
                   </WagmiProvider>
                 </PersistGate>

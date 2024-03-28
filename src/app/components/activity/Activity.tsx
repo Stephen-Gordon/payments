@@ -64,9 +64,9 @@ export default function Activity() {
     <>
       {transactionState?.length > 0 ? (
         <motion.div
-          key='activity-key'
+          
           layoutId='activity'
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4 }}
           className='from-background to bg-accent/80 w-full rounded-2xl bg-gradient-to-br  backdrop-blur-xl '
         >
           <Card className='bg-transparent '>
@@ -81,7 +81,7 @@ export default function Activity() {
                   transactionState.slice(0,5).map((transaction: any, i: any) => (
                     <motion.div
                       className='h-fit w-full'
-                      layoutId={transaction.blockHash}
+                      
                       key={i}
                     >
                       <RecentTransaction transaction={transaction} />

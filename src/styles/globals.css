@@ -9,11 +9,11 @@
 * {
   touch-action: pan-y;
 }
-
+/* 
 .ios {
   backdrop-filter: blur(100px) ;
     -webkit-backdrop-filter: blur(100px) ;
-        } 
+        }  */
 @layer base {
   :root {
     --background: 0 0% 100%;
