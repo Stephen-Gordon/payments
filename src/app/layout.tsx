@@ -180,8 +180,8 @@ export default function RootLayout({
                       <AnimatePresence mode='wait' initial={false}>
                         <LayoutGroup>
                           <div
-                            vaul-drawer-wrapper=''
-                            className='h-[100vh] text-gray-300'
+/*                             vaul-drawer-wrapper=''
+ */                            className=''
                           >
                             <div>{auth}</div>
                             <div>{drawer}</div>

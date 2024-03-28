@@ -44,7 +44,7 @@ const SheetLayout = ({ children }) => {
         <Sheet.Backdrop onTap={() => dispatch(setSheet(false))} />
       </Sheet> */}
       <Drawer
-        shouldScaleBackground={true}
+        shouldScaleBackground={false}
         onClose={() => {
           dispatch(setSheet(false));
             window.history.pushState({}, '', '/home');
