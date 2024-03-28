@@ -47,16 +47,16 @@ const SheetLayout = ({ children }) => {
         shouldScaleBackground={false}
         onClose={() => {
           dispatch(setSheet(false));
-            window.history.pushState({}, '', '/home');
+          window.history.pushState({}, '', '/home');
         }}
         open={isOpen}
       >
-        <DrawerOverlay />
         <DrawerContent
           className='' /*  className='bg-clip-padding backdrop-blur-sm backdrop-filter ' */
         >
           {children}
         </DrawerContent>
+        <DrawerOverlay />
       </Drawer>
     </>
   );

@@ -177,11 +177,11 @@ export default function RootLayout({
                 <PersistGate loading={null} persistor={persistor}>
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
-                      <AnimatePresence mode='wait' initial={false}>
+                      <AnimatePresence >
                         <LayoutGroup>
                           <div
 /*                             vaul-drawer-wrapper=''
- */                            className=''
+ */                            className='h-[100vh]'
                           >
                             <div>{auth}</div>
                             <div>{drawer}</div>
