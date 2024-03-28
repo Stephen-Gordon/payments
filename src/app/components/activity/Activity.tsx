@@ -64,8 +64,6 @@ export default function Activity() {
     <>
       {transactionState?.length > 0 ? (
         <motion.div
-          
-          layoutId='activity'
           transition={{ duration: 0.4 }}
           className='from-background to bg-accent/80 w-full rounded-2xl bg-gradient-to-br  backdrop-blur-xl '
         >
