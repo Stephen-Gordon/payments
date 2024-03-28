@@ -82,8 +82,9 @@ export default function Success({
           dispatch(setBalance(r.data.result));
           setTimeout(() => {
             setDrawerOpen(false);
-
+            router.push(`/tx?hash=${transactionHash}`);
             dispatch(setSheet(false));
+           
           }, 1000);
         })
         .catch((e) => {

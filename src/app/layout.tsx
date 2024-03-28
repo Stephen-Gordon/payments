@@ -98,7 +98,7 @@ export default function RootLayout({
         <meta name='format-detection' content='telephone=no' />
         <meta name='mobile-web-app-capable' content='yes' />
         <meta name='msapplication-config' content='/icons/browserconfig.xml' />
-        <meta name='msapplication-TileColor' content='#2B5797' />
+        <meta name='msapplication-TileColor' content='#020817' />
         <meta name='msapplication-tap-highlight' content='no' />
         <meta name='theme-color' content='#020817' />
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
@@ -133,7 +133,7 @@ export default function RootLayout({
         <link
           rel='mask-icon'
           href='/icons/safari-pinned-tab.svg'
-          color='#5bbad5'
+          color='#020817'
         />
         <link rel='shortcut icon' href='/favicon.ico' />
         <link rel='preconnect' href='https://fonts.googleapis.com'></link>

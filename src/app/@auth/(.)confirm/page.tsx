@@ -41,6 +41,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { Contact } from '@/app/types/types';
 
+// motion
+import { motion } from 'framer-motion';
+
 interface ConfirmProps {
   showConfirm: boolean;
 }
@@ -85,6 +88,11 @@ export default function Page({ showConfirm }: ConfirmProps) {
 
   return (
     <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <DrawerHeader>
         <DrawerTitle className='grid grid-cols-3 items-center'>
           <div
@@ -144,6 +152,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
         </button>
 
       </DrawerFooter>
+    </motion.div>
     </>
   );
 }

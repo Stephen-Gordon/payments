@@ -33,7 +33,6 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
   // If a matching contact is found, use its name, otherwise use truncated payee address
   const payeeName = matchedContact ? matchedContact.name : truncateEthAddress(payee);
   
-
     return (
       <>
         <div key={payee}>
@@ -43,7 +42,7 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
                 <Avatar className='h-9 w-9 bg-white'></Avatar>
                 <div className='ml-4 space-y-1'>
                   <div className='text-sm font-medium leading-none'>
-                    {useFindPayeeName(payee, contactsState)}
+                    {useFindPayeeName(payee)}
                   </div>
                 </div>
               </div>
@@ -65,19 +64,21 @@ export default function RecentPayee(): JSX.Element {
       (state: RootState) => state.contacts.value
     );
 
-    const transactionState = useSelector(
+    const transactionstate = useSelector(
       (state: RootState) => state.transactions.value
-    );
+    );  
   
   // get recent transactions 
   useEffect(() => {
 
-    const uniquePayees = Array.from(
-      new Set(
-        transactionState.map((transaction) => transaction.to || transaction.from)
-      )
-    );
-    setPayees(uniquePayees);
+          const uniquePayees = Array.from(
+            new Set(
+              transactionstate.map(
+                (transaction) => transaction.to || transaction.from
+              )
+            )
+          );
+          setPayees(uniquePayees);
     /* const fetchRecentTransactions = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);

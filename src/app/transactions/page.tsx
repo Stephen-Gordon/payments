@@ -110,6 +110,9 @@ export default function Page() {
     <>
       
         <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className='from-background to bg-accent/80 absolute z-50 min-h-screen w-full overflow-hidden bg-gradient-to-br  text-xl backdrop-blur-xl'
         >
           <Card style={{ border: '0px' }} className='bg-transparent'>
