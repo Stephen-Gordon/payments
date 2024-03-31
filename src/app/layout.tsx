@@ -32,6 +32,8 @@ import { sepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
 
+import PullToRefresh from 'pulltorefreshjs';
+
 
 
 export default function RootLayout({
@@ -47,6 +49,12 @@ export default function RootLayout({
 }) {
   const queryClient = new QueryClient();
   const router = useRouter();
+
+  PullToRefresh.init({
+    onRefresh() {
+      window.location.reload();
+    },
+  });
 
 
 
