@@ -83,7 +83,7 @@ export default function RootLayout({
  
 
   return (
-    <html className='h-full overflow-auto font-sans'>
+    <html className='h-full font-sans'>
       <head>
         <title>Payments, Stephen Gordon</title>
 
@@ -149,7 +149,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body>
+      <body className='overflow-hidden'>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'

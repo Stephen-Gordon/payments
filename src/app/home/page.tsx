@@ -98,7 +98,7 @@ export default function Page() {
   console.log('usdcBalance', usdcBalance);
   return (
     <AuthPage>
-      <div id='render' className='relative'>
+      <div id='render' className='relative bg-background'>
        
         <div>
          {/*  <div className='absolute -z-50 '>

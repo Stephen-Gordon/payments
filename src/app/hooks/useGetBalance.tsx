@@ -19,6 +19,4 @@ const useGetBalance = async (address: string) => {
  }
 };
 
-
-
 export default useGetBalance;
