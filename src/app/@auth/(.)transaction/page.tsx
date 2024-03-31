@@ -16,11 +16,23 @@ import { Send, QrCode } from 'lucide-react';
 
 import { Avatar } from '@/app/components/ui/avatar';
 import { RootState } from '@/GlobalRedux/store';
+import AuthPage from '@/app/components/AuthPage/AuthPage';
+// hooks
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
-export default function Page() {
-  console.log('Tx Modal Page');
-  const dispatch = useDispatch();
+// types
+import { Contact } from '@/app/types/types';
 
+// components
+import { Button } from '@/app/components/ui/button';
+
+import TimeAgo from 'react-timeago';
+
+import { fromUnixTime } from 'date-fns';
+
+import BackButton from '@/app/components/Navigation/BackButton/BackButton';
+import { formatUnits } from 'viem';
+
+export default function Page() {
   const [transaction, setTransaction] = useState<any>({});
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -32,87 +44,114 @@ export default function Page() {
 
   const address = useSelector((state: any) => state.address.value);
 
+  const [payeeName, setPayeeName] = useState<string | null>('');
+
+  const dispatch = useDispatch();
+
+  const contactsState = useSelector((state: RootState) => state.contacts.value);
+
+  const findPayeeName = (payeeAddress: string): string | null => {
+    if (!contactsState || contactsState.length === 0) {
+      return truncateEthAddress(payeeAddress);
+    }
+
+    // Ensure to lower case both sides to match
+    const contact = contactsState.find(
+      (element: Contact) =>
+        element.address?.toLocaleLowerCase() ===
+        payeeAddress.toLocaleLowerCase()
+    );
+
+    return contact ? contact.name : truncateEthAddress(payeeAddress);
+  };
+
   useEffect(() => {
-    console.log('txState', txState);
-    const filteredTransaction = txState.filter((tx: any) => tx.blockHash == hash);
+    const filteredTransaction = txState.filter(
+      (tx: any) => tx.blockHash == hash
+    );
 
     setTransaction(filteredTransaction[0]);
+
+    setPayeeName(filteredTransaction[0].to);
     console.log('filteredTransaction', filteredTransaction);
     setIsLoading(false);
   }, [txState]);
-  const contactsState = useSelector((state: RootState) => state.contacts.value);
-
-  const payeeName = useFindPayeeName(transaction.from, contactsState);
 
   return (
-    <>
-      {!isLoading && (
-        <motion.div
-          key={hash}
-          animate={{
-            transition: { duration: 0.5, ease: [0.76, 0, 0.24, 1] },
-          }}
-          style={{
-            width: '100vw',
-            height: '100vh',
-          }}
-          className='bg-background'
-        >
-          <div className='grid p-4'>
-            <div className='my-4'>
-              <div className='flex text-xl font-bold text-white'>
-                <Avatar className='bg-black'></Avatar>
-                {transaction.from == address ? '+$' : '-$'}
+    <AuthPage>
+      <>
+        {!isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+                     >
+            <div className='grid p-4 '>
+              <div className='absolute z-50'>
+                <Link href={'/home'}>
+                  <BackButton />
+                </Link>
+              </div>
+              <div className='my-4'>
+                <div className='flex text-xl font-bold'>
+                  <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
+                    {transaction.from == address ? '+$' : '-$'}
 
-                {transaction.value}
-              </div>
-              <div className='text-blue-400'>
-                {transaction.from == address ? 'From' : 'To'} {payeeName}
-              </div>
-              <div className='mt-10 grid grid-cols-2 gap-4 text-white'>
-                <div>
-                  <Link
-                    onClick={() => {}}
-                    href={{
-                      pathname: '/send',
-                      query: { address: transaction.from },
-                    }}
-                  >
-                    <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
-                      <div className='text-white'>Send</div>{' '}
-                      <Send size={20} color='#cbd5e1' />
-                    </button>
-                  </Link>
+                    {formatUnits(transaction.value, 6)}
+                  </div>
                 </div>
-                <div>
-                  <Link
-                    href={{
-                      pathname: '/receive',
-                    }}
-                  >
-                    <button className='bg-dark border-button-border hover:bg-button-hover flex w-full content-center items-center justify-between rounded border px-4 py-2 text-lg text-white transition-all duration-300'>
-                      <div className='text-white'>Receive</div>{' '}
-                      <QrCode size={20} color='#cbd5e1' />
-                    </button>
-                  </Link>
+                <div className='text-muted-foreground text-center'>
+                  {payeeName && findPayeeName(payeeName)}
                 </div>
-              </div>
-              <div className='bg-muted mt-4 rounded-xl p-4 text-slate-300'>
-                <div className='mb-4 flex justify-between'>
-                  <p>Status</p>
-                  <p>Completed</p>
+                <div className='text-muted-foreground text-center'>
+                  <TimeAgo date={fromUnixTime(transaction.timeStamp)} />{' '}
                 </div>
-                <div className='flex justify-between'>
-                  <p>Tx Hash</p>
-                  <p className='text-blue-400'>
-                    {truncateEthAddress(transaction.blockHash)}
-                  </p>
+                <div className='mt-10 grid grid-cols-1 gap-2 p-2'>
+                  <div>
+                    <Link
+                      onClick={() => {
+                        dispatch(setSheet(true));
+                      }}
+                      href={{
+                        pathname: '/search',
+                      }}
+                    >
+                      <Button
+                        className='text-xl'
+                        size={'lg'}
+                        variant={'default'}
+                      >
+                        <div className='flex grid-cols-3 content-center items-center'>
+                          <div className='text-xl'>
+                            <div>Send Again</div>
+                          </div>
+                          <div className='px-2'></div>
+                          <div>
+                            <Send size={20} />
+                          </div>
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+                <div className='bg-muted mt-4 rounded-xl p-4 text-slate-300'>
+                  <div className='mb-4 flex justify-between'>
+                    <p>Status</p>
+                    <p>Completed</p>
+                  </div>
+                  <div className='flex justify-between'>
+                    <p>Tx Hash</p>
+                    <p className='text-blue-400'>
+                      {truncateEthAddress(transaction.blockHash)}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      )}
-    </>
+          </motion.div>
+        )}
+      </>
+    </AuthPage>
   );
 }

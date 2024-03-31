@@ -63,7 +63,7 @@ export default function Success({
       const getData = async () => {
         try {
           const recentTransactions = await useGetRecentTransactions(address);
-          dispatch(setTransactions(recentTransactions?.transfers));
+          dispatch(setTransactions(recentTransactions));
         } catch (error) {
           console.error('Error while getting recent transactions:', error);
         }
@@ -82,8 +82,9 @@ export default function Success({
           dispatch(setBalance(r.data.result));
           setTimeout(() => {
             setDrawerOpen(false);
-            router.push(`/tx?hash=${transactionHash}`);
             dispatch(setSheet(false));
+            router.push(`/transaction?hash=${transactionHash}`);
+            
            
           }, 1000);
         })

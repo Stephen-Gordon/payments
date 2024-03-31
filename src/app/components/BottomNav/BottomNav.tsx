@@ -16,7 +16,7 @@ const BottomNavbar = () => {
   const [showNav, setShowNav] = useState(true);
 
    useEffect(() => {
-    if (pathname == '/' || pathname == '/login' || pathname == '/tx') {
+    if (pathname == '/' || pathname == '/login') {
       setShowNav(false);
     } else {
       setShowNav(true);
