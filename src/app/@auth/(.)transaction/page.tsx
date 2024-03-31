@@ -35,12 +35,11 @@ import { formatUnits } from 'viem';
 export default function Page() {
   const [transaction, setTransaction] = useState<any>({});
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const searchParams = useSearchParams();
 
   let hash = searchParams.get('hash');
 
-  const txState = useSelector((state: any) => state.transactions.value);
+  const transactionState = useSelector((state: any) => state.transactions.value);
 
   const address = useSelector((state: any) => state.address.value);
 
@@ -58,35 +57,39 @@ export default function Page() {
     // Ensure to lower case both sides to match
     const contact = contactsState.find(
       (element: Contact) =>
-        element.address?.toLocaleLowerCase() ===
+        element.address?.toLocaleLowerCase() ==
         payeeAddress.toLocaleLowerCase()
     );
 
     return contact ? contact.name : truncateEthAddress(payeeAddress);
   };
 
+
+  
+
   useEffect(() => {
-    const filteredTransaction = txState.filter(
-      (tx: any) => tx.blockHash == hash
+
+    const filteredTransaction = transactionState.filter(
+      (tx: any) =>
+        tx.blockHash.toLocaleLowerCase() == hash
     );
 
     setTransaction(filteredTransaction[0]);
 
-    setPayeeName(filteredTransaction[0].to);
-    console.log('filteredTransaction', filteredTransaction);
-    setIsLoading(false);
-  }, [txState]);
+    setPayeeName(filteredTransaction.to);
+  
+  }, [transactionState, hash]);
 
   return (
     <AuthPage>
       <>
-        {!isLoading && (
+         {transaction && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-                     >
+          >
             <div className='grid p-4 '>
               <div className='absolute z-50'>
                 <Link href={'/home'}>
@@ -96,16 +99,16 @@ export default function Page() {
               <div className='my-4'>
                 <div className='flex text-xl font-bold'>
                   <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
-                    {transaction.from == address ? '+$' : '-$'}
+                    {transaction?.from == address ? '+$' : '-$'}
 
-                    {formatUnits(transaction.value, 6)}
+                    {transaction?.value && formatUnits(transaction?.value, 6)}
                   </div>
                 </div>
                 <div className='text-muted-foreground text-center'>
                   {payeeName && findPayeeName(payeeName)}
                 </div>
                 <div className='text-muted-foreground text-center'>
-                  <TimeAgo date={fromUnixTime(transaction.timeStamp)} />{' '}
+                  <TimeAgo date={fromUnixTime(transaction?.timeStamp)} />{' '}
                 </div>
                 <div className='mt-10 grid grid-cols-1 gap-2 p-2'>
                   <div>
@@ -143,14 +146,20 @@ export default function Page() {
                   <div className='flex justify-between'>
                     <p>Tx Hash</p>
                     <p className='text-blue-400'>
-                      {truncateEthAddress(transaction.blockHash)}
+                      <a
+                        href={`https://sepolia.etherscan.io/tx/${transaction?.hash}`}
+                      >
+                        {' '}
+                        {transaction?.blockHash &&
+                          truncateEthAddress(transaction?.blockHash)}
+                      </a>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
-        )}
+        )} 
       </>
     </AuthPage>
   );
