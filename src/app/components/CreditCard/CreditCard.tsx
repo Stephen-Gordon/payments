@@ -83,7 +83,7 @@ export default function CreditCard() {
             </div>
 
             <div className='text-card-foreground absolute z-10 grid h-full w-full content-center items-center  justify-center p-2 text-center text-5xl '>
-              {reduxBalance && formatUnits(reduxBalance, 6)}
+              ${reduxBalance && formatUnits(reduxBalance, 6)}
             </div>
             <div className='sticky z-10 mb-auto flex h-full w-full content-end justify-between p-4'>
               <div className='text-muted-foreground mb-auto grid h-full content-end justify-start text-base'>
