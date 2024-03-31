@@ -14,7 +14,9 @@ export default function ComponentsLayout({
     <>
       <AuthPage>
         {/* <SheetLayout>{children}</SheetLayout> */}
-        <VaulDrawer>{children}</VaulDrawer>
+        <VaulDrawer>
+          <div className='overflow-y-scroll'>{children}</div>
+        </VaulDrawer>
       </AuthPage>
     </>
   );
