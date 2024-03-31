@@ -8,6 +8,7 @@
 
 * {
   touch-action: pan-y;
+    scroll-behavior: smooth;
 }
 /* 
 .ios {
