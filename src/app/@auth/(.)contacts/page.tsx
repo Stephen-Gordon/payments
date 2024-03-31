@@ -65,8 +65,8 @@ export default function Page() {
           <TextGenerateEffect words='Contacts'></TextGenerateEffect>
         </DrawerTitle>
       </DrawerHeader>
-      <Card style={{ border: '0px' }}>
-        <CardContent className='border-0 border-none'>
+      <Card className='bg-transparent' style={{ border: '0px' }}>
+        <CardContent className='border-0 border-none bg-transparent'>
           <div className='space-y-6'>
             {contactsState.length > 0 ? (
               <>

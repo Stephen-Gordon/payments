@@ -15,6 +15,10 @@
     -webkit-backdrop-filter: blur(100px) ;
         }  */
 
+body {
+  touch-action: none;
+}
+
 html {
   background-color: #020817;
 }

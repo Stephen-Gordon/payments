@@ -113,7 +113,7 @@ export default function Page() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className='from-background to bg-accent/80 absolute z-50 min-h-screen w-full overflow-hidden bg-gradient-to-br  text-xl backdrop-blur-xl'
+          className='from-background to bg-accent/80 h-screen w-full overflow-y-scroll bg-gradient-to-br   text-xl backdrop-blur-xl'
         >
           <Card style={{ border: '0px' }} className='bg-transparent'>
             <CardHeader>
@@ -129,7 +129,7 @@ export default function Page() {
                 <div className='ml-auto'></div>
               </CardTitle>
             </CardHeader>
-            <CardContent className='border-0 border-none'>
+            <CardContent className='border-0 border-none pb-16'>
               <motion.div>
                 {showTxs && (
                   <>
