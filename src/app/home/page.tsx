@@ -113,8 +113,7 @@ export default function Page() {
 
   // hooks
   const address = useGetAddress();
-  const usdcBalance = useGetTokenBalance(address as string) 
-  console.log('usdcBalance', usdcBalance);
+ 
   return (
     <AuthPage>
       <main className='relative bg-background  overflow-y-auto h-full'>
