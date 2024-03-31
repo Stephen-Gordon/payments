@@ -63,6 +63,8 @@ export default function Page() {
       PullToRefresh.init({
         mainElement: '#card',
         triggerElement: '#card',
+        instructionsReleaseToRefresh : ' ',
+
         onRefresh() {
           window.location.reload();
         },
