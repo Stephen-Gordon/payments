@@ -115,7 +115,7 @@ export default function Page() {
   console.log('usdcBalance', usdcBalance);
   return (
     <AuthPage>
-      <main className='relative bg-background grid justify-center'>
+      <main className='relative bg-background grid justify-center overflow-y-auto'>
        
         <div>
          {/*  <div className='absolute -z-50 '>

@@ -97,7 +97,7 @@ export default function Page() {
               width: '100vw',
               height: '100vh',
             }}
-            className='from-background to bg-accent/80 bg-gradient-to-br  backdrop-blur-xl'
+            className='from-background to bg-accent/80 bg-gradient-to-br backdrop-blur-xl'
           >
             <div className='grid p-4 '>
               <div className='absolute z-50'>

@@ -152,7 +152,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body id='main' className='overflow-hidden'>
+      <body id='main' className='overflow-y-scroll'>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
@@ -181,7 +181,7 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <div vaul-drawer-wrapper='' className='min-h-[100vh] overflow-y-scroll'>
+                        <div vaul-drawer-wrapper='' className='min-h-[100vh] overflow-y-scroll relative'>
                           {auth}
                           {drawer}
 
