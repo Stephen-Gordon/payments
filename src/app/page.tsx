@@ -43,12 +43,12 @@ export default function HomePage() {
   }, [isMobile]);
 
   return (
-    <main className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
+    <div className='flex min-h-screen flex-col items-center gap-10 px-4 py-20'>
       <p className=''>{welcomeMessage}</p>
       <AddToHomeScreen />
 
       <Link href='/home'>Home</Link>
       <Link href='/home'>login</Link>
-    </main>
+    </div>
   );
 }

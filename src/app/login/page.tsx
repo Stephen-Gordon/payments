@@ -57,7 +57,7 @@ const Page = () => {
 
   return (
     <>
-      <main className='relative'>
+      <div className='relative'>
         <div className='absolute -z-50 '> 
           <BackgroundGradientAnimation/>
         </div>
@@ -78,7 +78,7 @@ const Page = () => {
 
           
         </div>
-      </main>
+      </div>
     </>
   );
 };

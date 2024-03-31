@@ -36,8 +36,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import useGetTokenBalance from '../hooks/useGetTokenBalance';
 import AuthPage from '../components/AuthPage/AuthPage';
 import CreditCard from '../components/CreditCard/CreditCard';
+import PullToRefresh from 'pulltorefreshjs';
+
 
 export default function Page() {
+  
+  
+  
+
   // privy
   const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
 
@@ -51,6 +57,17 @@ export default function Page() {
 
   useEffect(() => {
     console.log('user', user);
+    console.log('zeroDevReady', zeroDevReady);
+    
+    if(zeroDevReady) {
+      PullToRefresh.init({
+        mainElement: '#card',
+        triggerElement: '#card',
+        onRefresh() {
+          window.location.reload();
+        },
+      });
+    }
   }, [zeroDevReady]);
 
   // next
@@ -98,7 +115,7 @@ export default function Page() {
   console.log('usdcBalance', usdcBalance);
   return (
     <AuthPage>
-      <div id='render' className='relative bg-background'>
+      <main className='relative bg-background'>
        
         <div>
          {/*  <div className='absolute -z-50 '>
@@ -171,7 +188,7 @@ export default function Page() {
             <Activity />
           </div>
         </div>
-      </div>
+      </main>
     </AuthPage>
   );
 }
