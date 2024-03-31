@@ -111,6 +111,7 @@ export default function RecentPayee(): JSX.Element {
           </div>
           {payees.map((payee, i) => (
             <Payee
+              key={i}
               payee={payee}
               contactsState={contactsState}
             />
