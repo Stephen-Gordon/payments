@@ -36,7 +36,10 @@ export default function RecentTransaction({ transaction }: any) {
 
   const contactsState = useSelector((state: RootState) => state.contacts.value);
 
-  const payeeName = useFindPayeeName(transaction.to, contactsState);
+  const payeeName =
+    transaction.from.toLocaleLowerCase() !== address?.toLocaleLowerCase()
+      ? useFindPayeeName(transaction.from, contactsState)
+      : useFindPayeeName(transaction.to, contactsState);
 
   const dispatch = useDispatch();
 
@@ -62,7 +65,8 @@ export default function RecentTransaction({ transaction }: any) {
                     ? 'From '
                     : 'To '}
 
-                  {payeeName}
+                   {payeeName} 
+
                 </div>
                 <p className='text-muted-foreground text-sm'>
                   <TimeAgo date={fromUnixTime(transaction.timeStamp)} />
