@@ -1,7 +1,7 @@
 # Payments PWA
 
 ## Description
-My final year thesis is a PWA blockchain based PWA. Built using 
+My final year thesis is a PWA blockchain based PWA.
 Built using:
 - React 
 - Next JS
