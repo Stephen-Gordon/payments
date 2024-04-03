@@ -3,14 +3,14 @@
 ## Description
 My final year thesis is a PWA blockchain based PWA. Built using 
 Built using:
-    - React 
-    - Next JS
-    - Redux
-    - ZeroDev Account Abstraction
-    - Privy
-    - Viem
-    - Tailwind
-    - ShadCN
+- React 
+- Next JS
+- Redux
+- ZeroDev Account Abstraction
+- Privy
+- Viem
+- Tailwind
+- ShadCN
 
 
 ## Connect With Me
