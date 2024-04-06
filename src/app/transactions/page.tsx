@@ -113,6 +113,9 @@ export default function Page() {
         transition={{
           duration: 0.3,
         }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         className='w-full'
       >
         <Card style={{ border: '0px' }} className='bg-transparent'>
