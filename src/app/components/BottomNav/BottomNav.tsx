@@ -60,10 +60,13 @@ const BottomNavbar = () => {
           </Link>
           <Link
             href={{
-              pathname: '/settings'
+              pathname: '/settings',
             }}
           >
             <Settings
+              onClick={() => {
+                dispatch(setSheet(true));
+              }}
               className='stroke-muted-foreground'
               strokeWidth={1}
             />
