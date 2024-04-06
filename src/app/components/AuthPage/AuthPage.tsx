@@ -1,24 +1,34 @@
 'use client'
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react"
 
 // privy
 import { usePrivySmartAccount } from "@zerodev/privy";
+import { setSheet } from "@/GlobalRedux/Features/sheet/sheetSlice";
+import { useDispatch } from "react-redux";
 
 
 export default function AuthPage ({children} : {children: React.ReactNode}) {
 
     const router = useRouter();
+    const pathname = usePathname();
+    const dispatch = useDispatch();
 
     //const { authenticated } = usePrivySmartAccount();
     const authenticated = true;
-     useEffect(() => {
-
+     useEffect(() => {  
+      
         if (!authenticated) {
           router.push('/login');
         } 
 
     }, [authenticated]); 
+
+    useEffect(() => {
+      if (pathname == 'home') {
+        dispatch(setSheet(false));
+      }
+    }, [pathname]); 
     return (
         <>{authenticated && (
             <>{children}</>
