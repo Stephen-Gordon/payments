@@ -35,21 +35,24 @@ import useFindPayeeName from '@/app/hooks/useFindPayeeName';
   
     return (
       <>
-        <div key={payee}>
-          <Link href={{ pathname: `/payee`, query: { payeeAddress: payee } }}>
-            <div className='space-y-8'>
-              <div className='flex w-full items-center '>
-                <Avatar className='h-9 w-9 bg-white'></Avatar>
-                <div className='ml-4 space-y-1'>
-                  <div className='text-sm font-medium leading-none'>
-                    {useFindPayeeName(payee)}
+     
+            <div key={payee}>
+              <Link
+                href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
+              >
+                <div className='space-y-8'>
+                  <div className='flex w-full items-center '>
+                    <Avatar className='h-9 w-9 bg-white'></Avatar>
+                    <div className='ml-4 space-y-1'>
+                      <div className='text-sm font-medium leading-none'>
+                        {useFindPayeeName(payee, contactsState)}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-      </>
+          </>
     );
   }
 
@@ -73,11 +76,17 @@ export default function RecentPayee(): JSX.Element {
 
           const uniquePayees = Array.from(
             new Set(
-              transactionstate.map(
-                (transaction) => transaction.to || transaction.from
-              )
+              transactionstate
+                .map((transaction) => transaction.to || transaction.from)
+                .filter(
+                  (payee) =>
+                    payee.toLocaleLowerCase() !== address.toLocaleLowerCase()
+                )
             )
-          );
+          );  
+          console.log('uniquePayees', uniquePayees);
+          console.log('address', address);
+        /*   uniquePayees.filter((payee) => payee == address); */
           setPayees(uniquePayees);
     /* const fetchRecentTransactions = async () => {
       try {
@@ -99,7 +108,7 @@ export default function RecentPayee(): JSX.Element {
     };
 
     fetchRecentTransactions(); */
-  }, []);
+  }, [transactionstate, address, contactsState]);
 
  
   return (
