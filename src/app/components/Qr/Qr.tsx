@@ -36,7 +36,7 @@ export default function Qr() {
       <QRCode
         ecLevel='H'
         quietZone={20}
-        size={windowWidth}
+        size={windowWidth > 500 ? 300 : windowWidth }
         bgColor='#0c0e1800'
         fgColor='#a7a3f5'
         qrStyle='dots'
