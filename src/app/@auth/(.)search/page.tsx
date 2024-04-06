@@ -83,7 +83,12 @@ export default function Page() {
 
   return (
     <>
-      <div className='grid h-full'>
+      <motion.div
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}} 
+        transition={{duration: 0.4}}
+        className='grid h-full'>
         <AddAContact
           open={showAddContact}
           setShowAddContact={setShowAddContact}
@@ -334,7 +339,7 @@ export default function Page() {
          
           </div>
         </div> */}
-      </div>
+      </motion.div>
     </>
   );
 }
