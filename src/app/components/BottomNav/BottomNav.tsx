@@ -29,7 +29,7 @@ const BottomNavbar = () => {
   return (
     <>
       {showNav && (
-        <nav className='sticky bottom-0 z-40 flex w-full justify-between h-auto bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl transition-all duration-500 '>
+        <nav className='sticky bottom-0 z-40 flex h-auto w-full justify-between bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl transition-all duration-500 '>
           {/* <Link href='/home'>
             <Home
               className='stroke-muted-foreground'
@@ -60,14 +60,14 @@ const BottomNavbar = () => {
           </Link>
           <Link
             href={{
-              pathname: '/menu',
+              pathname: '/settings',
               query: { isNavOpen: true },
             }}
           >
             <Settings
               className='stroke-muted-foreground'
               strokeWidth={1}
-              onClick={() => router.push(`/menu?isNavOpen=true`)}
+             // onClick={() => router.push(`/settings?isNavOpen=true`)}
             />
           </Link>
         </nav>
