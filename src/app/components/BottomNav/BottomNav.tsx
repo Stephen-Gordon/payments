@@ -60,14 +60,12 @@ const BottomNavbar = () => {
           </Link>
           <Link
             href={{
-              pathname: '/settings',
-              query: { isNavOpen: true },
+              pathname: '/settings'
             }}
           >
             <Settings
               className='stroke-muted-foreground'
               strokeWidth={1}
-             // onClick={() => router.push(`/settings?isNavOpen=true`)}
             />
           </Link>
         </nav>
