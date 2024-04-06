@@ -60,86 +60,93 @@ export default function Page() {
 
   return (
     <>
-      <DrawerHeader>
-        <DrawerTitle>
-          <TextGenerateEffect words='Contacts'></TextGenerateEffect>
-        </DrawerTitle>
-      </DrawerHeader>
-      <Card className='bg-transparent' style={{ border: '0px' }}>
-        <CardContent className='border-0 border-none bg-transparent'>
-          <div className='space-y-6'>
-            {contactsState.length > 0 ? (
-              <>
-                {contactsState.map((contact, index) => (
-                  <motion.div
-                    key={contact.address}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={{
-                        pathname: `/payee`,
-                        query: { payeeAddress: contact.address },
-                      }}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+      >
+        <DrawerHeader>
+          <DrawerTitle>
+            <TextGenerateEffect words='Contacts'></TextGenerateEffect>
+          </DrawerTitle>
+        </DrawerHeader>
+        <Card className='bg-transparent' style={{ border: '0px' }}>
+          <CardContent className='border-0 border-none bg-transparent'>
+            <div className='space-y-6'>
+              {contactsState.length > 0 ? (
+                <>
+                  {contactsState.map((contact, index) => (
+                    <motion.div
+                      key={contact.address}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
                     >
-                      <div className='flex w-full items-center '>
-                        <Avatar className='h-9 w-9 bg-white'></Avatar>
-                        <div className='ml-4 space-y-1'>
-                          <div className='text-sm font-medium leading-none'>
-                            {contact.name}
+                      <Link
+                        href={{
+                          pathname: `/payee`,
+                          query: { payeeAddress: contact.address },
+                        }}
+                      >
+                        <div className='flex w-full items-center '>
+                          <Avatar className='h-9 w-9 bg-white'></Avatar>
+                          <div className='ml-4 space-y-1'>
+                            <div className='text-sm font-medium leading-none'>
+                              {contact.name}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </>
-            ) : (
-              <>
-                <div className=' w-full rounded-xl p-2 text-xl'>
-                  <div className='mt-4 flex content-center justify-center'>
-                    <div>You've got no Contacts</div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  <div className=' w-full rounded-xl p-2 text-xl'>
+                    <div className='mt-4 flex content-center justify-center'>
+                      <div>You've got no Contacts</div>
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
-          </div>
-        </CardContent>
-      </Card>
-      <DrawerFooter
-        style={{ zIndex: 3000 }}
-        className='fixed bottom-4 w-full  '
-      >
-        <div className='w-full'>
-          <Button
-            onClick={handleContactsClick}
-            className='text-xl'
-            size={'lg'}
-            variant={'default'}
-          >
-            <div className='flex grid-cols-3 content-center items-center'>
-              <div className='text-xl'>
-                <div>New Contact</div>
-              </div>
-              <div className='px-2'></div>
-              <div>
-                <User2
-                  strokeWidth={1}
-                  className='stroke-background'
-                  size={20}
-                />
-              </div>
+                </>
+              )}
             </div>
-          </Button>
-        </div>
-      </DrawerFooter>
-      <AddAContact
-        open={showAddContact}
-        setShowAddContact={setShowAddContact}
-        contactsState={contactsState}
-        payee={''}
-      />
+          </CardContent>
+        </Card>
+        <DrawerFooter
+          style={{ zIndex: 3000 }}
+          className='fixed bottom-4 w-full  '
+        >
+          <div className='w-full'>
+            <Button
+              onClick={handleContactsClick}
+              className='text-xl'
+              size={'lg'}
+              variant={'default'}
+            >
+              <div className='flex grid-cols-3 content-center items-center'>
+                <div className='text-xl'>
+                  <div>New Contact</div>
+                </div>
+                <div className='px-2'></div>
+                <div>
+                  <User2
+                    strokeWidth={1}
+                    className='stroke-background'
+                    size={20}
+                  />
+                </div>
+              </div>
+            </Button>
+          </div>
+        </DrawerFooter>
+        <AddAContact
+          open={showAddContact}
+          setShowAddContact={setShowAddContact}
+          contactsState={contactsState}
+          payee={''}
+        />
+      </motion.div>
     </>
   );
 }

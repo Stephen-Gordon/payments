@@ -45,7 +45,7 @@ export default function Page() {
   
 
   // privy
-  const { user, zeroDevReady, sendTransaction } = usePrivySmartAccount();
+  const { user, zeroDevReady, getEthereumProvider } = usePrivySmartAccount();
 
   // next
   const router = useRouter();
@@ -57,6 +57,7 @@ export default function Page() {
 
   useEffect(() => {
     console.log('user', user);
+   
     console.log('zeroDevReady', zeroDevReady);
     
     if(zeroDevReady) {
@@ -69,6 +70,7 @@ export default function Page() {
           window.location.reload();
         },
       });
+       console.log('provider', getEthereumProvider());
     }
   }, [zeroDevReady]);
 

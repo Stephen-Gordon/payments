@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import * as React from 'react';
 import AuthPage from '../components/AuthPage/AuthPage';
 import { VaulDrawer } from '../components/ui/VaulDrawer';
+import { motion } from 'framer-motion';
 
 export default function ComponentsLayout({
   children,
@@ -13,11 +14,19 @@ export default function ComponentsLayout({
   return (
     <>
       <AuthPage>
-        {/* <SheetLayout>{children}</SheetLayout> */}
-        <VaulDrawer >
-          <div className='overflow-y-scroll'>{children}</div>
+        <VaulDrawer>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            className='overflow-y-scroll'
+          >
+            {children}
+          </motion.div>
         </VaulDrawer>
       </AuthPage>
     </>
   );
 }
+ 

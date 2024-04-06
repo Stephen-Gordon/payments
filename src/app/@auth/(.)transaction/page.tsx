@@ -65,6 +65,12 @@ export default function Page() {
   };
 
 
+  useEffect(() => {
+  
+
+  }, [hash])
+
+
   
 
   useEffect(() => {
@@ -85,10 +91,10 @@ export default function Page() {
       <>
          {transaction && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}} 
+        transition={{duration: 0.5, ease: 'easeInOut'}}
           >
             <div className='grid p-4 '>
               <div className='absolute z-50'>
@@ -117,7 +123,8 @@ export default function Page() {
                         dispatch(setSheet(true));
                       }}
                       href={{
-                        pathname: '/search',
+                        pathname: '/payee',
+                        query: { payeeAddress: payeeName }
                       }}
                     >
                       <Button

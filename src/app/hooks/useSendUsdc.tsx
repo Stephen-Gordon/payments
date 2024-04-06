@@ -31,6 +31,7 @@ const useSendUsdc = () => {
       });
 
       if (txnHash) {
+        console.log('txnHash in hook', txnHash);
         setLoading(false);
         setTransactionStatus(true);
         setTransactionHash(txnHash);

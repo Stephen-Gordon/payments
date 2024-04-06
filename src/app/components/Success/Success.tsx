@@ -64,13 +64,14 @@ export default function Success({
         try {
           const recentTransactions = await useGetRecentTransactions(address);
           dispatch(setTransactions(recentTransactions));
+          console.log('got data', recentTransactions);
+
         } catch (error) {
           console.error('Error while getting recent transactions:', error);
         }
       };
 
       getData();
-      console.log("got data")
 
       axios
         .get(
@@ -82,7 +83,6 @@ export default function Success({
           dispatch(setBalance(r.data.result));
           setTimeout(() => {
             setDrawerOpen(false);
-            dispatch(setSheet(false));
             router.push(`/transaction?hash=${transactionHash}`);
             
            

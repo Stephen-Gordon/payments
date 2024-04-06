@@ -39,3 +39,6 @@ remove a contact
 add refero to design doc
 
 add toast
+
+
+logout button

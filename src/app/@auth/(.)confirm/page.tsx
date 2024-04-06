@@ -92,6 +92,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
       <DrawerHeader>
         <DrawerTitle className='grid grid-cols-3 items-center'>

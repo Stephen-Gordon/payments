@@ -13,12 +13,18 @@ import { useSelector } from 'react-redux';
 import Qr from '@/app/components/Qr/Qr';
 import { DrawerHeader, DrawerTitle } from '@/app/components/ui/drawer';
 
+import { motion } from 'framer-motion';
+
 export default function Page() {
   const address = useSelector((state: string) => state.address.value);
 
   return (
     <>
-      <div className='grid'>
+      <motion.div className='grid'
+      initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}} 
+        transition={{duration: 0.5, ease: 'easeInOut'}}>
         <DrawerHeader>
           <DrawerTitle>Receive</DrawerTitle>
         </DrawerHeader>
@@ -28,7 +34,7 @@ export default function Page() {
             <Qr />
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
