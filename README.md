@@ -17,9 +17,19 @@ My final year thesis is a Fintech Payments PWA built on the Base Blockchain.
 
 ## Screenshots
 
-![Screenshot 1](./src/assets/screenshots/1.png)
-![Screenshot 2](./src/assets/screenshots/2.png)
-![Screenshot 3](./src/assets/screenshots/3.png)
+## Screenshots
+
+<div align="center">
+  <img src="./src/assets/screenshots/1.png"/>
+</div>
+
+<div align="center">
+  <img src="./src/assets/screenshots/2.png"/>
+</div>
+
+<div align="center">
+  <img src="./src/assets/screenshots/3.png"/>
+</div>
 
 ## Connect With Me
 
