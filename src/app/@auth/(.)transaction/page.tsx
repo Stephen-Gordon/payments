@@ -39,7 +39,9 @@ export default function Page() {
 
   let hash = searchParams.get('hash');
 
-  const transactionState = useSelector((state: any) => state.transactions.value);
+  const transactionState = useSelector(
+    (state: any) => state.transactions.value
+  );
 
   const address = useSelector((state: any) => state.address.value);
 
@@ -57,44 +59,33 @@ export default function Page() {
     // Ensure to lower case both sides to match
     const contact = contactsState.find(
       (element: Contact) =>
-        element.address?.toLocaleLowerCase() ==
-        payeeAddress.toLocaleLowerCase()
+        element.address?.toLocaleLowerCase() == payeeAddress.toLocaleLowerCase()
     );
 
     return contact ? contact.name : truncateEthAddress(payeeAddress);
   };
 
+  useEffect(() => {}, [hash]);
 
   useEffect(() => {
-  
-
-  }, [hash])
-
-
-  
-
-  useEffect(() => {
-
     const filteredTransaction = transactionState.filter(
-      (tx: any) =>
-        tx.blockHash.toLocaleLowerCase() == hash
+      (tx: any) => tx.blockHash.toLocaleLowerCase() == hash
     );
 
     setTransaction(filteredTransaction[0]);
 
     setPayeeName(filteredTransaction.to);
-  
   }, [transactionState, hash]);
 
   return (
     <AuthPage>
       <>
-         {transaction && (
+        {transaction && (
           <motion.div
-            initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}} 
-        transition={{duration: 0.5, ease: 'easeInOut'}}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
             <div className='grid p-4 '>
               <div className='absolute z-50'>
@@ -124,7 +115,7 @@ export default function Page() {
                       }}
                       href={{
                         pathname: '/payee',
-                        query: { payeeAddress: payeeName }
+                        query: { payeeAddress: payeeName },
                       }}
                     >
                       <Button
@@ -154,7 +145,7 @@ export default function Page() {
                     <p>Tx Hash</p>
                     <p className='text-blue-400'>
                       <a
-                        href={`https://sepolia.etherscan.io/tx/${transaction?.hash}`}
+                        href={`https://base.basescan.org/tx/${transaction?.hash}`}
                       >
                         {' '}
                         {transaction?.blockHash &&
@@ -166,7 +157,7 @@ export default function Page() {
               </div>
             </div>
           </motion.div>
-        )} 
+        )}
       </>
     </AuthPage>
   );

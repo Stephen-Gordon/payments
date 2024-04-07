@@ -28,12 +28,9 @@ import { PrivyProvider } from '@privy-io/react-auth';
 import { usePrivySmartAccount } from '@zerodev/privy';
 
 import { AnimatePresence, LayoutGroup } from 'framer-motion';
-import { sepolia } from 'viem/chains';
+import { baseSepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
-
-
-
 
 export default function RootLayout({
   auth,
@@ -49,13 +46,7 @@ export default function RootLayout({
   const queryClient = new QueryClient();
   const router = useRouter();
 
-  
-
-
-
-
-
-/* 
+  /* 
   
   useEffect(() => {
     if (window) {
@@ -71,7 +62,7 @@ export default function RootLayout({
     }
   }, []); */
 
-   /* useEffect(() => {
+  /* useEffect(() => {
     
 
      if (authenticated && zeroDevReady) {
@@ -83,7 +74,6 @@ export default function RootLayout({
        router.push('/login');
      }
    }, [authenticated, zeroDevReady]);  */
- 
 
   return (
     <html className='h-full font-sans'>
@@ -182,7 +172,7 @@ export default function RootLayout({
           defaultTheme='dark'
           disableTransitionOnChange
         >
-          <ZeroDevProvider projectId={'f6375b6f-2205-4fc7-bc87-f03218789b86'}>
+          <ZeroDevProvider projectId={'1c40e823-f88c-4fcb-85bf-eac7453d11e3'}>
             <PrivyProvider
               onSuccess={() => {
                 router.push('/home');
@@ -192,7 +182,7 @@ export default function RootLayout({
                 appearance: {
                   theme: 'dark',
                 },
-                defaultChain: sepolia,
+                defaultChain: baseSepolia,
                 loginMethods: ['apple', 'google', 'email'],
                 embeddedWallets: {
                   createOnLogin: 'users-without-wallets',

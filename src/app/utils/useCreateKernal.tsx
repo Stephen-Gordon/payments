@@ -1,7 +1,7 @@
 import { IProvider } from '@web3auth/base';
 import RPC from '../web3RPC';
 import { createEcdsaKernelAccountClient } from '@zerodev/presets/zerodev';
-import { sepolia } from 'viem/chains';
+import { baseSepolia } from 'viem/chains';
 import { Hex } from 'viem';
 import { privateKeyToAccount } from 'viem/accounts';
 import secureLocalStorage from 'react-secure-storage';
@@ -25,8 +25,8 @@ const useCreateKernal = async (option) => {
   }
 
   const kernelClient = await createEcdsaKernelAccountClient({
-    chain: sepolia,
-    projectId: 'f6375b6f-2205-4fc7-bc87-f03218789b86',
+    chain: baseSepolia,
+    projectId: '1c40e823-f88c-4fcb-85bf-eac7453d11e3',
     // @ts-ignore
     signer: signer,
   });

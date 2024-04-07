@@ -52,10 +52,7 @@ export default function Success({
     if (transactionStatus || loading) {
       setDrawerOpen(true);
     }
- 
-  
-
-  }, [transactionStatus, loading, transactionHash])
+  }, [transactionStatus, loading, transactionHash]);
 
   useEffect(() => {
     if (transactionStatus) {
@@ -65,7 +62,6 @@ export default function Success({
           const recentTransactions = await useGetRecentTransactions(address);
           dispatch(setTransactions(recentTransactions));
           console.log('got data', recentTransactions);
-
         } catch (error) {
           console.error('Error while getting recent transactions:', error);
         }
@@ -75,7 +71,7 @@ export default function Success({
 
       axios
         .get(
-          `https://api-sepolia.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8&address=${address}&tag=latest&apikey=F7A22CIQFVT5UDPBHKFN8GXYN9EXTS4G65`
+          `https://api-basescan.etherscan.io/api?module=account&action=tokenbalance&contractaddress=0x036CbD53842c5426634e7929541eC2318f3dCF7e&address=${address}&tag=latest&apikey=6VRQH98BTKVZYXU68YJYWVX3EC2ZP6UEFV`
         )
         .then((r) => {
           console.log('axios balance', r.data);
@@ -84,27 +80,20 @@ export default function Success({
           setTimeout(() => {
             setDrawerOpen(false);
             router.push(`/transaction?hash=${transactionHash}`);
-            
-           
           }, 1000);
         })
         .catch((e) => {
           console.log('axios balance error', e);
         });
-
-
     }
   }, [transactionStatus]);
-
-
-
 
   return (
     <>
       <Drawer nested={true} dismissible={false} open={drawerOpen}>
         <DrawerContent
           dontShowDrag={true}
-          className='flex h-full w-full border-none bg-black/90 transition-all duration-400 ease-in-out'
+          className='duration-400 flex h-full w-full border-none bg-black/90 transition-all ease-in-out'
         >
           {/*    <motion.div
             className='ios'
@@ -127,7 +116,7 @@ export default function Success({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
             exit={{ opacity: 0, y: 20 }}
-            className='fixed bottom-2 mb-auto w-full pb-8 shadow-lg px-2'
+            className='fixed bottom-2 mb-auto w-full px-2 pb-8 shadow-lg'
           >
             <div className=' text-card-foreground  h-full w-full rounded-2xl  border shadow'>
               <div
@@ -158,7 +147,7 @@ export default function Success({
                       className='w-full'
                     >
                       <TextGenerateEffect
-                        className='mt-4 text-center text-sm text-muted-foreground'
+                        className='text-muted-foreground mt-4 text-center text-sm'
                         words='Your payment is on the way'
                       ></TextGenerateEffect>
                     </motion.div>

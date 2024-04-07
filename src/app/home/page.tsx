@@ -38,12 +38,7 @@ import AuthPage from '../components/AuthPage/AuthPage';
 import CreditCard from '../components/CreditCard/CreditCard';
 import PullToRefresh from 'pulltorefreshjs';
 
-
 export default function Page() {
-  
-  
-  
-
   // privy
   const { user, zeroDevReady, getEthereumProvider } = usePrivySmartAccount();
 
@@ -57,27 +52,25 @@ export default function Page() {
 
   useEffect(() => {
     console.log('user', user);
-   
+
     console.log('zeroDevReady', zeroDevReady);
-    
-    if(zeroDevReady) {
+
+    if (zeroDevReady) {
       PullToRefresh.init({
         mainElement: '#card',
         triggerElement: '#card',
-        instructionsReleaseToRefresh : ' ',
+        instructionsReleaseToRefresh: ' ',
 
         onRefresh() {
           window.location.reload();
         },
       });
-       console.log('provider', getEthereumProvider());
+      console.log('provider', getEthereumProvider());
     }
   }, [zeroDevReady]);
 
   // next
   const pathname = usePathname();
-
-  
 
   // pathname use effect
   /* useEffect(() => {
@@ -89,14 +82,12 @@ export default function Page() {
   }, [pathname]);
  */
 
-
-
- /*  useEffect(() => {
+  /*  useEffect(() => {
     dispatch(
       setContacts([
         {
           name: 'John Doe',
-          address: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
+          address: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
         },
         {
           name: 'Jim Harris',
@@ -115,17 +106,16 @@ export default function Page() {
 
   // hooks
   const address = useGetAddress();
- 
+
   return (
     <AuthPage>
-      <main className='relative bg-background  overflow-y-auto h-full'>
-       
+      <main className='bg-background relative  h-full overflow-y-auto'>
         <div>
-         {/*  <div className='absolute -z-50 '>
+          {/*  <div className='absolute -z-50 '>
             <BackgroundGradientAnimation />
           </div>   */}
           <motion.div
-           /*  style={{ y, scale, opacity }} */
+            /*  style={{ y, scale, opacity }} */
             className='items-center p-2 text-center text-5xl'
           >
             {/*  <Balance />  */}
@@ -134,7 +124,7 @@ export default function Page() {
           </motion.div>
 
           <motion.div
-           /*  style={{ y, scale, opacity }} */
+            /*  style={{ y, scale, opacity }} */
             className='mt-4 grid grid-cols-2 gap-2 p-2'
           >
             <div>
@@ -159,7 +149,6 @@ export default function Page() {
                 </Button>
               </Link>
             </div>
-            
 
             <div>
               <Link
@@ -185,9 +174,6 @@ export default function Page() {
             </div>
           </motion.div>
           <div className='mt-4 p-2 pb-32 '>
-            
-         
-
             <Activity />
           </div>
         </div>

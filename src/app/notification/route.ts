@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import webPush from 'web-push';
 
 export const POST = async (req: NextRequest) => {
-  if (
+  /* if (
     !process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY ||
     !process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL ||
     !process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
   ) {
     throw new Error('Environment variables supplied not sufficient.');
-  }
+  } */
   const { subscription, message } = (await req.json()) as {
     subscription: webPush.PushSubscription;
     message: string;

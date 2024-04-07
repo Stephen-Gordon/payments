@@ -21,8 +21,6 @@ export default function Balance() {
   // hooks
   const address = useSelector((state: RootState) => state.address.value);
 
-  
-
   const checkBalance = async () => {
     try {
       console.log('balance', result?.data?.formatted);
@@ -30,7 +28,7 @@ export default function Balance() {
       const result = useBalance({
         // @ts-ignore
         address: address,
-        token: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8',
+        token: '0x036CbD53842c5426634e7929541eC2318f3dCF7e',
       });
       // @ts-ignore
       dispatch(setBalance(result?.data?.formatted));
@@ -48,7 +46,7 @@ export default function Balance() {
   // Get the balance from Redux
   const balanceState = useSelector((state: RootState) => state.balance.value);
   console.log('balanceState', balanceState);
-  
+
   // Render the balance
   return <div className='text-white'>${balanceState}</div>;
 }

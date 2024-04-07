@@ -1,5 +1,5 @@
 // react
-import { useState} from 'react';
+import { useState } from 'react';
 // viem
 import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
 // privy
@@ -25,7 +25,7 @@ const useSendUsdc = () => {
 
       setLoading(true);
       const txnHash = await sendTransaction({
-        to: '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8', // USDC contract address
+        to: '0x036CbD53842c5426634e7929541eC2318f3dCF7e', // USDC contract address
         value: BigInt(0),
         data: encoded,
       });
