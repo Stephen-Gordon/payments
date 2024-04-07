@@ -69,12 +69,13 @@ export default function Page() {
 
   useEffect(() => {
     const filteredTransaction = transactionState.filter(
-      (tx: any) => tx.blockHash.toLocaleLowerCase() == hash
+      (tx: any) => tx.blockHash.toLocaleLowerCase() == hash?.toLocaleLowerCase()
     );
 
     setTransaction(filteredTransaction[0]);
 
-    setPayeeName(filteredTransaction.to);
+    setPayeeName(filteredTransaction[0]?.to);
+    console.log('payeeName in transaction page', filteredTransaction);
   }, [transactionState, hash]);
 
   return (
