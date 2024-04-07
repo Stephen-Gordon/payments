@@ -77,14 +77,16 @@ export default function Success({
           console.log('axios balance', r.data);
           setBalanceToShow(r.data.result);
           dispatch(setBalance(r.data.result));
-          setTimeout(() => {
-            setDrawerOpen(false);
-            router.push(`/transaction?hash=${transactionHash}`);
-          }, 1000);
         })
         .catch((e) => {
           console.log('axios balance error', e);
         });
+
+      setTimeout(() => {
+        setDrawerOpen(false);
+        /* dispatch(setSheet(false)); */
+        router.push(`/transactions`);
+      }, 1000);
     }
   }, [transactionStatus]);
 
