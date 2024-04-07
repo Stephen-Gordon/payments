@@ -1,6 +1,6 @@
 'use client';
 // Viem
-import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
+import { encodeFunctionData, parseUnits, erc20Abi, formatUnits } from 'viem';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,20 +50,29 @@ export default function SendUsdc() {
         <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
       </div>
       <DrawerFooter>
-        <Link
-          href={{
-            pathname: '/confirm',
-            query: { payee: payee, amount: usdcAmount },
-          }}
+        <Button
+          disabled={usdcAmount > formatUnits(balanceState, 6) ? true : false}
+          className='text-xl'
+          size={'lg'}
+          variant={'default'}
         >
-          <Button className='text-xl' size={'lg'} variant={'default'}>
+          <Link
+            style={{
+              pointerEvents:
+                usdcAmount > formatUnits(balanceState, 6) ? 'none' : 'auto',
+            }}
+            href={{
+              pathname: '/confirm',
+              query: { payee: payee, amount: usdcAmount },
+            }}
+          >
             <div className='flex content-center items-center'>
               <div className='text-xl'>
                 <div>Send</div>
               </div>
             </div>
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </DrawerFooter>
     </>
   );

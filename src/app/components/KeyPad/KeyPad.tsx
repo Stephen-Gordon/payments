@@ -1,10 +1,19 @@
-'use client'
+'use client';
 import { useButton } from '@react-aria/button';
 import { FocusRing } from '@react-aria/focus';
-import { motion, useAnimation } from 'framer-motion';
+// framer
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+
+// icons
 import { ArrowLeft } from 'lucide-react';
+
+// react
 import { useEffect, useRef, useState } from 'react';
 
+// redux
+import { useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
+import { formatUnits } from 'viem';
 interface KeyPadProps {
   setUsdcAmount: (usdcAmount: string) => void;
   usdcAmount: string;
@@ -13,6 +22,9 @@ interface KeyPadProps {
 export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
   let [nums, setNums] = useState<any>([]);
 
+  // redux
+  const balanceState = useSelector((state: RootState) => state.balance.value);
+
   function handleClick(num: any) {
     setNums([...nums, num]);
   }
@@ -20,14 +32,49 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
   useEffect(() => {
     setUsdcAmount(nums.join(''));
   }, [nums]);
-  
 
   return (
     <div className='mx-auto flex max-w-xs flex-col justify-center'>
-      <div className='m-auto text-center text-5xl font-extralight tabular-nums text-white'>
-        ${usdcAmount || 0}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        className={`m-auto text-center text-5xl font-extralight tabular-nums transition-all duration-500 ${
+          parseInt(usdcAmount) > parseInt(formatUnits(balanceState, 6))
+            ? 'text-rose-500'
+            : 'text-white'
+        }`}
+      >
+        {usdcAmount || 0}
+      </motion.div>
+
+      <div className='grid w-full justify-center'>
+        <motion.div
+          onClick={() => {
+            setUsdcAmount(formatUnits(balanceState, 6));
+            setNums([]);
+          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          key='insufficient-balance'
+          className={` full  mt-2 flex w-fit rounded-full border px-4 py-2 text-center text-sm ${
+            parseInt(usdcAmount) > parseInt(formatUnits(balanceState, 6))
+              ? 'text-rose-500 '
+              : 'text-muted-foreground bg-card'
+          }`}
+        >
+          {balanceState && <span>Balance: {formatUnits(balanceState, 6)}</span>}
+        </motion.div>
       </div>
-      <div className='mt-9 flex flex-wrap justify-between gap-4'>
+
+      <motion.div
+        key='keypad-button'
+        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        className='mt-9 flex flex-wrap justify-between gap-4'
+      >
         <Button onClick={() => handleClick('7')}>7</Button>
         <Button onClick={() => handleClick('8')}>8</Button>
         <Button onClick={() => handleClick('9')}>9</Button>
@@ -46,11 +93,10 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
         >
           <ArrowLeft size={40} className='m-auto text-center' />
         </Button>
-      </div>
+      </motion.div>
     </div>
   );
 }
-
 
 function Button({
   onClick = () => {},
