@@ -41,7 +41,7 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         className={`m-auto text-center text-5xl font-extralight tabular-nums transition-all duration-500 ${
-          parseInt(usdcAmount) > parseInt(formatUnits(balanceState, 6))
+          usdcAmount > formatUnits(balanceState, 6)
             ? 'text-rose-500'
             : 'text-white'
         }`}
@@ -52,8 +52,8 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
       <div className='grid w-full justify-center'>
         <motion.div
           onClick={() => {
+            setNums([formatUnits(balanceState, 6)]);
             setUsdcAmount(formatUnits(balanceState, 6));
-            setNums([]);
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -61,7 +61,7 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           key='insufficient-balance'
           className={` full  mt-2 flex w-fit rounded-full border px-4 py-2 text-center text-sm ${
-            parseInt(usdcAmount) > parseInt(formatUnits(balanceState, 6))
+            usdcAmount > formatUnits(balanceState, 6)
               ? 'text-rose-500 '
               : 'text-muted-foreground bg-card'
           }`}
