@@ -1,5 +1,4 @@
-//import { NextRequest, NextResponse } from 'next/server';
-const webPush = require('web-push');
+// a script to test notifications when developing the app
 
 const sendPushNotification = async () => {
   /* const publicKey =
