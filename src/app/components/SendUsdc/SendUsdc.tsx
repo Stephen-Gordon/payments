@@ -3,23 +3,14 @@
 import { encodeFunctionData, parseUnits, erc20Abi } from 'viem';
 
 // Redux
-import { useDispatch } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/GlobalRedux/store';
 // Next
 import { useSearchParams } from 'next/navigation';
 
 // React
 import { useEffect, useState, useRef } from 'react';
-import truncateEthAddress from 'truncate-eth-address';
-import Success from '@/app/components/Success/Success';
-import { useRouter } from 'next/navigation';
-
-import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
-
-import { Input } from '../ui/input';
 import { Button } from '../ui/button';
-
-import { Send } from 'lucide-react';
 
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
@@ -36,22 +27,12 @@ export default function SendUsdc() {
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
-  // ref
-  const inputRef: any = useRef(null);
-
-  // next router
-  const router = useRouter();
-
   // redux
-  const dispatch = useDispatch();
+  const balanceState = useSelector((state: RootState) => state.balance.value);
 
   // get search params
   const searchParams = useSearchParams();
   let payee = searchParams.get('payee');
-
-  // USDC contract address
-  //const usdc = '0x9999f7Fea5938fD3b1E26A12c3f2fb024e194f97';
-  const usdc = '0x036CbD53842c5426634e7929541eC2318f3dCF7e';
 
   useEffect(() => {
     //inputRef.current.focus();
