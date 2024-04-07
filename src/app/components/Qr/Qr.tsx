@@ -4,7 +4,7 @@ import { QRCode } from 'react-qrcode-logo';
 // Redux
 import { useSelector } from 'react-redux';
 // react
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { RootState } from '@/GlobalRedux/store';
 
 export default function Qr() {
@@ -14,29 +14,22 @@ export default function Qr() {
 
   const [windowWidth, setWindowWidth] = useState(0);
 
+  const widthRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    function handleResize() {
-      const screenWidth = window.innerWidth; // Get the screen width
-      const tenPercentOfScreenWidth = screenWidth * 0.3; // Calculate 10% of the screen width
-      const screenWidthMinusTenPercent = screenWidth - tenPercentOfScreenWidth; // Subtract 10% from the screen width
-      setWindowWidth(screenWidthMinusTenPercent); // Set the state with the modified screen width
+    if (widthRef.current) {
+      const width = widthRef.current.offsetWidth;
+      console.log('width', width);
+      setWindowWidth(width);
     }
-
-    // Initial width on component mount
-    handleResize();
-
-    // Event listener for window resize
-    window.addEventListener('resize', handleResize);
-
-    // remove the event listener when the component unmounts
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
   return (
-    <>
+    <div ref={widthRef}>
       <QRCode
         ecLevel='H'
         quietZone={20}
-        size={windowWidth > 500 ? 300 : windowWidth }
+        size={windowWidth > 500 ? 300 : windowWidth}
         bgColor='#0c0e1800'
         fgColor='#a7a3f5'
         qrStyle='dots'
@@ -45,6 +38,6 @@ export default function Qr() {
         eyeColor={['#ec91d8', '#ec91d8b3', '#ec91d866 ']}
         value={`${address}`}
       />
-    </>
+    </div>
   );
 }
