@@ -97,19 +97,22 @@ export default function RecentPayee(): JSX.Element {
 
   // get recent transactions
   useEffect(() => {
-    const uniquePayees = Array.from(
-      new Set(
-        transactionstate
-          .map((transaction) => transaction.to || transaction.from)
-          .filter(
-            (payee) => payee.toLocaleLowerCase() !== address.toLocaleLowerCase()
-          )
-      )
-    );
-    console.log('uniquePayees', uniquePayees);
-    console.log('address', address);
-    /*   uniquePayees.filter((payee) => payee == address); */
-    setPayees(uniquePayees);
+    if(transactionstate && transactionstate.length > 0) {
+      const uniquePayees = Array.from(
+        new Set(
+          transactionstate
+            .map((transaction) => transaction.to || transaction.from)
+            .filter(
+              (payee) =>
+                payee.toLocaleLowerCase() !== address.toLocaleLowerCase()
+            )
+        )
+      );
+      console.log('uniquePayees', uniquePayees);
+      console.log('address', address);
+      /*   uniquePayees.filter((payee) => payee == address); */
+      setPayees(uniquePayees);
+    }
     /* const fetchRecentTransactions = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
