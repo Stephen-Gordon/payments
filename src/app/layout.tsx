@@ -174,9 +174,7 @@ export default function RootLayout({
         >
           <ZeroDevProvider projectId={'1c40e823-f88c-4fcb-85bf-eac7453d11e3'}>
             <PrivyProvider
-              onSuccess={() => {
-                router.push('/home');
-              }}
+             
               appId={'cltk97hyk016h7afh32g4363z'}
               config={{
                 appearance: {
