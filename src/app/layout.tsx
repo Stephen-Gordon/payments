@@ -174,7 +174,6 @@ export default function RootLayout({
         >
           <ZeroDevProvider projectId={'1c40e823-f88c-4fcb-85bf-eac7453d11e3'}>
             <PrivyProvider
-             
               appId={'cltk97hyk016h7afh32g4363z'}
               config={{
                 appearance: {
@@ -193,15 +192,17 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <div
-                          vaul-drawer-wrapper=''
-                          className='relative h-[100vh] justify-center overflow-hidden'
-                        >
-                          {auth}
-                          {drawer}
+                        <AnimatePresence mode='wait'>
+                          <div
+                            vaul-drawer-wrapper=''
+                            className='relative h-[100vh] justify-center overflow-hidden'
+                          >
+                            {auth}
+                            {drawer}
 
-                          {children}
-                        </div>
+                            {children}
+                          </div>
+                        </AnimatePresence>
                         <BottomNavbar />
                       </LayoutGroup>
                     </QueryClientProvider>
