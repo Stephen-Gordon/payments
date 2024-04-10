@@ -8,8 +8,9 @@
 
 * {
   touch-action: pan-y;
-    scroll-behavior: smooth;
-}
+  scroll-behavior: smooth;
+  user-select: none;
+  }
  a {
   -webkit-touch-callout: none;
  }
