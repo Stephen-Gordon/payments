@@ -1,4 +1,5 @@
-'use client'
+'use client';
+
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -7,9 +8,5 @@ export default function Page() {
   useEffect(() => {
     router.push('/home');
   }, []);
-  return (
-    <>
-      <h1> backup payee</h1>
-    </>
-  );
+  return <></>;
 }

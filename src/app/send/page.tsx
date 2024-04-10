@@ -8,9 +8,5 @@ export default function Page() {
   useEffect(() => {
     router.push('/home');
   }, []);
-  return (
-    <>
-      <h1> backup Send</h1>
-    </>
-  );
+  return <></>;
 }

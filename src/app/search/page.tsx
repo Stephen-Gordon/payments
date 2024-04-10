@@ -1,9 +1,12 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+
 export default function Page() {
-  return (
-    <>
-      <h1>Backup Search Page</h1>
-    </>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push('/home');
+  }, []);
+  return <></>;
 }
