@@ -21,7 +21,7 @@ import useGetRecentTransactions from '@/app/hooks/useGetRecentTransactions';
 import useGetAddress from '@/app/hooks/useGetAddress';
 
 // motion
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
@@ -163,151 +163,174 @@ export default function Page() {
 
   return (
     <>
-      <DrawerHeader>
-        <DrawerTitle className='grid grid-cols-3 items-center'>
-          <div
-            onClick={() => {
-              router.back();
-            }}
-          >
-            <BackButton />
-          </div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
-          >
-            {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
-          </motion.p>
-          {!isInContacts && (
-            <div className='ml-auto'>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <DrawerHeader>
+            <DrawerTitle className='grid grid-cols-3 items-center'>
               <div
-                onClick={handleAddUser}
-                className='text-muted-foreground flex space-x-2 text-base font-light'
+                onClick={() => {
+                  router.back();
+                }}
               >
-                <UserPlus
-                  strokeWidth={2}
-                  className='fill-muted-foreground stroke-muted-foreground'
-                />
-                <p>Save</p>
-              </div>{' '}
-            </div>
+                <BackButton />
+              </div>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
+              >
+                {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
+              </motion.p>
+              {!isInContacts && (
+                <div className='ml-auto'>
+                  <div
+                    onClick={handleAddUser}
+                    className='text-muted-foreground flex space-x-2 text-base font-light'
+                  >
+                    <UserPlus
+                      strokeWidth={2}
+                      className='fill-muted-foreground stroke-muted-foreground'
+                    />
+                    <p>Save</p>
+                  </div>{' '}
+                </div>
+              )}
+            </DrawerTitle>
+          </DrawerHeader>
+
+          {!groupedTransactions && (
+            <motion.div
+              layout
+              key='no-tx-with'
+              className='grid content-center justify-center'
+            >
+              <div className='text-center text-white'>
+                <p>
+                  You've got no transfers with{' '}
+                  {payeeAddress &&
+                    useFindPayeeName(payeeAddress, contactsState)}
+                </p>
+              </div>
+            </motion.div>
           )}
-        </DrawerTitle>
-      </DrawerHeader>
 
-      {!groupedTransactions && (
-        <div className='grid content-center justify-center'>
-          <div className='text-center text-white'>
-            <p>
-              You've got no transfers with{' '}
-              {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {groupedTransactions && (
-        <>
-          <div className='p-4'>
-            {groupedTransactions.map((month, i) => (
-              <div key={i} className='grid'>
-                <div
-                  style={{ marginBottom: '32px' }}
-                  className='flex w-full justify-center'
-                >
-                  <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
-                    {month.monthName}
-                  </p>
-                </div>
-                <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
-                  {month.transactions.map((transaction, j) => (
-                    <div key={j}>
-                      {transaction.from == payeeAddress ? (
-                        <div
-                          style={{ marginBottom: '32px' }}
-                          className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
-                        >
-                          <div className='pb-4'>
-                            ${formatUnits(transaction.value, 6)}
-                          </div>
-
-                          <p className='text-muted-foreground text-xs'>
-                            You Received
-                          </p>
-                          <p className='text-muted-foreground text-xs'>
-                            <TimeAgo
-                              date={fromUnixTime(transaction.timeStamp)}
-                            />
-                          </p>
-                        </div>
-                      ) : (
-                        <div
-                          style={{ marginBottom: '32px' }}
-                          className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
-                        >
-                          <div className='pb-4'>
-                            ${formatUnits(transaction.value, 6)}
-                          </div>
-
-                          <p className='text-muted-foreground text-xs'>
-                            You Sent
-                          </p>
-
-                          <p className='text-muted-foreground text-xs'>
-                            <TimeAgo
-                              date={fromUnixTime(transaction.timeStamp)}
-                            />
-                          </p>
-                        </div>
-                      )}
+          {groupedTransactions && (
+            <>
+              <motion.div key='groupedTransactions'  className='p-4'>
+                {groupedTransactions.map((month, i) => (
+                  <div key={i} className='grid'>
+                    <div
+                      style={{ marginBottom: '32px' }}
+                      className='flex w-full justify-center'
+                    >
+                      <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
+                        {month.monthName}
+                      </p>
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+                    <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
+                      {month.transactions.map((transaction, j) => (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{
+                            duration: 0.4,
+                            ease: 'easeInOut',
+                            delay: j * 0.25,
+                          }}
+                          key={j}
+                        >
+                          {transaction.from == payeeAddress ? (
+                            <div
+                              style={{ marginBottom: '32px' }}
+                              className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
+                            >
+                              <div className='pb-4'>
+                                ${formatUnits(transaction.value, 6)}
+                              </div>
 
-          <div className=' p-4'>
-            <div ref={end}></div>
-          </div>
-        </>
-      )}
-      <DrawerFooter
-        style={{ zIndex: 3000 }}
-        className='fixed bottom-0 w-full  bg-white/10 backdrop-blur-xl '
-      >
-        <div className='w-full ' style={{ paddingBottom: '16px' }}>
-          <Link
-            href={{
-              pathname: '/send',
-              query: { payee: payeeAddress },
-            }}
-          >
-            <Button className='text-xl' size={'lg'} variant={'default'}>
-              <div className='flex grid-cols-3 content-center items-center'>
-                <div className='text-xl'>
-                  <div>Send</div>
-                </div>
-                <div className='px-2'></div>
-                <div>
-                  <Send size={20} />
-                </div>
+                              <p className='text-muted-foreground text-xs'>
+                                You Received
+                              </p>
+                              <p className='text-muted-foreground text-xs'>
+                                <TimeAgo
+                                  date={fromUnixTime(transaction.timeStamp)}
+                                />
+                              </p>
+                            </div>
+                          ) : (
+                            <div
+                              style={{ marginBottom: '32px' }}
+                              className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
+                            >
+                              <div className='pb-4'>
+                                ${formatUnits(transaction.value, 6)}
+                              </div>
+
+                              <p className='text-muted-foreground text-xs'>
+                                You Sent
+                              </p>
+
+                              <p className='text-muted-foreground text-xs'>
+                                <TimeAgo
+                                  date={fromUnixTime(transaction.timeStamp)}
+                                />
+                              </p>
+                            </div>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+
+              <div className=' p-4'>
+                <div ref={end}></div>
               </div>
-            </Button>
-          </Link>
-        </div>
-      </DrawerFooter>
-      {!isInContacts && (
-        <AddAContact
-          open={showAddContact}
-          setShowAddContact={setShowAddContact}
-          contactsState={contactsState}
-          payee={payeeAddress}
-        />
-      )}
+            </>
+          )}
+          <DrawerFooter
+            style={{ zIndex: 3000 }}
+            className='fixed bottom-0 w-full  bg-white/10 backdrop-blur-xl '
+          >
+            <div className='w-full ' style={{ paddingBottom: '16px' }}>
+              <Link
+                href={{
+                  pathname: '/send',
+                  query: { payee: payeeAddress },
+                }}
+              >
+                <Button className='text-xl' size={'lg'} variant={'default'}>
+                  <div className='flex grid-cols-3 content-center items-center'>
+                    <div className='text-xl'>
+                      <div>Send</div>
+                    </div>
+                    <div className='px-2'></div>
+                    <div>
+                      <Send size={20} />
+                    </div>
+                  </div>
+                </Button>
+              </Link>
+            </div>
+          </DrawerFooter>
+          {!isInContacts && (
+            <AddAContact
+              open={showAddContact}
+              setShowAddContact={setShowAddContact}
+              contactsState={contactsState}
+              payee={payeeAddress}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
     </>
   );
 }
