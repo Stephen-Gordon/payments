@@ -127,7 +127,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
         
         
           
-        <div className='text-lg text-center text-muted-foreground font-normal leading-none'>
+        <div className='text-lg text-center font-normal leading-none'>
           {payee && findPayeeName(payee) }
         </div>
       </div>
@@ -147,7 +147,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
             </div>
             <div className='px-2'></div>
             <div>
-              <Send size={20} className='bg-muted-foreground' />
+              <Send size={20} className='fill-muted-foreground' />
             </div>
           </div>
         </button>
