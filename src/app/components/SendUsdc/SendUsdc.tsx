@@ -37,7 +37,7 @@ export default function SendUsdc() {
   useEffect(() => {
     //inputRef.current.focus();
     console.log('USDC amount', usdcAmount);
-    if(usdcAmount === '') {
+    if(usdcAmount == '') {
       setUsdcAmount('0');
     }
   }, [usdcAmount]);
@@ -48,33 +48,33 @@ export default function SendUsdc() {
         <KeyPad usdcAmount={usdcAmount} setUsdcAmount={setUsdcAmount} />
       </div>
       <DrawerFooter>
-        <Button
-          disabled={
-            parseFloat(usdcAmount) > parseFloat(formatUnits(balanceState, 6)) ||
-            usdcAmount === '0'
-          }
-          className='text-xl'
-          size='lg'
-          variant='default'
+        <Link
+          style={{
+            pointerEvents:
+              parseFloat(usdcAmount) >
+                parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
+                ? 'none'
+                : 'auto',
+          }}
+          href={{
+            pathname: '/confirm',
+            query: { payee, amount: usdcAmount },
+          }}
         >
-          <Link
-            style={{
-              pointerEvents:
-                parseFloat(usdcAmount) >
-                  parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
-                  ? 'none'
-                  : 'auto',
-            }}
-            href={{
-              pathname: '/confirm',
-              query: { payee, amount: usdcAmount },
-            }}
+          <Button
+            disabled={
+              parseFloat(usdcAmount) >
+                parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
+            }
+            className='text-xl'
+            size='lg'
+            variant='default'
           >
             <div className='flex content-center items-center'>
               <div className='text-xl'>Send</div>
             </div>
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </DrawerFooter>
     </>
   );
