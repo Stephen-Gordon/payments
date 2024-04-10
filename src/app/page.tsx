@@ -24,20 +24,25 @@ export default function HomePage() {
   const { zeroDevReady, authenticated } = usePrivySmartAccount();
 
   const { isMobile, userAgentString, userAgent, isStandalone } = useUserAgent();
-
+ useEffect(() => {
+   setTimeout(() => {
+     if (isStandalone && authenticated) {
+       router.push('/home');
+     }
+  
+   }, 3000);
+ }, [isStandalone, authenticated]);
 
   useEffect(() => {
     
     setTimeout(() => {
-      if (isStandalone && authenticated) {
-        router.push('/home');
-      }
-      if (isStandalone && zeroDevReady && !authenticated) {
+    
+      if (isStandalone && !authenticated) {
         router.push('/login');
       }
       
     }, 3000)
-  }, [isStandalone, authenticated, zeroDevReady]);
+  }, [isStandalone, authenticated]);
 
   const [welcomeMessage, setWelcomeMessage] =
     useState<string>('Checking device...');
@@ -58,6 +63,7 @@ export default function HomePage() {
 
       {/*  <Link href='/home'>Home</Link>
       <Link href='/home'>login</Link> */}
+      
 
       <AnimatePresence>
         {textLoading && (
