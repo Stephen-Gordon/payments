@@ -83,6 +83,22 @@ export default function Page() {
 
   return (
     <>
+      <DrawerHeader>
+        <DrawerTitle className='grid grid-cols-3 items-center'>
+          <motion.div key={'back'} layoutId='back'>
+            <BackButton
+              onClick={() => {
+                router.back();
+                dispatch(setSheet(false));
+              }}
+            />
+          </motion.div>
+          <p className='text-center font-normal'>
+            <TextGenerateEffect words='Search'></TextGenerateEffect>
+          </p>
+          <div className='ml-auto'></div>
+        </DrawerTitle>
+      </DrawerHeader>
       <motion.div className='grid h-full'>
         <AddAContact
           open={showAddContact}
@@ -91,23 +107,6 @@ export default function Page() {
           payee={payee}
         />
         {scanner && <Scanner isOpen={isOpen} setIsOpen={setIsOpen} />}
-
-        <DrawerHeader>
-          <DrawerTitle className='grid grid-cols-3 items-center'>
-            <div>
-              <BackButton
-                onClick={() => {
-                  router.back();
-                  dispatch(setSheet(false));
-                }}
-              />
-            </div>
-            <p className='text-center font-normal'>
-              <TextGenerateEffect words='Search'></TextGenerateEffect>
-            </p>
-            <div className='ml-auto'></div>
-          </DrawerTitle>
-        </DrawerHeader>
 
         <div className='flex px-4'>
           <form className='bg-muted w-full rounded-xl p-2 '>
@@ -202,12 +201,12 @@ export default function Page() {
               <>
                 <motion.div
                   key='vaild-address'
-                  initial={{ opacity: 0}}
+                  initial={{ opacity: 0 }}
                   animate={{
-                    opacity: 1
+                    opacity: 1,
                   }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  exit={{ opacity: 0,}}
+                  exit={{ opacity: 0 }}
                   className='w-full'
                 >
                   {payee != '' && (
@@ -230,12 +229,12 @@ export default function Page() {
               <motion.div
                 layout
                 key='search-page-check'
-                initial={{ opacity: 0, }}
+                initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
                 }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
-                exit={{ opacity: 0,  }}
+                exit={{ opacity: 0 }}
                 className='w-full'
               >
                 {/* Scan a Qr code */}

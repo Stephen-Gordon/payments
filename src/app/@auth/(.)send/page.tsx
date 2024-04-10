@@ -33,39 +33,46 @@ export default function Page() {
 
   return (
     <>
+      <DrawerHeader>
+        <DrawerTitle className='grid grid-cols-3 items-center'>
+          <motion.div
+            key={'back'}
+            layoutId='back'
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <BackButton />
+          </motion.div>
+          <motion.p
+            key={'payee-name'}
+            layoutId='payee-name'
+            className='text-center'
+          >
+            {payee && useFindPayeeName(payee, contactsState)}
+          </motion.p>
+          <div className='ml-auto'>
+            <Link
+              className='h-auto w-auto'
+              href={{ pathname: `/send`, query: { payee: payee } }}
+            >
+              <Link
+                className='h-auto w-auto'
+                href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
+              >
+                <Avatar className='h-9 w-9 bg-white'></Avatar>
+              </Link>
+            </Link>
+          </div>
+        </DrawerTitle>
+      </DrawerHeader>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
-        className='grid'>
-        <DrawerHeader>
-          <DrawerTitle className='grid grid-cols-3 items-center'>
-            <div
-              onClick={() => {
-                router.back();
-              }}
-            >
-              <BackButton />
-            </div>
-            <p className='text-center'>
-              {payee && useFindPayeeName(payee, contactsState)}
-            </p>
-            <div className='ml-auto'>
-              <Link
-                className='h-auto w-auto'
-                href={{ pathname: `/send`, query: { payee: payee } }}
-              >
-                <Link
-                  className='h-auto w-auto'
-                  href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
-                >
-                  <Avatar className='h-9 w-9 bg-white'></Avatar>
-                </Link>
-              </Link>
-            </div>
-          </DrawerTitle>
-        </DrawerHeader>
+        className='grid'
+      >
         <SendUsdc />
       </motion.div>
     </>

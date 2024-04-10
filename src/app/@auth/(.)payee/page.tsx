@@ -164,46 +164,51 @@ export default function Page() {
   return (
     <>
       <AnimatePresence>
+        <DrawerHeader>
+          <DrawerTitle className='grid grid-cols-3 items-center'>
+            <motion.div
+              key={'back'}
+              layoutId='back'
+              onClick={() => {
+                router.back();
+              }}
+            >
+              <BackButton />
+            </motion.div>
+            <motion.p
+              key={'payee-name'}
+              layoutId='payee-name'
+              className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
+            >
+              {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
+            </motion.p>
+            {!isInContacts && (
+              <motion.div
+                layout
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='ml-auto'
+              >
+                <div
+                  onClick={handleAddUser}
+                  className='text-muted-foreground flex space-x-2 text-base font-light'
+                >
+                  <UserPlus
+                    strokeWidth={2}
+                    className='fill-muted-foreground stroke-muted-foreground'
+                  />
+                  <p>Save</p>
+                </div>{' '}
+              </motion.div>
+            )}
+          </DrawerTitle>
+        </DrawerHeader>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <DrawerHeader>
-            <DrawerTitle className='grid grid-cols-3 items-center'>
-              <div
-                onClick={() => {
-                  router.back();
-                }}
-              >
-                <BackButton />
-              </div>
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
-              >
-                {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
-              </motion.p>
-              {!isInContacts && (
-                <div className='ml-auto'>
-                  <div
-                    onClick={handleAddUser}
-                    className='text-muted-foreground flex space-x-2 text-base font-light'
-                  >
-                    <UserPlus
-                      strokeWidth={2}
-                      className='fill-muted-foreground stroke-muted-foreground'
-                    />
-                    <p>Save</p>
-                  </div>{' '}
-                </div>
-              )}
-            </DrawerTitle>
-          </DrawerHeader>
-
           {!groupedTransactions && (
             <motion.div
               layout
@@ -222,7 +227,7 @@ export default function Page() {
 
           {groupedTransactions && (
             <>
-              <motion.div key='groupedTransactions'  className='p-4'>
+              <motion.div key='groupedTransactions' className='p-4'>
                 {groupedTransactions.map((month, i) => (
                   <div key={i} className='grid'>
                     <div

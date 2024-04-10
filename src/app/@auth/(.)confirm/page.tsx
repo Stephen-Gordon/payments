@@ -96,13 +96,15 @@ export default function Page({ showConfirm }: ConfirmProps) {
       >
       <DrawerHeader>
         <DrawerTitle className='grid grid-cols-3 items-center'>
-          <div
+         <motion.div
+            key={'back'}
+            layoutId='back'
             onClick={() => {
               router.back();
             }}
           >
             <BackButton />
-          </div>
+          </motion.div>
           <p className='text-center'>Review</p>
           <div className='ml-auto'>
             
