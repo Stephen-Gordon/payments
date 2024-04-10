@@ -22,7 +22,7 @@ export default function SendUsdc() {
   // privy
   const { zeroDevReady, user, sendTransaction } = usePrivySmartAccount();
 
-  const [usdcAmount, setUsdcAmount] = useState<string>('1');
+  const [usdcAmount, setUsdcAmount] = useState<string>('0');
 
   const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -37,10 +37,8 @@ export default function SendUsdc() {
   useEffect(() => {
     //inputRef.current.focus();
     console.log('USDC amount', usdcAmount);
-    if (zeroDevReady) {
-      console.log('ready to send');
-    } else {
-      console.log('not ready to send');
+    if(usdcAmount === '') {
+      setUsdcAmount('0');
     }
   }, [usdcAmount]);
 
@@ -51,25 +49,29 @@ export default function SendUsdc() {
       </div>
       <DrawerFooter>
         <Button
-          disabled={usdcAmount > formatUnits(balanceState, 6) ? true : false}
+          disabled={
+            parseFloat(usdcAmount) > parseFloat(formatUnits(balanceState, 6)) ||
+            usdcAmount === '0'
+          }
           className='text-xl'
-          size={'lg'}
-          variant={'default'}
+          size='lg'
+          variant='default'
         >
           <Link
             style={{
               pointerEvents:
-                usdcAmount > formatUnits(balanceState, 6) ? 'none' : 'auto',
+                parseFloat(usdcAmount) >
+                  parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
+                  ? 'none'
+                  : 'auto',
             }}
             href={{
               pathname: '/confirm',
-              query: { payee: payee, amount: usdcAmount },
+              query: { payee, amount: usdcAmount },
             }}
           >
             <div className='flex content-center items-center'>
-              <div className='text-xl'>
-                <div>Send</div>
-              </div>
+              <div className='text-xl'>Send</div>
             </div>
           </Link>
         </Button>
