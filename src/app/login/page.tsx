@@ -9,20 +9,24 @@ import { isAndroid } from 'react-device-detect';
 import { useDispatch } from 'react-redux';
 import { Button } from '../components/ui/button';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 import Link from 'next/link';
+import { TextGenerateEffect } from '../components/ui/text-generate-effect';
 
 const Page = () => {
   const [isInstalled, setIsInstalled] = useState(false);
   const [installationPrompt, setInstallationPrompt] = useState<any>();
 
+  const [routeHome, setRouteHome] = useState(false);
   // router
   const router = useRouter();
 
   // privy
   const { ready, authenticated, login, zeroDevReady, user } =
     usePrivySmartAccount();
+
+    
 
   // redux
   const dispatch = useDispatch();
@@ -47,38 +51,59 @@ const Page = () => {
   useEffect(() => {
     if (zeroDevReady && authenticated ) {
       // set user address
-      dispatch(setAddress(user?.wallet?.address));
+      dispatch(setAddress(user?.wallet?.address as string));
       
       // route home
-      router.push('/home');
+      
+      setRouteHome(true);
+      setTimeout(() => {
+        router.push('/home');
+      }, 700)
+
     }
   }, [authenticated, zeroDevReady]);
 
 
+  
   return (
     <>
-      <div className='relative'>
-        <div className='absolute -z-50 '> 
-          <BackgroundGradientAnimation/>
-        </div>
-        <div className='grid p-4 justify-center mt-[30vh]'>
-
-                <div className=' space-y-2 text-center'>
-                  <motion.h1 key="create-an-account" initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity:0 }} className='text-2xl font-semibold tracking-tight'>
-                    Log in or Sign up
-                  </motion.h1>
+      <AnimatePresence>
+        {!routeHome && (
+          <motion.div
+          
+            key={"login-page"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            className='relative'
+          >
+            <div className='absolute -z-50 '>
+              <BackgroundGradientAnimation />
+            </div>
+            <div className='mt-[30vh] grid justify-center p-4'>
+              <div className=' space-y-2 text-center'>
+                <motion.h1
+                  key='create-an-account'
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className='text-2xl font-semibold tracking-tight'
+                >
+                  Log in or Sign up
+                </motion.h1>
                 {/*   <motion.p  initial={{opacity: 0}} animate={{ opacity: 1}} exit={{opacity:0 }} className='text-muted-foreground text-sm'>
                     Enter your email below to create your account
                   </motion.p> */}
-                </div>
-                <Button className='mt-4' disabled={!ready || authenticated} onClick={login}>
-                  Login
-                </Button>
-                <Link href={'/home'}>home</Link>
-
-          
-        </div>
-      </div>
+              </div>
+              <Button className='mt-4' onClick={login}>
+                Login
+              </Button>
+              <Link href={'/home'}>home</Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };
