@@ -111,7 +111,8 @@ export default function Page() {
       <motion.div
         key='activity-key'
         transition={{
-          duration: 0.3,
+          duration: 0.4,
+          ease: 'easeInOut'
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -132,7 +133,7 @@ export default function Page() {
               <div className='ml-auto'></div>
             </CardTitle>
           </CardHeader>
-          <CardContent className='border-0 border-none'>
+          <CardContent className='border-0 border-none overflow-scroll'>
             <motion.div>
               {showTxs && (
                 <>
@@ -142,7 +143,7 @@ export default function Page() {
                         {groupedTransactions.map((month, i) => (
                           <div key={i} className='grid'>
                             <div
-                              style={{ marginBottom: '32px' }}
+                              style={{ marginBottom: '32px', }}
                               className='flex w-full justify-center'
                             >
                               <p className='bg-card text-card-foreground h-9 w-fit  rounded-xl border px-4 py-2 text-sm shadow'>
@@ -152,13 +153,15 @@ export default function Page() {
                             {month.transactions.map((transaction, j) => (
                               <motion.div
                                 className='grid h-fit w-full space-y-6'
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
+                                layout
+                                initial={{ opacity: 0, height: 0}}
+                                animate={{ opacity: 1, height: 'auto'}}
                                 transition={{
                                   duration: 0.4,
                                   delay: j * 0.2,
                                   ease: 'easeInOut', // Using a custom easing function
                                 }}
+                                exit={{ opacity: 0, height: 0}}
                                 key={j}
                               >
                                 <motion.div
