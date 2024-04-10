@@ -68,16 +68,19 @@ export default function HomePage() {
       <AnimatePresence>
         {textLoading && (
           <motion.div
+
+            layout  
             initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0, y: 40 }}
+            exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.4, ease: 'easeInOut' }}
             key={'intro-loading'}
             className='flex h-full w-full flex-col items-center justify-center'
           >
             <motion.h1
               key={'intro-loading-h1'}
-              initial={{ y: 40, opacity: 0 }}
+                layout
+                initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.2 }}
               className='mt-20 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl'
@@ -91,7 +94,8 @@ export default function HomePage() {
                   setTextLoading(false);
                 }, 3000);
               }}
-              initial={{ y: 40, opacity: 0 }}
+              layout
+              initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.4 }}
               className='text-muted-foreground  mt-20  scroll-m-20 text-center text-2xl font-semibold tracking-tight'
