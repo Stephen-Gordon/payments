@@ -10,11 +10,9 @@
   touch-action: pan-y;
     scroll-behavior: smooth;
 }
-/* 
-.ios {
-  backdrop-filter: blur(100px) ;
-    -webkit-backdrop-filter: blur(100px) ;
-        }  */
+ a {
+  -webkit-touch-callout: none;
+ }
 
 body {
   touch-action: none;
