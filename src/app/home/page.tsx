@@ -110,7 +110,11 @@ export default function Page() {
   return (
     <AuthPage>
       <main className='bg-background relative  h-full overflow-y-auto'>
-        <div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
+        >
           {/*  <div className='absolute -z-50 '>
             <BackgroundGradientAnimation />
           </div>   */}
@@ -176,7 +180,7 @@ export default function Page() {
           <div className='mt-4 p-2 pb-32 '>
             <Activity />
           </div>
-        </div>
+        </motion.div>
       </main>
     </AuthPage>
   );
