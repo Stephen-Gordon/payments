@@ -25,18 +25,17 @@ export default function HomePage() {
 
   const { isMobile, userAgentString, userAgent, isStandalone } = useUserAgent();
 
-/*   useEffect(() => {
-    if (zeroDevReady && authenticated) router.push('/home');
-  }, [zeroDevReady, authenticated, router]); */
 
   useEffect(() => {
+    
     setTimeout(() => {
-      if (isStandalone && !authenticated) {
-        router.push('/login');
-      }
-      if (isStandalone && zeroDevReady && authenticated) {
+      if (isStandalone && authenticated) {
         router.push('/home');
       }
+      if (isStandalone && zeroDevReady && !authenticated) {
+        router.push('/login');
+      }
+      
     }, 3000)
   }, [isStandalone, authenticated, zeroDevReady]);
 
