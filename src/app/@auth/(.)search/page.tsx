@@ -83,12 +83,7 @@ export default function Page() {
 
   return (
     <>
-      <motion.div
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}} 
-        transition={{duration: 0.5, ease: 'easeInOut'}}
-        className='grid h-full'>
+      <motion.div className='grid h-full'>
         <AddAContact
           open={showAddContact}
           setShowAddContact={setShowAddContact}
@@ -108,7 +103,6 @@ export default function Page() {
               />
             </div>
             <p className='text-center font-normal'>
-
               <TextGenerateEffect words='Search'></TextGenerateEffect>
             </p>
             <div className='ml-auto'></div>
@@ -132,55 +126,56 @@ export default function Page() {
                 type='text'
               />
 
-              <AnimatePresence>
-                {payee !== '' && (
-                  <motion.div
-                    key='clear'
-                    initial={{ opacity: 0 }}
-                    animate={{
-                      opacity: 1,
-                      transition: { duration: 0.4, ease: 'easeInOut' },
-                    }}
-                    exit={{ opacity: 0 }}
-                    className='ml-auto grid content-center justify-end'
-                  >
-                    {isAnAddress &&
-                    !contactsState.some(
-                      (contact: Contact) => contact.address == payee
-                    ) ? (
-                      <>
-                        <div onClick={handleAddUser} className='flex'>
-                          <UserPlus />
-                          Save
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <X
-                          className='text-muted-foreground h-8 w-8 '
-                          onClick={() => setPayee('')}
-                        />
-                      </>
-                    )}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {payee !== '' && (
+                <motion.div
+                  key='clear'
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{
+                    opacity: 1,
+                    height: 'auto',
+                  }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className='ml-auto grid content-center justify-end'
+                >
+                  {isAnAddress &&
+                  !contactsState.some(
+                    (contact: Contact) => contact.address == payee
+                  ) ? (
+                    <>
+                      <div onClick={handleAddUser} className='flex'>
+                        <UserPlus />
+                        Save
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <X
+                        className='text-muted-foreground h-8 w-8 '
+                        onClick={() => setPayee('')}
+                      />
+                    </>
+                  )}
+                </motion.div>
+              )}
             </div>
           </form>
         </div>
 
-        <div className='mt-4 space-y-8 px-4'>
-          {isAnAddress ? (
-            <>
-              <AnimatePresence>
+        <AnimatePresence>
+          <div className='mt-4 space-y-8 px-4'>
+            {isAnAddress ? (
+              <>
                 <motion.div
+                  layout
                   key='send-button'
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0, height: 0 }}
                   animate={{
                     opacity: 1,
-                    transition: { duration: 0.4, ease: 'easeInOut' },
+                    height: 'auto',
                   }}
-                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  exit={{ opacity: 0, height: 0 }}
                   className='w-full'
                 >
                   <Link
@@ -202,19 +197,17 @@ export default function Page() {
                     </Button>
                   </Link>
                 </motion.div>
-              </AnimatePresence>
-            </>
-          ) : (
-            <>
-              <AnimatePresence>
+              </>
+            ) : (
+              <>
                 <motion.div
                   key='vaild-address'
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0}}
                   animate={{
-                    opacity: 1,
-                    transition: { duration: 0.4, ease: 'easeInOut' },
+                    opacity: 1
                   }}
-                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  exit={{ opacity: 0,}}
                   className='w-full'
                 >
                   {payee != '' && (
@@ -226,34 +219,25 @@ export default function Page() {
                     </div>
                   )}
                 </motion.div>
-              </AnimatePresence>
-            </>
-          )}
-        </div>
+              </>
+            )}
+          </div>
+        </AnimatePresence>
 
         <AnimatePresence>
           {payee == '' && (
             <>
               <motion.div
-                key='search-page'
-                initial={{ opacity: 0 }}
+                layout
+                key='search-page-check'
+                initial={{ opacity: 0, }}
                 animate={{
                   opacity: 1,
-                  transition: { duration: 0.4, ease: 'easeInOut' },
                 }}
-                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                exit={{ opacity: 0,  }}
                 className='w-full'
               >
-                {/* <div className='w-full p-4'>
-                  <Link
-                    href={{
-                      pathname: '/send',
-                      query: { payee: payee },
-                    }}
-                  >
-                    <button className='bg-purple w-full rounded p-4'>Go</button>
-                  </Link>
-                </div> */}
                 {/* Scan a Qr code */}
                 <div
                   onClick={() => {
