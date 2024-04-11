@@ -31,22 +31,17 @@ function Payee({
   contactsState,
 }: {
   payee: string;
-  payees: any;
   contactsState: Contact[];
 }) {
-  // Find the contact in contactsState array with matching address
-  const matchedContact = contactsState.find(
-    (contact: Contact) => contact.address === payee
-  );
-
-  // If a matching contact is found, use its name, otherwise use truncated payee address
-  const payeeName = matchedContact
-    ? matchedContact.name
-    : truncateEthAddress(payee);
 
   return (
     <>
-      <div key={payee}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
+        key={payee}
+      >
         <Link href={{ pathname: `/payee`, query: { payeeAddress: payee } }}>
           <div className='space-y-8'>
             <div className='flex w-full items-center '>
@@ -59,7 +54,7 @@ function Payee({
             </div>
           </div>
         </Link>
-      </div>
+      </motion.div>
     </>
   );
 }
@@ -103,21 +98,24 @@ export default function RecentPayee(): JSX.Element {
   // get recent transactions
   useEffect(() => {
     console.log("type of", typeof transactionstate);
-    if(transactionstate && transactionstate.length > 0) {
+    if(transactionstate && transactionstate.length > 0 && address) {
+
+
+      
       const uniquePayees = Array.from(
         new Set(
           transactionstate
             .map((transaction) => transaction.to || transaction.from)
-            .filter(
-              (payee) =>
-                payee.toLocaleLowerCase() !== address.toLocaleLowerCase()
-            )
+            
         )
       );
+      
+      const filteredPayees = uniquePayees.filter((payee) =>payee.toLocaleLowerCase() !== address.toLocaleLowerCase());
+      console.log('filteredPayees', filteredPayees);
       console.log('uniquePayees', uniquePayees);
       console.log('address', address);
-      /*   uniquePayees.filter((payee) => payee == address); */
-      setPayees(uniquePayees);
+        //uniquePayees.filter((payee) => payee == address); 
+      setPayees(filteredPayees);
     }
     
   }, [transactionstate, address, contactsState]);
@@ -129,13 +127,15 @@ export default function RecentPayee(): JSX.Element {
           <div className='text-sm font-medium leading-none'>
             Recent Transfers
           </div>
-          {payees.map((payee, i) => (
-            <Payee key={i} payee={payee} contactsState={contactsState} />
-          ))}
+          
+            {payees.map((payee, i) => (
+              <Payee key={i} payee={payee} contactsState={contactsState} />
+            ))}
+
         </>
       ) : (
         <>
-          <Card>
+         {/*  <Card>
             <CardHeader className='text-sm font-medium leading-none'>
               Recent Transfers
             </CardHeader>
@@ -144,7 +144,7 @@ export default function RecentPayee(): JSX.Element {
                 No recent transfers
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
         </>
       )}
     </>

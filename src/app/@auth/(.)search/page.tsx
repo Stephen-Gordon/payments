@@ -226,7 +226,7 @@ export default function Page() {
           {payee == '' && (
             <>
               <motion.div
-                layout
+                
                 key='search-page-check'
                 initial={{ opacity: 0 }}
                 animate={{
