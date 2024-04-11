@@ -172,7 +172,7 @@ export default function RootLayout({
           defaultTheme='dark'
           disableTransitionOnChange
         >
-          <ZeroDevProvider projectId={'1c40e823-f88c-4fcb-85bf-eac7453d11e3'}>
+          <ZeroDevProvider projectId={process.env.NEXT_PUBLIC_ZERODEV_ID as string}>
             <PrivyProvider
               appId={'cltk97hyk016h7afh32g4363z'}
               config={{

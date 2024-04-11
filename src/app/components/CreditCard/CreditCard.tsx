@@ -23,27 +23,15 @@ export default function CreditCard() {
 
   const reduxBalance = useSelector((state: any) => state.balance.value);
 
-  //const hookBalance = useGetBalance(address as string)
 
   const dispatch = useDispatch();
 
-  /* 
-    useEffect(() => {
-      console.log('redux balance', reduxBalance)
-      console.log('hook balance', hookBalance)
-      
-      if (hookBalance !== reduxBalance) {
-        setBalanceToShow(hookBalance as string)
-        dispatch(setBalance(hookBalance as string))
-      }
-      
-    }, [hookBalance, reduxBalance])
- */
+
 
   useEffect(() => {
     axios
       .get(
-        `https://api-sepolia.basescan.org/api?module=account&action=tokenbalance&contractaddress=0x036CbD53842c5426634e7929541eC2318f3dCF7e&address=${address}&tag=latest&apikey=6VRQH98BTKVZYXU68YJYWVX3EC2ZP6UEFV`
+        `https://api-sepolia.basescan.org/api?module=account&action=tokenbalance&contractaddress=0x036CbD53842c5426634e7929541eC2318f3dCF7e&address=${address}&tag=latest&apikey=${process.env.NEXT_PUBLIC_BASESCAN_API_KEY}`
       )
       .then((r) => {
         console.log('axios balance', r.data);

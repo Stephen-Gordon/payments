@@ -106,7 +106,12 @@ export default function Page() {
 
   // hooks
   const address = useGetAddress();
-
+  useEffect(() => {
+    console.log("1)", process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID);
+    console.log("2",process.env.NEXT_PUBLIC_ZERODEV_ID);
+    console.log("3",process.env.NEXT_PUBLIC_ALCHEMY_API_KEY);
+    console.log("4",process.env.NEXT_PUBLIC_MORALIS_API_KEY);
+  })
   return (
     <AuthPage>
       <main className='bg-background relative  h-full overflow-y-auto'>

@@ -26,7 +26,7 @@ const useCreateKernal = async (option) => {
 
   const kernelClient = await createEcdsaKernelAccountClient({
     chain: baseSepolia,
-    projectId: '1c40e823-f88c-4fcb-85bf-eac7453d11e3',
+    projectId: process.env.NEXT_PUBLIC_ZERODEV_PROJECT_ID as string,
     // @ts-ignore
     signer: signer,
   });

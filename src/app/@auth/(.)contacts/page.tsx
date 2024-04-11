@@ -76,7 +76,7 @@ export default function Page() {
             <div className='space-y-6'>
               {contactsState.length > 0 ? (
                 <>
-                  {contactsState.map((contact, index) => (
+                  {contactsState.map((contact : Contact, index) => (
                     <motion.div
                       key={contact.address}
                       initial={{ opacity: 0, y: 20 }}
