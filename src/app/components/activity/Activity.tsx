@@ -67,58 +67,58 @@ export default function Activity() {
   
   return (
     <>
-      {transactionState?.length > 0 ? (
-        <motion.div
-          transition={{ duration: 0.4 }}
-          className='from-background to bg-accent/80 w-full rounded-2xl bg-gradient-to-br  backdrop-blur-xl '
-        >
-          <Card className='bg-transparent '>
-            <CardHeader>
-              <motion.div>
-                <CardTitle>Recent Transactions</CardTitle>
-              </motion.div>
-            </CardHeader>
-            <CardContent className=' '>
+      <motion.div
+        layout
+        initial={{ height: 0 }}
+        animate={{ height: 'auto' }}
+        exit={{ height: 0 }}
+        transition={{ duration: 0.4 }}
+        className='from-background to bg-accent/80 w-full rounded-2xl bg-gradient-to-br  backdrop-blur-xl '
+      >
+        <Card className='bg-transparent '>
+          <CardHeader>
+            <motion.div>
+              <CardTitle>Recent Transactions</CardTitle>
+            </motion.div>
+          </CardHeader>
+          <CardContent className=''>
+            {transactionState?.length > 0 ? (
               <div className='mt-4 space-y-8'>
-                {Array.isArray(transactionState)  &&
-                  transactionState.slice(0,5).map((transaction: any, i: any) => (
-                    <motion.div
-                      className='h-fit w-full'
-                      
-                      key={i}
-                    >
-                      <RecentTransaction transaction={transaction} />
-                    </motion.div>
-                  ))}
+                {Array.isArray(transactionState) &&
+                  transactionState
+                    .slice(0, 5)
+                    .map((transaction: any, i: any) => (
+                      <motion.div
+                        layout
+                        initial={{ height: 0, opacity: 0}}
+                        animate={{ height: 'auto', opacity: 1}}
+                        exit={{ height: 0 }}
+                        transition={{ duration: 0.4, delay: i * 0.2}}
+                        className='h-fit w-full'
+                        key={i}
+                      >
+                        <RecentTransaction transaction={transaction} />
+                      </motion.div>
+                    ))}
               </div>
-            </CardContent>
-            <CardFooter className='justify-center space-x-2'>
-              <Link
-                className='w-fit'
-                href={{
-                  pathname: '/transactions'
-                }}
-              >
-                <Button
-                  /* onClick={() => {
-                    dispatch(setSheet(true));
-                  }} */
-                  className='w-auto'
-                  variant='ghost'
-                >
-                  See All
-                </Button>
-              </Link>
-            </CardFooter>
-          </Card>
-        </motion.div>
-      ) : (
-        <div className=' w-full rounded-xl p-2 text-xl'>
-          <div className='mt-4 flex content-center justify-center'>
-            <div>You've got no transactions</div>
-          </div>
-        </div>
-      )}
+            ) : (
+              <></>
+            )}
+          </CardContent>
+          <CardFooter className='justify-center space-x-2'>
+            <Link
+              className='w-fit'
+              href={{
+                pathname: '/transactions',
+              }}
+            >
+              <Button className='w-auto' variant='ghost'>
+                See All
+              </Button>
+            </Link>
+          </CardFooter>
+        </Card>
+      </motion.div>
     </>
   );
 }

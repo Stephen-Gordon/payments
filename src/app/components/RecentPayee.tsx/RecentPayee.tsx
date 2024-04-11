@@ -37,8 +37,10 @@ function Payee({
   return (
     <>
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        layout
+
+        initial={{ opacity: 0, height: 0 }}
+        animate={{ opacity: 1, height: 'auto' }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
         key={payee}
       >

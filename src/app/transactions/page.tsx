@@ -117,9 +117,9 @@ export default function Page() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className='w-full'
+        className='w-full h-full'
       >
-        <Card style={{ border: '0px' }} className='bg-transparent'>
+        <Card style={{ border: '0px' }} className='bg-transparent h-full'>
           <CardHeader>
             <CardTitle className='grid grid-cols-3 items-center'>
               <div
@@ -133,7 +133,7 @@ export default function Page() {
               <div className='ml-auto'></div>
             </CardTitle>
           </CardHeader>
-          <CardContent className='border-0 border-none overflow-scroll'>
+          <CardContent className='border-0 border-none overflow-scroll h-full'>
             <motion.div>
               {showTxs && (
                 <>
