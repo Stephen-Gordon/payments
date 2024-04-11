@@ -90,7 +90,12 @@ export default function Page() {
                         }}
                       >
                         <div className='flex w-full items-center '>
-                          <Avatar className='h-9 w-9 bg-white'></Avatar>
+                          <div className='flex items-center justify-center'>
+                            <Avatar className='flex h-9 w-9 items-center justify-center bg-white'>
+                              <span className='text-black'>{contact.name.charAt(0)}</span>
+                            </Avatar>
+                          </div>
+
                           <div className='ml-4 space-y-1'>
                             <div className='text-sm font-medium leading-none'>
                               {contact.name}
