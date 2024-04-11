@@ -1,14 +1,9 @@
-/* 
-Notification api route
-deconstruct the subscription and message from the request body
-
-*/
-
+// This file is responsible for sending the notification to the user
 import { NextRequest, NextResponse } from 'next/server';
 import webPush from 'web-push';
 
 export const POST = async (req: NextRequest) => {
-
+  // get the subscription and message from the request body
   const { subscription, message } = (await req.json()) as {
     subscription: webPush.PushSubscription;
     message: string;
