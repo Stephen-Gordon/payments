@@ -49,17 +49,15 @@ const Page = () => {
     });
   }); */
   useEffect(() => {
-    if (zeroDevReady && authenticated ) {
+    if (zeroDevReady && !authenticated ) {
+      console.log("authenticated", authenticated)
       // set user address
+      console.log("address", user?.wallet?.address)
       dispatch(setAddress(user?.wallet?.address as string));
       
       // route home
       
-      setRouteHome(true);
-      setTimeout(() => {
-        router.push('/home');
-      }, 700)
-
+     
     }
   }, [authenticated, zeroDevReady]);
 
@@ -68,7 +66,7 @@ const Page = () => {
   return (
     <>
       <AnimatePresence>
-        {!routeHome && (
+
           <motion.div
           
             key={"login-page"}
@@ -102,7 +100,7 @@ const Page = () => {
               <Link href={'/home'}>home</Link>
             </div>
           </motion.div>
-        )}
+
       </AnimatePresence>
     </>
   );

@@ -175,6 +175,9 @@ export default function RootLayout({
           <ZeroDevProvider projectId={process.env.NEXT_PUBLIC_ZERODEV_ID as string}>
             <PrivyProvider
               appId={'cltk97hyk016h7afh32g4363z'}
+              onSuccess={() => {
+                router.push('/home');
+              }}
               config={{
                 appearance: {
                   theme: 'dark',
