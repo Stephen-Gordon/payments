@@ -1,31 +1,30 @@
+/* 
+Notification api route
+deconstruct the subscription and message from the request body
+
+*/
+
 import { NextRequest, NextResponse } from 'next/server';
 import webPush from 'web-push';
 
 export const POST = async (req: NextRequest) => {
-  /* if (
-    !process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY ||
-    !process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL ||
-    !process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
-  ) {
-    throw new Error('Environment variables supplied not sufficient.');
-  } */
+
   const { subscription, message } = (await req.json()) as {
     subscription: webPush.PushSubscription;
     message: string;
   };
   console.log(subscription);
+  // pass in the ENV variables for the email, public key, and private key
   try {
     webPush.setVapidDetails(
       `mailto:${process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL}`,
       process.env.NEXT_PUBLIC_WEB_PUSH_PUBLIC_KEY,
       process.env.NEXT_PUBLIC_WEB_PUSH_PRIVATE_KEY
     );
+    // send the notification to the user
     const response = await webPush.sendNotification(
       subscription,
       JSON.stringify({
-        // Add Title Here 
-        //title: `Payments`,
-        
         title: `${message}`,
         message: ``,
       })
