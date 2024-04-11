@@ -63,26 +63,25 @@ export default function HomePage() {
 
       {/*  <Link href='/home'>Home</Link>
       <Link href='/home'>login</Link> */}
-      
 
       <AnimatePresence>
         {textLoading && (
           <motion.div
-
-            layout  
-            initial={{ opacity: 1 }}
+            layout
+            /* initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, y: 20 }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }} */
             key={'intro-loading'}
             className='flex h-full w-full flex-col items-center justify-center'
           >
             <motion.h1
               key={'intro-loading-h1'}
-                layout
-                initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.2 }}
+              layout
+              initial={{ y: 20, opacity: 0, height: 0 }}
+              animate={{ y: 0, opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              exit={{ opacity: 0, y: 20, height: 0 }}
               className='mt-20 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl'
             >
               Welcome to Payments
@@ -95,9 +94,10 @@ export default function HomePage() {
                 }, 3000);
               }}
               layout
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: 'easeInOut', delay: 0.4 }}
+              initial={{ y: 20, opacity: 0, height: 0 }}
+              animate={{ y: 0, opacity: 1, height: 'auto' }}
+              transition={{ duration: 0.4, ease: 'easeInOut', delay: 0.2 }}
+              exit={{ opacity: 0, y: 20, height: 0 }}
               className='text-muted-foreground  mt-20  scroll-m-20 text-center text-2xl font-semibold tracking-tight'
             >
               By Stephen Gordon
