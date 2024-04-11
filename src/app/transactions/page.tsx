@@ -119,7 +119,7 @@ export default function Page() {
         exit={{ opacity: 0 }}
         className='w-full h-full'
       >
-        <Card style={{ border: '0px' }} className='bg-transparent h-full'>
+        <Card style={{ border: '0px' }} className=' h-full'>
           <CardHeader>
             <CardTitle className='grid grid-cols-3 items-center'>
               <div

@@ -172,7 +172,9 @@ export default function RootLayout({
           defaultTheme='dark'
           disableTransitionOnChange
         >
-          <ZeroDevProvider projectId={process.env.NEXT_PUBLIC_ZERODEV_ID as string}>
+          <ZeroDevProvider
+            projectId={process.env.NEXT_PUBLIC_ZERODEV_ID as string}
+          >
             <PrivyProvider
               appId={'cltk97hyk016h7afh32g4363z'}
               onSuccess={() => {
@@ -195,18 +197,16 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <AnimatePresence mode='wait'>
-                          <div
-                            vaul-drawer-wrapper=''
-                            className='relative h-[100vh] justify-center overflow-hidden'
-                          >
-                            {auth}
-                            {drawer}
+                        <div
+                          vaul-drawer-wrapper=''
+                          className='relative h-[100vh] justify-center overflow-hidden'
+                        >
+                          {auth}
+                          {drawer}
 
-                            {children}
-                          </div>
-                        </AnimatePresence>
-                        <BottomNavbar />
+                          {children}
+                          <BottomNavbar />
+                        </div>
                       </LayoutGroup>
                     </QueryClientProvider>
                   </WagmiProvider>

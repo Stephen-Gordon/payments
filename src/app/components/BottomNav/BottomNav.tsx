@@ -2,11 +2,12 @@
 import Link from 'next/link';
 import { BookUser, Home, Send, Settings } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 // react
 import { useEffect, useState } from 'react';
+import { RootState } from '@/GlobalRedux/store';
 
 const BottomNavbar = () => {
   const router = useRouter();
@@ -15,6 +16,8 @@ const BottomNavbar = () => {
 
   const [showNav, setShowNav] = useState(true);
 
+  const sheetState = useSelector((state: RootState) => state.sheet);
+
    useEffect(() => {
     if (pathname == '/' || pathname == '/login' || pathname == '/transactions') {
       setShowNav(false);
@@ -22,6 +25,14 @@ const BottomNavbar = () => {
       setShowNav(true);
     }
   }, [pathname])
+
+  useEffect(() => {
+    if (sheetState) {
+      setShowNav(false);
+    } else {
+      setShowNav(true);
+    }
+  }, [sheetState])
 
   // redux
   const dispatch = useDispatch();
