@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { setBalance } from '@/GlobalRedux/Features/balance/balanceSlice';
 import axios from 'axios';
-import { formatUnits } from 'viem';
+import { formatUnits, isAddress } from 'viem';
 import { Copy } from 'lucide-react';
 
 export default function CreditCard() {
@@ -29,21 +29,23 @@ export default function CreditCard() {
 
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api-sepolia.basescan.org/api?module=account&action=tokenbalance&contractaddress=0x036CbD53842c5426634e7929541eC2318f3dCF7e&address=${address}&tag=latest&apikey=${process.env.NEXT_PUBLIC_BASESCAN_API_KEY}`
-      )
-      .then((r) => {
-        console.log('axios balance', r.data);
-        setBalanceToShow(r.data.result);
+    if(isAddress(address)){
+      axios
+        .get(
+          `https://api-sepolia.basescan.org/api?module=account&action=tokenbalance&contractaddress=0x036CbD53842c5426634e7929541eC2318f3dCF7e&address=${address}&tag=latest&apikey=${process.env.NEXT_PUBLIC_BASESCAN_API_KEY}`
+        )
+        .then((r) => {
+          console.log('axios balance', r.data);
+          setBalanceToShow(r.data.result);
 
-        dispatch(setBalance(r.data.result));
-        console.log('balance to show', balanceToShow);
-      })
-      .catch((e) => {
-        console.log('axios balance error', e);
-      });
-  }, []);
+          dispatch(setBalance(r.data.result));
+          console.log('balance to show', balanceToShow);
+        })
+        .catch((e) => {
+          console.log('axios balance error', e);
+        });
+    }
+  }, [address]);
 
   useEffect(() => {}, [balanceToShow]);
 

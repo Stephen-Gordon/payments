@@ -72,9 +72,11 @@ export default function RecentPayee(): JSX.Element {
 
   const contactsState = useSelector((state: RootState) => state.contacts.value);
 
-  const transactionstate = useSelector(
+  const transactionstate : any[] = useSelector(
     (state: RootState) => state.transactions.value
   );
+      console.log('type of first', typeof transactionstate);
+
 
   const dispatch = useDispatch();
 
@@ -82,11 +84,14 @@ export default function RecentPayee(): JSX.Element {
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
-        dispatch(setTransactions(recentTransactions));
-        console.log(
-          'axios transactions request in payee page',
-          recentTransactions
-        );
+
+        if (Array.isArray(recentTransactions)) {
+          console.log('dispatching transactions in Recent Payee', recentTransactions);
+          dispatch(setTransactions(recentTransactions));
+
+       
+        }
+
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -97,6 +102,7 @@ export default function RecentPayee(): JSX.Element {
 
   // get recent transactions
   useEffect(() => {
+    console.log("type of", typeof transactionstate);
     if(transactionstate && transactionstate.length > 0) {
       const uniquePayees = Array.from(
         new Set(
@@ -113,26 +119,7 @@ export default function RecentPayee(): JSX.Element {
       /*   uniquePayees.filter((payee) => payee == address); */
       setPayees(uniquePayees);
     }
-    /* const fetchRecentTransactions = async () => {
-      try {
-        const recentTransactions = await useGetRecentTransactions(address);
-        console.log('recentTransactions in payee', recentTransactions);
-        if (recentTransactions) {
-          const uniquePayees = Array.from(
-            new Set(
-              recentTransactions.map(
-                (transaction) => transaction.to || transaction.from
-              )
-            )
-          );
-          setPayees(uniquePayees);
-        }
-      } catch (error) {
-        console.error('Error fetching recent transactions:', error);
-      }
-    };
-
-    fetchRecentTransactions(); */
+    
   }, [transactionstate, address, contactsState]);
 
   return (

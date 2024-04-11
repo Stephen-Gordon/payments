@@ -37,6 +37,7 @@ import useGetTokenBalance from '../hooks/useGetTokenBalance';
 import AuthPage from '../components/AuthPage/AuthPage';
 import CreditCard from '../components/CreditCard/CreditCard';
 import PullToRefresh from 'pulltorefreshjs';
+import { setAddress } from '@/GlobalRedux/Features/address/addressSlice';
 
 export default function Page() {
   // privy
@@ -72,7 +73,7 @@ export default function Page() {
   // next
   const pathname = usePathname();
 
-  // pathname use effect
+  // pathname use effect  
   /* useEffect(() => {
     if (pathname == '/home') {
       dispatch(setSheet(false));
@@ -107,86 +108,87 @@ export default function Page() {
   // hooks
   const address = useGetAddress();
   useEffect(() => {
-    console.log("1)", process.env.NEXT_PUBLIC_WEB3AUTH_CLIENT_ID);
-    console.log("2",process.env.NEXT_PUBLIC_ZERODEV_ID);
-    console.log("3",process.env.NEXT_PUBLIC_ALCHEMY_API_KEY);
-    console.log("4",process.env.NEXT_PUBLIC_MORALIS_API_KEY);
-  })
+    console.log("address " , address)
+    dispatch(setAddress(address))
+  }, [address, zeroDevReady])
+
   return (
     <AuthPage>
-      <main className='bg-background relative  h-full overflow-y-auto'>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-        >
-          {/*  <div className='absolute -z-50 '>
+      {address && (
+        <main className='bg-background relative  h-full overflow-y-auto'>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+          >
+            {/*  <div className='absolute -z-50 '>
             <BackgroundGradientAnimation />
           </div>   */}
-          <motion.div
-            /*  style={{ y, scale, opacity }} */
-            className='items-center p-2 text-center text-5xl'
-          >
-            {/*  <Balance />  */}
-            {/*   {address} */}
-            <CreditCard />
-          </motion.div>
+            <motion.div
+              /*  style={{ y, scale, opacity }} */
+              className='items-center p-2 text-center text-5xl'
+            >
+              {/*  <Balance />  */}
+              {/*   {address} */}
+              <CreditCard />
+            </motion.div>
 
-          <motion.div
-            /*  style={{ y, scale, opacity }} */
-            className='mt-4 grid grid-cols-2 gap-2 p-2'
-          >
-            <div>
-              <Link
-                onClick={() => {
-                  dispatch(setSheet(true));
-                }}
-                href={{
-                  pathname: '/search',
-                }}
-              >
-                <Button className='text-xl' size={'lg'} variant={'default'}>
-                  <div className='flex grid-cols-3 content-center items-center'>
-                    <div className='text-xl'>
-                      <div>Send</div>
+            <motion.div
+              /*  style={{ y, scale, opacity }} */
+              className='mt-4 grid grid-cols-2 gap-2 p-2'
+            >
+              <div>
+                <Link
+                  onClick={() => {
+                    dispatch(setSheet(true));
+                  }}
+                  href={{
+                    pathname: '/search',
+                  }}
+                >
+                  <Button className='text-xl' size={'lg'} variant={'default'}>
+                    <div className='flex grid-cols-3 content-center items-center'>
+                      <div className='text-xl'>
+                        <div>Send</div>
+                      </div>
+                      <div className='px-2'></div>
+                      <div>
+                        <Send size={20} />
+                      </div>
                     </div>
-                    <div className='px-2'></div>
-                    <div>
-                      <Send size={20} />
-                    </div>
-                  </div>
-                </Button>
-              </Link>
-            </div>
+                  </Button>
+                </Link>
+              </div>
 
-            <div>
-              <Link
-                onClick={() => {
-                  dispatch(setSheet(true));
-                }}
-                href={{
-                  pathname: '/receive',
-                }}
-              >
-                <Button className='text-xl' size={'lg'} variant={'default'}>
-                  <div className='flex grid-cols-3 content-center items-center'>
-                    <div className='text-xl'>
-                      <div>Receive</div>
+              <div>
+                <Link
+                  onClick={() => {
+                    dispatch(setSheet(true));
+                  }}
+                  href={{
+                    pathname: '/receive',
+                  }}
+                >
+                  <Button className='text-xl' size={'lg'} variant={'default'}>
+                    <div className='flex grid-cols-3 content-center items-center'>
+                      <div className='text-xl'>
+                        <div>Receive</div>
+                      </div>
+                      <div className='px-2'></div>
+                      <div>
+                        <QrCode size={22} />
+                      </div>
                     </div>
-                    <div className='px-2'></div>
-                    <div>
-                      <QrCode size={22} />
-                    </div>
-                  </div>
-                </Button>
-              </Link>
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+            <div className='mt-4 p-2 pb-32 '>
+              <Activity />
             </div>
           </motion.div>
-          <div className='mt-4 p-2 pb-32 '>
-            <Activity />
-          </div>
-        </motion.div>
-      </main>
+        </main>
+      )}
     </AuthPage>
   );
 }

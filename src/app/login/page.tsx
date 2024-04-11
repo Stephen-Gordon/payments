@@ -49,7 +49,7 @@ const Page = () => {
     });
   }); */
   useEffect(() => {
-    if (zeroDevReady && !authenticated ) {
+    if (zeroDevReady && authenticated ) {
       console.log("authenticated", authenticated)
       // set user address
       console.log("address", user?.wallet?.address)

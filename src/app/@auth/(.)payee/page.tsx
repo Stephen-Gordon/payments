@@ -63,13 +63,16 @@ export default function Page() {
   const router = useRouter();
 
   // state
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  //const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [groupedTransactions, setGroupedTransactions] = useState<any[]>([]);
   const [showAddContact, setShowAddContact] = useState<boolean>(false);
 
 
 
   const contactsState = useSelector((state: any) => state.contacts.value);
+
+  const transactionsState = useSelector((state: any) => state.transactions.value);
+      console.log('transactionsState in payee', transactionsState);
 
   const isInContacts = contactsState.some(
     (contact: any) => contact.address == payeeAddress
@@ -82,23 +85,21 @@ export default function Page() {
 
   // effect
   useEffect(() => {
-    end.current.scrollIntoView({});
     const fetchRecentTransactions = async () => {
-      const recentTransactions = await useGetRecentTransactions(
-        address as string
-      );
-      console.log('recentTransactions', recentTransactions);
-      if (recentTransactions) {
+
+      console.log('transactionsState in payee', transactionsState);
+     
+      if (transactionsState && Array.isArray(transactionsState)) {
         // Filter transactions where either to or from address matches payeeAddress
         console.log('filtering with payeeAddress', payeeAddress);
 
-        const filteredTransactions: any = recentTransactions.filter(
+        const filteredTransactions: any = transactionsState.filter(
           (t) =>
             t.to?.toLocaleLowerCase() === payeeAddress?.toLocaleLowerCase() ||
             t.from?.toLocaleLowerCase() === payeeAddress?.toLocaleLowerCase()
         );
         console.log('filteredTransactionssssss', filteredTransactions);
-        setTransactions(filteredTransactions);
+        //setTransactions(filteredTransactions);
 
         // Group transactions by month
         const groupedTransactionsByMonth: { [key: string]: Transaction[] } =
@@ -132,7 +133,7 @@ export default function Page() {
     };
 
     fetchRecentTransactions();
-  }, [payeeAddress]);
+  }, [payeeAddress, transactionsState]);
 
    const handleAddUser = () => {
      setShowAddContact(true);

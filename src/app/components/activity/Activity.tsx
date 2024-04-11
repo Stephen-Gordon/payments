@@ -18,6 +18,7 @@ import {
   CardTitle,
 } from '@/app/components/ui/card';
 import { Button } from '../ui/button';
+import { usePrivySmartAccount } from '@zerodev/privy';
 
 
 
@@ -34,27 +35,31 @@ export default function Activity() {
     (state: any) => state.transactions.value
   );
    
+  const {zeroDevReady} = usePrivySmartAccount();
 
   useEffect(() => {
     const getData = async () => {
       try {
         // get all
         const recentTransactions = await useGetRecentTransactions(address);
-        
-        dispatch(setTransactions(recentTransactions));
+        // Check if data is an array, if not throw an error
+        if (Array.isArray(recentTransactions)) {
+          console.log("dispatching transactions", recentTransactions);
+          dispatch(setTransactions(recentTransactions));
 
-        // set state
-        setTxs(recentTransactions);
-        console.log('transState', transactionState);
-
+          // set state
+          setTxs(recentTransactions);
+          console.log('transState', transactionState);
+        }
         
+
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
     };
 
     getData();
-  }, []);
+  }, [address, zeroDevReady]);
 
   
 
