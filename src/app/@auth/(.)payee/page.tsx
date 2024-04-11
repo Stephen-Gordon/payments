@@ -36,7 +36,6 @@ import Link from 'next/link';
 import useFindPayeeName from '@/app/hooks/useFindPayeeName';
 
 import { format, parseISO, set, fromUnixTime } from 'date-fns';
-import Moralis from 'moralis';
 
 
 // format date
@@ -79,28 +78,7 @@ export default function Page() {
   // refs
   const end = useRef<any>(null);
 
-  useEffect(() => {
-    const moralisFetch = async () => {
-          
-    try {
-      await Moralis.start({
-        apiKey:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjY4NTRjOTU5LTk5NGEtNGYwZC04MjA0LTA4YWM2MmE3Y2EwOSIsIm9yZ0lkIjoiMzc2ODcxIiwidXNlcklkIjoiMzg3Mjg5IiwidHlwZUlkIjoiMTQxNjQyOTUtNzg4MS00Yzk2LTkxM2ItNTQ5YjBiZjU2M2FkIiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MDc3NDAwOTgsImV4cCI6NDg2MzUwMDA5OH0.GrOEC01ujomn_3cVNZKKxCkd5QVP52i5I3HsFxSp23Q',
-      });
-
-      const response = await Moralis.EvmApi.token.getWalletTokenTransfers({
-        chain: '0xaa36a7',
-        order: 'DESC',
-        address: '0x0B0c7d71cb31240742Af35278dfe46112377Bf08',
-      });
-
-      console.log("moralis", response.raw);
-    } catch (e) {
-      console.error(e);
-    }
-    }
-    moralisFetch();
-  }, [])
+ 
 
   // effect
   useEffect(() => {
