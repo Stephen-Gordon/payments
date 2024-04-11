@@ -128,13 +128,12 @@ export default function Page() {
               {payee !== '' && (
                 <motion.div
                   key='clear'
-                  initial={{ opacity: 0, height: 0 }}
+                  initial={{ opacity: 0, }}
                   animate={{
                     opacity: 1,
-                    height: 'auto',
                   }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
-                  exit={{ opacity: 0, height: 0 }}
+                  exit={{ opacity: 0 }}
                   className='ml-auto grid content-center justify-end'
                 >
                   {isAnAddress &&
