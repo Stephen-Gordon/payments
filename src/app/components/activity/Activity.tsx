@@ -8,7 +8,7 @@ import { use, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTransactions } from '@/GlobalRedux/Features/transactions/transactionsSlice';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   Card,
   CardContent,
@@ -82,28 +82,30 @@ export default function Activity() {
             </motion.div>
           </CardHeader>
           <CardContent className=''>
-            {transactionState?.length > 0 ? (
-              <div className='mt-4 space-y-8'>
-                {Array.isArray(transactionState) &&
-                  transactionState
-                    .slice(0, 5)
-                    .map((transaction: any, i: any) => (
-                      <motion.div
-                        layout
-                        initial={{ height: 0, opacity: 0}}
-                        animate={{ height: 'auto', opacity: 1}}
-                        exit={{ height: 0 }}
-                        transition={{ duration: 0.4, delay: i * 0.2}}
-                        className='h-fit w-full'
-                        key={i}
-                      >
-                        <RecentTransaction transaction={transaction} />
-                      </motion.div>
-                    ))}
-              </div>
-            ) : (
-              <></>
-            )}
+            <AnimatePresence initial={false}>
+              {transactionState?.length > 0 ? (
+                <div className='mt-4 space-y-8'>
+                  {Array.isArray(transactionState) &&
+                    transactionState
+                      .slice(0, 5)
+                      .map((transaction: any, i: any) => (
+                        <motion.div
+                          layout
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0 }}
+                          transition={{ duration: 0.4, delay: i * 0.2 }}
+                          className='h-fit w-full'
+                          key={i}
+                        >
+                          <RecentTransaction transaction={transaction} />
+                        </motion.div>
+                      ))}
+                </div>
+              ) : (
+                <></>
+              )}
+            </AnimatePresence>
           </CardContent>
           <CardFooter className='justify-center space-x-2'>
             <Link

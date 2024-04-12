@@ -65,11 +65,12 @@ export default function Page() {
   }
 
   useEffect(() => {
+    console.log("transactionState in tx page", transactionState);
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
         setAllTransactions(recentTransactions);
-        dispatch(setTransactions(recentTransactions));
+        /* dispatch(setTransactions(recentTransactions)); */
       } catch (error) {
         console.error('Error while getting recent transactions:', error);
       }
@@ -83,7 +84,7 @@ export default function Page() {
     setTxs(transactionState);
 
     const groupedTransactionsByMonth: { [key: string]: any[] } =
-      transactions.reduce((groups, transaction) => {
+      transactionState.reduce((groups, transaction) => {
         const monthKey = format(fromUnixTime(transaction.timeStamp), 'yyyy-MM');
         if (!groups[monthKey]) {
           groups[monthKey] = [];
