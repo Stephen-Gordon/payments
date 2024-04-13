@@ -94,7 +94,7 @@ export default function RootLayout({
         <meta name='msapplication-config' content='/icons/browserconfig.xml' />
         <meta name='msapplication-TileColor' content='#020817' />
         <meta name='msapplication-tap-highlight' content='no' />
-        <meta name='theme-color' content='#020817' />
+        <meta name='theme-color' content='translucent' />
         <link rel='apple-touch-icon' href='/icons/touch-icon-iphone.png' />
         <link
           href='splashscreens/iphone5_splash.png'
