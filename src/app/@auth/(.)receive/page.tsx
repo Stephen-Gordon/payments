@@ -33,8 +33,8 @@ export default function Page() {
           <DrawerTitle>Receive</DrawerTitle>
         </DrawerHeader>
 
-        <div className='grid justify-center'>
-          <div className='mt-4 '>
+        <div className='grid justify-center w-full'>
+          <div className='mt-4 w-full'>
             <Qr />
           </div>
           <motion.button

@@ -25,11 +25,11 @@ export default function Qr() {
   }, []);
 
   return (
-    <div ref={widthRef}>
+    <div className='w-screen justify-center grid' ref={widthRef}>
       <QRCode
         ecLevel='H'
         quietZone={20}
-        size={windowWidth > 500 ? 300 : windowWidth}
+        size={windowWidth > 500 ? 400 : 200}
         bgColor='#0c0e1800'
         fgColor='#a7a3f5'
         qrStyle='dots'

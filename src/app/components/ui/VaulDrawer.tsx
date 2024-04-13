@@ -24,7 +24,7 @@ export function VaulDrawer({children}) {
         window.history.pushState({}, '', '/home');
       }}
       open={isOpen}
-      shouldScaleBackground={false}
+      shouldScaleBackground={true}
     >
       <Drawer.Portal>
         <Drawer.Overlay
@@ -32,7 +32,7 @@ export function VaulDrawer({children}) {
           onClick={() => dispatch(setSheet(false))}
           className='bg-background/40 fixed inset-0'
         />
-        <Drawer.Content className='from-background to bg-background/80 fixed bottom-0 left-0 right-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[10px] bg-gradient-to-t backdrop-blur-2xl'>
+        <Drawer.Content className='from-background to bg-background/60 fixed bottom-0 left-0 right-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[10px] bg-gradient-to-t backdrop-blur-2xl'>
           
             <>
               <motion.div
