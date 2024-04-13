@@ -14,20 +14,7 @@ export function VaulDrawer({children}) {
       const isOpen = useSelector((state) => state.sheet.value);
       const dispatch = useDispatch();
 
-      const pathname = usePathname();
-
-      const [pathnameState, setPathnameState] = useState('');
-        const prevCountRef = useRef<number>('');
-
-
-      useEffect(() => {
-        console.log('pathname', pathname);
-        setPathnameState(pathname);
-      }, [pathname]);
-
       
-
-
 
   return (
     <Drawer.Root
@@ -36,7 +23,7 @@ export function VaulDrawer({children}) {
         window.history.pushState({}, '', '/home');
       }}
       open={isOpen}
-      shouldScaleBackground
+      shouldScaleBackground={false}
     >
       <Drawer.Portal>
         <Drawer.Overlay
