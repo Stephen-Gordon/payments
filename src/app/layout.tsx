@@ -197,7 +197,7 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <div className='relative h-[100vh] justify-center overflow-hidden'>
+                        <div className='h-[100vh] justify-center'>
                           <div
                             vaul-drawer-wrapper=''
                             className='relative h-full w-full justify-center overflow-hidden'
@@ -206,8 +206,8 @@ export default function RootLayout({
                             {drawer}
 
                             {children}
+                            <BottomNavbar />
                           </div>
-                          <BottomNavbar />
                         </div>
                       </LayoutGroup>
                     </QueryClientProvider>
