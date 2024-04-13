@@ -79,7 +79,7 @@ export default function Activity() {
         <Card className='bg-transparent '>
           <CardHeader>
             <motion.div>
-              <CardTitle className='flex justify-between content-center'>
+              <CardTitle className='flex content-center justify-between'>
                 <span>Recent Transfers</span>
                 <span>
                   <ArrowLeftRight />
@@ -113,18 +113,20 @@ export default function Activity() {
               )}
             </AnimatePresence>
           </CardContent>
-          <CardFooter className='justify-center space-x-2'>
-            <Link
-              className='w-fit'
-              href={{
-                pathname: '/transactions',
-              }}
-            >
-              <Button className='w-auto' variant='ghost'>
-                See All
-              </Button>
-            </Link>
-          </CardFooter>
+          {transactionState?.length > 0 && (
+            <CardFooter className='justify-center space-x-2'>
+              <Link
+                className='w-fit'
+                href={{
+                  pathname: '/transactions',
+                }}
+              >
+                <Button className='w-auto' variant='ghost'>
+                  See All
+                </Button>
+              </Link>
+            </CardFooter>
+          )}
         </Card>
       </motion.div>
     </>
