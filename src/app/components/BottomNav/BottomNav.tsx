@@ -9,39 +9,49 @@ import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import { useEffect, useState } from 'react';
 import { RootState } from '@/GlobalRedux/store';
 
+// framer
+import { AnimatePresence, motion } from 'framer-motion';
+
 const BottomNavbar = () => {
   const router = useRouter();
 
   const pathname = usePathname();
 
-  const [showNav, setShowNav] = useState(true);
+  const [showNav, setShowNav] = useState(false);
 
-  const sheetState = useSelector((state: RootState) => state.sheet);
+  const sheetState = useSelector((state: RootState) => state.sheet.value);
 
    useEffect(() => {
-    if (pathname == '/' || pathname == '/login' || pathname == '/transactions') {
-      setShowNav(false);
-    } else {
+    if (pathname == '/home') {
       setShowNav(true);
+    } else {
+      setShowNav(false);
     }
   }, [pathname])
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (sheetState) {
       setShowNav(false);
     } else {
       setShowNav(true);
     }
-  }, [sheetState])
+  }, [sheetState]) */
 
   // redux
   const dispatch = useDispatch();
 
   return (
     <>
-      {showNav && (
-        <nav className='sticky bottom-0 z-40 flex h-auto w-full justify-between bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl transition-all duration-500 '>
-          {/* <Link href='/home'>
+      <AnimatePresence initial={false}>
+        
+          <motion.nav
+            initial={{ opacity:  0 }}
+            animate={{ opacity: showNav ? 1 : 0 }}
+            exit={{ opacity:  0 }}
+            transition={{ duration: 0.3 }}
+            className='sticky bottom-0  flex h-auto w-full justify-between bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl  '
+          >
+            {/* <Link href='/home'>
             <Home
               className='stroke-muted-foreground'
               strokeWidth={1}
@@ -50,40 +60,41 @@ const BottomNavbar = () => {
               }}
             />
           </Link> */}
-          <Link href='/search'>
-            <Send
-              className='stroke-muted-foreground'
-              strokeWidth={1}
+            <Link href='/search'>
+              <Send
+                className='stroke-muted-foreground'
+                strokeWidth={1}
+                onClick={() => {
+                  dispatch(setSheet(true));
+                }}
+              />
+            </Link>
+            <Link
+              href={{
+                pathname: '/contacts',
+              }}
               onClick={() => {
                 dispatch(setSheet(true));
               }}
-            />
-          </Link>
-          <Link
-            href={{
-              pathname: '/contacts',
-            }}
-            onClick={() => {
-              dispatch(setSheet(true));
-            }}
-          >
-            <BookUser className='stroke-muted-foreground' strokeWidth={1} />
-          </Link>
-          <Link
-            href={{
-              pathname: '/settings',
-            }}
-          >
-            <Settings
-              onClick={() => {
-                dispatch(setSheet(true));
+            >
+              <BookUser className='stroke-muted-foreground' strokeWidth={1} />
+            </Link>
+            <Link
+              href={{
+                pathname: '/settings',
               }}
-              className='stroke-muted-foreground'
-              strokeWidth={1}
-            />
-          </Link>
-        </nav>
-      )}
+            >
+              <Settings
+                onClick={() => {
+                  dispatch(setSheet(true));
+                }}
+                className='stroke-muted-foreground'
+                strokeWidth={1}
+              />
+            </Link>
+          </motion.nav>
+        
+      </AnimatePresence>
     </>
   );
 };
