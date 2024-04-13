@@ -1,13 +1,5 @@
 'use client';
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from '@/app/components/ui/drawer';
+
 import { Button } from '@/app/components/ui/button';
 
 import SendNotification from '@/app/components/SendNotification/SendNotification';
@@ -15,9 +7,9 @@ import SendNotification from '@/app/components/SendNotification/SendNotification
 import { useLogout } from '@privy-io/react-auth';
 
 // next
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { usePrivySmartAccount } from '@zerodev/privy';
+
+import {motion }from 'framer-motion';
 
 export default function Page() {
 
@@ -37,10 +29,13 @@ export default function Page() {
 
   return (
     <>
-      <div className='grid space-y-6 p-4'>
+      <motion.div
+      
+      className='grid space-y-6 p-4'>
         <SendNotification />
         <Button
-          variant={'destructive'}
+          className='bg-red-500'
+          //variant={'destructive'}
           onClick={() => {
             logout();
           }}
@@ -55,7 +50,7 @@ export default function Page() {
         >
           Clear Local Storage
         </Button>
-      </div>
+      </motion.div>
     </>
   );
 }

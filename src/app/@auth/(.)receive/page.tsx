@@ -25,11 +25,9 @@ export default function Page() {
   return (
     <>
       <motion.div
+        key="qr-page"
         className='grid'
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5, ease: 'easeInOut' }}
+        
       >
         <DrawerHeader>
           <DrawerTitle>Receive</DrawerTitle>
