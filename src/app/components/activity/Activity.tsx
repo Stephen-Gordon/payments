@@ -19,6 +19,7 @@ import {
 } from '@/app/components/ui/card';
 import { Button } from '../ui/button';
 import { usePrivySmartAccount } from '@zerodev/privy';
+import { ArrowLeftRight } from 'lucide-react';
 
 
 
@@ -78,7 +79,12 @@ export default function Activity() {
         <Card className='bg-transparent '>
           <CardHeader>
             <motion.div>
-              <CardTitle>Recent Transactions</CardTitle>
+              <CardTitle className='flex justify-between content-center'>
+                <span>Recent Transfers</span>
+                <span>
+                  <ArrowLeftRight />
+                </span>
+              </CardTitle>
             </motion.div>
           </CardHeader>
           <CardContent className=''>
@@ -103,7 +109,7 @@ export default function Activity() {
                       ))}
                 </div>
               ) : (
-                <></>
+                <> Yov've got no transfers yet</>
               )}
             </AnimatePresence>
           </CardContent>
