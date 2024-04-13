@@ -45,6 +45,7 @@ const BottomNavbar = () => {
       <AnimatePresence initial={false}>
         {showNav && (
           <motion.nav
+            layout
             key={"nav"}
             initial={{ opacity: 0, y: 100}}
             animate={{ opacity: showNav ? 1 : 0, y: showNav ? 0 : 100}}
