@@ -30,9 +30,9 @@ export default function AuthPage ({children} : {children: React.ReactNode}) {
       }
     }, [pathname]); 
     return (
-       <div className="h-full">{
+       <div className="h-[100vh]">{
         authenticated &&  (
-            <div className="h-full">
+            <div className="h-[100vh]">
                 {children}
             </div>
         ) }

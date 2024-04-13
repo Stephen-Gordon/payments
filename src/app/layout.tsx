@@ -197,7 +197,7 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <div id='wrapper' className=' '>
+                        <div style={{height: '100vh'}} className=' justify-center overflow-auto'>
                           <div
                             vaul-drawer-wrapper=''
                             className='relative h-full w-full justify-center overflow-hidden'
