@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation, useMotionValue } from 'framer-motion';
+import { Send } from 'lucide-react';
 
 interface ProgressButtonProps {
   onComplete: () => void;
@@ -36,14 +37,13 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   }, [width.current])
   
   return (
-    <div style={{ position: 'relative', width: 200, height: 50 }}>
+    <div style={{ position: 'relative', height: 50 }}>
       <motion.div
         style={{
           width: '100%',
           height: '100%',
         }}
-
-        className='bg-background rounded-xl border'
+        className='bg-background w-full rounded-xl border'
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onTapStart={handleHoldStart}
@@ -75,7 +75,6 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           }}
           className='bg-muted-foreground rounded-xl'
           animate={bgControls}
-          
         />
 
         <button
@@ -87,9 +86,9 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
             color: 'white',
             fontWeight: 'bold',
           }}
-          className='mix-blend-exclusion'
+          className='mix-blend-exclusion flex'
         >
-          Hold to Send
+          Hold to Send <Send className='ml-4 stoke-1 stroke-muted-foreground'/>
         </button>
       </motion.div>
     </div>
