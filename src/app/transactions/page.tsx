@@ -25,6 +25,7 @@ import { useRouter } from 'next/navigation';
 
 //import { format, parseISO } from 'date-fns';
 import { format, parseISO, set, fromUnixTime } from 'date-fns';
+import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 
 export default function Page() {
   //next
@@ -65,7 +66,7 @@ export default function Page() {
   }
 
   useEffect(() => {
-    console.log("transactionState in tx page", transactionState);
+    dispatch(setSheet(false))
     const getData = async () => {
       try {
         const recentTransactions = await useGetRecentTransactions(address);
