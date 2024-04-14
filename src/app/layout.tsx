@@ -31,6 +31,7 @@ import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { baseSepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
+import ScrollRestoration from './components/ScrollRestoration/ScrollRestoration';
 
 export default function RootLayout({
   auth,
@@ -202,6 +203,7 @@ export default function RootLayout({
                             vaul-drawer-wrapper=''
                             className='relative h-full w-full justify-center overflow-hidden'
                           >
+                            <ScrollRestoration/>
                             {auth}
                             {drawer}
 
