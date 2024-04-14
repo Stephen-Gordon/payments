@@ -17,7 +17,7 @@ import { setSheet } from '@/GlobalRedux/Features/sheet/sheetSlice';
 import { useEffect } from 'react';
 
 // icon
-import { Send, QrCode } from 'lucide-react';
+import { Send, QrCode, Loader } from 'lucide-react';
 
 // privy
 import { usePrivySmartAccount } from '@zerodev/privy';
@@ -38,6 +38,8 @@ import AuthPage from '../components/AuthPage/AuthPage';
 import CreditCard from '../components/CreditCard/CreditCard';
 import PullToRefresh from 'pulltorefreshjs';
 import { setAddress } from '@/GlobalRedux/Features/address/addressSlice';
+
+import ReactDOMServer from 'react-dom/server';
 
 export default function Page() {
   // privy
@@ -65,6 +67,42 @@ export default function Page() {
         onRefresh() {
           window.location.reload();
         },
+        iconArrow: ReactDOMServer.renderToString(
+          <motion.div
+            layout
+            layoutId='refresh'
+            className='flex w-full justify-center'
+          >
+            <Loader className='stroke-muted-foreground stroke-1' />
+          </motion.div>
+        ),
+        iconRefreshing: ReactDOMServer.renderToString(
+          <motion.div
+            layout
+            layoutId='refresh'
+            className='flex w-full justify-center'
+          >
+            <Loader className='stroke-muted-foreground animate-spin stroke-1' />
+          </motion.div>
+        ),
+        instructionsPullToRefresh: ReactDOMServer.renderToString(
+          <motion.div
+            layout
+            layoutId='refresh'
+            className='flex w-full justify-center'
+          >
+            <Loader className='stroke-muted-foreground stroke-1' />
+          </motion.div>
+        ),
+        instructionsRefreshing: ReactDOMServer.renderToString(
+          <motion.div
+            layout
+            layoutId='refresh'
+            className='flex w-full justify-center'
+          >
+            <Loader className='stroke-muted-foreground animate-spin stroke-1' />
+          </motion.div>
+        ),
       });
       console.log('provider', getEthereumProvider());
     }
