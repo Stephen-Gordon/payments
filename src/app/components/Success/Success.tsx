@@ -150,7 +150,7 @@ export default function Success({
                     >
                       <TextGenerateEffect
                         className='text-muted-foreground mt-4 text-center text-sm'
-                        words='Your payment is on the way'
+                        words='Your transfer is on the way'
                       ></TextGenerateEffect>
                     </motion.div>
                   </div>
