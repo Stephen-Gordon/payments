@@ -284,7 +284,13 @@ export default function Page() {
             style={{ zIndex: 3000 }}
             className='fixed bottom-0 w-full  bg-white/10 backdrop-blur-xl '
           >
-            <div className='w-full ' style={{ paddingBottom: '16px' }}>
+            <motion.div
+              key="payee-send-button"
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              exit={{opacity: 0}}
+              transition={{ease: "easeInOut", duration: 0.4}}
+            className='w-full ' style={{ paddingBottom: '16px' }}>
               <Link
                 href={{
                   pathname: '/send',
@@ -303,7 +309,7 @@ export default function Page() {
                   </div>
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           </DrawerFooter>
           {!isInContacts && (
             <AddAContact
