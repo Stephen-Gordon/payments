@@ -31,7 +31,6 @@ import { AnimatePresence, LayoutGroup } from 'framer-motion';
 import { baseSepolia } from 'viem/chains';
 import BottomNavbar from './components/BottomNav/BottomNav';
 import AuthPage from './components/AuthPage/AuthPage';
-import ScrollRestoration from './components/ScrollRestoration/ScrollRestoration';
 
 export default function RootLayout({
   auth,
@@ -198,19 +197,16 @@ export default function RootLayout({
                   <WagmiProvider config={config!}>
                     <QueryClientProvider client={queryClient}>
                       <LayoutGroup>
-                        <div style={{height: '100vh'}} className=' justify-center overflow-auto'>
-                          <div
+                        <div
                             vaul-drawer-wrapper=''
-                            className='relative h-full w-full justify-center overflow-hidden'
+                            className='relative h-[100vh] justify-center overflow-hidden'
                           >
-                            <ScrollRestoration/>
                             {auth}
                             {drawer}
 
                             {children}
-                            <BottomNavbar />
                           </div>
-                        </div>
+                        <BottomNavbar />
                       </LayoutGroup>
                     </QueryClientProvider>
                   </WagmiProvider>

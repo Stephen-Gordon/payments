@@ -24,21 +24,17 @@ export default function Page() {
 
   return (
     <>
-      <motion.div
-        key="qr-page"
-        className='grid'
-        
-      >
+      <motion.div key='qr-page' className='grid'>
         <DrawerHeader>
           <DrawerTitle>Receive</DrawerTitle>
         </DrawerHeader>
 
-        <div className='grid justify-center w-full'>
+        <div className='grid w-full justify-center justify-items-center'>
           <div className='mt-4 w-full'>
             <Qr />
           </div>
           <motion.button
-            className='text- flex justify-center rounded-full border p-4 text-center text-xl'
+            className='text flex w-fit justify-center justify-items-center rounded-full border p-4 text-center text-xl'
             onClick={() => navigator.clipboard.writeText(address as string)}
             whileTap={{
               scale: 0.95,
