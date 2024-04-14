@@ -153,7 +153,7 @@ export default function Page() {
   return (
     <AuthPage>
       
-        <main className='bg-background relative h-screen overflow-y-auto'>
+        <main className='bg-background relative h-[100vh] overflow-y-auto'>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
