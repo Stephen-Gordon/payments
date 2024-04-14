@@ -30,7 +30,7 @@ export default function HomePage() {
        router.push('/home');
      }
   
-   }, 3000);
+   }, 2000);
  }, [isStandalone, authenticated]);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function HomePage() {
         router.push('/login');
       }
       
-    }, 3000)
+    }, 2000)
   }, [isStandalone, authenticated]);
 
   const [welcomeMessage, setWelcomeMessage] =
@@ -78,10 +78,10 @@ export default function HomePage() {
             <motion.h1
               key={'intro-loading-h1'}
               layout
-              initial={{ y: 20, opacity: 0, height: 0 }}
-              animate={{ y: 0, opacity: 1, height: 'auto' }}
+              initial={{ y: 20, opacity: 0, }}
+              animate={{ y: 0, opacity: 1,  }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
-              exit={{ opacity: 0, y: 20, height: 0 }}
+              exit={{ opacity: 0, y: 20, }}
               className='mt-20 scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl'
             >
               Welcome to Payments
@@ -91,13 +91,13 @@ export default function HomePage() {
               onAnimationComplete={() => {
                 setTimeout(() => {
                   setTextLoading(false);
-                }, 3000);
+                }, 2000);
               }}
               layout
-              initial={{ y: 20, opacity: 0, height: 0 }}
-              animate={{ y: 0, opacity: 1, height: 'auto' }}
+              initial={{ y: 20, opacity: 0,  }}
+              animate={{ y: 0, opacity: 1, }}
               transition={{ duration: 0.4, ease: 'easeInOut', delay: 0.2 }}
-              exit={{ opacity: 0, y: 20, height: 0 }}
+              exit={{ opacity: 0, y: 20,  }}
               className='text-muted-foreground  mt-20  scroll-m-20 text-center text-2xl font-semibold tracking-tight'
             >
               By Stephen Gordon
