@@ -206,7 +206,6 @@ export default function RootLayout({
                             {drawer}
 
                             {children}
-                            <BottomNavbar />
                           </div>
                         </div>
                       </LayoutGroup>

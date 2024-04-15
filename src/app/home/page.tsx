@@ -41,6 +41,7 @@ import { setAddress } from '@/GlobalRedux/Features/address/addressSlice';
 
 import ReactDOMServer from 'react-dom/server';
 import ProgressBar from '../components/ProgressButton/ProgressButton';
+import BottomNavbar from '../components/BottomNav/BottomNav';
 export default function Page() {
   // privy
   const { user, zeroDevReady, getEthereumProvider } = usePrivySmartAccount();
@@ -223,7 +224,9 @@ export default function Page() {
           <div className='mt-4 p-2 pb-32 '>
             <Activity />
           </div>
-         {/*  <div className='mt-4 p-2 pb-32 '>
+          <BottomNavbar />
+
+          {/*  <div className='mt-4 p-2 pb-32 '>
                 <ProgressBar/>
           </div> */}
         </motion.div>
