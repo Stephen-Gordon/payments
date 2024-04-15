@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useAnimation, useMotionValue } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
 import { Send } from 'lucide-react';
 
 interface ProgressButtonProps {
@@ -8,33 +8,38 @@ interface ProgressButtonProps {
 
 const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const [isHolding, setIsHolding] = useState(false);
-  const controls = useAnimation();
-  const bgControls = useAnimation()
+
+  const [scope, animate ] = useAnimate()
   
 
   const handleHoldStart = async () => {
     setIsHolding(true);
-    controls.start({ pathLength: 1, transition: { duration: 2 } });
-    await bgControls.start({width: "100%", transition: { duration: 2 } })
+    animate(scope.current, { pathLength: 1 }, { duration: 2 } );
+        await animate(scope.current, { width: '100%' }, { duration: 2 });
+
+            console.log('scope 2', scope);
+
+
     
 
   };
 
   const handleHoldEnd = () => {
     setIsHolding(false);
-    controls.stop();
-    controls.start({ pathLength: 0, transition: { duration: 0.4 } }); // Animate pathLength back to 0
-    bgControls.start({ width: 0, transition: { duration: 0.4 } }); // Animate pathLength back to 0
+            animate(scope.current, { width: 0 }, { duration: 0.4 });
   };
   const width = useMotionValue(0);
 
+
   useEffect(() => {
 
-    if (width.current == '100%') {
-      onComplete(); 
-    }
+    if (scope.current >= '99') {
+/*       onComplete();  */
+      
+       //alert("Complete") 
+    } 
 
-  }, [width.current])
+  }, [ width])
   
   return (
     <div style={{ position: 'relative', height: 50 }}>
@@ -70,11 +75,11 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         </motion.svg> */}
         <motion.div
           style={{
-            width: width,
+            width: width, 
             height: '100%',
           }}
-          className='bg-muted-foreground rounded-xl'
-          animate={bgControls}
+          className='bg-white rounded-xl'
+          ref={scope}
         />
 
         <button
@@ -84,7 +89,6 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             color: 'white',
-            fontWeight: 'bold',
           }}
           className='mix-blend-exclusion flex'
         >
