@@ -41,6 +41,8 @@ export default function Page() {
 
   let hash = searchParams.get('hash');
 
+  let closeSheet = searchParams.get('closeSheet');
+
   const transactionState = useSelector(
     (state: any) => state.transactions.value
   );
@@ -94,7 +96,10 @@ export default function Page() {
               <div className='absolute z-50'>
                 <BackButton
                   onClick={() => {
-                    dispatch(setSheet(false));
+                    if(!closeSheet) {
+                      dispatch(setSheet(false));
+                    }
+                    router.back()
                   }}
                 />
               </div>

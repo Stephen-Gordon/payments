@@ -217,9 +217,7 @@ export default function Page() {
                         {month.monthName}
                       </p>
                     </div>
-                    <motion.div
-                      className='grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl pb-30 text-white'
-                    >
+                    <motion.div className='pb-30 grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl text-white'>
                       {month.transactions.map((transaction, j) => (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
@@ -234,41 +232,63 @@ export default function Page() {
                           key={j}
                         >
                           {transaction.from == payeeAddress ? (
-                            <div
-                              style={{ marginBottom: '32px' }}
-                              className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
+                            
+                              <div
+                                style={{ marginBottom: '32px' }}
+                                className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
+                              >
+                                <Link
+                              href={{
+                                pathname: '/transaction',
+                                query: {
+                                  transaction: transaction.blockHash,
+                                  closeSheet: false,
+                                },
+                              }}
                             >
-                              <div className='pb-4'>
-                                ${formatUnits(transaction.value, 6)}
-                              </div>
+                                <div className='pb-4'>
+                                  ${formatUnits(transaction.value, 6)}
+                                </div>
 
-                              <p className='text-muted-foreground text-xs'>
-                                You Received
-                              </p>
-                              <p className='text-muted-foreground text-xs'>
-                                <TimeAgo
-                                  date={fromUnixTime(transaction.timeStamp)}
-                                />
-                              </p>
-                            </div>
+                                <p className='text-muted-foreground text-xs'>
+                                  You Received
+                                </p>
+                                <p className='text-muted-foreground text-xs'>
+                                  <TimeAgo
+                                    date={fromUnixTime(transaction.timeStamp)}
+                                  />
+                                </p>
+                                </Link>
+
+                              </div>
                           ) : (
                             <div
                               style={{ marginBottom: '32px' }}
                               className='bg-muted ml-auto grid w-fit justify-self-end rounded-2xl rounded-br-none p-4'
                             >
-                              <div className='pb-4'>
-                                ${formatUnits(transaction.value, 6)}
-                              </div>
+                              <Link
+                                href={{
+                                  pathname: '/transaction',
+                                  query: {
+                                    hash: transaction.blockHash,
+                                    closeSheet: false,
+                                  },
+                                }}
+                              >
+                                <div className='pb-4'>
+                                  ${formatUnits(transaction.value, 6)}
+                                </div>
 
-                              <p className='text-muted-foreground text-xs'>
-                                You Sent
-                              </p>
+                                <p className='text-muted-foreground text-xs'>
+                                  You Sent
+                                </p>
 
-                              <p className='text-muted-foreground text-xs'>
-                                <TimeAgo
-                                  date={fromUnixTime(transaction.timeStamp)}
-                                />
-                              </p>
+                                <p className='text-muted-foreground text-xs'>
+                                  <TimeAgo
+                                    date={fromUnixTime(transaction.timeStamp)}
+                                  />
+                                </p>
+                              </Link>
                             </div>
                           )}
                         </motion.div>
