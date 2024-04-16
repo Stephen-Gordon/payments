@@ -55,8 +55,8 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         }}
         data-vaul-no-drag=''
         className='bg-background w-full rounded-xl border'
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        
+        whileTap={{ scale: 0.95, transition: { duration: 0.1, ease: 'easeInOut'} }}
         onTapStart={handleHoldStart}
         onTap={handleHoldEnd}
         onMouseLeave={() => {
