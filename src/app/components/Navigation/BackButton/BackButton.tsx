@@ -9,7 +9,7 @@ interface BackButtonProps {
 export default function BackButton({ routehome, onClick }: BackButtonProps) {
   return (
     <div onClick={onClick} className='w-fit rounded-full'>
-      <Undo2 size={20} color='#cbd5e1' />
+      <Undo2 size={20} className='stroke-muted-foreground' />
     </div>
   );
 }

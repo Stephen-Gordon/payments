@@ -144,8 +144,9 @@ export default function Page() {
     <>
       <AnimatePresence>
         <DrawerHeader>
-          <DrawerTitle className='grid grid-cols-3 items-center'>
+          <DrawerTitle className='grid grid-cols-3 items-center pt-2'>
             <motion.div
+              className='w-auto'
               key={'back'}
               layoutId='back'
               onClick={() => {
@@ -157,7 +158,7 @@ export default function Page() {
             <motion.p
               key={'payee-name'}
               layoutId='payee-name'
-              className='font-inherit text-center leading-snug tracking-wide text-inherit mix-blend-exclusion'
+              className='text-center '
             >
               {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
             </motion.p>
@@ -171,13 +172,14 @@ export default function Page() {
               >
                 <div
                   onClick={handleAddUser}
-                  className='text-muted-foreground flex space-x-2 text-base font-light'
+                  className='text-muted-foreground flex content-center items  text-base font-light'
                 >
-                  <UserPlus
-                    strokeWidth={2}
-                    className='fill-muted-foreground stroke-muted-foreground'
-                  />
-                  <p>Save</p>
+                  <span>
+                    <UserPlus
+                      strokeWidth={2}
+                      className='fill-muted-foreground stroke-muted-foreground h-auto '
+                    />
+                  </span>
                 </div>{' '}
               </motion.div>
             )}
@@ -232,20 +234,19 @@ export default function Page() {
                           key={j}
                         >
                           {transaction.from == payeeAddress ? (
-                            
-                              <div
-                                style={{ marginBottom: '32px' }}
-                                className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
-                              >
-                                <Link
-                              href={{
-                                pathname: '/transaction',
-                                query: {
-                                  transaction: transaction.blockHash,
-                                  closeSheet: false,
-                                },
-                              }}
+                            <div
+                              style={{ marginBottom: '32px' }}
+                              className='bg-muted mr-auto grid w-fit justify-self-start rounded-2xl rounded-bl-none p-4'
                             >
+                              <Link
+                                href={{
+                                  pathname: '/transaction',
+                                  query: {
+                                    transaction: transaction.blockHash,
+                                    closeSheet: false,
+                                  },
+                                }}
+                              >
                                 <div className='pb-4'>
                                   ${formatUnits(transaction.value, 6)}
                                 </div>
@@ -258,9 +259,8 @@ export default function Page() {
                                     date={fromUnixTime(transaction.timeStamp)}
                                   />
                                 </p>
-                                </Link>
-
-                              </div>
+                              </Link>
+                            </div>
                           ) : (
                             <div
                               style={{ marginBottom: '32px' }}

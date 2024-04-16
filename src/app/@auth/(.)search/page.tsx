@@ -94,7 +94,7 @@ export default function Page() {
             />
           </motion.div>
           <p className='text-center font-normal'>
-            <TextGenerateEffect words='Search'></TextGenerateEffect>
+            Search
           </p>
           <div className='ml-auto'></div>
         </DrawerTitle>

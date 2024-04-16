@@ -21,6 +21,7 @@ import { RootState } from '@/GlobalRedux/store';
 
 // motion
 import { motion } from 'framer-motion';
+import { Circle } from 'lucide-react';
 
 
 export default function Page() {
@@ -60,7 +61,7 @@ export default function Page() {
                 className='h-auto w-auto'
                 href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
               >
-                <Avatar className='h-9 w-9 bg-white'></Avatar>
+                <Circle className='fill-muted-foreground stroke-muted-foreground h-auto w-auto rounded-full stroke-1' />
               </Link>
             </Link>
           </div>
