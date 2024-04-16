@@ -8,7 +8,7 @@ interface ProgressButtonProps {
 
 const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const [isHolding, setIsHolding] = useState(false);
-  const [text, setText] = useState('');
+  const [text, setText] = useState('Hold to Send');
 
   const [blendMode, setBlenMode] = useState('Hold to Send');
 
