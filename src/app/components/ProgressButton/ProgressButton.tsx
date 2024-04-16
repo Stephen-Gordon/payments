@@ -59,6 +59,9 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         whileTap={{ scale: 0.9 }}
         onTapStart={handleHoldStart}
         onTap={handleHoldEnd}
+        onMouseLeave={() => {
+          animate(scope.current, { width: 0 }, { duration: 0.4 });
+        }}
       >
         {/*  <motion.svg
           xmlns='http://www.w3.org/2000/svg'
@@ -88,7 +91,7 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           ref={scope}
         />
 
-        <button
+        <motion.button
           style={{
             position: 'absolute',
             top: '50%',
@@ -101,7 +104,7 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         >
           Hold to Send
           <Send className='stoke-1 ml-4 stroke-white' />
-        </button>
+        </motion.button>
       </motion.div>
     </div>
   );
