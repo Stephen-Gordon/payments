@@ -43,7 +43,7 @@ const buttonRef = useRef(null);
 
        
        setTimeout(() => {
-         /*    onComplete();    */
+             onComplete();    
        }, 300);
      }
   });
