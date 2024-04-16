@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
+import { color, motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
 import { Send } from 'lucide-react';
 
 interface ProgressButtonProps {
@@ -8,6 +8,7 @@ interface ProgressButtonProps {
 
 const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const [isHolding, setIsHolding] = useState(false);
+  const [text, setText] = useState('');
 
   const [scope, animate ] = useAnimate()
   
@@ -17,32 +18,39 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
     animate(scope.current, { pathLength: 1 }, { duration: 2 } );
         await animate(scope.current, { width: '100%' }, { duration: 2 });
 
-            console.log('scope 2', scope);
-
+            
 
     
 
   };
 
   const handleHoldEnd = () => {
+    setText("")
     setIsHolding(false);
-            animate(scope.current, { width: 0 }, { duration: 0.4 });
+      animate(scope.current, { width: 0, backgroundColor: '#fff'}, { duration: 0.4 });
+      /* animate(scope.current, { backgroundColor: '#fff' }, { duration: 0.4 }); */
+
+
   };
   const width = useMotionValue(0);
 
+  width.on('change', async (latest) => {
+     if (parseFloat(latest) >= 99.99) {
+      await animate(scope.current, { backgroundColor: '#4ade80' }, { duration: 0.4 });
+      setTimeout(() => {
+          onComplete();  
+      }, 300)
 
-  useEffect(() => {
+     /*  await animate(scope.current, { width: 0 }, { duration: 0.4 }); */
 
-    if (scope.current >= '99') {
-/*       onComplete();  */
-      
-       //alert("Complete") 
-    } 
+      /* onComplete(); */
+       
+     }
+  });
 
-  }, [ width])
-  
   return (
     <div style={{ position: 'relative', height: 50 }}>
+      {text}
       <motion.div
         style={{
           width: '100%',
@@ -92,7 +100,7 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           }}
           className='mix-blend-exclusion flex'
         >
-          Hold to Send <Send className='ml-4 stoke-1 stroke-muted-foreground'/>
+          Hold to Send <Send className='ml-4 stoke-1 stroke-white'/>
         </button>
       </motion.div>
     </div>
