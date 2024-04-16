@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { color, motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
+import { MotionValue, color, motion, useAnimate, useAnimation, useMotionValue, useTransform } from 'framer-motion';
 import { Send } from 'lucide-react';
 
 interface ProgressButtonProps {
@@ -10,14 +10,25 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const [isHolding, setIsHolding] = useState(false);
   const [text, setText] = useState('');
 
-  const [scope, animate ] = useAnimate()
-  const [button ] = useAnimate();
+  const [widthFormatted, setWidthFormatted] = useState(0);
 
+  const [scope, animate ] = useAnimate()
+  
+   const width = useMotionValue(0);
+
+   const backgroundColor = useTransform(width, [0, 1], ['#fff', '#4ade80']);
 
   const handleHoldStart = async () => {
     setIsHolding(true);
-    animate(scope.current, { pathLength: 1 }, { duration: 2 } );
-        await animate(scope.current, { width: '100%' }, { duration: 2 });
+    animate(scope.current, { pathLength: 1,  }, { duration: 2 } );
+        await animate(
+          scope.current,
+          {
+            width: '100%',
+            backgroundColor: ['#fff', '#4ade80'],
+          },
+          { duration: 2 }
+        );
 
             
 
@@ -26,27 +37,33 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   };
 
   const handleHoldEnd = () => {
+    setText("")
     setIsHolding(false);
-      animate(scope.current, { width: 0, backgroundColor: '#fff'}, { duration: 0.4 });
+      animate(scope.current, { width: 0,  }, { duration: 0.4 });
       /* animate(scope.current, { backgroundColor: '#fff' }, { duration: 0.4 }); */
 
 
   };
-  const width = useMotionValue(0);
+ 
 
   width.on('change', async (latest) => {
+    setWidthFormatted(parseFloat(latest).toFixed(2));
      if (parseFloat(latest) >= 99.99) {
-    
+      //await animate(scope.current, { backgroundColor: '#4ade80' }, { duration: 0.4 });
       setTimeout(() => {
-        onComplete();   
+          /* onComplete();   */
       }, 300)
 
-     
+     /*  await animate(scope.current, { width: 0 }, { duration: 0.4 }); */
+
+      /* onComplete(); */
+       
      }
   });
 
   return (
     <div style={{ position: 'relative', height: 50 }} data-vaul-no-drag>
+      
       {text}
       <motion.div
         style={{
@@ -83,8 +100,9 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           style={{
             width: width,
             height: '100%',
+            //backgroundColor: backgroundColor,
           }}
-          className='rounded-xl bg-white'
+          className='rounded-xl'
           ref={scope}
         />
 
@@ -94,13 +112,12 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            color: 'white',
+            color: 'white'
           }}
           data-vaul-no-drag
           className='flex mix-blend-exclusion'
         >
-          Hold to Send
-          <Send className='stoke-1 ml-4 stroke-white' />
+          Hold to Send <Send className='stoke-1 ml-4 stroke-white' />
         </button>
       </motion.div>
     </div>
