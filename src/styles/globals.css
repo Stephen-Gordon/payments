@@ -13,6 +13,12 @@
   touch-action: pan-y;
   scroll-behavior: smooth;
   user-select: none;
+  -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
  a {
   -webkit-touch-callout: none;
