@@ -15,8 +15,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/GlobalRedux/store';
 import { formatUnits } from 'viem';
 interface KeyPadProps {
-  setUsdcAmount: (usdcAmount: string) => void;
-  usdcAmount: string;
+  setUsdcAmount: (usdcAmount: string | number) => void;
+  usdcAmount: string | number;
 }
 
 export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
@@ -26,11 +26,15 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
   const balanceState = useSelector((state: RootState) => state.balance.value);
 
   function handleClick(num: any) {
-    setNums([...nums, num]);
+      setNums((prevNums) => [...prevNums, num]);
+      setUsdcAmount((prevUsdcAmount) => prevUsdcAmount + num);
   }
 
   useEffect(() => {
-    setUsdcAmount(nums.join(''));
+    
+        
+    console.log('usdc amount in keypad ', usdcAmount);
+    console.log('nums in keypad ', nums);
   }, [nums]);
 
   return (
@@ -41,19 +45,19 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.5, ease: 'easeInOut' }}
         className={`m-auto text-center text-5xl font-extralight tabular-nums transition-all duration-500 ${
-          usdcAmount > formatUnits(balanceState, 6)
+          usdcAmount > parseFloat(formatUnits(balanceState, 6))
             ? 'text-rose-500'
             : 'text-white'
         }`}
       >
-        {usdcAmount || 0}
+        {usdcAmount || 0} 
       </motion.div>
 
       <div className='grid w-full justify-center'>
         <motion.div
           onClick={() => {
-            setNums([formatUnits(balanceState, 6)]);
-            setUsdcAmount(formatUnits(balanceState, 6));
+            setNums([parseFloat(formatUnits(balanceState, 6))]);
+            setUsdcAmount(parseFloat(formatUnits(balanceState, 6)));
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -61,12 +65,12 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
           transition={{ duration: 0.5, ease: 'easeInOut' }}
           key='insufficient-balance'
           className={` full  mt-2 flex w-fit rounded-full border px-4 py-2 text-center text-sm ${
-            usdcAmount > formatUnits(balanceState, 6)
+            usdcAmount > parseFloat(formatUnits(balanceState, 6))
               ? 'text-rose-500 '
               : 'text-muted-foreground bg-card'
           }`}
         >
-          {balanceState && <span>Balance: {formatUnits(balanceState, 6)}</span>}
+          {balanceState && <span>Balance: {parseFloat(formatUnits(balanceState, 6))}</span>}
         </motion.div>
       </div>
 
@@ -88,7 +92,16 @@ export default function KeyPad({ setUsdcAmount, usdcAmount }: KeyPadProps) {
         <Button onClick={() => handleClick('0')}>0</Button>
         <Button
           onClick={() => {
-            setNums(nums.slice(0, -1));
+            // Remove the last number from nums
+            const newNums = nums.slice(0, -1);
+            setNums(newNums);
+
+            // Update usdcAmount based on the new nums array
+            const newUsdcAmount = newNums.join('');
+            setUsdcAmount(newUsdcAmount);
+           /*  if (newUsdcAmount === '') {
+              setUsdcAmount('0');
+            } */
           }}
         >
           <ArrowLeft size={40} className='m-auto text-center' />

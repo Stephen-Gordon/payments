@@ -22,10 +22,10 @@ export default function SendUsdc() {
   // privy
   const { zeroDevReady, user, sendTransaction } = usePrivySmartAccount();
 
-  const [usdcAmount, setUsdcAmount] = useState<string>('0');
 
-  const [transactionStatus, setTransactionStatus] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [usdcAmount, setUsdcAmount] = useState<string>('');
+
+  
 
   // redux
   const balanceState = useSelector((state: RootState) => state.balance.value);
@@ -38,7 +38,8 @@ export default function SendUsdc() {
     //inputRef.current.focus();
     console.log('USDC amount', usdcAmount);
     if(usdcAmount == '') {
-      setUsdcAmount('0');
+      
+     /*  setUsdcAmount('0'); */
     }
   }, [usdcAmount]);
 
@@ -52,7 +53,10 @@ export default function SendUsdc() {
           style={{
             pointerEvents:
               parseFloat(usdcAmount) >
-                parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
+                parseFloat(formatUnits(balanceState, 6)) ||
+              usdcAmount == '0' ||
+              usdcAmount == '' ||
+              usdcAmount == '0.'
                 ? 'none'
                 : 'auto',
           }}
@@ -64,7 +68,10 @@ export default function SendUsdc() {
           <Button
             disabled={
               parseFloat(usdcAmount) >
-                parseFloat(formatUnits(balanceState, 6)) || usdcAmount === '0'
+                parseFloat(formatUnits(balanceState, 6)) ||
+              usdcAmount == '0' ||
+              usdcAmount == '' ||
+              usdcAmount == '0.'
             }
             className='text-xl'
             size='lg'
