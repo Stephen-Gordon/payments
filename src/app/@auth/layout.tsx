@@ -17,7 +17,7 @@ export default function ComponentsLayout({
         <VaulDrawer>
           <AnimatePresence mode='wait'>
             <motion.div
-              className='overflow-y-scroll'
+              className=''
             >
               {children}
             </motion.div>

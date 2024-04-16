@@ -217,11 +217,14 @@ export default function Page() {
                         {month.monthName}
                       </p>
                     </div>
-                    <div className='grid grid-flow-row auto-rows-max  grid-cols-1 gap-2 text-xl text-white'>
+                    <motion.div
+                      className='grid grid-flow-row auto-rows-max grid-cols-1 gap-2 text-xl pb-30 text-white'
+                    >
                       {month.transactions.map((transaction, j) => (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
+                          layout
                           exit={{ opacity: 0, height: 0 }}
                           transition={{
                             duration: 0.4,
@@ -270,7 +273,7 @@ export default function Page() {
                           )}
                         </motion.div>
                       ))}
-                    </div>
+                    </motion.div>
                   </div>
                 ))}
               </motion.div>
@@ -285,12 +288,14 @@ export default function Page() {
             className='fixed bottom-0 w-full  bg-white/10 backdrop-blur-xl '
           >
             <motion.div
-              key="payee-send-button"
-              initial={{opacity: 0}}
-              animate={{opacity: 1}}
-              exit={{opacity: 0}}
-              transition={{ease: "easeInOut", duration: 0.4}}
-            className='w-full ' style={{ paddingBottom: '16px' }}>
+              key='payee-send-button'
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ ease: 'easeInOut', duration: 0.4 }}
+              className='w-full '
+              style={{ paddingBottom: '16px' }}
+            >
               <Link
                 href={{
                   pathname: '/send',

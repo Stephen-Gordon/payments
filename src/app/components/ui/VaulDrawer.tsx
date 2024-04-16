@@ -39,6 +39,7 @@ export function VaulDrawer({children}) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
+                className='overflow-auto'
                 transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.2 }}
               >
                 {children}
