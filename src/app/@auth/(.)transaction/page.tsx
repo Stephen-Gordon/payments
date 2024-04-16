@@ -35,6 +35,8 @@ import { formatUnits } from 'viem';
 export default function Page() {
   const [transaction, setTransaction] = useState<any>({});
 
+  const router = useRouter();
+
   const searchParams = useSearchParams();
 
   let hash = searchParams.get('hash');
@@ -90,9 +92,11 @@ export default function Page() {
           >
             <div className='grid p-4 '>
               <div className='absolute z-50'>
-                <Link href={'/home'}>
-                  <BackButton />
-                </Link>
+                <BackButton
+                  onClick={() => {
+                    dispatch(setSheet(false));
+                  }}
+                />
               </div>
               <div className='my-4'>
                 <div className='flex text-xl font-bold'>
@@ -103,7 +107,10 @@ export default function Page() {
                   </div>
                 </div>
                 <div className='text-muted-foreground text-center'>
-                  {payeeName && findPayeeName(payeeName)}
+                  <Link href={`/payee?payeeAddress=${payeeName}`}>
+                    {' '}
+                    {payeeName && findPayeeName(payeeName)}
+                  </Link>
                 </div>
                 <div className='text-muted-foreground text-center'>
                   <TimeAgo date={fromUnixTime(transaction?.timeStamp)} />{' '}
