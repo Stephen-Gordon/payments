@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { color, motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
+import { AnimatePresence, color, motion, useAnimate, useAnimation, useMotionValue } from 'framer-motion';
 import { Send } from 'lucide-react';
 
 interface ProgressButtonProps {
@@ -10,17 +10,16 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const [isHolding, setIsHolding] = useState(false);
   const [text, setText] = useState('');
 
-  const [scope, animate ] = useAnimate()
-  const [button ] = useAnimate();
+  const [blendMode, setBlenMode] = useState('Hold to Send');
 
+  const [scope, animate ] = useAnimate()
+
+const buttonRef = useRef(null);
 
   const handleHoldStart = async () => {
     setIsHolding(true);
     animate(scope.current, { pathLength: 1 }, { duration: 2 } );
         await animate(scope.current, { width: '100%' }, { duration: 2 });
-
-            
-
     
 
   };
@@ -28,6 +27,7 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   const handleHoldEnd = () => {
     setIsHolding(false);
       animate(scope.current, { width: 0, backgroundColor: '#fff'}, { duration: 0.4 });
+      setText('Hold to Send');
       /* animate(scope.current, { backgroundColor: '#fff' }, { duration: 0.4 }); */
 
 
@@ -36,18 +36,20 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
 
   width.on('change', async (latest) => {
      if (parseFloat(latest) >= 99.99) {
-    
-      setTimeout(() => {
-        onComplete();   
-      }, 300)
+      // animate button color
+        await animate(scope.current, { backgroundColor: '#4ade80' }, { duration: 0.4 });
+        setText("")
+        //await animate(scope.current , { color: '#000' }, { duration: 0.4 });
 
-     
+       
+       setTimeout(() => {
+         /*    onComplete();    */
+       }, 300);
      }
   });
 
   return (
     <div style={{ position: 'relative', height: 50 }} data-vaul-no-drag>
-      {text}
       <motion.div
         style={{
           width: '100%',
@@ -55,8 +57,10 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         }}
         data-vaul-no-drag=''
         className='bg-background w-full rounded-xl border'
-        
-        whileTap={{ scale: 0.95, transition: { duration: 0.1, ease: 'easeInOut'} }}
+        whileTap={{
+          scale: 0.95,
+          transition: { duration: 0.1, ease: 'easeInOut' },
+        }}
         onTapStart={handleHoldStart}
         onTap={handleHoldEnd}
         onMouseLeave={() => {
@@ -102,8 +106,21 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           data-vaul-no-drag
           className='flex mix-blend-exclusion'
         >
-          Hold to Send
-          <Send className='stoke-1 ml-4 stroke-white' />
+          <AnimatePresence>
+            {text && (
+              <>
+                <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className='flex items-center'
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                >
+                  {text} <Send className='stoke-1 ml-4 stroke-white' />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
         </motion.button>
       </motion.div>
     </div>

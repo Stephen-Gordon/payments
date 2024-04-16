@@ -29,11 +29,6 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
           },
           { duration: 2 }
         );
-
-            
-
-    
-
   };
 
   const handleHoldEnd = () => {
