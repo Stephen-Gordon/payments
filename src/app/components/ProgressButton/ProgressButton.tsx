@@ -38,7 +38,7 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
      if (parseFloat(latest) >= 99.99) {
       await animate(scope.current, { backgroundColor: '#4ade80' }, { duration: 0.4 });
       setTimeout(() => {
-          onComplete();  
+          /* onComplete();   */
       }, 300)
 
      /*  await animate(scope.current, { width: 0 }, { duration: 0.4 }); */
@@ -49,13 +49,14 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
   });
 
   return (
-    <div style={{ position: 'relative', height: 50 }}>
+    <div style={{ position: 'relative', height: 50 }} data-vaul-no-drag>
       {text}
       <motion.div
         style={{
           width: '100%',
           height: '100%',
         }}
+        data-vaul-no-drag=""
         className='bg-background w-full rounded-xl border'
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -83,10 +84,10 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
         </motion.svg> */}
         <motion.div
           style={{
-            width: width, 
+            width: width,
             height: '100%',
           }}
-          className='bg-white rounded-xl'
+          className='rounded-xl bg-white'
           ref={scope}
         />
 
@@ -98,9 +99,10 @@ const ProgressButton = ({onComplete} : ProgressButtonProps) => {
             transform: 'translate(-50%, -50%)',
             color: 'white',
           }}
-          className='mix-blend-exclusion flex'
+          data-vaul-no-drag
+          className='flex mix-blend-exclusion'
         >
-          Hold to Send <Send className='ml-4 stoke-1 stroke-white'/>
+          Hold to Send <Send className='stoke-1 ml-4 stroke-white' />
         </button>
       </motion.div>
     </div>
