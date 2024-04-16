@@ -226,11 +226,11 @@ export default function Page() {
           </div>
           <BottomNavbar />
 
-           <div className='mt-4 p-2 pb-32 '>
+        {/*    <div className='mt-4 p-2 pb-32 '>
                 <ProgressBar onComplete={() => {
                   
                 }}/>
-          </div> 
+          </div>  */}
         </motion.div>
       </main>
     </AuthPage>
