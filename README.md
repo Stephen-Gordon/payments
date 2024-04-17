@@ -15,6 +15,10 @@ My final year thesis is a Fintech Payments PWA built on the Base Blockchain.
 - Tailwind
 - ShadCN
 
+
+https://github.com/Stephen-Gordon/payments/assets/91547618/9f831222-5382-4d34-853a-f1d6e9beb585
+
+
 ## Screenshots
 
 <div align="center">
