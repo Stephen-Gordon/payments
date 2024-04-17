@@ -1,8 +1,9 @@
 # Payments PWA
 
+## Try it out
+[https://payments-lyart.vercel.app/](https://payments-lyart.vercel.app/)
+
 ## Description
-
-
 The inspiration for this thesis project came from my travels through several countries in Asia, where I observed that payment apps were widely used but inaccessible to foreign users due to the need for a local bank account for onramping. To address this challenge, I decided to create a payment app that is open and permissionless, built on blockchain technology and uses progressive web app technology. The aim of this app is to provide a seamless payment experience to users. The app uses a layer 2 blockchain to create an app that is secure, permissionless, fast, and accessible to all users. 
 
 The app provides an easy-to-use interface that allows users to store, transfer, and receive payments via a blockchain. In addition, it implements account abstraction to create a smart contract account for users, enhancing the user experience when interacting with the blockchain.
@@ -14,7 +15,11 @@ https://github.com/Stephen-Gordon/payments/assets/91547618/f3f108bb-3966-4e3c-93
 Blockchain technology was chosen to build the app on top, not just for its open source and community-driven nature but also for its developer-friendly features. This technology empowers developers by providing them with auditable and transparent tools, reliable and self-custodial systems, and globally accessible platforms, making them an integral part of the blockchain ecosystem. Recent advancements in Layer 2 blockchains have further boosted scalability and transaction throughput, enhancing their UX.
 
 ## Why Base
-Base was chosen as it falls into the greater vision outlined the Optimism Foundation, the Superchain. 
+Base was chosen as it falls into the greater vision outlined the Optimism Foundation, the Superchain. Base also provides fast transaction throughput, great documentation and developer experience, along with useful faucets for testnet tokens. Also Privy and ZeroDev, two other packages used for account creation, had great support for Base.
+
+## Why Account Abstraction 
+Account Abstraction allows users to create smart contract accounts, that can still be used with the same functionality as an EOA wallet on an EVM blockchain. AA also allows for sponsoring user's gas fees, bundling transactions, and user's are not required to sign transactions first. All these attributes of AA provide a much better UX for users
+
 
 ## Built using
 - [React](https://react.dev/)
@@ -28,7 +33,6 @@ Base was chosen as it falls into the greater vision outlined the Optimism Founda
 - [Webpush](https://github.com/web-push-libs/web-push)
 - [Base](https://www.base.org/)
 - [Alchemy](https://www.alchemy.com/)
-
 
 
 # Similar Apps Studied 
