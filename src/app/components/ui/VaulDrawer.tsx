@@ -30,7 +30,7 @@ export function VaulDrawer({children}) {
         <Drawer.Overlay
         
           /* onClick={() => dispatch(setSheet(false))} */
-          className='bg-background/40 fixed inset-0'
+          className='bg-background/80 fixed inset-0'
         />
         <Drawer.Content className='from-background to bg-background/60 fixed bottom-0 left-0 right-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[10px] bg-gradient-to-t backdrop-blur-2xl'>
           
