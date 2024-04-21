@@ -144,11 +144,10 @@ export default function Page() {
     <>
       <AnimatePresence>
         <DrawerHeader>
-          <DrawerTitle className='grid grid-cols-3 items-center pt-2'>
+          <DrawerTitle className='grid grid-cols-3 items-center pt-2 h-6'>
             <motion.div
               className='w-auto'
               key={'back'}
-              layoutId='back'
               onClick={() => {
                 router.back();
               }}
@@ -162,9 +161,8 @@ export default function Page() {
             >
               {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
             </motion.p>
-            {!isInContacts && (
+           {!isInContacts && (
               <motion.div
-                layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -172,17 +170,18 @@ export default function Page() {
               >
                 <div
                   onClick={handleAddUser}
-                  className='text-muted-foreground flex content-center items  text-base font-light'
+                  className='text-muted-foreground flex content-center '
                 >
                   <span>
                     <UserPlus
-                      strokeWidth={2}
-                      className='fill-muted-foreground stroke-muted-foreground h-auto '
+                      strokeWidth={1}
+                      size={20}
+                      className='fill-muted-foreground stroke-muted-foreground '
                     />
                   </span>
                 </div>{' '}
               </motion.div>
-            )}
+            )} 
           </DrawerTitle>
         </DrawerHeader>
         <motion.div

@@ -84,7 +84,7 @@ export default function Page() {
   return (
     <>
       <DrawerHeader>
-        <DrawerTitle className='grid grid-cols-3 items-center'>
+        <DrawerTitle className='grid grid-cols-3 pt-2 h-6'>
           <motion.div key={'back'} layoutId='back'>
             <BackButton
               onClick={() => {
@@ -93,9 +93,7 @@ export default function Page() {
               }}
             />
           </motion.div>
-          <p className='text-center font-normal'>
-            Search
-          </p>
+          <p className='text-center'>Search</p>
           <div className='ml-auto'></div>
         </DrawerTitle>
       </DrawerHeader>
@@ -128,7 +126,7 @@ export default function Page() {
               {payee !== '' && (
                 <motion.div
                   key='clear'
-                  initial={{ opacity: 0, }}
+                  initial={{ opacity: 0 }}
                   animate={{
                     opacity: 1,
                   }}
@@ -226,7 +224,6 @@ export default function Page() {
           {payee == '' && (
             <>
               <motion.div
-                
                 key='search-page-check'
                 initial={{ opacity: 0 }}
                 animate={{

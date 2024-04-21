@@ -96,7 +96,7 @@ export default function Page({ showConfirm }: ConfirmProps) {
       transition={{ duration: 0.5, ease: 'easeInOut' }}
       >
       <DrawerHeader>
-        <DrawerTitle className='grid grid-cols-3 items-center'>
+        <DrawerTitle className='grid grid-cols-3 items-center pt-2'>
          <motion.div
             key={'back'}
             layoutId='back'

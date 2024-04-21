@@ -35,7 +35,7 @@ export default function Page() {
   return (
     <>
       <DrawerHeader>
-        <DrawerTitle className='grid grid-cols-3 items-center'>
+        <DrawerTitle className='grid grid-cols-3 items-center pt-2'>
           <motion.div
             key={'back'}
             layoutId='back'
@@ -61,7 +61,7 @@ export default function Page() {
                 className='h-auto w-auto'
                 href={{ pathname: `/payee`, query: { payeeAddress: payee } }}
               >
-                <Circle className='fill-muted-foreground stroke-muted-foreground h-auto w-auto rounded-full stroke-1' />
+                <Circle size={20} className='fill-muted-foreground stroke-muted-foreground h-auto w-auto rounded-full stroke-1' />
               </Link>
             </Link>
           </div>
