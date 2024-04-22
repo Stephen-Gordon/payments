@@ -14,6 +14,12 @@ https://github.com/Stephen-Gordon/payments/assets/91547618/6d8d36f0-9eaa-4327-b2
 ## Features
 The app allows users to receive payments via the base blockchain. A user can create a smart contract account using the Privy and ZeroDev SDKs. They can then receive USDC via scanning a QR code. On receiving a payment, a user receives a push notification using web-push. Once a user has some USDC, they can scan another user's QR code to send them USDC. If the person is a first-time payee, they can add the payee to their address book. The user can then choose an amount to send. They are then brought to a confirm page to check the amount and payee. Once the payment is sent the user is routed back to view all their transactions history.
 
+## Inspired by 
+- [Stablecoins](https://liamhorne.com/stablecoins)
+- [Recovery](https://vitalik.eth.limo/general/2021/01/11/recovery.html)
+- [Ethereum in the Next Decade](https://youtu.be/NS0P1eiW7NE?si=Uy_392SPh39S9muD)
+
+
 ## Why blockchain
 Blockchain technology was chosen to build the app on top, not just for its open source and community-driven nature but also for its developer-friendly features. This technology empowers developers by providing them with auditable and transparent tools, reliable and self-custodial systems, and globally accessible platforms, making them an integral part of the blockchain ecosystem. Recent advancements in Layer 2 blockchains have further boosted scalability and transaction throughput, enhancing their UX.
 
