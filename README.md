@@ -55,7 +55,7 @@ Account Abstraction allows users to create smart contract accounts that can stil
 - [Framer Motion](https://www.framer.com/motion/)
 
 
-# Similar Apps Studied 
+## Similar Apps Studied 
 - [Revolut](https://www.revolut.com/)
 - [Uniswap Wallet](https://wallet.uniswap.org/)
 - [Family](https://family.co/)
