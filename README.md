@@ -11,6 +11,8 @@ The app provides an easy-to-use interface that allows users to store, transfer, 
 ## Demo 
 https://github.com/Stephen-Gordon/payments/assets/91547618/6d8d36f0-9eaa-4327-b299-eab635eaca1d
 
+## Features
+The app allows users to receive payments via the base blockchain. A user can create a smart contract account using the Privy and ZeroDev SDKs. They can then receive USDC via scanning a QR code. On receiving a payment, a user receives a push notification using web-push. Once a user has some USDC, they can scan another user's QR code to send them USDC. If the person is a first-time payee, they can add the payee to their address book. The user can then choose an amount to send. They are then brought to a confirm page to check the amount and payee. Once the payment is sent the user is routed back to view all their transactions history.
 
 ## Why blockchain
 Blockchain technology was chosen to build the app on top, not just for its open source and community-driven nature but also for its developer-friendly features. This technology empowers developers by providing them with auditable and transparent tools, reliable and self-custodial systems, and globally accessible platforms, making them an integral part of the blockchain ecosystem. Recent advancements in Layer 2 blockchains have further boosted scalability and transaction throughput, enhancing their UX.
@@ -20,6 +22,14 @@ Base was chosen as it falls into the greater vision outlined the Optimism Founda
 
 ## Why Account Abstraction 
 Account Abstraction allows users to create smart contract accounts that can still be used with the same functionality as an EOA wallet on an EVM blockchain. AA also allows for sponsoring user's gas fees, bundling transactions, and user's are not required to sign transactions first. All these attributes of AA provide a much better UX for users.
+
+## Future Developments 
+- Add ENS subdomain support 
+- Migrate to a React Native Expo app
+- Fix tyescipt bugs
+- Add support for multiple wallets
+- Add React Toast
+- Add AA session keys and account recovery
 
 
 ## Built using
