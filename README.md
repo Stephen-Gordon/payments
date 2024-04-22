@@ -34,6 +34,7 @@ Account Abstraction allows users to create smart contract accounts that can stil
 - [Webpush](https://github.com/web-push-libs/web-push)
 - [Base](https://www.base.org/)
 - [Alchemy](https://www.alchemy.com/)
+- [Framer Motion](https://www.framer.com/motion/)
 
 
 # Similar Apps Studied 
