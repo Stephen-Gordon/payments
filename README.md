@@ -9,7 +9,8 @@ The inspiration for this thesis project came from my travels through several cou
 The app provides an easy-to-use interface that allows users to store, transfer, and receive payments via a blockchain. In addition, it implements account abstraction to create a smart contract account for users, enhancing the user experience when interacting with the blockchain.
 
 ## Demo 
-https://github.com/Stephen-Gordon/payments/assets/91547618/389f876e-5c49-404b-a52b-c71772dad989
+https://github.com/Stephen-Gordon/payments/assets/91547618/53481091-577d-4333-b8c2-d531e5a444ea
+
 
 
 ## Features
