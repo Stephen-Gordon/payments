@@ -9,16 +9,17 @@ The inspiration for this thesis project came from my travels through several cou
 The app provides an easy-to-use interface that allows users to store, transfer, and receive payments via a blockchain. In addition, it implements account abstraction to create a smart contract account for users, enhancing the user experience when interacting with the blockchain.
 
 ## Demo 
-https://github.com/Stephen-Gordon/payments/assets/91547618/f3f108bb-3966-4e3c-93c4-1e13b62e9fcd
+https://github.com/Stephen-Gordon/payments/assets/91547618/6d8d36f0-9eaa-4327-b299-eab635eaca1d
+
 
 ## Why blockchain
 Blockchain technology was chosen to build the app on top, not just for its open source and community-driven nature but also for its developer-friendly features. This technology empowers developers by providing them with auditable and transparent tools, reliable and self-custodial systems, and globally accessible platforms, making them an integral part of the blockchain ecosystem. Recent advancements in Layer 2 blockchains have further boosted scalability and transaction throughput, enhancing their UX.
 
 ## Why Base
-Base was chosen as it falls into the greater vision outlined the Optimism Foundation, the Superchain. Base also provides fast transaction throughput, great documentation and developer experience, along with useful faucets for testnet tokens. Also Privy and ZeroDev, two other packages used for account creation, had great support for Base.
+Base was chosen as it falls into the greater vision outlined the Optimism Foundation, the [Superchain](https://docs.optimism.io/stack/explainer/). Base also provides fast transaction throughput, great documentation and developer experience, along with useful faucets for testnet tokens. Also Privy and ZeroDev, two other packages used for account creation, had great support for Base.
 
 ## Why Account Abstraction 
-Account Abstraction allows users to create smart contract accounts, that can still be used with the same functionality as an EOA wallet on an EVM blockchain. AA also allows for sponsoring user's gas fees, bundling transactions, and user's are not required to sign transactions first. All these attributes of AA provide a much better UX for users
+Account Abstraction allows users to create smart contract accounts that can still be used with the same functionality as an EOA wallet on an EVM blockchain. AA also allows for sponsoring user's gas fees, bundling transactions, and user's are not required to sign transactions first. All these attributes of AA provide a much better UX for users.
 
 
 ## Built using
@@ -44,7 +45,8 @@ Account Abstraction allows users to create smart contract accounts, that can sti
 - [Coinbase Wallet](https://www.coinbase.com/wallet)
 - [Rainbow Wallet](https://rainbow.me/)
 - [Argent](https://www.argent.xyz/)
-
+- [Cake Wakllet](https://cakewallet.com/)
+- [UniPass](https://unipass.id/)
 
 
 ## Screenshots
