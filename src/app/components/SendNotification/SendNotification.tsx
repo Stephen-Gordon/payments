@@ -3,6 +3,9 @@
 import useGetAddress from '@/app/hooks/useGetAddress';
 import type { MouseEventHandler } from 'react';
 import { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
+import { usePrivySmartAccount } from '@zerodev/privy';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card';
 
 const base64ToUint8Array = (base64: string) => {
   const padding = '='.repeat((4 - (base64.length % 4)) % 4);
@@ -18,10 +21,14 @@ const base64ToUint8Array = (base64: string) => {
 };
 
 export default function SendNotification() {
+  
+  
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(
     null
   );
+
+
   const [text, setText] = useState('');
   const [registration, setRegistration] =
     useState<ServiceWorkerRegistration | null>(null);
@@ -160,30 +167,29 @@ export default function SendNotification() {
 
   return (
     <>
-      <div className='grid'>
-        <p>{text}</p>
-        <button
-          type='button'
-          onClick={subscribeButtonOnClick}
-          disabled={isSubscribed}
-        >
-          Subscribe
-        </button>
-        <button
-          type='button'
-          onClick={unsubscribeButtonOnClick}
-          disabled={!isSubscribed}
-        >
-          Unsubscribe
-        </button>
-        <button
-          type='button'
-          onClick={sendNotificationButtonOnClick}
-          disabled={!isSubscribed}
-        >
-          Send Notification
-        </button>
-      </div>
+      <Card className='grid'>
+        <CardHeader>
+          <CardTitle>Notification Center</CardTitle>
+          <CardDescription>
+            <p>Control your Push Notifications</p>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className=' space-y-6'>
+          <Button onClick={subscribeButtonOnClick}>
+            Turn Notifications on
+          </Button>
+          <Button onClick={unsubscribeButtonOnClick}>
+            Turn Notifications off
+          </Button>
+
+          <Button
+            onClick={sendNotificationButtonOnClick}
+            disabled={!isSubscribed}
+          >
+            Send Test Notification
+          </Button>
+        </CardContent>
+      </Card>
     </>
   );
 }
