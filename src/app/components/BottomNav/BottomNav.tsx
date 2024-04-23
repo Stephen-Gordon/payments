@@ -51,7 +51,7 @@ const BottomNavbar = () => {
              initial={{ opacity: 1, }}
             animate={{ opacity: showNav ? 1 : 0.5, y: showNav ? 0 : 0 }}
             exit={{ opacity: 0.5, }} */
-            transition={{ duration: 0.4, ease: 'easeIn' }} 
+            transition                                                                                                                                                                                                                                                                                                                                  ={{ duration: 0.4, ease: 'easeIn' }} 
             className='fixed bottom-0 flex h-auto w-full justify-between bg-transparent bg-opacity-0 bg-gradient-to-br from-slate-50/10 p-4 px-8 pb-8 pt-4 backdrop-blur-xl  '
           >
             {/* <Link href='/home'>

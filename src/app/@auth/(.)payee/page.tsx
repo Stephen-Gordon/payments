@@ -144,7 +144,7 @@ export default function Page() {
     <>
       <AnimatePresence>
         <DrawerHeader>
-          <DrawerTitle className='grid grid-cols-3 items-center pt-2 h-6'>
+          <DrawerTitle className='grid h-6 grid-cols-3 items-center pt-2'>
             <motion.div
               className='w-auto'
               key={'back'}
@@ -161,7 +161,7 @@ export default function Page() {
             >
               {payeeAddress && useFindPayeeName(payeeAddress, contactsState)}
             </motion.p>
-           {!isInContacts && (
+            {!isInContacts && (
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -181,7 +181,7 @@ export default function Page() {
                   </span>
                 </div>{' '}
               </motion.div>
-            )} 
+            )}
           </DrawerTitle>
         </DrawerHeader>
         <motion.div
@@ -241,7 +241,7 @@ export default function Page() {
                                 href={{
                                   pathname: '/transaction',
                                   query: {
-                                    transaction: transaction.blockHash,
+                                    hash: transaction.blockHash,
                                     closeSheet: false,
                                   },
                                 }}

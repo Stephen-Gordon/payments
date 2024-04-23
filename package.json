@@ -21,6 +21,7 @@
     "@headlessui/react": "^1.7.18",
     "@moralisweb3/common-evm-utils": "^2.25.2",
     "@moralisweb3/next": "^2.25.2",
+    "@next/bundle-analyzer": "^14.2.2",
     "@next/font": "^14.1.0",
     "@privy-io/react-auth": "^1.59.2",
     "@pushprotocol/restapi": "^0.0.1",
