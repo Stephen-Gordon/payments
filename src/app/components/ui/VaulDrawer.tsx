@@ -34,17 +34,17 @@ export function VaulDrawer({children}) {
         />
         <Drawer.Content className='from-background to bg-background/60 fixed bottom-0 left-0 right-0 z-50 mt-24 flex h-[96%] flex-col rounded-t-[10px] bg-gradient-to-t backdrop-blur-2xl'>
           
-            <>
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className='overflow-auto'
+                className='overflow-auto h-full'
                 transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.2 }}
               >
                 {children}
               </motion.div>
-            </>
+
 
         </Drawer.Content>
       </Drawer.Portal>
