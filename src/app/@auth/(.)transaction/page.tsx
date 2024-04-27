@@ -112,7 +112,7 @@ export default function Page() {
               <div className='my-4'>
                 <div className='flex text-xl font-bold'>
                   <div className='text-card-foreground grid h-full w-full content-center items-center justify-center p-2 text-center text-5xl mix-blend-exclusion '>
-                    {transaction?.from == address ? '+$' : '-$'}
+                    {transaction?.from !== address ? '+$' : '-$'}
 
                     {transaction?.value && formatUnits(transaction?.value, 6)}
                   </div>
