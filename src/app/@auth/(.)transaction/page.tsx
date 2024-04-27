@@ -27,7 +27,7 @@ import { Button } from '@/app/components/ui/button';
 
 import TimeAgo from 'react-timeago';
 
-import { fromUnixTime } from 'date-fns';
+import { add, fromUnixTime } from 'date-fns';
 
 import BackButton from '@/app/components/Navigation/BackButton/BackButton';
 import { formatUnits } from 'viem';
@@ -77,8 +77,14 @@ export default function Page() {
     );
 
     setTransaction(filteredTransaction[0]);
+    
+    if (filteredTransaction[0]?.to.toLocaleLowerCase() == address.toLocaleLowerCase()) {
+      setPayeeName(filteredTransaction[0]?.from);
+    }
+    if (filteredTransaction[0]?.from.toLocaleLowerCase() == address.toLocaleLowerCase()) {
+      setPayeeName(filteredTransaction[0]?.to);
+    }
 
-    setPayeeName(filteredTransaction[0]?.to);
     console.log('payeeName in transaction page', filteredTransaction);
   }, [transactionState, hash]);
 
