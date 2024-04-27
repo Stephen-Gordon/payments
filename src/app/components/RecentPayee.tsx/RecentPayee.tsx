@@ -103,21 +103,27 @@ export default function RecentPayee(): JSX.Element {
     if(transactionstate && transactionstate.length > 0 && address) {
 
 
-      
-      const uniquePayees = Array.from(
-        new Set(
-          transactionstate
-            .map((transaction) => transaction.to || transaction.from)
-            
-        )
-      );
-      
-      const filteredPayees = uniquePayees.filter((payee) =>payee.toLocaleLowerCase() !== address.toLocaleLowerCase());
-      console.log('filteredPayees', filteredPayees);
-      console.log('uniquePayees', uniquePayees);
-      console.log('address', address);
-        //uniquePayees.filter((payee) => payee == address); 
-      setPayees(filteredPayees);
+      // get all the addresses from the transactions
+      const addresses = transactionstate.map((transaction) => ({
+        from: transaction.from,
+        to: transaction.to,
+      }));
+
+      const addressesList = [];
+      // create an array of addresses
+      addresses.forEach((addressObj) => {
+        addressesList.push(addressObj.from);
+        addressesList.push(addressObj.to);
+      });
+     
+      // remove duplicates
+      const uniqueAddresses = Array.from(new Set(addressesList));
+
+      // remove the users address from the list
+      const filteredUniqueAddresses = uniqueAddresses.filter((addressInArray) => addressInArray.toLocaleLowerCase() !== address.toLocaleLowerCase());
+   
+      // set the payees
+      setPayees(filteredUniqueAddresses);
     }
     
   }, [transactionstate, address, contactsState]);
