@@ -33,7 +33,7 @@ export default function Page() {
     <>
       <motion.div className='grid space-y-6 p-4'>
         <p className='text-xl'> {user?.google?.name}</p>
-        <p className='text-base'> {user?.wallet?.address}</p>
+        <p className='text-base text-wrap'> {user?.wallet?.address}</p>
 
         <SendNotification />
         <Card className='grid'>
